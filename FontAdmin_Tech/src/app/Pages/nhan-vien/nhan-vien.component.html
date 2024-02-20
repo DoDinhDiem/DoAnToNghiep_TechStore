@@ -1,0 +1,346 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </div>
+            <h4 class="page-title">{{title}}</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <a (click)="showDialog()" class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i>
+                            Thêm mới</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+
+                <div class="table-responsive">
+                    <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="products-datatable_length">
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                            type="search" class="form-control form-control-sm" placeholder="Tìm..."
+                                            [(ngModel)]="key" (input)="onKeywordInput()"></label></div>
+                            </div>
+                        </div>
+                        <div class="mb-1"></div>
+                        <div *ngIf="showSkeleton">
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                        </div>
+
+                        <table *ngIf="!showSkeleton" class="table table-centered w-100 dt-responsive nowrap"
+                            id="products-datatable">
+
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Ảnh</th>
+                                    <th class="text-center">Họ tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Số điện thoại</th>
+                                    <th class="text-center">Địa chỉ</th>
+                                    <th class="text-center">Giới tính</th>
+                                    <th class="text-center">Ngày sinh</th>
+                                    <th class="text-center">Ngày vào làm</th>
+                                    <th class="text-center">Chức vụ</th>
+                                    <th class="text-center">Quyền</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center" style="width: 150px">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of nhanvienList?.items">
+                                    <td class="text-center">
+                                        <img style="box-shadow: 5px 5px 10px 0px #888888;
+                                        border-radius: 5px;  height: 60px"
+                                            src="{{baseUrl}}/Uploads/Staffs/{{item.nhanVien.avatar}}" alt="">
+                                    </td>
+                                    <td class="text-center">{{item.nhanVien.hoTen}}</td>
+                                    <td class="text-center">{{item.nhanVien.email}}</td>
+                                    <td class="text-center">0{{item.nhanVien.soDienThoai}}</td>
+                                    <td class="text-center">{{item.nhanVien.diaChi}}</td>
+                                    <td class="text-center">{{item.nhanVien.gioiTinh}}</td>
+                                    <td class="text-center">{{item.nhanVien.ngaySinh | date: 'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{item.nhanVien.ngayVaoLam | date: 'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{item.tenChucVu}}</td>
+                                    <td class="text-center">{{item.tenQuyen}}</td>
+                                    <td class="text-center">
+                                        <p-inputSwitch [(ngModel)]="item.nhanVien.trangThai"
+                                            (ngModelChange)="trangThai(item.nhanVien)"></p-inputSwitch>
+                                    </td>
+                                    <td class="table-action text-center">
+                                        <a (click)="editModal(item.nhanVien)" class="action-icon">
+                                            <i class="mdi mdi-square-edit-outline"></i>
+                                        </a>
+                                        <!-- <a href="javascript:void(0);" class="action-icon"> <i
+                                                class="mdi mdi-delete"></i></a> -->
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="products-datatable_info" role="status"
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    nhanvienList?.totalItems }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
+                                    <ul class="pagination pagination-rounded">
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="title" [(visible)]="visible" position="top" [style]="{ width: '95vw' }" [draggable]="false">
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Avatar <a class="text-danger">(*)</a></label>
+                    <input type="file" (change)="onFileOnly($event)" id="avatar" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="hoTen" class="form-label">Họ tên <a class="text-danger">(*)</a></label>
+                    <input type="text" id="hoTen" [(ngModel)]="nhanvien.hoTen" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email <a class="text-danger">(*)</a></label>
+                    <input type="text" id="email" [(ngModel)]="nhanvien.email" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="passWord" class="form-label">Mật khẩu <a class="text-danger">(*)</a></label>
+                    <input type="text" id="passWord" value="techstore@123" placeholder="techstore@123"
+                        [(ngModel)]="nhanvien.passWord" readonly class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="soDienThoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
+                    <input type="number" id="soDienThoai" [(ngModel)]="nhanvien.soDienThoai" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Địa chỉ <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" [(ngModel)]="nhanvien.diaChi" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Giới tính <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.gioiTinh">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="ngaySinh" class="form-label">Ngày sinh <a class="text-danger">(*)</a></label>
+                    <input type="date" id="ngaySinh" [(ngModel)]="nhanvien.ngaySinh" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="ngayVaoLam" class="form-label">Ngày vào làm <a class="text-danger">(*)</a></label>
+                    <input type="date" id="ngayVaoLam" [(ngModel)]="nhanvien.ngayVaoLam" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Chức vụ <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.chucVuId">
+                        <option *ngFor="let item of chucvu" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Quyền <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.roleId">
+                        <option *ngFor="let item of role" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="trangThai" class="form-label">Trạng thái </label>
+                    <br>
+                    <div class="mb-1"></div>
+                    <p-inputSwitch [(ngModel)]="nhanvien.trangThai"></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-light" (click)="closeDialog()">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ Save }}</button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [header]="title" [(visible)]="visible_edit" position="top" [style]="{ width: '95vw' }" [draggable]="false">
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Avatar <a class="text-danger">(*)</a></label>
+                    <input type="file" id="tenLoai" class="form-control" autocomplete="off">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <img style="height: 100px; border-radius: 5px;"
+                                src="{{baseUrl}}Uploads/Staffs/{{fileOnly.name}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="hoTen" class="form-label">Họ tên <a class="text-danger">(*)</a></label>
+                    <input type="text" id="hoTen" [(ngModel)]="nhanvien.hoTen" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Email <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" [(ngModel)]="nhanvien.email" class="form-control" autocomplete="off"
+                        readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="soDienThoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
+                    <input type="number" id="soDienThoai" [(ngModel)]="nhanvien.soDienThoai" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Địa chỉ <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" [(ngModel)]="nhanvien.diaChi" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Giới tính <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.gioiTinh">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="ngaySinh" class="form-label">Ngày sinh <a class="text-danger">(*)</a></label>
+                    <input type="date" id="ngaySinh" name="nhanvien.ngaySinh" [(ngModel)]="nhanvien.ngaySinh"
+                        class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="ngayVaoLam" class="form-label">Ngày vào làm <a class="text-danger">(*)</a></label>
+                    <input type="date" id="ngayVaoLam" [(ngModel)]="nhanvien.ngayVaoLam" class="form-control"
+                        autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Chức vụ <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.chucVuId">
+                        <option *ngFor="let item of chucvu" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Quyền <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select" [(ngModel)]="nhanvien.roleId">
+                        <option *ngFor="let item of role" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="trangThai" class="form-label">Trạng thái </label>
+                    <br>
+                    <div class="mb-1"></div>
+                    <p-inputSwitch [(ngModel)]="nhanvien.trangThai"></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-light" (click)="closeEditDialog()">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ Save }}</button>
+    </ng-template>
+</p-dialog>
+
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '450px', }"></p-confirmDialog>

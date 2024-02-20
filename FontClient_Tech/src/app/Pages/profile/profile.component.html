@@ -1,0 +1,71 @@
+<div class="mn-1"></div>
+<div class="container-new">
+    <div class="cps-container cps-body">
+        <div style="display: none;">
+            <div id="page_loader">
+                <div class="logo"></div>
+                <div class="loader"></div>
+            </div>
+        </div>
+        <div class="cps-left-col">
+            <div class="block-menu">
+                <div class="block-menu__item-menu button__home " [routerLink]="['/profile/']" routerLinkActive="active">
+                    <div class="item-menu">
+                        <div class="box-icon" data-v-5170e23d="">
+                            <img src="assets/Profile/homeMember.svg" alt="">
+                        </div>
+                        <p>Trang chủ</p>
+                    </div>
+                </div>
+                <div class="block-menu__item-menu button__history" [routerLink]="['/profile/history']"
+                    routerLinkActive="active">
+                    <div class="item-menu">
+                        <div class="box-icon" data-v-5170e23d="">
+                            <img src="assets/Profile/historyMember.svg" alt="">
+                        </div>
+                        <p>Lịch sử mua hàng</p>
+                    </div>
+                </div>
+                <div class="block-menu__item-menu button__rank" [routerLink]="['/profile/rank']"
+                    routerLinkActive="active">
+                    <div class="item-menu" [routerLink]="['/profile/rank']">
+                        <div class="box-icon" data-v-5170e23d="">
+                            <img src="assets/Profile/rank.svg" alt="">
+                        </div>
+                        <p>Hạng thành viên</p>
+                    </div>
+                </div>
+                <div class="block-menu__item-menu button__rank" [routerLink]="['/profile/money']"
+                    routerLinkActive="active">
+                    <div class="item-menu">
+                        <div class="box-icon" data-v-5170e23d="">
+                            <!-- <img src="assets/Profile/rank.svg" alt=""> -->
+                            <i class="pi pi-money-bill"></i>
+                        </div>
+                        <p>Nạp tiền</p>
+                    </div>
+                </div>
+                <div class="block-menu__item-menu button__account" [routerLink]="['/profile/account']"
+                    routerLinkActive="active">
+                    <div class="item-menu">
+                        <div class="box-icon" data-v-5170e23d="">
+                            <img src="assets/Profile/accountMember.svg" alt="">
+                        </div>
+                        <p>Tài khoản của bạn</p>
+                    </div>
+                </div>
+                <div class="block-menu__item-menu button__sign-out">
+                    <div class="item-menu">
+                        <div class="box-icon" style="margin-left:2px;" data-v-5170e23d="">
+                            <img src="assets/Profile/logoutMember.svg" alt="">
+                        </div>
+                        <p>Thoát tài khoản</p>
+                    </div>
+                </div>
+            </div> <!----> <!---->
+        </div>
+        <div class="cps-right-col">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

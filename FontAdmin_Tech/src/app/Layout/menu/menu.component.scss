@@ -1,0 +1,20 @@
+.side-nav-item :hover span {
+    color: #fff;
+}
+
+.side-nav-link {
+    cursor: pointer;
+}
+.active-link {
+    color: #fff;
+    span {
+        color: #fff;
+    }
+}
+.active-child {
+    color: #fff !important;
+}
+
+.side-nav-second-level li :hover a {
+    color: #fff;
+}

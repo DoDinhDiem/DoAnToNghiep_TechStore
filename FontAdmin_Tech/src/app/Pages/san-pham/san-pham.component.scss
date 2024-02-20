@@ -1,0 +1,328 @@
+.drop-action {
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    transform: translate(-167px, -55px) !important;
+}
+
+.box-more-promotion {
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.box-more-promotion .box-more-promotion-title {
+    background-color: #d1d5db;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+}
+
+.box-more-promotion .render-promotion li {
+    font-size: 12px;
+    margin: 10px 5px;
+    display: flex;
+}
+
+.box-more-promotion .render-promotion li img {
+    height: 16px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: auto;
+}
+
+.box-more-promotion .render-promotion li:before {
+    content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 48 48'%3E%3Cpath fill='%234caf50' d='M44 24c0 11.045-8.955 20-20 20S4 35.045 4 24 12.955 4 24 4s20 8.955 20 20'/%3E%3Cpath fill='%23ccff90' d='M34.602 14.602 21 28.199l-5.602-5.598-2.797 2.797L21 33.801l16.398-16.402z'/%3E%3C/svg%3E");
+    margin-right: 4px;
+    position: relative;
+    top: 2px;
+}
+
+.box-more-promotion .render-promotion li a {
+    color: #000 !important;
+    display: flex;
+}
+
+.box-more-promotion .render-promotion li a:hover {
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+}
+
+.box-more-promotion .render-promotion li ul {
+    bottom: 30px;
+    height: calc(100% - 30px);
+    position: relative;
+    right: 5px;
+}
+
+.box-more-promotion .render-promotion li:last-child {
+    margin: 5px;
+}
+
+.box-more-promotion .box-more-promotion-content {
+    max-height: 240px;
+    transition: all 1s ease-in-out;
+}
+
+.box-more-promotion .box-more-promotion-content .box-more-promotion-item img {
+    width: 35px;
+}
+
+.box-more-promotion .box-more-promotion-content .box-more-promotion-item .large {
+    width: 60px;
+}
+
+.box-more-promotion .box-more-promotion-content .box-more-promotion-item a:hover {
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+}
+
+.box-more-promotion .content-full {
+    max-height: 800px;
+    transition: all 1s ease-out;
+}
+
+.box-more-promotion .showmore-button {
+    background-color: #d2d5da;
+    border: none;
+    height: 35px;
+    outline: none;
+    width: 100%;
+}
+
+.box-more-promotion .showmore-button span {
+    gap: 10px;
+}
+
+.cps-block-technicalInfo {
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    max-width: 370px;
+}
+
+.cps-block-technicalInfo .technical-content {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cps-block-technicalInfo .technical-content li:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.cps-block-technicalInfo .technical-content .technical-content-item {
+    font-size: 14px;
+    width: 100%;
+}
+
+.cps-block-technicalInfo .technical-content .technical-content-item p:first-child {
+    width: 40%;
+}
+
+.cps-block-technicalInfo .technical-content .technical-content-item a {
+    color: #4a4a4a;
+}
+
+.cps-block-technicalInfo .technical-content .technical-content-item div {
+    width: 50%;
+}
+
+.cps-block-technicalInfo .button {
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    font-size: 14px;
+    height: 35px;
+    transition: background-color 0.5s ease;
+    width: 100%;
+    border: none;
+    display: flex;
+    line-height: 30px;
+    justify-content: center;
+}
+
+.cps-block-technicalInfo .button:hover {
+    background-color: #fef2f2;
+    border: 1px solid #c52927;
+    color: #c52927;
+    transition: background-color 0.5s ease-out;
+}
+
+.cps-block-technicalInfo .button:hover .icon-svg svg {
+    fill: #c52927;
+}
+
+.cps-block-technicalInfo .modal {
+    z-index: 1001;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body {
+    padding: 0;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content {
+    background-color: #fff;
+    border-radius: 15px;
+    height: auto;
+    overflow: visible;
+    overflow: initial;
+    width: 100%;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-title-modal {
+    background-color: #d70018;
+    height: 50px;
+    width: 100%;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-title-modal button {
+    background-color: transparent;
+    background-color: initial;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    gap: 5px;
+    outline: none;
+    padding: 5px;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-title-modal button:hover {
+    background-color: #9b191e;
+    cursor: pointer;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-content-modal {
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-content-modal .technical-content-modal-item .modal-item-description {
+    border: 1px solid #efefef;
+    border-radius: 10px;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-content-modal .technical-content-modal-item .modal-item-description div p:first-child {
+    width: 30%;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-content-modal .technical-content-modal-item .modal-item-description div div:last-child {
+    width: 60%;
+}
+
+.cps-block-technicalInfo .modal .modal-card-body .modal-content .technical-content-modal .technical-content-modal-item .modal-item-description div:nth-child(odd) {
+    background-color: #efefef;
+}
+
+.cps-block-technicalInfo .modal .modal-card-foot .close-button-modal {
+    background-color: #c51f27;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    padding: 3px 10px;
+}
+
+.cps-block-technicalInfo .modal .modal-card-foot .close-button-modal:hover {
+    background-color: #9b191e;
+    cursor: pointer;
+}
+
+.is-flex {
+    display: flex !important;
+}
+.is-align-items-center {
+    align-items: center !important;
+}
+.is-justify-content-space-between {
+    justify-content: space-between !important;
+}
+.cps-block-content {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    display: block;
+    margin-bottom: 15px;
+    margin-right: auto;
+    min-height: 500px;
+    min-height: 0;
+    overflow: hidden;
+    padding: 15px;
+    position: relative;
+    text-align: justify;
+    width: 100%;
+}
+.cps-block-content_btn-showmore {
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.91) 50%, #fff 55%);
+    border-radius: 10px;
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin-bottom: 0;
+    padding-top: 50px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.cps-block-content_btn-showmore .btn-show-more {
+    align-items: center;
+    background: #fff;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    color: #212529;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    height: 34px;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 335px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    width: 100%;
+}
+
+.cps-block-content .ksp-content {
+    background-color: #f2f2f2;
+    border-radius: 0.5rem;
+    margin: auto;
+    width: 100%;
+}
+
+.cps-block-content_btn-showmore .btn-show-more:hover {
+    background: #fef2f2;
+    border: 1px solid #d70018;
+    color: #d70018;
+}
+
+@media only screen and (min-width: 541px) and (max-width: 768px) {
+    .cps-block-technicalInfo {
+        margin: 0 0 10px !important;
+        max-width: 768px;
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    .cps-block-technicalInfo .modal .modal-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .cps-block-technicalInfo {
+        margin-left: 0 !important;
+        max-width: 100%;
+    }
+
+    .cps-block-technicalInfo .modal .modal-content {
+        margin: 0;
+    }
+}

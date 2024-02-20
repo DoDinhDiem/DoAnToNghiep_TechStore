@@ -1,0 +1,196 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </div>
+            <h4 class="page-title">{{title}}</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <!-- <a (click)="showDialog()" class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i>
+                            Thêm mới</a> -->
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+
+                <div class="table-responsive">
+                    <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="products-datatable_length">
+                                    <label class="form-label">Hiển thị <select
+                                            class="form-select form-select-sm ms-1 me-1">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="-1">All</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                            type="search" class="form-control form-control-sm" placeholder=""
+                                            aria-controls="products-datatable"></label></div>
+                            </div>
+                        </div>
+                        <div class="mb-1"></div>
+                        <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Avatar</th>
+                                    <th class="text-center">Họ tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">SoDienThoai</th>
+                                    <th class="text-center">Địa chỉ</th>
+                                    <th class="text-center">Giới tính</th>
+                                    <th class="text-center">Ngày sinh</th>
+                                    <th class="text-center">Hạng</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center" style="width: 150px">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="text-center">Avatar</th>
+                                    <th class="text-center">Họ tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">SoDienThoai</th>
+                                    <th class="text-center">Địa chỉ</th>
+                                    <th class="text-center">Giới tính</th>
+                                    <th class="text-center">Ngày sinh</th>
+                                    <th class="text-center">Hạng</th>
+                                    <td class="text-center">
+                                        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+                                    </td>
+                                    <td class="table-action text-center">
+                                        <a (click)="editModal()" class="action-icon" data-bs-toggle="modal"
+                                            data-bs-target="#standard-modal"> <i
+                                                class="mdi mdi-square-edit-outline"></i></a>
+                                        <a href="javascript:void(0);" class="action-icon"> <i
+                                                class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="products-datatable_info" role="status"
+                                    aria-live="polite">Showing products 1 to 5 of 12</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
+                                    <ul class="pagination pagination-rounded">
+                                        <li class="paginate_button page-item previous disabled"
+                                            id="products-datatable_previous"><a href="#"
+                                                aria-controls="products-datatable" data-dt-idx="0" tabindex="0"
+                                                class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
+                                        <li class="paginate_button page-item active"><a href="#"
+                                                aria-controls="products-datatable" data-dt-idx="1" tabindex="0"
+                                                class="page-link">1</a></li>
+                                        <li class="paginate_button page-item "><a href="#"
+                                                aria-controls="products-datatable" data-dt-idx="2" tabindex="0"
+                                                class="page-link">2</a></li>
+                                        <li class="paginate_button page-item "><a href="#"
+                                                aria-controls="products-datatable" data-dt-idx="3" tabindex="0"
+                                                class="page-link">3</a></li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"><a
+                                                href="#" aria-controls="products-datatable" data-dt-idx="4" tabindex="0"
+                                                class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="title" [(visible)]="visible" position="top" [style]="{ width: '95vw' }" [draggable]="false">
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Avatar <a class="text-danger">(*)</a></label>
+                    <input type="file" id="tenLoai" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Họ tên <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Email <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" class="form-control" autocomplete="off" readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Địa chỉ <a class="text-danger">(*)</a></label>
+                    <input type="text" id="tenLoai" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Giới tính <a class="text-danger">(*)</a></label>
+                    <select class="form-select" id="example-select">
+                        <option>Nam</option>
+                        <option>Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="tenLoai" class="form-label">Ngày sinh <a class="text-danger">(*)</a></label>
+                    <input type="date" id="tenLoai" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="trangThai" class="form-label">Trạng thái </label>
+                    <br>
+                    <div class="mb-1"></div>
+                    <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-light" (click)="closeDialog()">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ Save }}</button>
+    </ng-template>
+</p-dialog>

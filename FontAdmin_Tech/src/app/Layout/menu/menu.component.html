@@ -1,0 +1,134 @@
+<div class="leftside-menu">
+    <!-- LOGO -->
+    <a [routerLink]="['/']" class="logo text-center logo-light">
+        <span class="logo-lg">
+            <img src="assets/logo/logo-white-lg.png" alt="" height="35" />
+        </span>
+        <span class="logo-sm">
+            <img src="assets/logo/logo-white.png" alt="" height="35" />
+        </span>
+    </a>
+
+    <div class="h-100" id="leftside-menu-container" data-simplebar="">
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+            <li class="side-nav-title side-nav-item">Home</li>
+
+            <li class="side-nav-item">
+                <a class="side-nav-link" routerLink="/" routerLinkActive="active-link">
+                    <i class="uil-home-alt"></i>
+                    <span> Trang chủ </span>
+                </a>
+            </li>
+
+            <li class="side-nav-title side-nav-item">Apps</li>
+
+            <li class="side-nav-item">
+                <a (click)="toggleProductCollapse()" class="side-nav-link">
+                    <i class="uil-store"></i>
+                    <span> Sản phẩm </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" [ngClass]="{'show': isProductCollapsed}" id="sidebarEcommerceProduct">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/loai']" [ngClass]="{'active': isProductCollapsed}">Loại sản phẩm</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/hang']" [ngClass]="{'active': isProductCollapsed}">Hãng sản phẩm</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/sanpham']" [ngClass]="{'active': isProductCollapsed}">Sản phẩm</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a class="side-nav-link" (click)="toggleNewsCollapse()">
+                    <i class="uil-store"></i>
+                    <span> Tin tức </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" [ngClass]="{'show': isNewsCollapsed}" id="sidebarEcommerceNews">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/danhmuc']" [ngClass]="{'active': isNewsCollapsed}">Danh mục tin tức</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/tintuc']" [ngClass]="{'active': isNewsCollapsed}">Tin tức</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a class="side-nav-link" (click)="toggleInvoiceCollapse()">
+                    <i class="uil-store"></i>
+                    <span> Hóa đơn </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" [ngClass]="{'show': isInvoiceCollapsed}" id="sidebarEcommerceNews">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/nhacungcap']" [ngClass]="{'active': isInvoiceCollapsed}">Nhà cung
+                                cấp</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/hoadonnhap']" [ngClass]="{'active': isInvoiceCollapsed}">Hóa đơn
+                                nhập</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/hoadonxuat']" [ngClass]="{'active': isInvoiceCollapsed}">Hóa đơn
+                                xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="side-nav-item">
+                <a class="side-nav-link" (click)="toggleManKindCollapse()">
+                    <i class="uil-store"></i>
+                    <span> Con người </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" [ngClass]="{'show': isManKindCollapsed}" id="sidebarEcommerceNews">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/chucvu']" [ngClass]="{'active': isManKindCollapsed}">Chức vụ</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/nhanvien']" [ngClass]="{'active': isManKindCollapsed}">Nhân viên</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/khachhang']" [ngClass]="{'active': isManKindCollapsed}">Khách hàng</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="side-nav-item">
+                <a class="side-nav-link" (click)="toggleSystemCollapse()">
+                    <i class="uil-store"></i>
+                    <span> Hệ thống </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" [ngClass]="{'show': isSystemCollapsed}" id="sidebarEcommerceNews">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/slide']" [ngClass]="{'active': isSystemCollapsed}">Slide</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="side-nav-item">
+                <a class="side-nav-link" (click)="toggleRoleCollapse()" routerLink="/role"
+                    [ngClass]="{'active-link': isRoleCollapsed}">
+                    <i class="uil-home-alt"></i>
+                    <span>Phân quyền </span>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <!-- Sidebar -left -->
+</div>

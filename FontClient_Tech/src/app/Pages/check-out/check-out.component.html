@@ -1,0 +1,122 @@
+<div class="mb-1"></div>
+<div class="container-new">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="checkout">
+            <div class="container">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2 class="checkout-title">Chi tiết thanh toán</h2>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Họ tên *</label>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label>Số điện thoại *</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label>Địa chỉ *</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
+                                <label class="custom-control-label" for="checkout-diff-address">Đặt làm địa chỉ mặc
+                                    định?</label>
+                            </div><!-- End .custom-checkbox -->
+
+                            <div class="mb-3">
+                                <label>Ghi chú đơn hàng (tùy chọn)</label>
+                                <textarea class="form-control" cols="30" rows="4"
+                                    placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: ghi chú đặc biệt khi giao hàng"></textarea>
+                            </div>
+                        </div>
+                        <aside class="col-lg-3">
+                            <div class="summary">
+                                <h3 class="summary-title">Đơn hàng của bạn</h3><!-- End .summary-title -->
+
+                                <table class="table table-summary">
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Tổng</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#">Beige knitted elastic runner shoes <b> x1</b></a></td>
+                                            <td>$84.00</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><a href="#">Blue utility pinafore denimdress <b> x1</b></a></td>
+                                            <td>$76,00</td>
+                                        </tr>
+                                        <tr class="summary-subtotal">
+                                            <td>Tổng phụ:</td>
+                                            <td>$160.00</td>
+                                        </tr><!-- End .summary-subtotal -->
+                                        <tr>
+                                            <td>Vận chuyển:</td>
+                                            <td>Miễn phí vận chuyển</td>
+                                        </tr>
+                                        <tr class="summary-total">
+                                            <td>Tổng:</td>
+                                            <td>$160.00</td>
+                                        </tr><!-- End .summary-total -->
+                                    </tbody>
+                                </table><!-- End .table table-summary -->
+
+                                <div class="accordion-summary" id="accordion-payment">
+                                    <div class="card">
+                                        <div class="card-header" id="heading-1">
+                                            <h2 class="card-title">
+                                                <a role="button" data-toggle="collapse" href="#collapse-1"
+                                                    aria-expanded="true" aria-controls="collapse-1">
+                                                    Thanh toán qua ví TechPay
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
+                                            data-parent="#accordion-payment">
+                                            <div class="card-body">
+                                                <p style="font-family: 'Times New Roman', Times, serif;">Tổng tiền trong
+                                                    ví: 1.000.000 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header" id="heading-3">
+                                            <h2 class="card-title">
+                                                <a class="collapsed" role="button" data-toggle="collapse"
+                                                    href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                                                    Thanh toán khi nhận hàng
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .collapse -->
+                                    </div>
+                                </div><!-- End .accordion -->
+
+                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                    <span class="btn-text">Đặt hàng</span>
+                                    <span class="btn-hover-text">Tiến hành kiểm tra</span>
+                                </button>
+                            </div><!-- End .summary -->
+                        </aside><!-- End .col-lg-3 -->
+                    </div><!-- End .row -->
+                </form>
+            </div><!-- End .container -->
+        </div><!-- End .checkout -->
+    </div>
+</div>

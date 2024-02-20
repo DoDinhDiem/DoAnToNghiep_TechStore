@@ -1,0 +1,85 @@
+.cps-smember-homepage-desktop .block-smeminfo-sliding {
+    display: flex;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.block-welcomeDesktop {
+    border: 0.5px solid #e7e7e7;
+    border-radius: 15px;
+    display: block;
+    margin-right: 25px;
+    padding: 10px;
+    text-align: center;
+    min-width: 450px;
+}
+.block-welcomeDesktop .welcome-avatarDesktop {
+    border: 0.5px solid #9b9b9b;
+    border-radius: 50%;
+    height: 70px;
+    margin: 0 auto 10px;
+    width: 70px;
+}
+.block-welcomeDesktop .welcome-avatarDesktop img {
+    height: 60px;
+    margin: 0;
+}
+
+.block-welcomeDesktop .welcome-smemberDesktop .welcome-smember__contentDesktop {
+    color: #4a4a4a;
+}
+
+.block-welcomeDesktop .welcome-smemberDesktop .welcome-smember__2nd-contentDesktop {
+    color: #fd2424;
+    font-size: 21px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.block-smember-info__box-content_p {
+    color: #000;
+    font-weight: 600;
+}
+
+.block-smember-info__box-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-QR {
+    margin-top: 20px;
+    display: contents;
+}
+
+.content-img {
+    width: 250px;
+    margin-left: 25%;
+}
+
+.table {
+    border: none;
+}
+
+.content-img img {
+    max-width: 100%;
+    border-radius: 10px;
+    height: auto;
+}
+
+.containerQR-text {
+    margin-top: 5px;
+}
+.containerQR-text-title {
+    color: #1aa1dc;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: auto;
+    letter-spacing: -0.025em;
+}
+.containerQR-text-content {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    color: #000;
+}

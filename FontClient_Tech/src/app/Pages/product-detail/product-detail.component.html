@@ -1,0 +1,508 @@
+<div class="mb-1"></div>
+<div class="container-new">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container d-flex align-items-center">
+            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container">
+            <div class="product-details-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p-galleria [value]="images" [responsiveOptions]="responsiveOptions"
+                            [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" [activeIndex]="activeIndex">
+                            <ng-template pTemplate="item" let-item>
+                                <img [src]="item.itemImageSrc" style="width: 100%;" />
+                            </ng-template>
+                            <ng-template pTemplate="thumbnail" let-item>
+                                <div class="grid grid-nogutter justify-content-center">
+                                    <img [src]="item.thumbnailImageSrc" />
+                                </div>
+                            </ng-template>
+                        </p-galleria>
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h1 class="product-title">Dark yellow lace cut out swing dress</h1>
+                            <!-- End .product-title -->
+
+                            <div class="mb-2"></div>
+
+                            <div class="product-price">
+                                $84.00
+                            </div>
+
+
+                            <div class="details-filter-row details-row-size">
+                                <label>Bảo hành:</label>
+                            </div>
+
+
+                            <div class="details-filter-row details-row-size">
+                                <label for="qty">Số lượng:</label>
+                                <div class="product-details-quantity">
+                                    <div class="cart-product-quantity">
+                                        <div class="input-group  input-spinner">
+                                            <div class="input-group-prepend">
+                                                <button style="min-width: 26px" class="btn btn-decrement btn-spinner"
+                                                    type="button"><i class="icon-minus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button style="min-width: 26px; margin-left: 20px;"
+                                                    class="btn btn-increment btn-spinner" type="button"><i
+                                                        class="icon-plus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" style="text-align: center" value="1" min="1" max="10"
+                                                class="form-control " required="" placeholder="" />
+
+                                        </div>
+                                    </div>
+                                </div><!-- End .product-details-quantity -->
+                            </div><!-- End .details-filter-row -->
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="product-details-action">
+                                        <a href="#" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <div class="product-details-action">
+                                        <a href="#" class="btn-product btn-cart"
+                                            style=" background: linear-gradient(#f52f32, #e11b1e); width: 70%;"><span>Mua
+                                                ngay</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-details-action">
+                                <a href="#" class="btn-product"
+                                    style="background: linear-gradient(180deg,#3a78d0,#277cea); border: none;">
+                                    <strong class="has-text-white">Trả góp 0%</strong>
+                                </a>
+                            </div>
+                            <div class="box-more-promotion my-3">
+                                <div class="box-more-promotion-title has-text-black has-text-weight-semibold">ƯU ĐÃI
+                                    THÊM</div>
+                                <div class="render-promotion">
+                                    <ul>
+                                        <li class="item-promotion"><span><a target="_blank"><span>Giảm thêm tới 5% cho
+                                                        thành viên Smember (áp
+                                                        dụng tùy sản phẩm)</span></a></span></li>
+                                        <li class="item-promotion">
+                                            <a><img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/Logo/logo_momo_1.png"
+                                                    loading="lazy">&nbsp;Giảm thêm 2% tối đa 800.000đ khi thanh toán qua
+                                                Momo</a>
+                                        </li>
+                                        <li class="item-promotion"><img
+                                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:40:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/DUMT_ZV0.png"
+                                                width="40" alt="Kredivo" loading="lazy" title="Kredivo">&nbsp;<a
+                                                target="_blank">Giảm thêm 5% tối đa 200.000đ khi thanh toán qua
+                                                Krediv</a></li>
+                                        <li class="item-promotion"><img
+                                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/Icon/fundiin.png"
+                                                loading="lazy">&nbsp;<a>Giảm thêm 6% tối
+                                                đa 150.000đ khi thanh toán qua&nbsp;Fundiin</a></li>
+                                        <li class="item-promotion"><img
+                                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:40:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/home-pay-later_1.png"
+                                                width="40" alt="Home Paylater" loading="lazy">&nbsp;<a
+                                                target="_blank">Giảm đến 400k cho đơn hàng từ 1.1 triệu qua Home
+                                                Paylater</a></li>
+                                        <li class="item-promotion"><a target="_blank"></a><a target="_blank">B2B - Ưu
+                                                đãi tốt hơn cho khách hàng doanh nghiệp, trường
+                                                học,... khi mua số lượng nhiều</a></li>
+                                    </ul>
+                                    <div id="eJOY__extension_root" class="eJOY__extension_root_class"></div>
+                                    <div id="gtx-trans" style="position: absolute; left: 29px; top: 109px;">
+                                        <div class="gtx-trans-icon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-details-footer">
+
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label">Chia sẻ:</span>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                            class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i
+                                            class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                            class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
+                                            class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
+                        </div><!-- End .product-details -->
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .product-details-top -->
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="block-content-product-left"><!---->
+                        <div class="cps-block-content">
+                            <div class="ksp-content p-2 mb-2">
+
+                            </div>
+                            <div class="cps-block-content_btn-showmore"><a
+                                    class="btn-show-more button__content-show-more">
+                                    Xem thêm </a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="cps-block-technicalInfo mb-3 ml-3 px-3 pt-3 pb-1">
+                        <div class="is-flex is-justify-content-space-between is-align-items-center">
+                            <h2 class="title is-6 mb-3">Thông số kỹ thuật</h2> <!---->
+                        </div>
+                        <ul class="technical-content">
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Kích thước màn hình</p>
+                                <div>6.1 inches</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Công nghệ màn hình</p>
+                                <div><a href="https://cellphones.com.vn/sforum/man-hinh-super-retina-xdr-la-gi"
+                                        target="_blank" rel="nofollow">Super Retina XDR OLED</a></div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Camera sau</p>
+                                <div>Camera chính: 48MP<br>Camerra góc rộng: 12MP<br> Camera Tele: 12MP </div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Camera trước</p>
+                                <div>12MP</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Chipset</p>
+                                <div>Apple A16 Bionic</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Dung lượng RAM</p>
+                                <div>6 GB</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Bộ nhớ trong</p>
+                                <div>128 GB</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Pin</p>
+                                <div>3349 mAh</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Thẻ SIM</p>
+                                <div>2 SIM (nano‑SIM và eSIM)</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Hệ điều hành</p>
+                                <div>iOS 17</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Độ phân giải màn hình</p>
+                                <div>1179 x 2556 pixels</div>
+                            </li>
+                            <li
+                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                <p>Tính năng màn hình</p>
+                                <div>Dynamic Island <br>HDR display <br>True Tone <br>Wide color (P3) <br>Haptic
+                                    Touch<br>Lớp phủ oleophobia chống dấu vân tay<br>Độ sáng tối đa: 2000 nits<br>Mặt
+                                    kính cảm ứng: Kính cường lực Ceramic Shield</div>
+                            </li>
+                        </ul> <button
+                            class="button button__show-modal-technical my-3 is-flex is-justify-content-center">
+                            Xem cấu hình chi tiết
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <h2 class="title text-center mb-4">Sản phẩm tương tự</h2><!-- End .title text-center -->
+
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow">
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <span class="product-label label-top">Top</span>
+                        <a href="product.html">
+                            <img src="assets/Client/images/demos/demo-14/products/product-6.jpg" alt="Product image"
+                                class="product-image" />
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
+                                    thích</span></a>
+
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
+                                    sánh</span></a>
+                        </div>
+                        <!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
+                                    vào giỏ hàng</span></a>
+                        </div>
+                        <!-- End .product-action -->
+                    </figure>
+                    <!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Laptops</a>
+                        </div>
+                        <!-- End .product-cat -->
+                        <h3 class="product-title">
+                            <a href="product.html">MacBook Pro 13" Display, i5</a>
+                        </h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">$1,199.99</div>
+                        <!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 100%"></div>
+                                <!-- End .ratings-val -->
+                            </div>
+                            <!-- End .ratings -->
+                            <span class="ratings-text">( 4 Reviews )</span>
+                        </div>
+                        <!-- End .rating-container -->
+                    </div>
+
+                </div>
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <span class="product-label label-new">New</span>
+                        <a href="product.html">
+                            <img src="assets/Client/images/products/product-4.jpg" alt="Product image"
+                                class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+                                title="Quick view"><span>Quick view</span></a>
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-action -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Women</a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            $60.00
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div><!-- End .rating-container -->
+
+                        <div class="product-nav product-nav-thumbs">
+                            <a href="#" class="active">
+                                <img src="assets/Client/images/products/product-4-thumb.jpg" alt="product desc">
+                            </a>
+                            <a href="#">
+                                <img src="assets/Client/images/products/product-4-2-thumb.jpg" alt="product desc">
+                            </a>
+
+                            <a href="#">
+                                <img src="assets/Client/images/products/product-4-3-thumb.jpg" alt="product desc">
+                            </a>
+                        </div><!-- End .product-nav -->
+                    </div><!-- End .product-body -->
+                </div><!-- End .product -->
+
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <span class="product-label label-out">Out of Stock</span>
+                        <a href="product.html">
+                            <img src="assets/Client/images/products/product-6.jpg" alt="Product image"
+                                class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+                                title="Quick view"><span>Quick view</span></a>
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-action -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Jackets</a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            <span class="out-price">$120.00</span>
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 6 Reviews )</span>
+                        </div><!-- End .rating-container -->
+                    </div><!-- End .product-body -->
+                </div><!-- End .product -->
+
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <span class="product-label label-top">Top</span>
+                        <a href="product.html">
+                            <img src="assets/Client/images/products/product-11.jpg" alt="Product image"
+                                class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+                                title="Quick view"><span>Quick view</span></a>
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-action -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Shoes</a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            $110.00
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 1 Reviews )</span>
+                        </div><!-- End .rating-container -->
+
+                        <div class="product-nav product-nav-thumbs">
+                            <a href="#" class="active">
+                                <img src="assets/Client/images/products/product-11-thumb.jpg" alt="product desc">
+                            </a>
+                            <a href="#">
+                                <img src="assets/Client/images/products/product-11-2-thumb.jpg" alt="product desc">
+                            </a>
+
+                            <a href="#">
+                                <img src="assets/Client/images/products/product-11-3-thumb.jpg" alt="product desc">
+                            </a>
+                        </div><!-- End .product-nav -->
+                    </div><!-- End .product-body -->
+                </div><!-- End .product -->
+
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <a href="product.html">
+                            <img src="assets/Client/images/products/product-10.jpg" alt="Product image"
+                                class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+                                title="Quick view"><span>Quick view</span></a>
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-action -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Jumpers</a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            $56.00
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 0 Reviews )</span>
+                        </div><!-- End .rating-container -->
+                    </div><!-- End .product-body -->
+                </div><!-- End .product -->
+
+                <div class="product text-center">
+                    <figure class="product-media">
+                        <a href="product.html">
+                            <img src="assets/Client/images/products/product-7.jpg" alt="Product image"
+                                class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                    wishlist</span></a>
+                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
+                                title="Quick view"><span>Quick view</span></a>
+                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                        <div class="product-action">
+                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-action -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">Jeans</a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            $76.00
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 2 Reviews )</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,232 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </div>
+            <h4 class="page-title">{{title}}</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <button type="button" (click)="showDialog()" class="btn btn-primary me-2"><i
+                                class="mdi mdi-plus-circle me-2"></i>Thêm</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+
+                <div class="table-responsive">
+                    <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="products-datatable_length">
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                            type="search" class="form-control form-control-sm" placeholder="Tìm..."
+                                            [(ngModel)]="key" (input)="onKeywordInput()"></label></div>
+                            </div>
+                        </div>
+                        <div class="mb-1"></div>
+                        <div *ngIf="showSkeleton">
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                        </div>
+                        <table *ngIf="!showSkeleton" class="table table-centered w-100 dt-responsive nowrap"
+                            id="products-datatable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Ảnh</th>
+                                    <th class="text-center" style="min-width: 110px">Danh mục</th>
+                                    <th class="text-center">Tiêu đề</th>
+                                    <th class="text-center">Nội dung</th>
+                                    <th class="text-center" style="min-width: 110px">Người viết</th>
+                                    <th class="text-center" style="min-width: 100px">Trạng thái</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of tintucList?.items">
+                                    <td class="text-center">
+                                        <img style="box-shadow: 5px 5px 10px 0px #888888;
+                                        border-radius: 5px; height: 60px"
+                                            src="{{baseUrl}}Uploads/News/{{item.anhTinTuc}}" alt="">
+                                    </td>
+                                    <td class="text-center">
+                                        {{item.tenDanhMuc}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{item.tinTuc.tieuDe}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{item.tinTuc.noiDung | slice:0:120}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{item.tenNguoiViet}}
+                                    </td>
+                                    <td class="text-center">
+                                        <p-inputSwitch [(ngModel)]="item.tinTuc.trangThai"
+                                            (ngModelChange)="trangThai(item.tinTuc)"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group dropdown">
+                                            <button
+                                                class="table-action-btn dropdown-toggle arrow-none btn btn-primary btn-xs"
+                                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                    class="mdi mdi-dots-vertical"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end drop-action">
+                                                <button class="dropdown-item"
+                                                    [routerLink]="['/tintuc/anhtintuc', item.tinTuc.id]"><i
+                                                        class="mdi dripicons-photo-group me-2 text-muted vertical-middle"></i>Ảnh</button>
+                                                <button class="dropdown-item"
+                                                    [routerLink]="['/tintuc/binhluantintuc', item.tinTuc.id]"><i
+                                                        class="uil  uil-comments-alt me-2 text-muted vertical-middle"></i>Bình
+                                                    luận</button>
+                                                <button class="dropdown-item" (click)="showSeeDialog(item.tinTuc)"><i
+                                                        class="mdi mdi-eye me-2 text-muted vertical-middle"></i>Xem</button>
+                                                <button class="dropdown-item" (click)="editModal(item.tinTuc)"><i
+                                                        class="mdi mdi-square-edit-outline me-2 text-muted vertical-middle"></i>Sửa</button>
+                                                <button class="dropdown-item" (click)="delete(item.tinTuc)"><i
+                                                        class="mdi mdi-delete me-2 text-muted vertical-middle"></i>Xóa</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="products-datatable_info" role="status"
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    tintucList?.totalItems }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
+                                    <ul class="pagination pagination-rounded">
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="title" [(visible)]="visible" position="top" [style]="{ 'width': '85vw', 'height': '650px' }"
+    [draggable]="false">
+
+    <ng-template pTemplate="content">
+        <div class="row">
+            <div class="mb-xl-2 col-md-6">
+                <label for="tieuDe" class="form-label">Tiêu đề <a class="text-danger">(*)</a></label>
+                <input type="text" id="tieuDe" [(ngModel)]="tintuc.tieuDe" class="form-control" autocomplete="off">
+            </div>
+            <div class="mb-2 col-md-6">
+                <label for="tenLoai" class="form-label">Danh mục tin tức <a class="text-danger">(*)</a></label>
+                <select class="form-select" id="example-select" [(ngModel)]="tintuc.danhMucId">
+                    <option *ngFor="let item of danhmuc" [value]="item.id">{{ item.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="mb-2 col-md-6">
+                <label for="tenLoai" class="form-label">Ảnh đại diện <a class="text-danger">(*)</a></label>
+                <input type="file" class="form-control" (change)="onFileOnly($event)">
+                <div class="row mt-2" *ngIf="fileOnlyEdit">
+                    <div class="col">
+                        <img style="height: 100px; border-radius: 5px;"
+                            src="{{baseUrl}}Uploads/News/{{fileOnlyEdit.image}}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-2 col-md-6">
+                <label for="tenLoai" class="form-label">Ảnh chi tiết</label>
+                <input type="file" class="form-control" multiple (change)="onFilesArray($event)">
+                <div class="row" *ngIf="selectedFilesEdit">
+                    <div class="col mt-2" *ngFor="let item of selectedFilesEdit">
+                        <img style="height: 100px; margin-right: 2px; border-radius: 5px;"
+                            src="{{baseUrl}}Uploads/News/{{item.image}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label for="tenLoai" class="form-label">Nội dung</label>
+            <p-editor [(ngModel)]="tintuc.noiDung" [style]="{ height: '180px' }"></p-editor>
+        </div>
+        <div class="mb-3">
+            <label for="trangThai" class="form-label">Trạng thái <a class="text-danger">(*)</a></label>
+            <br>
+            <p-inputSwitch [(ngModel)]="tintuc.trangThai"></p-inputSwitch>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-light" (click)="closeDialog()">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">{{ Save }}</button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [header]="title" [(visible)]="visible_look" position="top" [style]="{ 'width': '45vw', 'height': '670px' }"
+    [draggable]="false">
+    <div class="card mt-1" style="box-shadow:  1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);">
+        <img *ngIf="image" style="width: 80%; margin: auto;" src="{{baseUrl}}Uploads/News/{{image.image}}"
+            class="card-img-top mt-2" alt="Card image cap">
+        <div class="card-body text-center">
+            <p class="card-text">
+                <small class="text-muted">bởi {{nguoiViet}} | {{tintucDetail?.createdAt | date: 'dd/MM/yyyy'}}</small>
+            </p>
+            <h5 class="card-title">{{tintucDetail?.tieuDe}}</h5>
+            <p class="card-text">
+                {{tintucDetail?.noiDung | slice:0:250}}.</p>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-light" (click)="closeSeeDialog()">Đóng</button>
+    </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '450px', }"></p-confirmDialog>
