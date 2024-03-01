@@ -34,19 +34,19 @@ namespace BackEnd_Tech.Models
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; } = null!;
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; } = null!;
         public virtual DbSet<NhanVien> NhanViens { get; set; } = null!;
+        public virtual DbSet<PhanHoiBinhLuanTinTuc> PhanHoiBinhLuanTinTucs { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<SanPham> SanPhams { get; set; } = null!;
         public virtual DbSet<Slide> Slides { get; set; } = null!;
         public virtual DbSet<ThongSo> ThongSos { get; set; } = null!;
         public virtual DbSet<TinTuc> TinTucs { get; set; } = null!;
-        public virtual DbSet<ViTechStore> ViTechStores { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DINHDIEMIT;Initial Catalog=TechStore;Integrated Security=True;Trust Server Certificate=True");
+                optionsBuilder.UseSqlServer("Data Source=DINHDIEMIT;Initial Catalog=TechStore;Integrated Security=True;Encrypt=True;Trust Server Certificate=True;");
             }
         }
 
@@ -143,9 +143,13 @@ namespace BackEnd_Tech.Models
                     .HasMaxLength(255)
                     .HasColumnName("hoTen");
 
+                entity.Property(e => e.KhachHangId).HasColumnName("khachHang_Id");
+
                 entity.Property(e => e.NoiDung)
                     .HasColumnType("ntext")
                     .HasColumnName("noiDung");
+
+                entity.Property(e => e.TinTucId).HasColumnName("tinTuc_Id");
 
                 entity.Property(e => e.TrangThai).HasColumnName("trangThai");
 
@@ -153,21 +157,17 @@ namespace BackEnd_Tech.Models
                     .HasColumnType("datetime")
                     .HasColumnName("updated_at");
 
-                entity.Property(e => e.UserAdminId).HasColumnName("userAdmin_id");
-
-                entity.Property(e => e.UserClientId).HasColumnName("userClient_id");
-
-                entity.HasOne(d => d.UserAdmin)
+                entity.HasOne(d => d.KhachHang)
                     .WithMany(p => p.BinhLuanTinTucs)
-                    .HasForeignKey(d => d.UserAdminId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_NhanVien_BinhLuan_id_userAdmin");
-
-                entity.HasOne(d => d.UserClient)
-                    .WithMany(p => p.BinhLuanTinTucs)
-                    .HasForeignKey(d => d.UserClientId)
+                    .HasForeignKey(d => d.KhachHangId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_KhachHang_id_userClient");
+
+                entity.HasOne(d => d.TinTuc)
+                    .WithMany(p => p.BinhLuanTinTucs)
+                    .HasForeignKey(d => d.TinTucId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_TinTuc_id_tintucid");
             });
 
             modelBuilder.Entity<ChiTietHoaDonNhap>(entity =>
@@ -272,7 +272,7 @@ namespace BackEnd_Tech.Models
                     .HasColumnName("email");
 
                 entity.Property(e => e.Map)
-                    .HasMaxLength(255)
+                    .HasColumnType("ntext")
                     .HasColumnName("map");
 
                 entity.Property(e => e.QuanHuyen)
@@ -435,6 +435,10 @@ namespace BackEnd_Tech.Models
                     .HasMaxLength(255)
                     .HasColumnName("hoTen");
 
+                entity.Property(e => e.PhuongThucGiaoDich)
+                    .HasMaxLength(255)
+                    .HasColumnName("phuongThucGiaoDich");
+
                 entity.Property(e => e.SoDienThoai).HasColumnName("soDienThoai");
 
                 entity.Property(e => e.TongTien)
@@ -451,12 +455,17 @@ namespace BackEnd_Tech.Models
                     .WithMany(p => p.HoaDonXuats)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_HDX_NhanVien_id_userid");
+                    .HasConstraintName("FK_HDX_KhachHang_id_userid");
             });
 
             modelBuilder.Entity<KhachHang>(entity =>
             {
                 entity.ToTable("KhachHang");
+
+                entity.Property(e => e.Avatar)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("avatar");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -487,7 +496,11 @@ namespace BackEnd_Tech.Models
                     .HasMaxLength(100)
                     .HasColumnName("passWord");
 
+                entity.Property(e => e.RefreshToken).HasColumnName("refreshToken");
+
                 entity.Property(e => e.SoDienThoai).HasColumnName("soDienThoai");
+
+                entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.TrangThai).HasColumnName("trangThai");
 
@@ -500,30 +513,37 @@ namespace BackEnd_Tech.Models
             {
                 entity.ToTable("LichSuGiaoDich");
 
-                entity.Property(e => e.CreatedAt)
+                entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
-                    .HasColumnName("created_at")
+                    .HasColumnName("createdDate")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.SoDuTruocDo)
-                    .HasColumnType("decimal(18, 2)")
-                    .HasColumnName("soDuTruocDo");
+                entity.Property(e => e.HoaDonId).HasColumnName("hoaDon_Id");
+
+                entity.Property(e => e.KhachHangId).HasColumnName("khachHang_Id");
+
+                entity.Property(e => e.LoaiThe)
+                    .HasMaxLength(1)
+                    .HasColumnName("loaiThe");
+
+                entity.Property(e => e.NganHang)
+                    .HasMaxLength(255)
+                    .HasColumnName("nganHang");
 
                 entity.Property(e => e.SoTien)
                     .HasColumnType("decimal(18, 2)")
                     .HasColumnName("soTien");
 
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at");
-
-                entity.Property(e => e.ViTechStoreId).HasColumnName("viTechStore_id");
-
-                entity.HasOne(d => d.ViTechStore)
+                entity.HasOne(d => d.HoaDon)
                     .WithMany(p => p.LichSuGiaoDiches)
-                    .HasForeignKey(d => d.ViTechStoreId)
+                    .HasForeignKey(d => d.HoaDonId)
+                    .HasConstraintName("FK_LichSuGiaoDich_id_hoaDonId");
+
+                entity.HasOne(d => d.KhachHang)
+                    .WithMany(p => p.LichSuGiaoDiches)
+                    .HasForeignKey(d => d.KhachHangId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_ViTechStore_LichSuGiaoDich_id_viTechStore");
+                    .HasConstraintName("FK_LichSuGiaoDich_id_khachhangId");
             });
 
             modelBuilder.Entity<LoaiSanPham>(entity =>
@@ -619,9 +639,17 @@ namespace BackEnd_Tech.Models
                     .HasMaxLength(100)
                     .HasColumnName("passWord");
 
+                entity.Property(e => e.RefreshToken)
+                    .HasMaxLength(1)
+                    .HasColumnName("refreshToken");
+
+                entity.Property(e => e.RefreshTokenExpiryTime).HasColumnName("refreshTokenExpiryTime");
+
                 entity.Property(e => e.RoleId).HasColumnName("role_id");
 
                 entity.Property(e => e.SoDienThoai).HasColumnName("soDienThoai");
+
+                entity.Property(e => e.Token).HasColumnName("token");
 
                 entity.Property(e => e.TrangThai).HasColumnName("trangThai");
 
@@ -640,6 +668,47 @@ namespace BackEnd_Tech.Models
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_NhanVien_Role");
+            });
+
+            modelBuilder.Entity<PhanHoiBinhLuanTinTuc>(entity =>
+            {
+                entity.ToTable("PhanHoiBinhLuanTinTuc");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.BinhLuanId).HasColumnName("binhLuan_Id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("created_At")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.HoTen)
+                    .HasMaxLength(255)
+                    .HasColumnName("hoTen");
+
+                entity.Property(e => e.KhachHangId).HasColumnName("khachHang_Id");
+
+                entity.Property(e => e.NhanVienId).HasColumnName("nhanVien_Id");
+
+                entity.Property(e => e.NoiDung)
+                    .HasColumnType("ntext")
+                    .HasColumnName("noiDung");
+
+                entity.Property(e => e.TinTucId).HasColumnName("tinTuc_Id");
+
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+
+                entity.HasOne(d => d.BinhLuan)
+                    .WithMany(p => p.PhanHoiBinhLuanTinTucs)
+                    .HasForeignKey(d => d.BinhLuanId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_PhanHoiBinhLuan_id_binhluanid");
+
+                entity.HasOne(d => d.TinTuc)
+                    .WithMany(p => p.PhanHoiBinhLuanTinTucs)
+                    .HasForeignKey(d => d.TinTucId)
+                    .HasConstraintName("FK_PhanHoiTinTuc_id_tinTucId");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -814,34 +883,6 @@ namespace BackEnd_Tech.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_NhanVien_TinTuc_id_userid");
-            });
-
-            modelBuilder.Entity<ViTechStore>(entity =>
-            {
-                entity.ToTable("ViTechStore");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.SoTien)
-                    .HasColumnType("decimal(18, 2)")
-                    .HasColumnName("soTien");
-
-                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ViTechStores)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_ViTien_KhachHang_id_userid");
             });
 
             OnModelCreatingPartial(modelBuilder);

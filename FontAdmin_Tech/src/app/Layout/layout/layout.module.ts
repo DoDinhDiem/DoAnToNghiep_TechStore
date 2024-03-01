@@ -121,6 +121,9 @@ import { NhanVienComponent } from 'src/app/Pages/nhan-vien/nhan-vien.component'
 import { KhachHangComponent } from 'src/app/Pages/khach-hang/khach-hang.component'
 import { RoleComponent } from 'src/app/Pages/role/role.component'
 import { SlideComponent } from 'src/app/Pages/slide/slide.component'
+import { AboutComponent } from 'src/app/Pages/about/about.component'
+import { ContactComponent } from 'src/app/Pages/contact/contact.component'
+import { SafePipe } from 'src/app/Pages/contact/safe.pipe'
 
 import { LoaiSanPhamModule } from '../../Pages/loai-san-pham/loai-san-pham.module'
 import { DashboardModule } from '../../Pages/dashboard/dashboard.module'
@@ -140,6 +143,8 @@ import { NhanVienModule } from 'src/app/Pages/nhan-vien/nhan-vien.module'
 import { KhachHangModule } from 'src/app/Pages/khach-hang/khach-hang.module'
 import { RoleModule } from 'src/app/Pages/role/role.module'
 import { SlideModule } from 'src/app/Pages/slide/slide.module'
+import { AboutModule } from 'src/app/Pages/about/about.module'
+import { ContactModule } from 'src/app/Pages/contact/contact.module'
 
 @NgModule({
     declarations: [
@@ -164,7 +169,10 @@ import { SlideModule } from 'src/app/Pages/slide/slide.module'
         NhanVienComponent,
         KhachHangComponent,
         RoleComponent,
-        SlideComponent
+        SlideComponent,
+        AboutComponent,
+        ContactComponent,
+        SafePipe
     ],
     imports: [
         LoaiSanPhamModule,
@@ -185,7 +193,8 @@ import { SlideModule } from 'src/app/Pages/slide/slide.module'
         KhachHangModule,
         RoleModule,
         SlideModule,
-
+        AboutModule,
+        ContactModule,
         //PrimeNG
         BrowserModule,
         AvatarModule,

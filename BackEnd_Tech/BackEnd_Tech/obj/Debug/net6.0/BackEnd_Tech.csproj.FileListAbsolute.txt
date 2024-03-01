@@ -69,3 +69,4 @@ D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\refint\BackEnd_Tech.
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.pdb
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.genruntimeconfig.cache
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\ref\BackEnd_Tech.dll
+D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.sourcelink.json

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core'
 import { MenuItem } from 'primeng/api'
+import { baseUrl } from 'src/app/Api/baseHttp'
+import { CartService } from 'src/app/Service/cart.service'
 
 @Component({
     selector: 'app-shopping-cart',
@@ -7,13 +9,43 @@ import { MenuItem } from 'primeng/api'
     styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent {
-    items: MenuItem[] | undefined
-
-    home: MenuItem | undefined
+    baseUrl = baseUrl
+    cartItems: any[] = []
+    quantity = 0
+    totalPrice: number = 0
+    price: number = 0
+    constructor(private cartService: CartService) {}
 
     ngOnInit() {
-        this.items = [{ label: 'Cửa hàng' }, { label: 'Giỏ hàng' }]
+        this.cartService.loadCart()
+        this.cartService.products$.subscribe((products) => {
+            this.getQuantity()
+            this.calculateTotalPrice()
+        })
+        this.cartItems = this.cartService.getCartItem()
+    }
+    getQuantity() {
+        this.quantity = this.cartService.getQuantity()
+    }
+    calculateTotalPrice() {
+        this.totalPrice = this.cartService.getTotalPrice()
+    }
+    removeFromCart(product: any) {
+        this.cartService.removeProduct(product)
+        this.cartItems = this.cartService.getCartItem()
+        this.getQuantity()
+        this.calculateTotalPrice()
+    }
 
-        this.home = { icon: 'pi pi-home', routerLink: '/' }
+    incrementQuantity(cart: any) {
+        this.cartService.incrementQuantity(cart)
+    }
+
+    decrementQuantity(cart: any) {
+        this.cartService.decrementQuantity(cart)
+    }
+
+    calculateSubtotal(cart: any): number {
+        return cart.thanhTien * cart.soLuong
     }
 }

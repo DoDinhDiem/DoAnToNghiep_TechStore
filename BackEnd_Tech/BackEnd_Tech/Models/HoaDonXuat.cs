@@ -8,6 +8,7 @@ namespace BackEnd_Tech.Models
         public HoaDonXuat()
         {
             ChiTietHoaDonXuats = new HashSet<ChiTietHoaDonXuat>();
+            LichSuGiaoDiches = new HashSet<LichSuGiaoDich>();
         }
 
         public int Id { get; set; }
@@ -22,8 +23,10 @@ namespace BackEnd_Tech.Models
         public int? TrangThaiDonHang { get; set; }
         public bool? TrangThaiThanhToan { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public string? PhuongThucGiaoDich { get; set; }
 
-        public virtual NhanVien? User { get; set; }
+        public virtual KhachHang? User { get; set; }
         public virtual ICollection<ChiTietHoaDonXuat> ChiTietHoaDonXuats { get; set; }
+        public virtual ICollection<LichSuGiaoDich> LichSuGiaoDiches { get; set; }
     }
 }

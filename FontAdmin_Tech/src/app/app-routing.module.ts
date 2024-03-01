@@ -78,6 +78,14 @@ const routes: Routes = [
             {
                 path: 'slide',
                 loadChildren: () => import('./Pages/slide/slide.module').then((m) => m.SlideModule)
+            },
+            {
+                path: 'about',
+                loadChildren: () => import('./Pages/about/about.module').then((m) => m.AboutModule)
+            },
+            {
+                path: 'contact',
+                loadChildren: () => import('./Pages/contact/contact.module').then((m) => m.ContactModule)
             }
         ]
     }

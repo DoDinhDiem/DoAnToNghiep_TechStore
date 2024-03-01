@@ -2,10 +2,24 @@
 using BackEnd_Tech.Models.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//Kết nối cơ sở dữ liệu
+builder.Services.AddDbContext<TechStoreContext>(options =>
+{
+    var configuration = builder.Configuration;
+    options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
+});
 
 // Add services to the container.
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
@@ -23,24 +37,12 @@ builder.Services.AddAuthentication(x =>
     x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
-
-//Kết nối cơ sở dữ liệu
-builder.Services.AddDbContext<TechStoreContext>(options =>
-{
-    var configuration = builder.Configuration;
-    options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
-});
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

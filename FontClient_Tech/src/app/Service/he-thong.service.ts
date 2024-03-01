@@ -18,7 +18,7 @@ export class HeThongService {
         return this.http.get<any[]>(baseUrl + `api/Client/GetSearchSanPham${params}`)
     }
 
-    GetLoaiTinTuc(): Observable<any[]> {
+    GetLoaiTinTuc(): Observable<any> {
         return this.http.get<any>(baseUrl + 'api/Client/GetLoaiTinTuc')
     }
 
@@ -26,7 +26,7 @@ export class HeThongService {
         return this.http.get<any>(baseUrl + 'api/Client/GetGioiThieu')
     }
 
-    GetLienHe(): Observable<any[]> {
+    GetLienHe(): Observable<any> {
         return this.http.get<any>(baseUrl + 'api/Client/GetLienHe')
     }
 }

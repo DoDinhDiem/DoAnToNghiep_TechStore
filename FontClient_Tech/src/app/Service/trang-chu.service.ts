@@ -32,4 +32,8 @@ export class TrangChuService {
     GetLapTop(): Observable<any[]> {
         return this.http.get<any>(baseUrl + 'api/Client/GetLapTop')
     }
+
+    GetTinTuc(): Observable<any[]> {
+        return this.http.get<any>(baseUrl + 'api/Client/GetTinTuc')
+    }
 }

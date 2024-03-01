@@ -1,10 +1,13 @@
 <div class="mb-1"></div>
 <div class="container-new">
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container">
-            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+            </div>
+        </div>
+    </nav>
 
     <div class="page-content">
         <div class="checkout">
@@ -15,28 +18,27 @@
                             <h2 class="checkout-title">Chi tiết thanh toán</h2>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>Họ tên *</label>
-                                    <input type="text" class="form-control" required>
+                                    <label for="hoTen">Họ tên *</label>
+                                    <input type="text" [(ngModel)]="khachhang.hoTen" name="hoTen" class="form-control"
+                                        required>
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
-                                    <label>Số điện thoại *</label>
-                                    <input type="text" class="form-control" required>
+                                    <label for="soDienThoai">Số điện thoại *</label>
+                                    <input type="number" [(ngModel)]="khachhang.soDienThoai" name="soDienThoai"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label>Địa chỉ *</label>
-                                <input type="text" class="form-control" required>
+                                <label for="diaChi">Địa chỉ *</label>
+                                <input type="text" [(ngModel)]="khachhang.diaChi" name="diaChi" class="form-control"
+                                    required>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                <label class="custom-control-label" for="checkout-diff-address">Đặt làm địa chỉ mặc
-                                    định?</label>
-                            </div><!-- End .custom-checkbox -->
 
                             <div class="mb-3">
-                                <label>Ghi chú đơn hàng (tùy chọn)</label>
-                                <textarea class="form-control" cols="30" rows="4"
+                                <label for="ghiChu">Ghi chú đơn hàng (tùy chọn)</label>
+                                <textarea class="form-control" cols="30" rows="4" [(ngModel)]="hoadon.ghiChu"
+                                    name="ghiChu"
                                     placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: ghi chú đặc biệt khi giao hàng"></textarea>
                             </div>
                         </div>
@@ -53,18 +55,15 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td><a href="#">Beige knitted elastic runner shoes <b> x1</b></a></td>
-                                            <td>$84.00</td>
+                                        <tr *ngFor="let item of cartItems">
+                                            <td><a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}<b>
+                                                        x{{item.soLuong}}</b></a></td>
+                                            <td>{{ calculateSubtotal(item) | number }}</td>
                                         </tr>
 
-                                        <tr>
-                                            <td><a href="#">Blue utility pinafore denimdress <b> x1</b></a></td>
-                                            <td>$76,00</td>
-                                        </tr>
                                         <tr class="summary-subtotal">
                                             <td>Tổng phụ:</td>
-                                            <td>$160.00</td>
+                                            <td>{{ totalPrice | number }}</td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
                                             <td>Vận chuyển:</td>
@@ -72,7 +71,7 @@
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Tổng:</td>
-                                            <td>$160.00</td>
+                                            <td>{{ totalPrice | number }}</td>
                                         </tr><!-- End .summary-total -->
                                     </tbody>
                                 </table><!-- End .table table-summary -->
@@ -80,43 +79,41 @@
                                 <div class="accordion-summary" id="accordion-payment">
                                     <div class="card">
                                         <div class="card-header" id="heading-1">
-                                            <h2 class="card-title">
-                                                <a role="button" data-toggle="collapse" href="#collapse-1"
-                                                    aria-expanded="true" aria-controls="collapse-1">
-                                                    Thanh toán qua ví TechPay
-                                                </a>
+                                            <h2 class="card-title input-radio">
+                                                <input type="radio" id="vnpay" name="paymentMethod"
+                                                    (change)="selectPaymentMethod('vnpay')"
+                                                    [checked]="selectedPaymentMethod === 'vnpay'">
+                                                <label style="font-size: 1.6rem;" class="ml-2" for="vnpay">Thanh toán
+                                                    qua ví VNPAY</label>
                                             </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
-                                            data-parent="#accordion-payment">
-                                            <div class="card-body">
-                                                <p style="font-family: 'Times New Roman', Times, serif;">Tổng tiền trong
-                                                    ví: 1.000.000 VNĐ</p>
-                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="card">
                                         <div class="card-header" id="heading-3">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse"
-                                                    href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                                                    Thanh toán khi nhận hàng
-                                                </a>
+                                            <h2 class="card-title input-radio">
+                                                <input type="radio" id="home" name="paymentMethod"
+                                                    (change)="selectPaymentMethod('cash')"
+                                                    [checked]="selectedPaymentMethod === 'cash'">
+                                                <label style="font-size: 1.6rem;" class="ml-2" for="home">Thanh toán khi
+                                                    nhận hàng</label>
                                             </h2>
-                                        </div><!-- End .collapse -->
+                                        </div>
                                     </div>
+
                                 </div><!-- End .accordion -->
 
-                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                <button (click)="onSubmit()" type="submit"
+                                    class="btn btn-outline-primary-2 btn-order btn-block">
                                     <span class="btn-text">Đặt hàng</span>
                                     <span class="btn-hover-text">Tiến hành kiểm tra</span>
                                 </button>
-                            </div><!-- End .summary -->
-                        </aside><!-- End .col-lg-3 -->
-                    </div><!-- End .row -->
+                            </div>
+                        </aside>
+                    </div>
                 </form>
-            </div><!-- End .container -->
-        </div><!-- End .checkout -->
+            </div>
+        </div>
     </div>
 </div>
+<p-toast></p-toast>

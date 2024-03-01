@@ -1,78 +1,99 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy, ViewChild } from '@angular/core'
-import { Galleria } from 'primeng/galleria'
+import { Component, OnInit } from '@angular/core'
+import { MessageService } from 'primeng/api'
 import { baseUrl } from 'src/app/Api/baseHttp'
+import { CartService } from 'src/app/Service/cart.service'
 import { TrangChuService } from 'src/app/Service/trang-chu.service'
 declare var $: any
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
+    providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
     baseUrl = baseUrl
+    responsiveOptions: any[] | undefined
+    images: any[] | undefined
 
-    constructor(private TrangChuService: TrangChuService) {}
+    constructor(private trangChuService: TrangChuService, private cartService: CartService, private messageService: MessageService) {}
     ngOnInit() {
-        this.initOwlCarousel()
         this.GetSlide()
+        this.GetSanPhamBanChay()
+        this.GetSanPhamGiamGia()
+        this.GetSanPhamMoi()
+        this.GetDienThoai()
+        this.GetLapTop()
+        this.GetTinTuc()
+
+        this.responsiveOptions = [
+            {
+                breakpoint: '1199px',
+                numVisible: 1,
+                numScroll: 1
+            },
+            {
+                breakpoint: '991px',
+                numVisible: 2,
+                numScroll: 1
+            },
+            {
+                breakpoint: '767px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ]
     }
 
     GetSlide() {
-        this.TrangChuService.GetSlide().subscribe((data) => {
+        this.trangChuService.GetSlide().subscribe((data) => {
             this.images = data
         })
     }
 
-    //Next or prev của sản phẩm
-
-    private initOwlCarousel() {
-        $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
-                nav: false,
-                dots: true,
-                margin: 20,
-                loop: false,
-                responsive: {
-                    '0': {
-                        items: 1
-                    },
-                    '480': {
-                        items: 2
-                    },
-                    '768': {
-                        items: 3
-                    },
-                    '992': {
-                        items: 4
-                    },
-                    '1200': {
-                        items: 3,
-                        nav: true
-                    },
-                    '1600': {
-                        items: 5,
-                        nav: true
-                    }
-                }
-            })
+    sanPhamBanChay: any[] = []
+    GetSanPhamBanChay() {
+        this.trangChuService.GetSanPhamBanChay().subscribe((data) => {
+            this.sanPhamBanChay = data
         })
     }
 
-    //Slide
-    images: any[] | undefined
+    sanPhamGiamGia: any[] = []
+    GetSanPhamGiamGia() {
+        this.trangChuService.GetSanPhamGiamGia().subscribe((data) => {
+            this.sanPhamGiamGia = data
+        })
+    }
 
-    responsiveOptions: any[] = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ]
+    sanPhamMoi: any[] = []
+    GetSanPhamMoi() {
+        this.trangChuService.GetSanPhamMoi().subscribe((data) => {
+            this.sanPhamMoi = data
+        })
+    }
+
+    dienThoai: any[] = []
+    GetDienThoai() {
+        this.trangChuService.GetDienThoai().subscribe((data) => {
+            this.dienThoai = data
+        })
+    }
+
+    lapTop: any[] = []
+    GetLapTop() {
+        this.trangChuService.GetLapTop().subscribe((data) => {
+            this.lapTop = data
+        })
+    }
+
+    tinTuc: any[] = []
+    GetTinTuc() {
+        this.trangChuService.GetTinTuc().subscribe((data) => {
+            this.tinTuc = data
+        })
+    }
+
+    addToCart(product: any) {
+        this.cartService.addToCart(product)
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 3000 })
+    }
 }

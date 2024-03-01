@@ -1,9 +1,12 @@
 <div class="mb-1"></div>
 <div class="container-new">
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container">
-            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
-        </div><!-- End .container -->
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Giới thiệu</li>
+            </div>
+        </div>
     </nav><!-- End .breadcrumb-nav -->
 
     <div class="page-content pb-3">
@@ -12,10 +15,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="about-text text-center mt-3">
                         <h2 class="title text-center mb-2">Chúng tôi là ai</h2><!-- End .title text-center mb-2 -->
-                        <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit
-                            nunc tortor eu nibh. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, uctus
-                            metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id,
-                            est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. </p>
+                        <p [innerHTML]="about?.gioiThieu"> </p>
                     </div><!-- End .about-text -->
                 </div><!-- End .col-lg-10 offset-1 -->
             </div>
@@ -40,7 +40,7 @@
                     <div class="col-6 col-md-3">
                         <div class="count-container text-center">
                             <div class="count-wrapper text-white">
-                                <span class="count" data-from="0" data-to="20" data-speed="3000"
+                                <span class="count" data-from="0" data-to="10" data-speed="3000"
                                     data-refresh-interval="50">0</span>+
                             </div><!-- End .count-wrapper -->
                             <h3 class="count-title text-white">Số năm kinh doanh</h3><!-- End .count-title -->
@@ -75,189 +75,28 @@
                 <h2 class="title text-center mb-4">Đội của chúng tôi</h2><!-- End .title text-center mb-2 -->
 
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3" *ngFor="let item of nhanvien">
                         <div class="member member-2 text-center">
                             <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-1.jpg" alt="member photo">
+                                <img src="{{baseUrl}}/Uploads/Staffs/{{item.anh}}" style="height: 300px;"
+                                    alt="member photo">
 
                                 <figcaption class="member-overlay">
                                     <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
+                                        <a href="javascript: void(0)" class="social-icon" title="Facebook"
+                                            target="_blank"><i class="icon-facebook-f"></i></a>
+                                        <a href="javascript: void(0)" class="social-icon" title="Twitter"
+                                            target="_blank"><i class="icon-twitter"></i></a>
+                                        <a href="javascript: void(0)" class="social-icon" title="Instagram"
+                                            target="_blank"><i class="icon-instagram"></i></a>
+                                    </div>
+                                </figcaption>
+                            </figure>
                             <div class="member-content">
-                                <h3 class="member-title">Samanta Grey<span>Founder & CEO</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-2.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Bruce Sutton<span>Sales & Marketing Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-3.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Janet Joy<span>Product Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-4.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Mark Pocket<span>Product Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-5.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Damion Blue<span>Sales & Marketing Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-6.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Lenard Smith<span>Product Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-7.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">Rachel Green<span>Product Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="member member-2 text-center">
-                            <figure class="member-media">
-                                <img src="assets/Client/images/team/about-2/member-8.jpg" alt="member photo">
-
-                                <figcaption class="member-overlay">
-                                    <div class="social-icons social-icons-simple">
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i
-                                                class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i
-                                                class="icon-instagram"></i></a>
-                                    </div><!-- End .soial-icons -->
-                                </figcaption><!-- End .member-overlay -->
-                            </figure><!-- End .member-media -->
-                            <div class="member-content">
-                                <h3 class="member-title">David Doe<span>Product Manager</span></h3>
-                                <!-- End .member-title -->
-                            </div><!-- End .member-content -->
-                        </div><!-- End .member -->
-                    </div><!-- End .col-lg-3 -->
+                                <h3 class="member-title">{{item.hoTen}}<span>{{item.chucVu}}</span></h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div><!-- End .container -->
         </div><!-- End .bg-light-2 pt-6 pb-6 -->

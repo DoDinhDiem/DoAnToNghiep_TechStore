@@ -13,19 +13,19 @@ const routes: Routes = [
                 loadChildren: () => import('./Pages/home/home.module').then((m) => m.HomeModule)
             },
             {
-                path: 'product',
+                path: 'product/:id',
                 loadChildren: () => import('./Pages/product/product.module').then((m) => m.ProductModule)
             },
             {
-                path: 'product-detail',
+                path: 'product-detail/:id',
                 loadChildren: () => import('./Pages/product-detail/product-detail.module').then((m) => m.ProductDetailModule)
             },
             {
-                path: 'blog',
+                path: 'blog/:id',
                 loadChildren: () => import('./Pages/blog/blog.module').then((m) => m.BlogModule)
             },
             {
-                path: 'blog-detail',
+                path: 'blog-detail/:id',
                 loadChildren: () => import('./Pages/blog-detail/blog-detail.module').then((m) => m.BlogDetailModule)
             },
             {
@@ -73,6 +73,14 @@ const routes: Routes = [
             {
                 path: 'contact',
                 loadChildren: () => import('./Pages/contact/contact.module').then((m) => m.ContactModule)
+            },
+            {
+                path: 'search/:searchTerm',
+                loadChildren: () => import('./Pages/search/search.module').then((m) => m.SearchModule)
+            },
+            {
+                path: 'success',
+                loadChildren: () => import('./Pages/success/success.module').then((m) => m.SuccessModule)
             }
         ]
     }

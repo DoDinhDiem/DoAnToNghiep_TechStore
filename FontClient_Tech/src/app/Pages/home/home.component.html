@@ -1,2850 +1,334 @@
 <div class="mb-lg-2"></div>
-<!-- End .mb-lg-2 -->
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-xl-12">
-            <div class="intro-slider-container slider-container-ratio mb-2">
-                <div class="intro-slider owl-carousel owl-simple owl-nav-inside">
-                    <p-galleria [value]="images" [autoPlay]="true" [showThumbnails]="false"
-                        [showItemNavigatorsOnHover]="true" [showItemNavigators]="true" [circular]="true"
-                        [autoPlay]="true" [transitionInterval]="3000" [responsiveOptions]="responsiveOptions"
-                        [containerStyle]="{ 'min-width': '1500px'}">
+            <div class="intro-slider-container slider-container-ratio mb-2" style="max-height: 350px;">
+                <div class="intro-slider  owl-simple owl-nav-inside">
+                    <p-galleria [value]="images" [showThumbnails]="false" [showItemNavigatorsOnHover]="true"
+                        [showItemNavigators]="true" [circular]="true" [autoPlay]="true" [transitionInterval]="3000"
+                        [responsiveOptions]="responsiveOptions">
                         <ng-template pTemplate="item" let-item>
-                            <img src="{{baseUrl}}/Uploads/Slides/{{item.anhSlide}}"
-                                style="width: 100%; max-height: 450px; display: block; border-radius: 5px;" />
+                            <img src="{{baseUrl}}Uploads/Slides/{{item.anhSlide}}"
+                                style="width: 100%; max-height: 350px; display: block; border-radius: 5px;" />
                         </ng-template>
                     </p-galleria>
-
                 </div>
-
-                <span class="slider-loader"></span>
             </div>
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-9 col-xxl-10">
-            <div class="mb-5"></div>
-            <!-- End .mb-5 -->
-
-            <div class="bg-lighter trending-products">
-                <div class="heading heading-flex mb-3">
-                    <div class="heading-left">
-                        <h2 class="title">Bán chạy</h2>
-                        <!-- End .title -->
-                    </div>
-                </div>
-                <!-- End .heading -->
-
-                <div class="tab-content tab-content-carousel">
-                    <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel"
-                        aria-labelledby="trending-all-link">
-                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
-                            data-toggle="owl" data-owl-options='{ }'>
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-1.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Butler Stool Ladder</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$251.99</span>
-                                        <span class="old-price">Was $290.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 2 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-2.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-countdown" data-until="+55h" data-relative="true"
-                                        data-labels-short="true">
-                                    </div>
-                                    <!-- End .product-countdown -->
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Bose - SoundSport wireless headphones</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$179.99</span>
-                                        <span class="old-price">Was $199.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #69b4ff"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #ff887f"><span class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-3.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Can 2-Seater Sofa frame charcoal</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$3,050.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 60%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 8 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #b58555"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #93a6b0"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-4.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Clothes</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Tan suede biker jacket</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$240.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-5.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Sony - Class LED 2160p Smart <br />4K Ultra
-                                            HD</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,699.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 10 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Laptops</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,199.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-                        </div>
-                        <!-- End .owl-carousel -->
-                    </div>
-                    <!-- .End .tab-pane -->
-                    <div class="tab-pane p-0 fade" id="trending-elec-tab" role="tabpanel"
-                        aria-labelledby="trending-elec-link">
-                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
-                            data-toggle="owl" data-owl-options='{
-                                "nav": false,
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":1
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":3,
-                                        "nav": true
-                                    },
-                                    "1600": {
-                                        "items":5,
-                                        "nav": true
-                                    }
-                                }
-                            }'>
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-3.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Can 2-Seater Sofa frame charcoal</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$3,050.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 60%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 8 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #b58555"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #93a6b0"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-4.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Clothes</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Tan suede biker jacket</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$240.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-1.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Butler Stool Ladder</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$251.99</span>
-                                        <span class="old-price">Was $290.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 2 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-2.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-countdown" data-until="+55h" data-relative="true"
-                                        data-labels-short="true">
-                                    </div>
-                                    <!-- End .product-countdown -->
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Bose - SoundSport wireless headphones</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$179.99</span>
-                                        <span class="old-price">Was $199.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #69b4ff"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #ff887f"><span class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Laptops</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,199.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-5.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Sony - Class LED 2160p Smart <br />4K Ultra
-                                            HD</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,699.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 10 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-                        </div>
-                        <!-- End .owl-carousel -->
-                    </div>
-                    <!-- .End .tab-pane -->
-                    <div class="tab-pane p-0 fade" id="trending-furn-tab" role="tabpanel"
-                        aria-labelledby="trending-furn-link">
-                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
-                            data-toggle="owl" data-owl-options='{
-                                "nav": false,
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":1
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":3,
-                                        "nav": true
-                                    },
-                                    "1600": {
-                                        "items":5,
-                                        "nav": true
-                                    }
-                                }
-                            }'>
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Laptops</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,199.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-                        </div>
-                        <!-- End .owl-carousel -->
-                    </div>
-                    <!-- .End .tab-pane -->
-                    <div class="tab-pane p-0 fade" id="trending-cloth-tab" role="tabpanel"
-                        aria-labelledby="trending-cloth-link">
-                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
-                            data-toggle="owl" data-owl-options='{
-                                "nav": false,
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":1
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":3,
-                                        "nav": true
-                                    },
-                                    "1600": {
-                                        "items":5,
-                                        "nav": true
-                                    }
-                                }
-                            }'>
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-1.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Butler Stool Ladder</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$251.99</span>
-                                        <span class="old-price">Was $290.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 2 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-5.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Sony - Class LED 2160p Smart <br />4K Ultra
-                                            HD</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,699.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 10 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Laptops</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,199.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-2.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-countdown" data-until="+55h" data-relative="true"
-                                        data-labels-short="true">
-                                    </div>
-                                    <!-- End .product-countdown -->
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Bose - SoundSport wireless headphones</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$179.99</span>
-                                        <span class="old-price">Was $199.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #69b4ff"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #ff887f"><span class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-3.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Can 2-Seater Sofa frame charcoal</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$3,050.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 60%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 8 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #b58555"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #93a6b0"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-                        </div>
-                        <!-- End .owl-carousel -->
-                    </div>
-                    <!-- .End .tab-pane -->
-                    <div class="tab-pane p-0 fade" id="trending-acc-tab" role="tabpanel"
-                        aria-labelledby="trending-acc-link">
-                        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
-                            data-toggle="owl" data-owl-options='{ }'>
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-4.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Clothes</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Tan suede biker jacket</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$240.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-3.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Furniture</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Can 2-Seater Sofa frame charcoal</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$3,050.00</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 60%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 8 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #b58555"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #93a6b0"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-sale">Sale</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-2.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-countdown" data-until="+55h" data-relative="true"
-                                        data-labels-short="true">
-                                    </div>
-                                    <!-- End .product-countdown -->
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Bose - SoundSport wireless headphones</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$179.99</span>
-                                        <span class="old-price">Was $199.00</span>
-                                    </div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-
-                                    <div class="product-nav product-nav-dots">
-                                        <a href="#" class="active" style="background: #69b4ff"><span
-                                                class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #ff887f"><span class="sr-only">Color
-                                                name</span></a>
-                                        <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                name</span></a>
-                                    </div>
-                                    <!-- End .product-nav -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-5.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Electronics</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">Sony - Class LED 2160p Smart <br />4K Ultra
-                                            HD</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,699.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 10 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <span class="product-label label-top">Top</span>
-                                    <a href="product.html">
-                                        <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                            alt="Product image" class="product-image" />
-                                    </a>
-
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                                thích</span></a>
-
-                                        <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                                sánh</span></a>
-                                    </div>
-                                    <!-- End .product-action-vertical -->
-
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                                vào giỏ hàng</span></a>
-                                    </div>
-                                    <!-- End .product-action -->
-                                </figure>
-                                <!-- End .product-media -->
-
-                                <div class="product-body">
-                                    <div class="product-cat">
-                                        <a href="#">Laptops</a>
-                                    </div>
-                                    <!-- End .product-cat -->
-                                    <h3 class="product-title">
-                                        <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                    </h3>
-                                    <!-- End .product-title -->
-                                    <div class="product-price">$1,199.99</div>
-                                    <!-- End .product-price -->
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%"></div>
-                                            <!-- End .ratings-val -->
-                                        </div>
-                                        <!-- End .ratings -->
-                                        <span class="ratings-text">( 4 Reviews )</span>
-                                    </div>
-                                    <!-- End .rating-container -->
-                                </div>
-
-                            </div>
-                            <!-- End .product -->
-                        </div>
-                        <!-- End .owl-carousel -->
-                    </div>
-                    <!-- .End .tab-pane -->
-                </div>
-                <!-- End .tab-content -->
-            </div>
-            <!-- End .bg-lighter -->
-
-            <div class="mb-5"></div>
-            <!-- End .mb-5 -->
-
-            <div class="row cat-banner-row electronics">
-                <div class="col-xl-3 col-xxl-2">
-
-                    <div class="banner">
-                        <a href="#">
-                            <img src="assets/Client/images/demos/demo-14/banners/banner-bg-1.jpg" alt="Banner img desc">
-                        </a>
-
-                        <div class="banner-content">
-                            <h1 class="banner-title text-white" style="font-size: 60px;"><a href="#"
-                                    style="color: #000;">Điện
-                                    thoại</a></h1>
-
-                        </div>
-                    </div>
-                    <!-- End .cat-banner -->
-                </div>
-                <!-- End .col-xl-3 -->
-
-                <div class="col-xl-9 col-xxl-10">
-                    <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
-                        data-owl-options='{ }'>
-                        <div class="product text-center">
+<div class="container">
+    <ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="products-featured-link" data-toggle="tab" href="#products-featured-tab"
+                role="tab" aria-controls="products-featured-tab" aria-selected="true">Mới</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="products-sale-link" data-toggle="tab" href="#products-sale-tab" role="tab"
+                aria-controls="products-sale-tab" aria-selected="false">Bán chạy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="products-top-link" data-toggle="tab" href="#products-top-tab" role="tab"
+                aria-controls="products-top-tab" aria-selected="false">Giảm giá</a>
+        </li>
+    </ul>
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel"
+            aria-labelledby="products-featured-link">
+            <p-carousel [value]="sanPhamMoi" [numVisible]="(sanPhamMoi.length < 2) ? sanPhamMoi.length : 5"
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                <ng-template let-item pTemplate="item">
+                    <div class="border-1 surface-border border-round px-1">
+                        <div class="product" [style.width.px]="(sanPhamMoi.length < 5) ? 217 : null"
+                            style="min-height: 376px;">
                             <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
+                                <a [routerLink]="['/product-detail', item.id]">
+                                    <img src="{{baseUrl}}Uploads/Products/{{item.avatar}}" alt="Product image"
+                                        class="product-image">
                                 </a>
-
                                 <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                        title="Yêu thích"><span>Yêu
+                                            thích</span></a>
                                 </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
+                                <div class="product-action product-action-dark">
+                                    <a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"
+                                        title="Add to cart"><span>Thêm vào giỏ
+                                            hàng</span></a>
                                 </div>
-                                <!-- End .product-action -->
                             </figure>
-                            <!-- End .product-media -->
 
                             <div class="product-body">
                                 <div class="product-cat">
-                                    <a href="#">Laptops</a>
+                                    <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
                                 </div>
-                                <!-- End .product-cat -->
                                 <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
+                                    <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
                                 </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-7.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Audio</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Bose - SoundLink Bluetooth Speaker</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$79.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-new">New</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-8.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Tablets</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Apple - 11 Inch iPad Pro <br />with Wi-Fi 256GB
-                                    </a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$899.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" class="active" style="background: #333333"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <span class="product-label label-sale">Sale</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-9.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Cell Phone</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Google - Pixel 3 XL 128GB</a>
-                                </h3>
-                                <!-- End .product-title -->
                                 <div class="product-price">
-                                    <span class="new-price">$350.00</span>
-                                    <span class="old-price">Was $410.00</span>
-                                </div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 80%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 10 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-                    </div>
-                    <!-- End .owl-carousel -->
-                </div>
-                <!-- End .col-xl-9 -->
-            </div>
-            <!-- End .row cat-banner-row -->
-
-            <div class="mb-3"></div>
-            <!-- End .mb-3 -->
-
-            <div class="row cat-banner-row electronics">
-                <div class="col-xl-3 col-xxl-2">
-
-                    <div class="banner">
-                        <a href="#">
-                            <img src="assets/Client/images/demos/demo-14/banners/banner-bg-1.jpg" alt="Banner img desc">
-                        </a>
-
-                        <div class="banner-content">
-                            <h1 class="banner-title text-white" style="font-size: 60px;"><a href="#"
-                                    style="color: #000;">Điện
-                                    thoại</a></h1>
-
-                        </div>
-                    </div>
-                    <!-- End .cat-banner -->
-                </div>
-                <!-- End .col-xl-3 -->
-
-                <div class="col-xl-9 col-xxl-10">
-                    <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
-                        data-owl-options='{ }'>
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-7.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Audio</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Bose - SoundLink Bluetooth Speaker</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$79.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-new">New</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-8.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Tablets</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Apple - 11 Inch iPad Pro <br />with Wi-Fi 256GB
-                                    </a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$899.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" class="active" style="background: #333333"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <span class="product-label label-sale">Sale</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-9.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Cell Phone</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Google - Pixel 3 XL 128GB</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="new-price">$350.00</span>
-                                    <span class="old-price">Was $410.00</span>
-                                </div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 80%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 10 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-                    </div>
-                    <!-- End .owl-carousel -->
-                </div>
-                <!-- End .col-xl-9 -->
-            </div>
-            <!-- End .row cat-banner-row -->
-
-            <div class="mb-5"></div>
-            <!-- End .mb-3 -->
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="banner banner-overlay">
-                        <a href="#">
-                            <img style="height: 188px; border-radius: 5px;"
-                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:10/plain/https://dashboard.cellphones.com.vn/storage/right sv.png"
-                                alt="Banner img desc" />
-                        </a>
-
-                        <!-- End .banner-content -->
-                    </div>
-                    <!-- End .banner -->
-                </div>
-                <!-- End .col-md-6 -->
-
-                <div class="col-md-6">
-                    <div class="banner banner-overlay">
-                        <a href="#">
-                            <img style="height: 188px; border-radius: 5px;"
-                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:80/plain/https://dashboard.cellphones.com.vn/storage/rog strix scar.jpg"
-                                alt="Banner img desc" />
-                        </a>
-
-
-                        <!-- End .banner-content -->
-                    </div>
-                    <!-- End .banner banner-overlay -->
-                </div>
-                <!-- End .col-md-6 -->
-            </div>
-            <!-- End .row -->
-
-            <div class="mb-3"></div>
-            <!-- End .mb-3 -->
-
-            <div class="row cat-banner-row electronics">
-                <div class="col-xl-3 col-xxl-2">
-
-                    <div class="banner">
-                        <a href="#">
-                            <img src="assets/Client/images/demos/demo-14/banners/banner-bg-1.jpg" alt="Banner img desc">
-                        </a>
-
-                        <div class="banner-content">
-                            <h1 class="banner-title text-white" style="font-size: 60px;"><a href="#"
-                                    style="color: #000;">Điện
-                                    thoại</a></h1>
-
-                        </div>
-                    </div>
-                    <!-- End .cat-banner -->
-                </div>
-                <!-- End .col-xl-3 -->
-
-                <div class="col-xl-9 col-xxl-10">
-                    <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
-                        data-owl-options='{ }'>
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-7.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Audio</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Bose - SoundLink Bluetooth Speaker</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$79.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-new">New</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-8.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Tablets</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Apple - 11 Inch iPad Pro <br />with Wi-Fi 256GB
-                                    </a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$899.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 60%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 6 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" class="active" style="background: #333333"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <span class="product-label label-sale">Sale</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-9.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Cell Phone</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">Google - Pixel 3 XL 128GB</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="new-price">$350.00</span>
-                                    <span class="old-price">Was $410.00</span>
-                                </div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 80%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 10 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #edd2c8"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #eaeaec"><span class="sr-only">Color
-                                            name</span></a>
-                                </div>
-                                <!-- End .product-nav -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>add
-                                            to cart</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                        <!-- End .product -->
-                    </div>
-                    <!-- End .owl-carousel -->
-                </div>
-                <!-- End .col-xl-9 -->
-            </div>
-
-            <div class="mb-3"></div>
-            <!-- End .mb-3 -->
-
-            <div class="icon-boxes-container">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="icon-box icon-box-side">
-                                <span class="icon-box-icon text-dark">
-                                    <i class="icon-rocket"></i>
-                                </span>
-                                <div class="icon-box-content">
-                                    <h3 class="icon-box-title">Miễn phí vận chuyển</h3>
-
-                                    <p>Đơn hàng 1.500.000 trở lên</p>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="icon-box icon-box-side">
-                                <span class="icon-box-icon text-dark">
-                                    <i class="icon-rotate-left"></i>
-                                </span>
-
-                                <div class="icon-box-content">
-                                    <h3 class="icon-box-title">Đổi trả miễn phí</h3>
-                                    <!-- End .icon-box-title -->
-                                    <p>Trong vòng 15 ngày</p>
-                                </div>
-                                <!-- End .icon-box-content -->
-                            </div>
-                            <!-- End .icon-box -->
-                        </div>
-                        <!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="icon-box icon-box-side">
-                                <span class="icon-box-icon text-dark">
-                                    <i class="icon-info-circle"></i>
-                                </span>
-
-                                <div class="icon-box-content">
-                                    <h3 class="icon-box-title">Được giảm giá 20% cho 1 mặt hàng</h3>
-                                    <!-- End .icon-box-title -->
-                                    <p>Khi bạn đăng ký</p>
-                                </div>
-                                <!-- End .icon-box-content -->
-                            </div>
-                            <!-- End .icon-box -->
-                        </div>
-                        <!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="icon-box icon-box-side">
-                                <span class="icon-box-icon text-dark">
-                                    <i class="icon-life-ring"></i>
-                                </span>
-
-                                <div class="icon-box-content">
-                                    <h3 class="icon-box-title">Hỗ trợ</h3>
-                                    <!-- End .icon-box-title -->
-                                    <p>Dịch vụ tuyệt vời 24/7</p>
+                                    <span class="new-price">{{item.giaBan - item.giamGia | number}}
+                                        <small>đ</small></span>
+                                    <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan | number}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="mb-5"></div>
+                </ng-template>
+            </p-carousel>
         </div>
-
-        <aside class="col-xl-3 col-xxl-2 order-xl-first">
-            <div class="sidebar sidebar-home">
-                <div class="mb-5"></div>
-                <div class="row">
-                    <div class="col-sm-6 col-xl-12 mb-2">
-                        <div class="widget widget-products">
-                            <h4 class="widget-title"><span>Giảm giá</span></h4>
-                            <div class="products">
-                                <div class="product product-sm">
-                                    <figure class="product-media">
-                                        <a href="product.html">
-                                            <img src="assets/Client/images/demos/demo-14/products/small/product-1.jpg"
-                                                alt="Product image" class="product-image" />
-                                        </a>
-                                    </figure>
-
-                                    <div class="product-body">
-                                        <h5 class="product-title">
-                                            <a href="product.html">Sceptre 50" Class FHD (1080P) LED TV</a>
-                                        </h5>
-                                        <div class="product-price">$199.99</div>
-                                    </div>
+        <div class="tab-pane p-0 fade" id="products-sale-tab" role="tabpanel" aria-labelledby="products-sale-link">
+            <p-carousel [value]="sanPhamBanChay" [numVisible]="(sanPhamBanChay.length < 2) ? sanPhamBanChay.length : 5"
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                <ng-template let-item pTemplate="item">
+                    <div class="border-1 surface-border border-round text-center px-1">
+                        <div class="product" [style.width.px]="(sanPhamBanChay.length < 5) ? 217 : null"
+                            style="min-height: 376px;">
+                            <figure class="product-media">
+                                <a [routerLink]="['/product-detail', item.id]">
+                                    <img src="{{baseUrl}}Uploads/Products/{{item.avatar}}" alt="Product image"
+                                        class="product-image">
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                        title="Yêu thích"><span>Yêu
+                                            thích</span></a>
                                 </div>
-
-                                <div class="product product-sm">
-                                    <figure class="product-media">
-                                        <a href="product.html">
-                                            <img src="assets/Client/images/demos/demo-14/products/small/product-2.jpg"
-                                                alt="Product image" class="product-image" />
-                                        </a>
-                                    </figure>
-
-                                    <div class="product-body">
-                                        <h5 class="product-title">
-                                            <a href="product.html">Red Cookware Set, 9 Piece</a>
-                                        </h5>
-                                        <div class="product-price">$24.95</div>
-                                    </div>
+                                <div class="product-action product-action-dark">
+                                    <a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"
+                                        title="Add to cart"><span>Thêm vào giỏ
+                                            hàng</span></a>
                                 </div>
+                            </figure>
 
-                                <div class="product product-sm">
-                                    <figure class="product-media">
-                                        <a href="product.html">
-                                            <img src="assets/Client/images/demos/demo-14/products/small/product-3.jpg"
-                                                alt="Product image" class="product-image" />
-                                        </a>
-                                    </figure>
-
-                                    <div class="product-body">
-                                        <h5 class="product-title">
-                                            <a href="product.html">Epson WorkForce WF-2750 All-in-One
-                                                Wireless</a>
-                                        </h5>
-                                        <div class="product-price">$49.99</div>
-                                    </div>
-
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
                                 </div>
-
-
-                                <div class="product product-sm">
-                                    <figure class="product-media">
-                                        <a href="product.html">
-                                            <img src="assets/Client/images/demos/demo-14/products/small/product-4.jpg"
-                                                alt="Product image" class="product-image" />
-                                        </a>
-                                    </figure>
-
-                                    <div class="product-body">
-                                        <h5 class="product-title">
-                                            <a href="product.html">Stainless Steel Microwave Oven</a>
-                                        </h5>
-                                        <div class="product-price">$64.84</div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="product product-sm">
-                                    <figure class="product-media">
-                                        <a href="product.html">
-                                            <img src="assets/Client/images/demos/demo-14/products/small/product-5.jpg"
-                                                alt="Product image" class="product-image" />
-                                        </a>
-                                    </figure>
-
-                                    <div class="product-body">
-                                        <h5 class="product-title">
-                                            <a href="product.html">Fatboy Original Beanbag</a>
-                                        </h5>
-                                        <div class="product-price">$49.99</div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-12">
-                        <div class="widget widget-deals">
-                            <h4 class="widget-title"><span>Kiến nghị</span></h4>
-
-
-                            <div class="row">
-                                <div class="col-sm-6 col-xl-12">
-                                    <div class="product text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-sale">Deal of the week</span>
-                                            <a href="product.html">
-                                                <img src="assets/Client/images/demos/demo-14/products/deals/product-1.jpg"
-                                                    alt="Product image" class="product-image" />
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist"
-                                                    title="Yêu thích"><span>add to
-                                                        wishlist</span></a>
-                                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                                    title="Quick view"><span>Quick view</span></a>
-                                                <a href="#" class="btn-product-icon btn-compare"
-                                                    title="Compare"><span>So
-                                                        sánh</span></a>
-                                            </div>
-                                            <!-- End .product-action-vertical -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"
-                                                    title="Thêm vào giỏ hàng"><span>Thêm vào giỏ
-                                                        hàng</span></a>
-                                            </div>
-                                            <!-- End .product-action -->
-                                        </figure>
-                                        <!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Audio</a>
-                                            </div>
-                                            <!-- End .product-cat -->
-                                            <h3 class="product-title">
-                                                <a href="product.html">Bose SoundLink Micro speaker</a>
-                                            </h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price">
-                                                <span class="new-price">$99.99</span>
-                                                <span class="old-price">Was $110.99</span>
-                                            </div>
-                                            <!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%"></div>
-                                                    <!-- End .ratings-val -->
-                                                </div>
-                                                <!-- End .ratings -->
-                                                <span class="ratings-text">( 4 Reviews )</span>
-                                            </div>
-                                            <!-- End .rating-container -->
-
-                                            <div class="product-nav product-nav-dots">
-                                                <a href="#" class="active" style="background: #f3815f"><span
-                                                        class="sr-only">Color
-                                                        name</span></a>
-                                                <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                        name</span></a>
-                                            </div>
-                                            <!-- End .product-nav -->
-                                        </div>
-
-
-                                        <div class="product-countdown" data-until="+44h" data-relative="true"
-                                            data-labels-short="true"></div>
-                                        <!-- End .product-countdown -->
-                                    </div>
-                                    <!-- End .product -->
-                                </div>
-                                <!-- End .col-sm-6 col-xl-12 -->
-
-                                <div class="col-sm-6 col-xl-12">
-                                    <div class="product text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-sale">Deal of the week</span>
-                                            <a href="product.html">
-                                                <img src="assets/Client/images/demos/demo-14/products/deals/product-2.jpg"
-                                                    alt="Product image" class="product-image" />
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist"
-                                                    title="Yêu thích"><span>add to
-                                                        wishlist</span></a>
-                                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                                    title="Quick view"><span>Quick view</span></a>
-                                                <a href="#" class="btn-product-icon btn-compare"
-                                                    title="Compare"><span>So
-                                                        sánh</span></a>
-                                            </div>
-                                            <!-- End .product-action-vertical -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"
-                                                    title="Thêm vào giỏ hàng"><span>Thêm vào giỏ
-                                                        hàng</span></a>
-                                            </div>
-                                            <!-- End .product-action -->
-                                        </figure>
-                                        <!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Cameras</a>
-                                            </div>
-                                            <!-- End .product-cat -->
-                                            <h3 class="product-title">
-                                                <a href="product.html">GoPro HERO Session Waterproof HD
-                                                    Action
-                                                    Camera</a>
-                                            </h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price">
-                                                <span class="new-price">$196.99</span>
-                                                <span class="old-price">Was $210.99</span>
-                                            </div>
-                                            <!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%"></div>
-                                                    <!-- End .ratings-val -->
-                                                </div>
-                                                <!-- End .ratings -->
-                                                <span class="ratings-text">( 19 Reviews )</span>
-                                            </div>
-                                            <!-- End .rating-container -->
-                                        </div>
-
-
-                                        <div class="product-countdown" data-until="+52h" data-relative="true"
-                                            data-labels-short="true"></div>
-                                        <!-- End .product-countdown -->
-                                    </div>
-                                    <!-- End .product -->
-                                </div>
-                                <div class="col-sm-6 col-xl-12">
-                                    <div class="product text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-sale">Deal of the week</span>
-                                            <a href="product.html">
-                                                <img src="assets/Client/images/demos/demo-14/products/deals/product-1.jpg"
-                                                    alt="Product image" class="product-image" />
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist"
-                                                    title="Yêu thích"><span>add to
-                                                        wishlist</span></a>
-                                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                                    title="Quick view"><span>Quick view</span></a>
-                                                <a href="#" class="btn-product-icon btn-compare"
-                                                    title="Compare"><span>So
-                                                        sánh</span></a>
-                                            </div>
-                                            <!-- End .product-action-vertical -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"
-                                                    title="Thêm vào giỏ hàng"><span>Thêm vào giỏ
-                                                        hàng</span></a>
-                                            </div>
-                                            <!-- End .product-action -->
-                                        </figure>
-                                        <!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Audio</a>
-                                            </div>
-                                            <!-- End .product-cat -->
-                                            <h3 class="product-title">
-                                                <a href="product.html">Bose SoundLink Micro speaker</a>
-                                            </h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price">
-                                                <span class="new-price">$99.99</span>
-                                                <span class="old-price">Was $110.99</span>
-                                            </div>
-                                            <!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%"></div>
-                                                    <!-- End .ratings-val -->
-                                                </div>
-                                                <!-- End .ratings -->
-                                                <span class="ratings-text">( 4 Reviews )</span>
-                                            </div>
-                                            <!-- End .rating-container -->
-
-                                            <div class="product-nav product-nav-dots">
-                                                <a href="#" class="active" style="background: #f3815f"><span
-                                                        class="sr-only">Color
-                                                        name</span></a>
-                                                <a href="#" style="background: #333333"><span class="sr-only">Color
-                                                        name</span></a>
-                                            </div>
-                                            <!-- End .product-nav -->
-                                        </div>
-
-
-                                        <div class="product-countdown" data-until="+44h" data-relative="true"
-                                            data-labels-short="true"></div>
-                                        <!-- End .product-countdown -->
-                                    </div>
-                                    <!-- End .product -->
-                                </div>
-                                <!-- End .col-sm-6 col-xl-12 -->
-
-                                <div class="col-sm-6 col-xl-12">
-                                    <div class="product text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-sale">Deal of the week</span>
-                                            <a href="product.html">
-                                                <img src="assets/Client/images/demos/demo-14/products/deals/product-2.jpg"
-                                                    alt="Product image" class="product-image" />
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist"
-                                                    title="Yêu thích"><span>add to
-                                                        wishlist</span></a>
-                                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                                    title="Quick view"><span>Quick view</span></a>
-                                                <a href="#" class="btn-product-icon btn-compare"
-                                                    title="Compare"><span>So
-                                                        sánh</span></a>
-                                            </div>
-                                            <!-- End .product-action-vertical -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"
-                                                    title="Thêm vào giỏ hàng"><span>Thêm vào giỏ
-                                                        hàng</span></a>
-                                            </div>
-                                            <!-- End .product-action -->
-                                        </figure>
-                                        <!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Cameras</a>
-                                            </div>
-                                            <!-- End .product-cat -->
-                                            <h3 class="product-title">
-                                                <a href="product.html">GoPro HERO Session Waterproof HD
-                                                    Action
-                                                    Camera</a>
-                                            </h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price">
-                                                <span class="new-price">$196.99</span>
-                                                <span class="old-price">Was $210.99</span>
-                                            </div>
-                                            <!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%"></div>
-                                                    <!-- End .ratings-val -->
-                                                </div>
-                                                <!-- End .ratings -->
-                                                <span class="ratings-text">( 19 Reviews )</span>
-                                            </div>
-                                            <!-- End .rating-container -->
-                                        </div>
-
-
-                                        <div class="product-countdown" data-until="+52h" data-relative="true"
-                                            data-labels-short="true"></div>
-                                        <!-- End .product-countdown -->
-                                    </div>
-                                    <!-- End .product -->
+                                <h3 class="product-title">
+                                    <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="new-price">{{item.giaBan - item.giamGia | number}}
+                                        <small>đ</small></span>
+                                    <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan | number}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </aside>
+                </ng-template>
+            </p-carousel>
+        </div><!-- .End .tab-pane -->
+        <div class="tab-pane p-0 fade" id="products-top-tab" role="tabpanel" aria-labelledby="products-top-link">
+            <p-carousel [value]="sanPhamGiamGia" [numVisible]="(sanPhamGiamGia.length < 2) ? sanPhamGiamGia.length : 5"
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                <ng-template let-item pTemplate="item">
+                    <div class="border-1 surface-border border-round px-1">
+                        <div class="product" [style.width.px]="(sanPhamGiamGia.length < 5) ? 217 : null"
+                            style="min-height: 376px;">
+                            <figure class="product-media">
+                                <a [routerLink]="['/product-detail', item.id]">
+                                    <img src="{{baseUrl}}Uploads/Products/{{item.avatar}}" alt="Product image"
+                                        class="product-image">
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                        title="Yêu thích"><span>Yêu
+                                            thích</span></a>
+                                </div>
+                                <div class="product-action product-action-dark">
+                                    <a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"
+                                        title="Add to cart"><span>Thêm vào giỏ
+                                            hàng</span></a>
+                                </div>
+                            </figure>
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="new-price">{{item.giaBan - item.giamGia | number}}
+                                        <small>đ</small></span>
+                                    <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
     </div>
 </div>
+<div class="container">
+    <div class="cta cta-border cta-border-image mb-5 mb-lg-7"
+        style="background-image: url(assets/Client/images/demos/demo-3/bg-1.jpg);">
+        <div class="cta-border-wrapper bg-white">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-xl-12">
+                    <div class="cta-content">
+                        <div class="cta-heading">
+                            <h3 class="cta-title text-right"><span class="text-primary">Ưu Đãi Mới</span> <br>Bắt Đầu
+                                Mỗi Ngày vào lúc 12 giờ trưa</h3>
+                        </div>
+
+                        <div class="cta-text text-center">
+                            <p>Nhận <span class="text-dark font-weight-normal">MIỄN PHÍ VẬN CHUYỂN & 5% hoàn
+                                    tiền</span> cho <br>mỗi đơn hàng với chương trình hoàn tiền VNPay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container top">
+    <div class="heading heading-flex mb-3">
+        <div class="heading-left">
+            <h2 class="title">Điện Thoại</h2><!-- End .title -->
+        </div><!-- End .heading-left -->
+
+        <div class="heading-right">
+        </div><!-- End .heading-right -->
+    </div><!-- End .heading -->
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="top-all-tab">
+            <p-carousel [value]="dienThoai" [numVisible]="(dienThoai.length < 2) ? dienThoai.length : 5" [numScroll]="1"
+                [circular]="true" [responsiveOptions]="responsiveOptions">
+                <ng-template let-item pTemplate="item">
+                    <div class="border-1 surface-border border-round px-1">
+                        <div class="product" [style.width.px]="(dienThoai.length < 5) ? 217 : null"
+                            style="min-height: 376px;">
+                            <figure class="product-media">
+                                <a [routerLink]="['/product-detail', item.id]">
+                                    <img src="{{baseUrl}}Uploads/Products/{{item.avatar}}" alt="Product image"
+                                        class="product-image">
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                        title="Yêu thích"><span>Yêu
+                                            thích</span></a>
+                                </div>
+                                <div class="product-action product-action-dark">
+                                    <a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"
+                                        title="Add to cart"><span>Thêm vào giỏ
+                                            hàng</span></a>
+                                </div>
+                            </figure>
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="new-price">{{item.giaBan - item.giamGia | number}}</span>
+                                    <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+</div>
+
+<div class="container top">
+    <div class="heading heading-flex mb-3">
+        <div class="heading-left">
+            <h2 class="title">Laptop</h2>
+        </div>
+
+        <div class="heading-right">
+        </div>
+    </div>
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="top-all-tab">
+            <p-carousel [value]="lapTop" [numVisible]="(lapTop.length < 2) ? lapTop.length : 5" [numScroll]="1"
+                [circular]="true" [responsiveOptions]="responsiveOptions">
+                <ng-template let-item pTemplate="item">
+                    <div class="border-1 surface-border border-round px-1">
+                        <div class="product" [style.width.px]="(lapTop.length < 5) ? 217 : null"
+                            style="min-height: 376px;">
+                            <figure class="product-media">
+                                <a [routerLink]="['/product-detail', item.id]">
+                                    <img src="{{baseUrl}}Uploads/Products/{{item.avatar}}" alt="Product image"
+                                        class="product-image">
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                        title="Yêu thích"><span>Yêu
+                                            thích</span></a>
+                                </div>
+                                <div class="product-action product-action-dark">
+                                    <a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"
+                                        title="Add to cart"><span>Thêm vào giỏ
+                                            hàng</span></a>
+                                </div>
+                            </figure>
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="new-price">{{item.giaBan - item.giamGia | number}}</span>
+                                    <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+</div>
+
+<div class="blog-posts pt-4 pb-7">
+    <div class="container">
+        <h2 class="title">Tin tức mới</h2>
+        <p-carousel [value]="tinTuc" [numVisible]="(tinTuc.length < 2) ? tinTuc.length : 4" [numScroll]="1"
+            [circular]="true" [responsiveOptions]="responsiveOptions">
+            <ng-template let-item pTemplate="item">
+                <div class="border-1 surface-border border-round px-1">
+                    <article class="entry" [style.width.px]="(tinTuc.length < 4) ? 277 : null">
+                        <figure class="entry-media">
+                            <a [routerLink]="['/blog-detail', item.id]">
+                                <img src="{{baseUrl}}Uploads/News/{{item.anh}}" alt="image desc">
+                            </a>
+                        </figure>
+
+                        <div class="entry-body">
+                            <div class="entry-meta">
+                                <a href="#">{{item.createdAt | date: 'dd/MM/yyyy h:mm a'}}</a>
+                            </div>
+
+                            <h3 class="entry-title">
+                                <a [routerLink]="['/blog-detail', item.id]">{{item.tieuDe}}</a>
+                            </h3>
+                            <div class="entry-content">
+                                <p [innerHTML]="item.noiDung | slice:0:120"></p>
+                                <a [routerLink]="['/blog-detail', item.id]" class="read-more">xem thêm</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </ng-template>
+        </p-carousel>
+
+    </div>
+</div>
+
+<p-toast></p-toast>

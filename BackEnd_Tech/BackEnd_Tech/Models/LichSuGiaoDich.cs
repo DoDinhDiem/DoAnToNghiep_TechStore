@@ -6,12 +6,14 @@ namespace BackEnd_Tech.Models
     public partial class LichSuGiaoDich
     {
         public int Id { get; set; }
-        public int? ViTechStoreId { get; set; }
+        public int? KhachHangId { get; set; }
         public decimal? SoTien { get; set; }
-        public decimal? SoDuTruocDo { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public string? NganHang { get; set; }
+        public string? LoaiThe { get; set; }
+        public int? HoaDonId { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
-        public virtual ViTechStore? ViTechStore { get; set; }
+        public virtual HoaDonXuat? HoaDon { get; set; }
+        public virtual KhachHang? KhachHang { get; set; }
     }
 }

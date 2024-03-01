@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { CarouselModule } from 'primeng/carousel'
 // Import PrimeNG modules
 import { AccordionModule } from 'primeng/accordion'
 import { AutoCompleteModule } from 'primeng/autocomplete'
@@ -15,7 +15,6 @@ import { BadgeModule } from 'primeng/badge'
 import { BreadcrumbModule } from 'primeng/breadcrumb'
 import { ButtonModule } from 'primeng/button'
 import { CalendarModule } from 'primeng/calendar'
-import { CarouselModule } from 'primeng/carousel'
 import { CascadeSelectModule } from 'primeng/cascadeselect'
 import { ChartModule } from 'primeng/chart'
 import { CheckboxModule } from 'primeng/checkbox'
@@ -111,6 +110,8 @@ import { ProfileComponent } from 'src/app/Pages/profile/profile.component'
 import { AccountComponent } from 'src/app/Pages/account/account.component'
 import { AboutComponent } from 'src/app/Pages/about/about.component'
 import { ContactComponent } from 'src/app/Pages/contact/contact.component'
+import { SearchComponent } from 'src/app/Pages/search/search.component'
+import { SuccessComponent } from 'src/app/Pages/success/success.component'
 
 import { HomeModule } from '../../Pages/home/home.module'
 import { ProductModule } from 'src/app/Pages/product/product.module'
@@ -123,6 +124,11 @@ import { ProfileModule } from 'src/app/Pages/profile/profile.module'
 import { AccountModule } from 'src/app/Pages/account/account.module'
 import { AboutModule } from 'src/app/Pages/about/about.module'
 import { ContactModule } from 'src/app/Pages/contact/contact.module'
+import { SearchModule } from 'src/app/Pages/search/search.module'
+import { NgToastModule } from 'ng-angular-popup'
+import { SafePipe } from 'src/app/Pages/contact/safe.pipe'
+import { TokenInterceptor } from 'src/app/Interceptors/Token.interceptor'
+import { SuccessModule } from 'src/app/Pages/success/success.module'
 
 @NgModule({
     declarations: [
@@ -139,7 +145,10 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         ProfileComponent,
         AccountComponent,
         AboutComponent,
-        ContactComponent
+        ContactComponent,
+        SearchComponent,
+        SafePipe,
+        SuccessComponent
     ],
     imports: [
         HomeModule,
@@ -154,7 +163,9 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         AccountModule,
         AboutModule,
         ContactModule,
-
+        SearchModule,
+        NgToastModule,
+        SuccessModule,
         //PrimeNG
         AvatarModule,
         AvatarGroupModule,
@@ -251,6 +262,13 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         AnimateModule,
         CardModule,
         RouterModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
     ]
 })
 export class LayoutModule {}

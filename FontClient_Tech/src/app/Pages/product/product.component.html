@@ -1,722 +1,177 @@
 <div class="mb-1"></div>
 <div class="container-new">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-        <div class="container">
-            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+    <nav aria-label="breadcrumb" class=" mb-2">
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{tenLSP}}</li>
+            </div>
         </div>
     </nav>
 
     <div class="page-content">
         <div class="container">
-            <div class="toolbox">
-                <div class="toolbox-left">
-                    <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Bộ lọc</a>
-                </div><!-- End .toolbox-left -->
-
-                <div class="toolbox-center">
-                    <div class="toolbox-info">
-                        Showing <span>12 of 56</span> Products
-                    </div><!-- End .toolbox-info -->
-                </div><!-- End .toolbox-center -->
-
-                <div class="toolbox-right">
-                    <div class="toolbox-sort">
-                        <label for="sortby">Sort by:</label>
-                        <div class="select-custom">
-                            <select name="sortby" id="sortby" class="form-control">
-                                <option value="popularity" selected="selected">Most Popular</option>
-                                <option value="rating">Most Rated</option>
-                                <option value="date">Date</option>
-                            </select>
-                        </div>
-                    </div><!-- End .toolbox-sort -->
-                </div><!-- End .toolbox-right -->
-            </div>
-            <div class="products">
-                <div class="row">
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="toolbox">
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Sắp xếp:</label>
+                                <div class="select-custom">
+                                    <select name="sortby" id="sortby" class="form-control" (change)="onSapXepChange()"
+                                        [(ngModel)]="sapxepSelects">
+                                        <option *ngFor="let item of sapxep" [value]="item.value">{{ item.name }}
+                                        </option>
+                                    </select>
                                 </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
                             </div>
-
                         </div>
                     </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
 
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
+                    <div class="products">
+                        <div class="row" *ngIf="sanPhams?.totalItems == 0">
+                            <div class="col d-flex flex-column justify-content-center align-items-center">
+                                <img src="assets/Profile/bookSearch.png" width="134px" alt="">
+                                <p style="font-weight: 600; font-size: 1.8rem;">Không tìm thấy kết quả nào</p>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
+                        <div class="row">
+                            <div *ngFor="let item of sanPhams?.items" class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                <div class="product">
+                                    <figure class="product-media">
+                                        <a [routerLink]="['/product-detail', item.id]">
+                                            <img src="{{baseUrl}}/Uploads/Products/{{item.avatar}}" alt="Product image"
+                                                class="product-image">
+                                        </a>
 
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
+                                        <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                                title="Yêu thích"><span>Yêu thích</span></a>
+                                        </div>
+                                        <div class="product-action product-action-dark">
+                                            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
+                                                    giỏ hàng</span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="product-body">
+                                        <!-- End .product-cat -->
+                                        <h3 class="product-title">
+                                            <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                        </h3>
+                                        <!-- End .product-title -->
+                                        <div class="product-price">
+                                            <span class="new-price">{{item.giaBan - item.giamGia | number}}</span>
+                                            <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan |
+                                                number}}</span>
+                                        </div>
                                     </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
+
                                 </div>
-                                <!-- End .rating-container -->
                             </div>
-
                         </div>
+
+                        <nav aria-label="Page navigation" *ngIf="sanPhams?.totalItems > pageSizes">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled" [class.disabled]="currentPage === 1"
+                                    (click)="onPreviousPage()">
+                                    <a class="page-link page-link-prev">
+                                        <i class="icon-long-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active" *ngFor="let page of getPageNumbers()"
+                                    style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                    (click)="onPageChange(page)">
+                                    <a class="page-link">{{ page }}</a>
+                                </li>
+                                <li class="page-item" (click)="onNextPage()">
+                                    <a class="page-link page-link-next">
+                                        <i class="icon-long-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="assets/Client/images/demos/demo-14/products/product-6.jpg"
-                                        alt="Product image" class="product-image" />
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                            thích</span></a>
-
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                            sánh</span></a>
-                                </div>
-                                <!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                            vào giỏ hàng</span></a>
-                                </div>
-                                <!-- End .product-action -->
-                            </figure>
-                            <!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Laptops</a>
-                                </div>
-                                <!-- End .product-cat -->
-                                <h3 class="product-title">
-                                    <a href="product.html">MacBook Pro 13" Display, i5</a>
-                                </h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">$1,199.99</div>
-                                <!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 100%"></div>
-                                        <!-- End .ratings-val -->
-                                    </div>
-                                    <!-- End .ratings -->
-                                    <span class="ratings-text">( 4 Reviews )</span>
-                                </div>
-                                <!-- End .rating-container -->
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </div><!-- End .row -->
-
-                <div class="load-more-container text-center">
-                    <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i
-                            class="icon-refresh"></i></a>
-                </div><!-- End .load-more-container -->
-            </div><!-- End .products -->
-
-            <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
-            <aside class="sidebar-shop sidebar-filter">
-                <div class="sidebar-filter-wrapper">
-                    <div class="widget widget-clean">
-                        <label><i class="icon-close"></i>Bộ lọc</label>
-                        <a href="#" class="sidebar-filter-clear">Xóa hết</a>
-                    </div><!-- End .widget -->
-                    <div class="widget widget-collapsible">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
-                                aria-controls="widget-1">
-                                Danh mục loại sản phẩm
-                            </a>
-                        </h3><!-- End .widget-title -->
-
-                        <div class="collapse show" id="widget-1">
-                            <div class="widget-body">
-                                <div class="filter-items filter-items-count">
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-1">
-                                            <label class="custom-control-label" for="cat-1">Dresses</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">3</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-2">
-                                            <label class="custom-control-label" for="cat-2">T-shirts</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">0</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-3">
-                                            <label class="custom-control-label" for="cat-3">Bags</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">4</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-4">
-                                            <label class="custom-control-label" for="cat-4">Jackets</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">2</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-5">
-                                            <label class="custom-control-label" for="cat-5">Shoes</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">2</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-6">
-                                            <label class="custom-control-label" for="cat-6">Jumpers</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">1</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-7">
-                                            <label class="custom-control-label" for="cat-7">Jeans</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">1</span>
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-8">
-                                            <label class="custom-control-label" for="cat-8">Sportwear</label>
-                                        </div><!-- End .custom-checkbox -->
-                                        <span class="item-count">0</span>
-                                    </div><!-- End .filter-item -->
-                                </div><!-- End .filter-items -->
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div>
-                    <div class="widget widget-collapsible">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
-                                aria-controls="widget-4">
-                                Danh mục hãng sản phẩm
-                            </a>
-                        </h3><!-- End .widget-title -->
-
-                        <div class="collapse show" id="widget-4">
-                            <div class="widget-body">
-                                <div class="filter-items">
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-1">
-                                            <label class="custom-control-label" for="brand-1">Next</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-2">
-                                            <label class="custom-control-label" for="brand-2">River Island</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-3">
-                                            <label class="custom-control-label" for="brand-3">Geox</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-4">
-                                            <label class="custom-control-label" for="brand-4">New Balance</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-5">
-                                            <label class="custom-control-label" for="brand-5">UGG</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-6">
-                                            <label class="custom-control-label" for="brand-6">F&F</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-7">
-                                            <label class="custom-control-label" for="brand-7">Nike</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                </div><!-- End .filter-items -->
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
-
-                    <div class="widget widget-collapsible">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
-                                aria-controls="widget-5">
-                                Giá
-                            </a>
-                        </h3><!-- End .widget-title -->
-
-                        <div class="collapse show" id="widget-5">
-                            <div class="widget-body">
-                                <div class="filter-price">
-                                    <div class="filter-price-text">
-                                        Price Range:
-                                        <span id="filter-price-range"></span>
-                                    </div><!-- End .filter-price-text -->
-
-                                    <div id="price-slider"></div><!-- End #price-slider -->
-                                </div><!-- End .filter-price -->
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
                 </div>
-                < </aside>
+                <aside class="col-lg-3 order-lg-first">
+                    <div class="sidebar sidebar-shop">
+                        <div class="widget widget-clean">
+                            <label>Bộ lọc:</label>
+                            <a href="javascript: void(0)" (click)="onResetMain()" class="sidebar-filter-clear">Xóa
+                                hết</a>
+                        </div>
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                    aria-controls="widget-1">
+                                    Danh mục sản phẩm
+                                </a>
+                            </h3>
+
+                            <div class="collapse show" id="widget-1">
+                                <div class="widget-body">
+                                    <div class="filter-items filter-items-count">
+                                        <div class="filter-item" *ngFor="let item of loaiSanPham">
+                                            <div class="custom-control " [routerLink]="['/product', item.id]"
+                                                (click)="onReset()">
+                                                <label for="cat-{{item.id}}"
+                                                    [ngStyle]="{ 'color': id == item.id ? '#FCB941' : '', 'text-decoration': id == item.id ? 'underline' : 'none'  }">{{item.tenLoai}}</label>
+                                            </div>
+                                            <span class="item-count">{{item.countProduct}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
+                                    aria-controls="widget-4">
+                                    Danh mục hãng sản phẩm
+                                </a>
+                            </h3>
+
+                            <div class="collapse show" id="widget-4">
+                                <div class="widget-body">
+                                    <div class="filter-items">
+                                        <div class="filter-item" *ngFor="let item of hangSanPham">
+                                            <div class="custom-control custom-checkbox"
+                                                (click)="onHangId(item.hangSanPhamId)">
+                                                <label for="brand-1"
+                                                    [ngStyle]="{ 'color': hangid == item.hangSanPhamId ? '#FCB941' : '', 'text-decoration': hangid == item.hangSanPhamId ? 'underline' : 'none'  }">{{item.tenHang}}</label>
+                                            </div>
+                                        </div>
+
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
+                                    aria-controls="widget-5">
+                                    Giá
+                                </a>
+                            </h3><!-- End .widget-title -->
+
+                            <div class="collapse show" id="widget-5">
+                                <div class="widget-body">
+                                    <div class="filter-price">
+                                        <div class="filter-price-text">
+                                            Khoảng giá: {{giaMin | number}} ~ {{giaMax | number}}
+                                            <span id="filter-price-range"></span>
+                                        </div>
+                                        <p-slider [(ngModel)]="giaMax" [max]="giaRange"
+                                            (onChange)="onSlide()"></p-slider>
+                                    </div>
+                                </div><!-- End .widget-body -->
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
         </div>
     </div>
 </div>

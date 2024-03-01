@@ -1,61 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~primeicons/primeicons.css';
-.p-menuitem-icon {
-    color: #777777;
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@media (min-width: 1200px) {
+    .custom-col-5 {
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
 }
-.p-menuitem-text {
-    color: #0d0d0d;
-}
-.p-icon {
-    width: 10px;
-    height: 10px;
-    margin: 0 2px;
-}
-
-//Home
-.p-galleria .p-galleria-item-nav {
-    background: transparent;
-    color: #f9fafb;
-    width: 4rem;
-    height: 4rem;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-    border-radius: 6px;
-    margin: 0 0.5rem;
-    border: none;
-}
-.p-galleria .p-galleria-item-nav .p-galleria-item-prev-icon,
-.p-galleria .p-galleria-item-nav .p-galleria-item-next-icon {
-    font-size: 2rem;
-}
-
-.p-galleria .p-galleria-item-nav .p-icon-wrapper .p-icon {
-    width: 2rem;
-    height: 2rem;
-}
-.p-galleria .p-galleria-item-nav:not(.p-disabled):hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #f9fafb;
-}
-.p-galleria .p-galleria-indicators .p-galleria-indicator button {
-    display: none;
-}
-
-//productDetail
-.p-galleria .p-galleria-thumbnail-container {
-    background: rgba(0, 0, 0, 0.9);
-    padding: 1rem 0.25rem;
-}
-.p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-prev,
-.p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-next {
-    margin: 0.5rem;
-    background-color: transparent;
-    color: #f9fafb;
-    width: 2rem;
-    height: 2rem;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-prev:hover,
-.p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-next:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #f9fafb;
+.p-toast {
+    position: fixed;
+    width: 30rem !important;
+    font-size: 15px;
 }

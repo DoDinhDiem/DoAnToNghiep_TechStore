@@ -21,7 +21,20 @@ namespace BackEnd_Tech.Controllers
         {
             try
             {
-                var query = await _context.BinhLuanTinTucs.FindAsync(id);
+                var query = await _context.BinhLuanTinTucs
+                                          .Where(x => x.Id == id)
+                                          .Select(x => new
+                                          {
+                                              id = x.Id,
+                                              tenTinTuc = x.TinTuc.TieuDe,
+                                              hoTen = x.HoTen,
+                                              email = x.Email,
+                                              noiDung = x.NoiDung,
+                                              userComment = x.KhachHang.HoTen,
+                                              avatar = x.KhachHang.Avatar,
+                                              createdAt = x.CreatedAt,
+                                              trangThai = x.TrangThai
+                                          }).FirstOrDefaultAsync();
 
                 if(query == null)
                 {
@@ -36,25 +49,6 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Route("Create_BinhLuanTinTuc")]
-        [HttpPost]
-        public async Task<IActionResult> CreateBinhLuanTinTuc([FromBody] BinhLuanTinTuc model)
-        {
-            try
-            {
-                _context.BinhLuanTinTucs.Add(model);
-                await _context.SaveChangesAsync();
-
-                return Ok(new
-                {
-                    message = "Thêm bình luận thành cồng!"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [Route("Update_BinhLuanTinTuc")]
         [HttpPut]
@@ -128,7 +122,7 @@ namespace BackEnd_Tech.Controllers
 
         [Route("Search_BinhLuanTinTuc")]
         [HttpGet]
-        public async Task<IActionResult> SearchBinhLuanTinTuc([FromQuery] int page = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchBinhLuanTinTuc([FromQuery] int id, int page = 1, int pageSize = 10)
         {
             try
             {
@@ -142,13 +136,23 @@ namespace BackEnd_Tech.Controllers
                     pageSize = 10;
                 }
 
-                var query = _context.BinhLuanTinTucs.AsQueryable();
+                var query = _context.BinhLuanTinTucs.Where(x=>x.TinTucId ==id).AsQueryable();
 
                 var totalItems = await query.CountAsync();
 
                 var BinhLuanTinTucList = await query
                                             .Skip((page - 1) * pageSize)
                                             .Take(pageSize)
+                                            .Select(x => new
+                                            {
+                                                id = x.Id,
+                                                tenTinTuc = x.TinTuc.TieuDe,
+                                                hoTen = x.HoTen,
+                                                email = x.Email,
+                                                noiDung = x.NoiDung,
+                                                userComment = x.KhachHang.HoTen,
+                                                trangThai = x.TrangThai
+                                            })
                                             .ToListAsync();
 
                 var response = new

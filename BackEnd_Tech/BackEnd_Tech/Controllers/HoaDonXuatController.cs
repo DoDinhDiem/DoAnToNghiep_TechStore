@@ -35,42 +35,6 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Route("Create_HoaDonXuat")]
-        [HttpPost]
-        public async Task<IActionResult> CreateHoaDonXuat([FromBody] HoaDonXuat model)
-        {
-            try
-            {
-                _context.HoaDonXuats.Add(model);
-
-                foreach(var invoice in _context.ChiTietHoaDonXuats)
-                {
-                    var ct = new ChiTietHoaDonXuat
-                    {
-                        HoaDonXuatId = model.Id,
-                        SanPhamId = invoice.SanPhamId,
-                        SoLuong = invoice.SoLuong,
-                        GiaBan = invoice.GiaBan,
-                        ThanhTien = invoice.ThanhTien
-                    };
-
-                    _context.ChiTietHoaDonXuats.Add(ct);
-                }
-
-                decimal? totalAmount = _context.ChiTietHoaDonXuats.Sum(ct => ct.ThanhTien);
-                decimal? giamGia = model.GiamGia ?? 0;
-                model.TongTien = totalAmount - giamGia;
-
-                await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Đặt hàng thành công!" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [Route("Update_HoaDonXuat")]
         [HttpPut]
         public async Task<IActionResult> UpdateHoaDonXuat([FromBody] HoaDonXuat model)

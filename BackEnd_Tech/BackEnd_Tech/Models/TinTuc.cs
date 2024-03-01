@@ -8,6 +8,8 @@ namespace BackEnd_Tech.Models
         public TinTuc()
         {
             AnhTinTucs = new HashSet<AnhTinTuc>();
+            BinhLuanTinTucs = new HashSet<BinhLuanTinTuc>();
+            PhanHoiBinhLuanTinTucs = new HashSet<PhanHoiBinhLuanTinTuc>();
         }
 
         public int Id { get; set; }
@@ -22,5 +24,7 @@ namespace BackEnd_Tech.Models
         public virtual DanhMucTinTuc? DanhMuc { get; set; }
         public virtual NhanVien? User { get; set; }
         public virtual ICollection<AnhTinTuc> AnhTinTucs { get; set; }
+        public virtual ICollection<BinhLuanTinTuc> BinhLuanTinTucs { get; set; }
+        public virtual ICollection<PhanHoiBinhLuanTinTuc> PhanHoiBinhLuanTinTucs { get; set; }
     }
 }

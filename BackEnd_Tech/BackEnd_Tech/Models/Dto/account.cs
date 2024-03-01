@@ -1,6 +1,6 @@
 ﻿namespace BackEnd_Tech.Models.Dto
 {
-    public class account
+    public class Account
     {
         public string Email { get; set; }
         public string PassWord { get; set; }

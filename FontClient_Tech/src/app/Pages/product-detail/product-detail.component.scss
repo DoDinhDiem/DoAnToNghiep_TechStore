@@ -254,7 +254,7 @@
     display: block;
     margin-bottom: 15px;
     margin-right: auto;
-    max-height: 500px;
+    // max-height: 500px;
     min-height: 0;
     overflow: hidden;
     padding: 15px;
@@ -331,5 +331,57 @@
 
     .cps-block-technicalInfo .modal .modal-content {
         margin: 0;
+    }
+}
+
+:host ::ng-deep {
+    .p-galleria-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 450px;
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        img {
+            height: 100%;
+            border-radius: 10px;
+        }
+    }
+    .p-items-hidden .p-galleria-thumbnail-item {
+        visibility: visible;
+    }
+    .p-galleria .p-galleria-thumbnail-container {
+        background: none;
+    }
+    .p-galleria-thumbnail-item {
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 1.5;
+    }
+    .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-prev,
+    .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-next {
+        margin: 0.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        color: #f8f9f2;
+        width: 2rem;
+        height: 4rem;
+        border: none;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        border-radius: 5px;
+    }
+    .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-prev:hover,
+    .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-next:hover {
+        background-color: #000;
+        color: #fff;
+    }
+    .product-details-top {
+        margin-bottom: -1rem;
+    }
+    .page-content {
+        padding-bottom: 0px;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BackEnd_Tech.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,12 @@ namespace BackEnd_Tech.Controllers
             {
                 var query = await _context.LoaiSanPhams
                                           .Where(x => x.TrangThai == true)
+                                          .Select(x => new
+                                          {
+                                              id = x.Id,
+                                              tenLoai = x.TenLoai,
+                                              countProduct = x.SanPhams.Count()
+                                          })
                                           .ToListAsync();
                 return Ok(query);
             }catch (Exception ex)
@@ -71,6 +78,7 @@ namespace BackEnd_Tech.Controllers
                                     {
                                         id = x.Id,
                                         tenSanPham = x.TenSanPham,
+                                        loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
                                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -105,6 +113,7 @@ namespace BackEnd_Tech.Controllers
                                     {
                                         id = x.Id,
                                         tenSanPham = x.TenSanPham,
+                                        loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
                                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -135,6 +144,7 @@ namespace BackEnd_Tech.Controllers
                                    {
                                        x.Id,
                                        x.TenSanPham,
+                                       x.LoaiSanPhamId,
                                        x.GiaBan,
                                        x.GiamGia
                                    } into g
@@ -142,6 +152,7 @@ namespace BackEnd_Tech.Controllers
                                    {
                                        id = g.Key.Id,
                                        tenSanPham = g.Key.TenSanPham,
+                                       loaiSanPhamId = g.Key.LoaiSanPhamId,
                                        giaBan = g.Key.GiaBan,
                                        giamGia = g.Key.GiamGia,
                                        avatar = _context.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault(),
@@ -172,6 +183,7 @@ namespace BackEnd_Tech.Controllers
                                     {
                                         id = x.Id,
                                         tenSanPham = x.TenSanPham,
+                                        loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
                                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -202,6 +214,7 @@ namespace BackEnd_Tech.Controllers
                                     {
                                         id = x.Id,
                                         tenSanPham = x.TenSanPham,
+                                        loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
                                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -216,6 +229,37 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
+        [Route("GetTinTuc")]
+        [HttpGet]
+        public async Task<IActionResult> GetTinTuc()
+        {
+            try
+            {
+                var query = await _context.TinTucs
+                                    .Where(x => x.DanhMuc.TrangThai == true &&
+                                                x.TrangThai == true)
+                                    .Select(x => new
+                                    {
+                                        id = x.Id,
+                                        tenUser = x.User.HoTen,
+                                        tieuDe = x.TieuDe,
+                                        noiDung = x.NoiDung,
+                                        createdAt = x.CreatedAt,
+                                        anh = _context.AnhTinTucs.Where(a => a.TinTucId == x.Id).Select(a => a.Image).FirstOrDefault()
+                                    })
+                                    .Take(10)
+                                    .ToListAsync();
+                return Ok(query);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
         //Lấy chi tiết sản phẩm
         [Route("GetChiTietSanPham/{id}")]
         [HttpGet]
@@ -227,7 +271,17 @@ namespace BackEnd_Tech.Controllers
                                         .Where(a => a.Id == id)
                                         .Select(sp => new
                                         {
-                                            sanPham = sp,
+                                            id = sp.Id,
+                                            tenSanPham = sp.TenSanPham,
+                                            giaBan = sp.GiaBan,
+                                            giamGia = sp.GiamGia,
+                                            soLuongTon = sp.SoLuongTon,
+                                            baoHang = sp.BaoHang,
+                                            moTa = sp.MoTa,
+                                            loaiSanPhamId = sp.LoaiSanPhamId,
+                                            hangSanPhamId = sp.HangSanPhamId,
+                                            avatar = sp.AnhSanPhams.Where(a => a.SanPhamId == sp.Id).Select(a => a.Image ).FirstOrDefault(),
+                                            tenLoai = sp.LoaiSanPham.TenLoai,
                                             anhSanPhams = sp.AnhSanPhams.Select(a => new { image = a.Image }).ToList(),
                                             thongSos = sp.ThongSos.Where(a => a.TrangThai == true)
                                                                .Select(a => new 
@@ -264,6 +318,7 @@ namespace BackEnd_Tech.Controllers
                                     {
                                         id = x.Id,
                                         tenSanPham = x.TenSanPham,
+                                        loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
                                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -289,7 +344,7 @@ namespace BackEnd_Tech.Controllers
         //Sản phẩm theo loại
         [Route("GetSanPhamByLoaiAndHang")]
         [HttpGet]
-        public async Task<IActionResult> GetSanPhamByLoai([FromQuery] int id, int? hangid, string? sapXep, int? giaMin, int? giaMax, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetSanPhamByLoai([FromQuery] int id, int? hangid, string? sapXep, int? giaMax, int page = 1, int pageSize = 10)
         {
             try
             {
@@ -324,6 +379,9 @@ namespace BackEnd_Tech.Controllers
                         case "pricemax":
                             query = query.OrderByDescending(p => p.GiaBan);
                             break;
+                        case "name":
+                            query = query.OrderBy(p => p.TenSanPham);
+                            break;
                         case "date":
                             query = query.OrderByDescending(p => p.CreatedAt);
                             break;
@@ -331,13 +389,13 @@ namespace BackEnd_Tech.Controllers
                             break;
                     }
                 }
-                if (giaMin != null && giaMax != null)
+                if (giaMax != null)
                 {
-                    query = query.Where(p => p.GiaBan >= giaMin && p.GiaBan <= giaMax);
+                    query = query.Where(p => p.GiaBan <= giaMax);
                 }
 
                 var totalItems = await query.CountAsync();
-
+                var loaisp = await _context.LoaiSanPhams.Where(x => x.Id == id).Select(x => x.TenLoai ).FirstOrDefaultAsync();
                 var sanPhamList = await query
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -345,6 +403,7 @@ namespace BackEnd_Tech.Controllers
                     {
                         id = x.Id,
                         tenSanPham = x.TenSanPham,
+                        loaiSanPhamId = x.LoaiSanPhamId,
                         giaBan = x.GiaBan,
                         giamGia = x.GiamGia,
                         tenLoai = x.LoaiSanPham.TenLoai,
@@ -358,6 +417,7 @@ namespace BackEnd_Tech.Controllers
                     TotalPages = (int)Math.Ceiling((double)totalItems / pageSize),
                     PageSize = pageSize,
                     PageNumber = page,
+                    category = loaisp,
                     Items = sanPhamList
                 };
 
@@ -389,6 +449,29 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
+        [Route("GetHangSanPham/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllHangByLoaiId(int id)
+        {
+            try
+            {
+
+                var uniqueBrands = await _context.SanPhams
+                    .Where(p => p.LoaiSanPham.TrangThai == true && p.HangSanPham.TrangThai == true && p.TrangThai == true && p.LoaiSanPhamId == id)
+                    .Select(x => new { x.HangSanPhamId, x.HangSanPham.TenHang })
+                    .Distinct()
+                    .OrderBy(x => x.HangSanPhamId)
+                    .ToListAsync();
+
+                return Ok(uniqueBrands);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         //Lấy loại tin tức
         [Route("GetLoaiTinTuc")]
         [HttpGet]
@@ -401,7 +484,8 @@ namespace BackEnd_Tech.Controllers
                                         .Select(x => new
                                         {
                                             id = x.Id,
-                                            tenTinTuc = x.TenDanhMuc
+                                            tenTinTuc = x.TenDanhMuc,
+                                            countNew = x.TinTucs.Count()
                                         }).ToListAsync();
                 return Ok(query);
             }catch (Exception ex)
@@ -411,18 +495,43 @@ namespace BackEnd_Tech.Controllers
         }
 
         //Lấy danh sách loại tin tức
-        [Route("GetTinTucByLoai/{id}")]
+        [Route("GetTinTucByLoai")]
         [HttpGet]
-        public async Task<IActionResult> GetTinTucByLoai(int id)
+        public async Task<IActionResult> GetTinTucByLoai([FromQuery] int id, int page = 1, int pageSize = 10)
         {
             try
             {
-                var query = await _context.TinTucs
-                                    .Where(x => x.DanhMuc.TrangThai == true && 
+                var query =  _context.TinTucs.Where(x => x.DanhMuc.TrangThai == true &&
                                                 x.TrangThai == true &&
-                                                x.DanhMucId == id )
-                                    .FirstOrDefaultAsync();
-                return Ok(query);
+                                                x.DanhMucId == id);
+
+                var totalItems = await query.CountAsync();
+                var loaiTinTuc = _context.DanhMucTinTucs.Where(a => a.Id == id).Select(a => a.TenDanhMuc);
+                var tinTucList = await query
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .Select(x => new
+                                            {
+                                                id = x.Id,
+                                                tenUser = _context.NhanViens.Where(u => u.Id == x.UserId).Select(a => a.HoTen).FirstOrDefault(),
+                                                tieuDe = x.TieuDe,
+                                                noiDung = x.NoiDung,
+                                                createdAt = x.CreatedAt,
+                                                anhTinTuc = x.AnhTinTucs.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
+                                            })
+                                            .ToListAsync();
+
+                var response = new
+                {
+                    TotalItems = totalItems,
+                    TotalPages = (int)Math.Ceiling((double)totalItems / pageSize),
+                    PageSize = pageSize,
+                    PageNumber = page,
+                    tenLoaiTinTuc = loaiTinTuc,
+                    Items = tinTucList
+                };
+
+                return Ok(response);
 
             }
             catch(Exception ex)
@@ -444,6 +553,13 @@ namespace BackEnd_Tech.Controllers
                                                 x.TrangThai == true &&
                                                 x.DanhMucId == loaiid &&
                                                 x.Id != id)
+                                        .Select(x => new
+                                        {
+                                            id = x.Id,
+                                            tieuDe = x.TieuDe,
+                                            createdAt = x.CreatedAt,
+                                            anhTinTuc = x.AnhTinTucs.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
+                                        })
                                         .Take(5)
                                         .ToListAsync();
                 return Ok(query);
@@ -463,6 +579,18 @@ namespace BackEnd_Tech.Controllers
             {
                 var query = await _context.TinTucs
                                     .Where(x => x.Id == id)
+                                    .Select(x => new
+                                    {
+                                        id = x.Id,
+                                        tenUser = _context.NhanViens.Where(a => a.Id == x.UserId ).Select(a=> a.HoTen).FirstOrDefault(),
+                                        danhMucId = x.DanhMucId,
+                                        tenDanhMuc = x.DanhMuc.TenDanhMuc,
+                                        tieuDe = x.TieuDe,
+                                        noiDung = x.NoiDung,
+                                        createdAt = x.CreatedAt,
+                                        anhTinTuc = x.AnhTinTucs.Where(a => a.TrangThai == true).Select(a=> a.Image).FirstOrDefault()
+
+                                    })
                                     .FirstOrDefaultAsync();
                 if(query == null)
                 {
@@ -476,43 +604,97 @@ namespace BackEnd_Tech.Controllers
         }
 
         //Lấy ra bình luận tin tức
-        [Route("GetBinhLuanTinTuc")]
+        [Route("GetBinhLuanTinTuc/{id}")]
         [HttpGet]
-        public async Task<IActionResult> GetBinhLuanTinTuc(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetBinhLuanTinTuc(int id)
         {
             try
             {
-                if (page < 1)
-                {
-                    page = 1;
-                }
+                var query = await _context.BinhLuanTinTucs
+                                     .Where(x => x.TrangThai == true && x.TinTucId == id)
+                                     .Select(x => new
+                                     {
+                                         id = x.Id,
+                                         hoTen = x.HoTen,
+                                         noiDung = x.NoiDung,
+                                         avatar = x.KhachHang.Avatar,
+                                         createdAt = x.CreatedAt,
+                                     }).ToListAsync();
 
-                if (pageSize < 1)
-                {
-                    pageSize = 10;
-                }
-
-                var query = _context.BinhLuanTinTucs
-                                     .Where(x => x.TrangThai == true)
-                                     .Skip((page - 1) * pageSize)
-                                     .Take(pageSize);
-
-                var binhLuanTinTucList = await query.ToListAsync();
-
-                var totalItems = await _context.BinhLuanTinTucs.CountAsync(x => x.TrangThai == true);
+                var totalItems = await _context.BinhLuanTinTucs.CountAsync(x => x.TrangThai == true && x.TinTucId == id);
 
                 var response = new
                 {
                     TotalItems = totalItems,
-                    TotalPages = (int)Math.Ceiling((double)totalItems / pageSize),
-                    PageSize = pageSize,
-                    PageNumber = page,
-                    Items = binhLuanTinTucList
+                    Items = query
                 };
 
                 return Ok(response);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetPhanHoiBinhLuan/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetPhanHoiBinhLuan(int id)
+        {
+            try
+            {
+                var query = await _context.PhanHoiBinhLuanTinTucs
+                                     .Where(x => x.TrangThai == true && x.TinTucId == id)
+                                     .Select(x => new
+                                     {
+                                         id = x.Id,
+                                         binhLuanId = x.BinhLuanId,
+                                         hoTen = x.HoTen,
+                                         noiDung = x.NoiDung,
+                                         avatarClient = _context.KhachHangs.Where(a => a.Id == x.KhachHangId).Select(a => a.Avatar).FirstOrDefault(),
+                                         avatar = _context.NhanViens.Where(a => a.Id == x.NhanVienId).Select(a => a.Avatar).FirstOrDefault(),
+                                         createdAt = x.CreatedAt,
+                                     }).ToListAsync();
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("Create_BinhLuanTinTuc")]
+        [HttpPost]
+        public async Task<IActionResult> CreateBinhLuanTinTuc([FromBody] BinhLuanTinTuc model)
+        {
+            try
+            {
+                _context.BinhLuanTinTucs.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "Thêm bình luận thành cồng!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        
+        [Route("Create_PhanHoiBinhLuan")]
+        [HttpPost]
+        public async Task<IActionResult> CreatePhanHoiBinhLuan([FromBody] PhanHoiBinhLuanTinTuc model)
+        {
+            try
+            {   model.HoTen = _context.KhachHangs.Where(a => a.Id == model.KhachHangId).Select(a => a.HoTen).FirstOrDefault();
+                _context.PhanHoiBinhLuanTinTucs.Add(model);
+                await _context.SaveChangesAsync();
+                return Ok(new {message = "Bình luận thành công"});
+            }catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -559,7 +741,7 @@ namespace BackEnd_Tech.Controllers
         //Lấy ra sản phẩm tìm kiếm
         [Route("GetSearchSanPham")]
         [HttpGet]
-        public async Task<IActionResult> SearchHangSanPham([FromQuery] string key, int page = 1, int pageSize = 20)
+        public async Task<IActionResult> SearchSanPham([FromQuery] string key, int page = 1, int pageSize = 20)
         {
             try
             {
@@ -573,9 +755,18 @@ namespace BackEnd_Tech.Controllers
                     pageSize = 20;
                 }
 
+                if (key == null)
+                {
+                    var responseWhenKeyIsNull = new
+                    {
+                        TotalItems = 0
+                    };
+                    return Ok(responseWhenKeyIsNull);
+                }
+
                 var query = _context.SanPhams.AsQueryable();
 
-                    query = query.Where(l => l.TenSanPham.Contains(key));
+                query = query.Where(l => l.TenSanPham.Contains(key));
 
                 var totalItems = await query.CountAsync();
 
@@ -609,5 +800,116 @@ namespace BackEnd_Tech.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
+        [Route("GetById_KhachHang/{email}")]
+        [HttpGet]
+        public async Task<IActionResult> GetByIdKhachHang(string email)
+        {
+            try
+            {
+                var query = await _context.KhachHangs.Where(x => x.Email == email).SingleOrDefaultAsync();
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Khách hàng không tồn tại!" });
+                }
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Update_KhachHang")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateKhachHang([FromBody] KhachHang model)
+        {
+            try
+            {
+                var query = await _context.KhachHangs.FindAsync(model.Id);
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Khách hàng không tồn tại!" });
+                }
+
+                query.HoTen = model.HoTen;
+                query.SoDienThoai = model.SoDienThoai;
+                query.DiaChi = model.DiaChi;
+                query.GioiTinh = model.GioiTinh;
+                query.NgaySinh = model.NgaySinh;
+                query.TrangThai = model.TrangThai;
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Cập nhập thông tin khách hàng thành công" });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [Route("Create_HoaDonXuat")]
+        [HttpPost]
+        public async Task<IActionResult> CreateHoaDonBan([FromBody] HoaDonXuat model)
+        {
+            try
+            {
+                _context.HoaDonXuats.Add(model);
+
+                var newHoaDon = new List<ChiTietHoaDonXuat>();
+
+                foreach (var cthd in model.ChiTietHoaDonXuats)
+                {
+
+                    var ct = new ChiTietHoaDonXuat
+                    {
+                        HoaDonXuatId = model.Id,
+                        SanPhamId = cthd.SanPhamId,
+                        SoLuong = cthd.SoLuong,
+                        GiaBan = cthd.GiaBan,
+                        ThanhTien = cthd.ThanhTien
+                    };
+                    newHoaDon.Add(ct);
+
+                }
+                decimal? totalAmount = newHoaDon.Sum(ct => ct.ThanhTien);
+                decimal? giamGia = model.GiamGia ?? 0;
+                model.TongTien = totalAmount - giamGia;
+
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    id = model.Id,
+                    message = "Đặt hàng thành công!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("Create_LichSuGiaoDich")]
+        [HttpPost]
+        public async Task<IActionResult> CreateLichSuGiaoDich([FromBody] LichSuGiaoDich model)
+        {
+            try
+            {
+                _context.LichSuGiaoDiches.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Thành công" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

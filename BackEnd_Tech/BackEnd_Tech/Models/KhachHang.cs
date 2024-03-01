@@ -9,7 +9,8 @@ namespace BackEnd_Tech.Models
         {
             BinhLuanTinTucs = new HashSet<BinhLuanTinTuc>();
             FeedBacks = new HashSet<FeedBack>();
-            ViTechStores = new HashSet<ViTechStore>();
+            HoaDonXuats = new HashSet<HoaDonXuat>();
+            LichSuGiaoDiches = new HashSet<LichSuGiaoDich>();
         }
 
         public int Id { get; set; }
@@ -23,9 +24,14 @@ namespace BackEnd_Tech.Models
         public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public string? Avatar { get; set; }
+        public string? Token { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
 
         public virtual ICollection<BinhLuanTinTuc> BinhLuanTinTucs { get; set; }
         public virtual ICollection<FeedBack> FeedBacks { get; set; }
-        public virtual ICollection<ViTechStore> ViTechStores { get; set; }
+        public virtual ICollection<HoaDonXuat> HoaDonXuats { get; set; }
+        public virtual ICollection<LichSuGiaoDich> LichSuGiaoDiches { get; set; }
     }
 }

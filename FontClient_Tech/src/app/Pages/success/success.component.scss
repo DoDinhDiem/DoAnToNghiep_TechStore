@@ -1,0 +1,41 @@
+.infor-success {
+    margin-top: 15px;
+    img {
+        height: 70px;
+        margin: auto;
+    }
+}
+.infor-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h3 {
+        margin-top: 15px;
+        color: #47af2c;
+    }
+}
+.infor-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+.box-header {
+    border-bottom: 1px solid #eaedf1;
+    padding-bottom: 20px;
+    img {
+        margin-bottom: 5px;
+        height: 30px;
+        margin: auto;
+    }
+}
+.error {
+    .infor-title {
+        h3 {
+            color: #e04006;
+        }
+    }
+}

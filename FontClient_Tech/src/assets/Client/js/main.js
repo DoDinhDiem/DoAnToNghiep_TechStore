@@ -30,31 +30,6 @@ $(document).ready(function () {
         e.stopPropagation()
     })
 
-    // Sticky header
-    // var catDropdown = $('.category-dropdown'),
-    //     catInitVal = catDropdown.data('visible')
-
-    // if ($('.sticky-header').length && $(window).width() >= 992) {
-    //     var sticky = new Waypoint.Sticky({
-    //         element: $('.sticky-header')[0],
-    //         stuckClass: 'fixed',
-    //         offset: -300,
-    //         handler: function (direction) {
-    //             // Show category dropdown
-    //             // if (catInitVal && direction == 'up') {
-    //             //     catDropdown.addClass('show').find('.dropdown-menu').addClass('show')
-    //             //     catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'true')
-    //             //     return false
-    //             // }
-    //             // Hide category dropdown on fixed header
-    //             // if (catDropdown.hasClass('show')) {
-    //             //     catDropdown.removeClass('show').find('.dropdown-menu').removeClass('show')
-    //             //     catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'false')
-    //             // }
-    //         }
-    //     })
-    // }
-
     // Menu init with superfish plugin
     if ($.fn.superfish) {
         $('.menu, .menu-vertical').superfish({
@@ -594,16 +569,14 @@ $(document).ready(function () {
         e.preventDefault()
     })
 
-    var header = $('.header-bottom')
-    var scrollThreshold = 150
+    //Stick
+    $(window).on('load scroll', function () {
+        var $headerBottom = $('.sticky-header')
 
-    $(window).on('scroll', function () {
-        var scrollPosition = $(window).scrollTop()
-
-        if (scrollPosition > scrollThreshold) {
-            header.addClass('fixed')
+        if ($(window).scrollTop() >= 400) {
+            $headerBottom.addClass('fixed-header')
         } else {
-            header.removeClass('fixed')
+            $headerBottom.removeClass('fixed-header')
         }
     })
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { MenuItem } from 'primeng/api'
+import { HeThongService } from 'src/app/Service/he-thong.service'
 
 @Component({
     selector: 'app-contact',
@@ -7,13 +8,15 @@ import { MenuItem } from 'primeng/api'
     styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-    items: MenuItem[] | undefined
-
-    home: MenuItem | undefined
-
+    constructor(private heThongService: HeThongService) {}
     ngOnInit() {
-        this.items = [{ label: 'Liên hệ' }]
+        this.GetLienHe()
+    }
 
-        this.home = { icon: 'pi pi-home', routerLink: '/' }
+    contact: any
+    GetLienHe() {
+        this.heThongService.GetLienHe().subscribe((data) => {
+            this.contact = data
+        })
     }
 }

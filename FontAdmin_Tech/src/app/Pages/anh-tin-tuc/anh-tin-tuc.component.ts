@@ -14,7 +14,7 @@ import { AnhTinTucService } from 'src/app/Service/anh-tin-tuc.service'
 export class AnhTinTucComponent {
     baseUrl = baseUrl
     //title
-    title = 'Ảnh sản phẩm'
+    title = 'Ảnh tin tức'
 
     //Khai báo true/false cho dialog
     visible: boolean = false

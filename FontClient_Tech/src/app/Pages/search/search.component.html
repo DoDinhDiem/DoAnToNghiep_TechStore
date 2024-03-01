@@ -1,0 +1,94 @@
+<div class="mb-1"></div>
+<div class="container-new">
+    <nav aria-label="breadcrumb" class=" mb-2">
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Kết quả tìm kiếm cho "{{key}}"</li>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="toolbox justify-content-center">
+                        <div class="toolbox-center">
+                            <div class="toolbox-info" *ngIf="sanphamList?.totalItems > 0">
+                                Tìm thấy <span>{{sanphamList?.totalItems}}</span> sản phẩm cho từ khóa
+                                <span>'{{key}}'</span>
+                                <div class="mb-2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="products">
+                        <div class="row" *ngIf="sanphamList?.totalItems == 0">
+                            <div class="col d-flex flex-column justify-content-center align-items-center">
+                                <img src="assets/Profile/bookSearch.png" width="134px" alt="">
+                                <p style="font-weight: 600; font-size: 1.8rem;">Không tìm thấy kết quả nào cho từ khóa
+                                    ' {{key}} '</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngFor="let item of sanphamList?.items" class="col-6 col-md-4 col-lg-4 custom-col-5">
+                                <div class="product">
+                                    <figure class="product-media">
+                                        <a [routerLink]="['/product-detail', item.id]">
+                                            <img src="{{baseUrl}}/Uploads/Products/{{item.avatar}}" alt="Product image"
+                                                class="product-image">
+                                        </a>
+
+                                        <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                                title="Yêu thích"><span>Yêu thích</span></a>
+                                        </div>
+                                        <div class="product-action product-action-dark">
+                                            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
+                                                    giỏ hàng</span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="product-body">
+                                        <!-- End .product-cat -->
+                                        <h3 class="product-title">
+                                            <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                        </h3>
+                                        <!-- End .product-title -->
+                                        <div class="product-price">
+                                            <span class="new-price">{{item.giaBan - item.giamGia | number}}</span>
+                                            <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan |
+                                                number}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <nav aria-label="Page navigation" *ngIf="sanphamList?.totalItems > pageSizes">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled" [class.disabled]="currentPage === 1"
+                                    (click)="onPreviousPage()">
+                                    <a class="page-link page-link-prev">
+                                        <i class="icon-long-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active" *ngFor="let page of getPageNumbers()"
+                                    style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                    (click)="onPageChange(page)">
+                                    <a class="page-link">{{ page }}</a>
+                                </li>
+                                <li class="page-item" (click)="onNextPage()">
+                                    <a class="page-link page-link-next">
+                                        <i class="icon-long-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

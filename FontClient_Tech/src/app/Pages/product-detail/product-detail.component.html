@@ -1,24 +1,29 @@
 <div class="mb-1"></div>
 <div class="container-new">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container d-flex align-items-center">
-            <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+    <nav aria-label="breadcrumb" class=" mb-2">
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/product', sanPham?.loaiSanPhamId]">{{tenLoai}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{sanPham?.tenSanPham}}</li>
+            </div>
+        </div>
+    </nav>
 
     <div class="page-content">
         <div class="container">
             <div class="product-details-top">
                 <div class="row">
                     <div class="col-md-6">
-                        <p-galleria [value]="images" [responsiveOptions]="responsiveOptions"
-                            [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" [activeIndex]="activeIndex">
+                        <p-galleria [value]="Images" [circular]="true" [responsiveOptions]="responsiveOptions"
+                            [numVisible]="8">
                             <ng-template pTemplate="item" let-item>
-                                <img [src]="item.itemImageSrc" style="width: 100%;" />
+                                <img src="{{baseUrl}}/Uploads/Products/{{item.image}}" />
                             </ng-template>
                             <ng-template pTemplate="thumbnail" let-item>
                                 <div class="grid grid-nogutter justify-content-center">
-                                    <img [src]="item.thumbnailImageSrc" />
+                                    <img style="height: 60px; width: 60px; border: 1px solid #d1d5db; border-radius: 5px;"
+                                        src="{{baseUrl}}/Uploads/Products/{{item.image}}" />
                                 </div>
                             </ng-template>
                         </p-galleria>
@@ -26,62 +31,71 @@
 
                     <div class="col-md-6">
                         <div class="product-details">
-                            <h1 class="product-title">Dark yellow lace cut out swing dress</h1>
+                            <h1 class="product-title">{{sanPham?.tenSanPham}}</h1>
                             <!-- End .product-title -->
-
                             <div class="mb-2"></div>
 
                             <div class="product-price">
-                                $84.00
+                                <span class="new-price ml-2">{{sanPham?.giaBan - sanPham?.giamGia | number}}
+                                </span>
+                                <span class="old-price" style="font-size: 1.6rem;"
+                                    *ngIf="sanPham?.giamGia > 0">{{sanPham?.giaBan | number}}</span>
                             </div>
 
 
                             <div class="details-filter-row details-row-size">
-                                <label>Bảo hành:</label>
+                                <label>Bảo hành: <span class="ml-2">{{sanPham?.baoHang}}</span></label>
                             </div>
 
 
                             <div class="details-filter-row details-row-size">
                                 <label for="qty">Số lượng:</label>
-                                <div class="product-details-quantity">
-                                    <div class="cart-product-quantity">
-                                        <div class="input-group  input-spinner">
-                                            <div class="input-group-prepend">
-                                                <button style="min-width: 26px" class="btn btn-decrement btn-spinner"
-                                                    type="button"><i class="icon-minus"></i>
-                                                </button>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <button style="min-width: 26px; margin-left: 20px;"
-                                                    class="btn btn-increment btn-spinner" type="button"><i
-                                                        class="icon-plus"></i>
-                                                </button>
-                                            </div>
-                                            <input type="text" style="text-align: center" value="1" min="1" max="10"
-                                                class="form-control " required="" placeholder="" />
-
+                                <div class="product-details-quantity" style="margin-left: 10px;">
+                                    <div class="input-group  input-spinner">
+                                        <div class="input-group-prepend">
+                                            <button style="min-width: 26px" class="btn btn-decrement btn-spinner"
+                                                type="button" (click)="decrement()">
+                                                <i class="icon-minus"></i>
+                                            </button>
                                         </div>
+                                        <div class="input-group-append">
+                                            <button style="min-width: 26px; margin-left: 20px;"
+                                                class="btn btn-increment btn-spinner" type="button"
+                                                (click)="increment()">
+                                                <i class="icon-plus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" style="text-align: center" [value]="quantity" min="1"
+                                            max="10" class="form-control " required="" placeholder="" />
                                     </div>
-                                </div><!-- End .product-details-quantity -->
+                                </div>
+
+                                <span style="margin-left: 25px;">{{sanPham?.soLuongTon}} sản phẩm có sẵn</span>
                             </div><!-- End .details-filter-row -->
                             <div class="row">
                                 <div class="col-xl-6">
-                                    <div class="product-details-action">
-                                        <a href="#" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
+                                    <div class="product-details-action product-action-dark"
+                                        style="border-radius: 10px;">
+                                        <a href="javascript:void(0)" (click)="addToCart(sanPham)" class="btn-product">
+                                            <i class="pi pi-cart-plus mr-2" style="font-size: 1.6rem"></i><span>Thêm vào
+                                                giỏ hàng</span></a>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6">
-                                    <div class="product-details-action">
-                                        <a href="#" class="btn-product btn-cart"
-                                            style=" background: linear-gradient(#f52f32, #e11b1e); width: 70%;"><span>Mua
+                                    <div class="product-details-action product-action-dark"
+                                        style="border-radius: 10px;">
+                                        <a href="javascript:void(0)" (click)="addToCartBuyNow(sanPham)"
+                                            class="btn-product"
+                                            style="background: linear-gradient(#f52f32,#e11b1e); border-radius: 10px;">
+                                            <i class="pi pi-shopping-cart mr-2" style="font-size: 1.6rem"></i><span>Mua
                                                 ngay</span></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-details-action">
+                            <div class="product-details-action product-action-dark" style="border-radius: 10px;">
                                 <a href="#" class="btn-product"
-                                    style="background: linear-gradient(180deg,#3a78d0,#277cea); border: none;">
+                                    style="background: linear-gradient(180deg,#3a78d0,#277cea); border-radius: 10px;">
                                     <strong class="has-text-white">Trả góp 0%</strong>
                                 </a>
                             </div>
@@ -138,19 +152,21 @@
                             </div><!-- End .product-details-footer -->
                         </div><!-- End .product-details -->
                     </div><!-- End .col-md-6 -->
-                </div><!-- End .row -->
-            </div><!-- End .product-details-top -->
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xl-8">
                     <div class="block-content-product-left"><!---->
                         <div class="cps-block-content">
                             <div class="ksp-content p-2 mb-2">
-
+                                <p [innerHTML]="displayedContent"></p>
                             </div>
-                            <div class="cps-block-content_btn-showmore"><a
+                            <div class="cps-block-content_btn-showmore">
+                                <a *ngIf="showMoreLessButton" (click)="toggleContent()"
                                     class="btn-show-more button__content-show-more">
-                                    Xem thêm </a></div>
+                                    {{ isContentExpanded ? 'Thu gọn' : 'Xem thêm' }} </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,348 +177,75 @@
                             <h2 class="title is-6 mb-3">Thông số kỹ thuật</h2> <!---->
                         </div>
                         <ul class="technical-content">
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Kích thước màn hình</p>
-                                <div>6.1 inches</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Công nghệ màn hình</p>
-                                <div><a href="https://cellphones.com.vn/sforum/man-hinh-super-retina-xdr-la-gi"
-                                        target="_blank" rel="nofollow">Super Retina XDR OLED</a></div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Camera sau</p>
-                                <div>Camera chính: 48MP<br>Camerra góc rộng: 12MP<br> Camera Tele: 12MP </div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Camera trước</p>
-                                <div>12MP</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Chipset</p>
-                                <div>Apple A16 Bionic</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Dung lượng RAM</p>
-                                <div>6 GB</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Bộ nhớ trong</p>
-                                <div>128 GB</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Pin</p>
-                                <div>3349 mAh</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Thẻ SIM</p>
-                                <div>2 SIM (nano‑SIM và eSIM)</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Hệ điều hành</p>
-                                <div>iOS 17</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Độ phân giải màn hình</p>
-                                <div>1179 x 2556 pixels</div>
-                            </li>
-                            <li
-                                class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
-                                <p>Tính năng màn hình</p>
-                                <div>Dynamic Island <br>HDR display <br>True Tone <br>Wide color (P3) <br>Haptic
-                                    Touch<br>Lớp phủ oleophobia chống dấu vân tay<br>Độ sáng tối đa: 2000 nits<br>Mặt
-                                    kính cảm ứng: Kính cường lực Ceramic Shield</div>
-                            </li>
-                        </ul> <button
-                            class="button button__show-modal-technical my-3 is-flex is-justify-content-center">
-                            Xem cấu hình chi tiết
+                            <ng-container *ngFor="let item of thongSos; let i = index">
+                                <li *ngIf="showDetail || i < 10"
+                                    class="technical-content-item is-flex is-align-items-center is-justify-content-space-between p-2">
+                                    <p>{{item.tenThongSo}}</p>
+                                    <div>{{item.moTa}}</div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                        <button *ngIf="thongSos.length > 10"
+                            class="button button__show-modal-technical my-3 is-flex is-justify-content-center"
+                            (click)="toggleDetail()">
+                            {{ showDetail ? 'Ẩn chi tiết' : 'Xem cấu hình chi tiết' }}
                         </button>
                     </div>
+
                 </div>
             </div>
 
+            <div class="mb-2"></div>
+            <h2 class="title text-center mb-4">Sản phẩm tương tự</h2>
 
-            <h2 class="title text-center mb-4">Sản phẩm tương tự</h2><!-- End .title text-center -->
+            <div class="tab-content tab-content-carousel">
+                <div class="tab-pane p-0 fade show active" id="top-all-tab">
+                    <p-carousel [value]="sanPhams" [numVisible]="(sanPhams.length < 2) ? sanPhams.length : 5"
+                        [numScroll]="1" [circular]="true" [autoplayInterval]="5000"
+                        [responsiveOptions]="responsiveOptionsSimilar">
+                        <ng-template let-item pTemplate="item">
+                            <div class="border-1 surface-border border-round px-1">
+                                <div class="product" [style.width.px]="(sanPhams.length < 5) ? 217 : null"
+                                    style="min-height: 376px;">
+                                    <figure class="product-media">
+                                        <a [routerLink]="['/product-detail', item.id]">
+                                            <img src="{{baseUrl}}/Uploads/Products/{{item.avatar}}" alt="Product image"
+                                                class="product-image">
+                                        </a>
+                                        <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"
+                                                title="Yêu thích"><span>Yêu
+                                                    thích</span></a>
+                                        </div>
+                                        <div class="product-action product-action-dark">
+                                            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
+                                                    giỏ hàng</span></a>
+                                        </div>
+                                    </figure>
 
-            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow">
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-top">Top</span>
-                        <a href="product.html">
-                            <img src="assets/Client/images/demos/demo-14/products/product-6.jpg" alt="Product image"
-                                class="product-image" />
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Yêu thích"><span>Yêu
-                                    thích</span></a>
-
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So
-                                    sánh</span></a>
-                        </div>
-                        <!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart" title="Thêm vào giỏ hàng"><span>Thêm
-                                    vào giỏ hàng</span></a>
-                        </div>
-                        <!-- End .product-action -->
-                    </figure>
-                    <!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Laptops</a>
-                        </div>
-                        <!-- End .product-cat -->
-                        <h3 class="product-title">
-                            <a href="product.html">MacBook Pro 13" Display, i5</a>
-                        </h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">$1,199.99</div>
-                        <!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 100%"></div>
-                                <!-- End .ratings-val -->
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a [routerLink]="['/product', item.loaiSanPhamId]">{{item.tenLoai}}</a>
+                                        </div>
+                                        <h3 class="product-title">
+                                            <a [routerLink]="['/product-detail', item.id]">{{item.tenSanPham}}</a>
+                                        </h3>
+                                        <div class="product-price">
+                                            <span class="new-price">{{item.giaBan - item.giamGia | number}}
+                                                <small>đ</small></span>
+                                            <span class="old-price" *ngIf="item.giamGia > 0">{{item.giaBan |
+                                                number}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- End .ratings -->
-                            <span class="ratings-text">( 4 Reviews )</span>
-                        </div>
-                        <!-- End .rating-container -->
-                    </div>
-
-                </div>
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-new">New</span>
-                        <a href="product.html">
-                            <img src="assets/Client/images/products/product-4.jpg" alt="Product image"
-                                class="product-image">
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                    wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Women</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">
-                            $60.00
-                        </div><!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <span class="ratings-text">( 2 Reviews )</span>
-                        </div><!-- End .rating-container -->
-
-                        <div class="product-nav product-nav-thumbs">
-                            <a href="#" class="active">
-                                <img src="assets/Client/images/products/product-4-thumb.jpg" alt="product desc">
-                            </a>
-                            <a href="#">
-                                <img src="assets/Client/images/products/product-4-2-thumb.jpg" alt="product desc">
-                            </a>
-
-                            <a href="#">
-                                <img src="assets/Client/images/products/product-4-3-thumb.jpg" alt="product desc">
-                            </a>
-                        </div><!-- End .product-nav -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
-
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-out">Out of Stock</span>
-                        <a href="product.html">
-                            <img src="assets/Client/images/products/product-6.jpg" alt="Product image"
-                                class="product-image">
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                    wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jackets</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">
-                            <span class="out-price">$120.00</span>
-                        </div><!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <span class="ratings-text">( 6 Reviews )</span>
-                        </div><!-- End .rating-container -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
-
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-top">Top</span>
-                        <a href="product.html">
-                            <img src="assets/Client/images/products/product-11.jpg" alt="Product image"
-                                class="product-image">
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                    wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Shoes</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">
-                            $110.00
-                        </div><!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <span class="ratings-text">( 1 Reviews )</span>
-                        </div><!-- End .rating-container -->
-
-                        <div class="product-nav product-nav-thumbs">
-                            <a href="#" class="active">
-                                <img src="assets/Client/images/products/product-11-thumb.jpg" alt="product desc">
-                            </a>
-                            <a href="#">
-                                <img src="assets/Client/images/products/product-11-2-thumb.jpg" alt="product desc">
-                            </a>
-
-                            <a href="#">
-                                <img src="assets/Client/images/products/product-11-3-thumb.jpg" alt="product desc">
-                            </a>
-                        </div><!-- End .product-nav -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
-
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="assets/Client/images/products/product-10.jpg" alt="Product image"
-                                class="product-image">
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                    wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jumpers</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">
-                            $56.00
-                        </div><!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <span class="ratings-text">( 0 Reviews )</span>
-                        </div><!-- End .rating-container -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
-
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="assets/Client/images/products/product-7.jpg" alt="Product image"
-                                class="product-image">
-                        </a>
-
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                    wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jeans</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3>
-                        <!-- End .product-title -->
-                        <div class="product-price">
-                            $76.00
-                        </div><!-- End .product-price -->
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <span class="ratings-text">( 2 Reviews )</span>
-                        </div>
-                    </div>
+                        </ng-template>
+                    </p-carousel>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<p-toast></p-toast>

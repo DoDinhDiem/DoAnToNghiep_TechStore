@@ -7,9 +7,7 @@ namespace BackEnd_Tech.Models
     {
         public NhanVien()
         {
-            BinhLuanTinTucs = new HashSet<BinhLuanTinTuc>();
             HoaDonNhaps = new HashSet<HoaDonNhap>();
-            HoaDonXuats = new HashSet<HoaDonXuat>();
             TinTucs = new HashSet<TinTuc>();
         }
 
@@ -28,12 +26,13 @@ namespace BackEnd_Tech.Models
         public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public string? Token { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
 
         public virtual ChucVu? ChucVu { get; set; }
         public virtual Role? Role { get; set; }
-        public virtual ICollection<BinhLuanTinTuc> BinhLuanTinTucs { get; set; }
         public virtual ICollection<HoaDonNhap> HoaDonNhaps { get; set; }
-        public virtual ICollection<HoaDonXuat> HoaDonXuats { get; set; }
         public virtual ICollection<TinTuc> TinTucs { get; set; }
     }
 }

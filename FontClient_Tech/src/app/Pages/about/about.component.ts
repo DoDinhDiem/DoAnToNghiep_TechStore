@@ -1,5 +1,7 @@
 import { Component } from '@angular/core'
 import { MenuItem } from 'primeng/api'
+import { baseUrl } from 'src/app/Api/baseHttp'
+import { HeThongService } from 'src/app/Service/he-thong.service'
 
 @Component({
     selector: 'app-about',
@@ -7,13 +9,18 @@ import { MenuItem } from 'primeng/api'
     styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-    items: MenuItem[] | undefined
-
-    home: MenuItem | undefined
-
+    baseUrl = baseUrl
+    constructor(private heThongService: HeThongService) {}
     ngOnInit() {
-        this.items = [{ label: 'Giới thiệu' }]
+        this.GetGioiThieu()
+    }
 
-        this.home = { icon: 'pi pi-home', routerLink: '/' }
+    about: any
+    nhanvien: any
+    GetGioiThieu() {
+        this.heThongService.GetGioiThieu().subscribe((data: any) => {
+            this.about = data.about
+            this.nhanvien = data.nhanvien
+        })
     }
 }

@@ -45,20 +45,18 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="products-datatable_length">
-                                    <label class="form-label">Hiển thị <select
-                                            class="form-select form-select-sm ms-1 me-1">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="-1">All</option>
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                <!-- <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
                                             type="search" class="form-control form-control-sm" placeholder=""
-                                            aria-controls="products-datatable"></label></div>
+                                            aria-controls="products-datatable"></label></div> -->
                             </div>
                         </div>
                         <div class="mb-1"></div>
@@ -67,7 +65,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="text-center">Tin tức</th>
-                                    <th class="text-center">Tên</th>
+                                    <th class="text-center">Tên hiển thị</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Nội dung</th>
                                     <th class="text-center">Người Comment</th>
@@ -76,17 +74,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">Xiaomi Redmi Note 13 6GB 128GB</td>
-                                    <td class="text-center">Diệm</td>
-                                    <td class="text-center">dodinhdiem2802@gmail.com</td>
-                                    <td class="text-center">Tin tức như cái đb</td>
-                                    <td class="text-center">Ai biết</td>
+                                <tr *ngFor="let item of binhLuanList?.items">
+                                    <td class="text-center" style="width: 250px">{{item.tenTinTuc}}</td>
+                                    <td class="text-center">{{item.hoTen}}</td>
+                                    <td class="text-center">{{item.email}}</td>
+                                    <td class="text-center">{{item.noiDung}}</td>
+                                    <td class="text-center">{{item.userComment}}</td>
                                     <td class="text-center">
-                                        <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+                                        <p-inputSwitch [(ngModel)]="item.trangThai"
+                                            (ngModelChange)="trangThai(item)"></p-inputSwitch>
                                     </td>
                                     <td class="table-action text-center">
-                                        <a (click)="editModal()" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                        <a (click)="editModal(item)" class="action-icon"> <i
+                                                class="mdi mdi-eye"></i></a>
                                     </td>
                                 </tr>
 
@@ -95,27 +95,25 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="products-datatable_info" role="status"
-                                    aria-live="polite">Showing products 1 to 5 of 12</div>
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    binhLuanList?.totalItems }}</div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
                                     <ul class="pagination pagination-rounded">
-                                        <li class="paginate_button page-item previous disabled"
-                                            id="products-datatable_previous"><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="0" tabindex="0"
-                                                class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
-                                        <li class="paginate_button page-item active"><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="1" tabindex="0"
-                                                class="page-link">1</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="2" tabindex="0"
-                                                class="page-link">2</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="3" tabindex="0"
-                                                class="page-link">3</a></li>
-                                        <li class="paginate_button page-item next" id="products-datatable_next"><a
-                                                href="#" aria-controls="products-datatable" data-dt-idx="4" tabindex="0"
-                                                class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -135,30 +133,56 @@
             <div class="card-body pb-1">
                 <div class="mt-3">
                     <div class="d-flex">
-                        <img class="me-2 rounded" src="assets/Admin/images/users/avatar-9.jpg"
+                        <img *ngIf="!binhLuan.avatar" class="me-2 rounded" src="assets/imageUser/user.png"
                             alt="Generic placeholder image" height="32">
-                        <div>
-                            <h5 class="m-0">Sansa Stark </h5>
-                            <p class="text-muted mb-0"><small>2 mins ago</small></p>
+                        <img *ngIf="binhLuan.avatar" class="me-2 rounded"
+                            src="{{baseUrl}}/Uploads/Clients/{{binhLuan.avatar}}" alt="Generic placeholder image"
+                            height="32">
+                        <div style="width: 100%;">
+                            <h5 class="m-0">{{binhLuan.hoTen}} </h5>
+                            <p class="text-muted mb-0"><small>{{getTimeAgo(binhLuan.createdAt)}}</small></p>
 
-                            <p class="my-1">This is awesome! Proud of sis :) Waiting for you to
-                                come back to winterfall</p>
+                            <p class="my-1">{{binhLuan.noiDung}}</p>
 
                             <div>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-link text-muted p-0 ps-2"
-                                    (click)="toggleCommentBox()">
+                                    (click)="toggleCommentBox(binhLuan.id)">
                                     <i class='uil uil-comments-alt me-1'></i> Trả lời
                                 </a>
                             </div>
+                            <div class="tab-content" *ngIf="isCommentBoxVisible">
+                                <div class="tab-pane show active p-3" id="newpost">
+                                    <div class="border rounded">
+                                        <form action="#" class="comment-area-box">
+                                            <textarea rows="3" [(ngModel)]="phanhoi.noiDung" name="text"
+                                                class="form-control border-0 resize-none"
+                                                placeholder="Viết phản hồi...."></textarea>
+                                            <div class="p-2 bg-light flex justify-content-between align-items-center">
+                                                <button type="submit" class="btn btn-secondary me-2"
+                                                    (click)="closeCommentBox()">Hủy</button>
+                                                <button type="submit" class="btn btn-sm btn-success"
+                                                    (click)="onSubmit()"><i
+                                                        class='uil uil-message me-1'></i>Gửi</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div class="d-flex mt-3">
-                                <img class="me-2 rounded" src="assets/Admin/images/users/avatar-8.jpg"
-                                    alt="Generic placeholder image" height="32">
+                            <div class="d-flex mt-3" *ngFor="let item of phanHoiList">
+                                <img *ngIf="!item.avatarClient" class="me-2 rounded" src="assets/imageUser/user_2.png"
+                                    alt="" height="32">
+                                <img *ngIf="item.avatarClient" class="me-2 rounded"
+                                    src="{{baseUrl}}/Uploads/Clients/{{item.avatarClient}}" alt="" height="32">
+                                <img *ngIf="!item.avatar" class="me-2 rounded" src="assets/imageUser/user_2.png" alt=""
+                                    height="32">
+                                <img *ngIf="item.avatar" class="me-2 rounded"
+                                    src="{{baseUrl}}/Uploads/Clients/{{item.avatar}}" alt="" height="32">
                                 <div>
-                                    <h5 class="m-0">Cersei Lannister </h5>
-                                    <p class="text-muted mb-0"><small>1 min ago</small></p>
+                                    <h5 class="m-0">{{item.hoTen}} </h5>
+                                    <p class="text-muted mb-0"><small>{{getTimeAgo(item.createdAt)}}</small></p>
 
-                                    <p class="my-1">I swear! She won't be able to reach to winterfall</p>
+                                    <p class="my-1">{{item.noiDung}}</p>
                                 </div>
                             </div>
                         </div>
@@ -166,22 +190,7 @@
 
                     <hr>
 
-                    <div class="tab-content" *ngIf="isCommentBoxVisible">
-                        <div class="tab-pane show active p-3" id="newpost">
-                            <div class="border rounded">
-                                <form action="#" class="comment-area-box">
-                                    <textarea rows="3" class="form-control border-0 resize-none"
-                                        placeholder="Viết phản hồi...."></textarea>
-                                    <div class="p-2 bg-light flex justify-content-between align-items-center">
-                                        <button type="submit" class="btn btn-secondary me-2"
-                                            (click)="toggleCommentBox()">Hủy</button>
-                                        <button type="submit" class="btn btn-sm btn-success"><i
-                                                class='uil uil-message me-1'></i>Gửi</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div> <!-- end card-body -->
@@ -191,3 +200,5 @@
         <button type="button" class="btn btn-light" (click)="closeDialog()">Đóng</button>
     </ng-template>
 </p-dialog>
+
+<p-toast></p-toast>

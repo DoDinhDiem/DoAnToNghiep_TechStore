@@ -1,26 +1,83 @@
 import { Component, AfterViewInit } from '@angular/core'
-import { MenuItem } from 'primeng/api'
-import { ProductDetailService } from 'src/app/Service/product-detail.service'
+import { ActivatedRoute, Router } from '@angular/router'
+import { MenuItem, MessageService } from 'primeng/api'
+import { baseUrl } from 'src/app/Api/baseHttp'
+import { CartService } from 'src/app/Service/cart.service'
+import { ChiTietSanPhamService } from 'src/app/Service/chi-tiet-san-pham.service'
 
 declare var $: any
 @Component({
     selector: 'app-product-detail',
     templateUrl: './product-detail.component.html',
-    styleUrls: ['./product-detail.component.scss']
+    styleUrls: ['./product-detail.component.scss'],
+    providers: [MessageService]
 })
 export class ProductDetailComponent {
-    items: MenuItem[] | undefined
+    baseUrl = baseUrl
+    id!: any
+    responsiveOptionsSimilar: any[] | undefined
+    constructor(
+        private chiTietSanPhamService: ChiTietSanPhamService,
+        private cartService: CartService,
+        private route: ActivatedRoute,
+        private messageService: MessageService,
+        private router: Router
+    ) {}
 
-    home: MenuItem | undefined
+    ngOnInit() {
+        this.route.params.subscribe((params) => {
+            this.id = +params['id']
+            this.GetChiTietSanPham(this.id)
+        })
+        this.responsiveOptionsSimilar = [
+            {
+                breakpoint: '1199px',
+                numVisible: 1,
+                numScroll: 1
+            },
+            {
+                breakpoint: '991px',
+                numVisible: 2,
+                numScroll: 1
+            },
+            {
+                breakpoint: '767px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ]
+    }
 
-    images: any[] | undefined
+    sanPham: any | undefined
+    tenLoai: any
+    thongSos: any[] = []
+    Images: any[] | undefined
+    GetChiTietSanPham(id: any) {
+        this.chiTietSanPhamService.GetChiTietSanPham(id).subscribe((data) => {
+            this.sanPham = data
+            this.tenLoai = data.tenLoai
+            this.Images = data.anhSanPhams
+            this.thongSos = data.thongSos
+            const loaiid = data.loaiSanPhamId
+            this.updateDisplayedContent()
+            this.GetSanPhamTuongTu(id, loaiid)
+        })
+    }
 
+    sanPhams: any[] = []
+    GetSanPhamTuongTu(id: any, loaiid: any) {
+        this.chiTietSanPhamService.GetSanPhamTuongTu(id, loaiid).subscribe((data) => {
+            this.sanPhams = data
+        })
+    }
+
+    //Next or prev ảnh
     get activeIndex(): number {
         return this._activeIndex
     }
 
     set activeIndex(newValue) {
-        if (this.images && 0 <= newValue && newValue <= this.images.length - 1) {
+        if (this.Images && 0 <= newValue && newValue <= this.Images.length - 1) {
             this._activeIndex = newValue
         }
     }
@@ -42,15 +99,6 @@ export class ProductDetailComponent {
         }
     ]
 
-    constructor(private photoService: ProductDetailService) {}
-
-    ngOnInit() {
-        this.initOwlCarousel()
-        this.photoService.getImages().then((images) => (this.images = images))
-        this.items = [{ label: 'Loại sản phẩm' }, { label: 'Chi tiết sản phẩm' }]
-        this.home = { icon: 'pi pi-home', routerLink: '/' }
-    }
-
     next() {
         this.activeIndex++
     }
@@ -59,33 +107,62 @@ export class ProductDetailComponent {
         this.activeIndex--
     }
 
-    private initOwlCarousel() {
-        $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
-                nav: false,
-                dots: true,
-                margin: 20,
-                loop: false,
-                responsive: {
-                    '0': {
-                        items: 1
-                    },
-                    '480': {
-                        items: 2
-                    },
-                    '768': {
-                        items: 3
-                    },
-                    '992': {
-                        items: 4
-                    },
-                    '1200': {
-                        items: 4,
-                        nav: true,
-                        dots: false
-                    }
-                }
-            })
-        })
+    //MoTa
+    maxCharacters = 3500
+    displayedContent!: string
+    showMoreLessButton = false
+    isContentExpanded = false
+
+    updateDisplayedContent() {
+        const content = this.sanPham.moTa || ''
+        if (content.length > this.maxCharacters) {
+            this.displayedContent = content.slice(0, this.maxCharacters) + '...'
+            this.showMoreLessButton = true
+        } else {
+            this.displayedContent = content
+            this.showMoreLessButton = false
+        }
+    }
+
+    toggleContent() {
+        this.isContentExpanded = !this.isContentExpanded
+
+        if (this.isContentExpanded) {
+            this.displayedContent = this.sanPham.moTa
+        } else {
+            this.displayedContent = this.sanPham.moTa.slice(0, this.maxCharacters)
+        }
+    }
+
+    //Thông số
+    showDetail: boolean = false
+    toggleDetail() {
+        this.showDetail = !this.showDetail
+    }
+
+    //Tăng giảm số lượng
+    quantity: number = 1
+
+    increment() {
+        if (this.quantity < 10) {
+            this.quantity++
+        }
+    }
+
+    decrement() {
+        if (this.quantity > 1) {
+            this.quantity--
+        }
+    }
+
+    addToCart(product: any) {
+        this.cartService.addToCartDetail(product, this.quantity)
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 3000 })
+    }
+
+    addToCartBuyNow(product: any) {
+        this.cartService.addToCartDetail(product, this.quantity)
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 3000 })
+        this.router.navigate(['/'])
     }
 }
