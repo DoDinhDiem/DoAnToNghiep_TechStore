@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { ILoaiSanPham } from 'src/app/Models/loai-san-pham'
 import { LoaiSanPhamService } from 'src/app/Service/loai-san-pham.service'
+import { UserStoreService } from 'src/app/Service/user-store.service'
 
 @Component({
     selector: 'app-loai-san-pham',
@@ -43,6 +44,8 @@ export class LoaiSanPhamComponent implements OnInit {
         this.visible = false
         this.loaisp = {}
     }
+
+    id: any
 
     //Gọi load loại sản phẩm
     loadData() {

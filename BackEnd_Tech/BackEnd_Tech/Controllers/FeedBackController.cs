@@ -1,7 +1,12 @@
 ﻿using BackEnd_Tech.Models;
+using BackEnd_Tech.Models.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MimeKit;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
+
 
 namespace BackEnd_Tech.Controllers
 {
@@ -10,9 +15,12 @@ namespace BackEnd_Tech.Controllers
     public class FeedBackController : ControllerBase
     {
         private TechStoreContext _context;
-        public FeedBackController(TechStoreContext context)
+        private readonly MailSettings _mailSettings;
+
+        public FeedBackController(TechStoreContext context, IOptions<MailSettings> mailSettings)
         {
             _context = context;
+            _mailSettings = mailSettings.Value;
         }
 
         [Route("GetById_FeedBack/{id}")]
@@ -34,17 +42,61 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Route("Create_FeedBack")]
+        [Route("SendEmail")]
         [HttpPost]
-        public async Task<IActionResult> CreateFeedBack([FromBody] FeedBack model)
+        public IActionResult SendEmail([FromBody] EmailRequest emailRequest)
         {
             try
             {
-                _context.FeedBacks.Add(model);
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail));
+                message.To.Add(new MailboxAddress("", emailRequest.To));
+                message.Subject = emailRequest.Subject;
+
+                message.Body = new TextPart("html")
+                {
+                    Text = emailRequest.Content
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(_mailSettings.Host, _mailSettings.Port, false);
+                    client.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return Ok(new { message = "Email đã được gửi thành công" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+        }
+
+        [Route("TrangThai/{id}")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateTrangThai(int id)
+        {
+            try
+            {
+                var query = await _context.FeedBacks.FindAsync(id);
+
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Không tìm thấy loại sản phẩm cần sửa" });
+                }
+
+                query.TrangThai = !query.TrangThai;
+
                 await _context.SaveChangesAsync();
 
-                return Ok(new {message = "Phản hồi đã được lưu giữ"});
-            }catch (Exception ex)
+                return Ok(new
+                {
+                    message = "Cập nhật trạng thái thành công!"
+                });
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -67,11 +119,6 @@ namespace BackEnd_Tech.Controllers
                 }
 
                 var query = _context.FeedBacks.AsQueryable();
-
-                //if (!string.IsNullOrEmpty(tenLoai))
-                //{
-                //    query = query.Where(l => l.TenLoai.Contains(tenLoai));
-                //}
 
                 var totalItems = await query.CountAsync();
 

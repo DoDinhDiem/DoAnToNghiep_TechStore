@@ -3,20 +3,19 @@
         <div class="block-welcome-containter is-flex is-align-items-center">
             <div class="welcome-avatar"><img src="assets/Profile/Shipper_CPS3.77d4065.png" alt="cps-icon"></div>
             <div class="welcome-smember is-flex is-flex-direction-column"><!---->
-                <p class="welcome-smember__name">06. Đỗ Đình Diệm</p>
-                <p class="welcome-smember__level">SNull</p>
+                <p class="welcome-smember__name">{{name}}</p>
             </div>
         </div>
         <div class="bg-smember-fa"></div>
         <div class="block-homepage-menu">
             <div class="block-homepage-menu__content is-flex is-justify-content-space-around">
                 <div class="content__item is-flex is-flex-direction-column is-align-items-center">
-                    <p class="item__content title">1</p>
+                    <p class="item__content title">{{chitietList?.totalItems }}</p>
                     <p class="item__content text">Đơn hàng</p>
                 </div>
                 <div class="content__item is-flex is-flex-direction-column is-align-items-center">
                     <p class="item__content title">
-                        8M</p>
+                        {{ totalAmount | number}}</p>
                     <p class="item__content text">Tổng tiền tích luỹ</p>
                 </div>
             </div>
@@ -26,52 +25,78 @@
                 <div class="block-sliding-order">
                     <div class="order-container gallery-thumbs">
                         <div class="thumbs-wrapper is-flex">
-                            <div class="thumb-item swiper-slide-thumb-active">Tất cả
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === null}"
+                                (click)="filterByStatus('tatca')">Tất cả
                             </div>
-                            <div class="thumb-item">Chờ xác nhận
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === 0}"
+                                (click)="filterByStatus(0)">Chờ xác nhận
                             </div>
-                            <div class="thumb-item">Đã xác nhận
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === 1}"
+                                (click)="filterByStatus(1)">Đã xác nhận
                             </div>
-                            <div class="thumb-item">Đang vận chuyển
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === 2}"
+                                (click)="filterByStatus(2)">Đang vận chuyển
                             </div>
-                            <div class="thumb-item">Đã giao hàng
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === 3}"
+                                (click)="filterByStatus(3)">Đã giao hàng
                             </div>
-                            <div class="thumb-item">Đã huỷ
+                            <div class="thumb-item" [ngClass]="{'swiper-slide-thumb-active': selectedStatus === 4}"
+                                (click)="filterByStatus(4)">Đã huỷ
                             </div>
                         </div>
                     </div>
-                    <div id="listOrder" class="list-order-wrapper">
+                    <div id="listOrder" *ngIf="chitietList?.totalItems > 0" class="list-order-wrapper">
                         <div class="block-order-list">
-                            <div class="block-order-item">
-                                <div class="order-item is-flex">
-                                    <div class="order-item__img"><img
-                                            src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/x/i/xiaomi-mi-11-lite-5g-2_2.jpg"
+                            <div class="block-order-item" *ngFor="let item of chitietList?.items">
+                                <div class="order-item is-flex" *ngFor="let sp of item.chiTiet">
+                                    <div class="order-item__img"><img src="{{baseUrl}}/Uploads/Products/{{sp.anhSP}}"
                                             alt="cps-product" loading="lazy"></div>
                                     <div class="order-item__info is-flex is-flex-direction-column">
-                                        <div class="info__title button__order-detail">Xiaomi Mi 11 Lite 5G-Xanh bạc hà
+                                        <div class="info__title button__order-detail">{{sp.tenSP}}
                                         </div>
-                                        <div class="is-flex is-align-items-center">
-                                            <div class="info__sub-title mr-2">và 1 sản phẩm khác</div>
-                                            <div class="vat-tag">Đã xuất VAT</div>
-                                        </div> <!---->
                                         <div class="order-status shipped">Đã giao hàng
                                         </div>
                                         <div
                                             class="info__group is-flex is-justify-content-space-between is-flex-direction-column">
-                                            <div class="price">8.340.000đ</div>
-                                            <div class="group-btn-info is-flex"><a target="_blank" rel="noopener"
-                                                    href="https://view-hddt.cps.onl/Viewer/HoaDonViewer.aspx?mhd=0e950819-fb10-4ea5-bf35-e3e91855da5e"
-                                                    class="btn-info">Xem hóa đơn</a>
-                                                <div class="btn-info">Xem chi tiết</div>
-                                            </div>
+                                            <div class="price">{{sp.giaBan | number}}đ x {{sp.soLuong}}</div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> <!---->
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled" [class.disabled]="currentPage === 1"
+                                    (click)="onPreviousPage()">
+                                    <a class="page-link page-link-prev">
+                                        <i class="icon-long-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active" *ngFor="let page of getPageNumbers()"
+                                    style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                    (click)="onPageChange(page)">
+                                    <a class="page-link">{{ page }}</a>
+                                </li>
+                                <li class="page-item" (click)="onNextPage()">
+                                    <a class="page-link page-link-next">
+                                        <i class="icon-long-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div id="listOrder" *ngIf="chitietList?.totalItems == 0" class="list-order-wrapper">
+                        <div class="no-order mt-6">
+                            <div class="no-info is-flex is-flex-direction-column is-align-items-center"><img
+                                    src="assets/Profile/none_order.svg">
+                                <p>Không có đơn hàng nào thỏa mãn!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div> <!---->
+        </div>
     </div>
 </div>

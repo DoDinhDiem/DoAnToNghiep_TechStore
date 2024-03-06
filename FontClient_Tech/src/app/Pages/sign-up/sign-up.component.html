@@ -1,0 +1,70 @@
+<div class="mb-1"></div>
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container breadcrumb-container">
+        <div class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+        </div>
+    </div>
+</nav>
+
+<div class="login-page mt-3">
+    <div class="container">
+        <div class="form-box" style="box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+                            aria-controls="signin-2" aria-selected="true">Đăng ký</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <div class="form-group">
+                            <label for="register-email-2">Họ tên *</label>
+                            <input type="email" class="form-control" name="khachanhName" [(ngModel)]="khachhang.hoTen"
+                                required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email-2">Email *</label>
+                            <input type="email" class="form-control" name="khachanhEmail" [(ngModel)]="khachhang.email"
+                                required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email-2">Số điện thoại *</label>
+                            <input type="email" class="form-control" name="khachanhPhone"
+                                [(ngModel)]="khachhang.soDienThoai" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password-2">Mật khẩu *</label>
+                            <div class="password-container">
+                                <input [type]="passwordTypes" class="form-control" name="khachhangPass"
+                                    [(ngModel)]="khachhang.passWord" required autocomplete="off">
+                                <span class="password-toggle" (click)="togglePasswordVisibilitys()">
+                                    <i class="pi"
+                                        [ngClass]="{'pi-eye': passwordTypes === 'password', 'pi-eye-slash': passwordTypes === 'text'}"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button type="submit" (click)="signUp()" class="btn btn-outline-primary-2">
+                                <span>Đăng ký</span>
+                                <i class="icon-long-arrow-right"></i>
+                            </button>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                <label class="custom-control-label" for="register-policy-2">Tôi đồng ý với <a
+                                        href="#">Chính sách bảo mật</a> *</label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p>Bạn đã có tài khoản? <a [routerLink]="['/account']">Đăng nhập</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>

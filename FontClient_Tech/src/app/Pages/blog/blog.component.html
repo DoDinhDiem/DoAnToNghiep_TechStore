@@ -19,17 +19,17 @@
                                 <img src="{{baseUrl}}/Uploads/News/{{item.anhTinTuc}}" style="height: 150px !important"
                                     alt="image desc">
                             </a>
-                        </figure><!-- End .entry-media -->
+                        </figure>
 
                         <div class="entry-body">
                             <div class="entry-meta">
                                 <a href="javascript:void(0)">{{item.createdAt | date: 'dd/mm/yyyy h:mm a'}}</a>
-                            </div><!-- End .entry-meta -->
+                            </div>
 
                             <h2 class="entry-title">
                                 <a [routerLink]="['/blog-detail', item.id]">{{item.tieuDe}}</a>
                             </h2>
-                        </div><!-- End .entry-body -->
+                        </div>
                     </article>
                 </div>
             </div>

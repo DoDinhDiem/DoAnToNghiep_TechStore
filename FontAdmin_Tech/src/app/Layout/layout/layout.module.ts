@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // Import PrimeNG modules
@@ -145,6 +145,15 @@ import { RoleModule } from 'src/app/Pages/role/role.module'
 import { SlideModule } from 'src/app/Pages/slide/slide.module'
 import { AboutModule } from 'src/app/Pages/about/about.module'
 import { ContactModule } from 'src/app/Pages/contact/contact.module'
+import { NgToastModule } from 'ng-angular-popup'
+import { AccountComponent } from 'src/app/Pages/account/account.component'
+import { AccountModule } from 'src/app/Pages/account/account.module'
+import { FeedBackComponent } from 'src/app/Pages/feed-back/feed-back.component'
+import { FeedBackModule } from 'src/app/Pages/feed-back/feed-back.module'
+import { ResetPassComponent } from 'src/app/Pages/reset-pass/reset-pass.component'
+import { ResetPassModule } from 'src/app/Pages/reset-pass/reset-pass.module'
+import { ChangePassComponent } from 'src/app/Pages/change-pass/change-pass.component'
+import { ChangePassModule } from 'src/app/Pages/change-pass/change-pass.module'
 
 @NgModule({
     declarations: [
@@ -172,7 +181,11 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         SlideComponent,
         AboutComponent,
         ContactComponent,
-        SafePipe
+        SafePipe,
+        AccountComponent,
+        FeedBackComponent,
+        ResetPassComponent,
+        ChangePassComponent
     ],
     imports: [
         LoaiSanPhamModule,
@@ -195,6 +208,10 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         SlideModule,
         AboutModule,
         ContactModule,
+        AccountModule,
+        FeedBackModule,
+        ResetPassModule,
+        ChangePassModule,
         //PrimeNG
         BrowserModule,
         AvatarModule,
@@ -291,7 +308,8 @@ import { ContactModule } from 'src/app/Pages/contact/contact.module'
         TreeTableModule,
         AnimateModule,
         CardModule,
-        RouterModule
+        RouterModule,
+        NgToastModule
     ]
 })
 export class LayoutModule {}

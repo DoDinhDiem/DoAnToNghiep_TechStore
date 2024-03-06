@@ -19,7 +19,7 @@ export class UserStoreService {
     }
 
     public getEmailFromStore() {
-        return this.fullName$.asObservable()
+        return this.email$.asObservable()
     }
 
     public setEmailForStore(email: string) {

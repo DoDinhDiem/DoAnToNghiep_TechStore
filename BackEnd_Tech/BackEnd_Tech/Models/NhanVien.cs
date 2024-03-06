@@ -29,6 +29,7 @@ namespace BackEnd_Tech.Models
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
+        public bool? PassTrue { get; set; }
 
         public virtual ChucVu? ChucVu { get; set; }
         public virtual Role? Role { get; set; }

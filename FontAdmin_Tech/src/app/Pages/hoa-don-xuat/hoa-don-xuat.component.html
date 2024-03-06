@@ -38,24 +38,31 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="products-datatable_length">
-                                    <label class="form-label">Hiển thị <select
-                                            class="form-select form-select-sm ms-1 me-1">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="-1">All</option>
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                <!-- <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
                                             type="search" class="form-control form-control-sm" placeholder=""
-                                            aria-controls="products-datatable"></label></div>
+                                            aria-controls="products-datatable"></label></div> -->
                             </div>
                         </div>
                         <div class="mb-1"></div>
-                        <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                        <div *ngIf="showSkeleton">
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                        </div>
+
+                        <table *ngIf="!showSkeleton" class="table table-centered w-100 dt-responsive nowrap"
+                            id="products-datatable">
 
                             <thead class="table-light">
                                 <tr>
@@ -64,31 +71,41 @@
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Địa chỉ</th>
                                     <th class="text-center">Ghi chú</th>
-                                    <th class="text-center">Khách hàng</th>
                                     <th class="text-center">Giảm giá</th>
                                     <th class="text-center">Tổng tiền</th>
                                     <th class="text-center">Trạng thái đơn hàng</th>
                                     <th class="text-center">Trạng thái thanh toán</th>
+                                    <th class="text-center">Phương thức thanh toán</th>
                                     <th class="text-center" style="width: 150px">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">Đỗ Đình Diệm</td>
-                                    <td class="text-center">0796498503</td>
-                                    <td class="text-center">dodinhdiem2802@gmail.com</td>
-                                    <td class="text-center">Hàm Hy - Cộng Lạc - Tứ Kỳ - Hải Dương</td>
-                                    <td class="text-center">Xóm Ái Quốc</td>
-                                    <td class="text-center">Hà Thu Thảo</td>
-                                    <td class="text-center">0 VNĐ</td>
-                                    <td class="text-center">10.000.000 VNĐ</td>
-                                    <td class="text-center">Chờ xác nhận</td>
-                                    <td class="text-center">Đã thanh toán</td>
+                                <tr *ngFor="let item of hoadonxuatList?.items">
+                                    <td class="text-center">{{item.hoTen}}</td>
+                                    <td class="text-center">{{item.soDienThoai}}</td>
+                                    <td class="text-center">{{item.email}}</td>
+                                    <td class="text-center">{{item.diaChi}}</td>
+                                    <td class="text-center">{{item.ghiChu}}</td>
+                                    <td class="text-center">{{item.giamGia}} VNĐ</td>
+                                    <td class="text-center">{{item.tongTien}} VNĐ</td>
+                                    <td class="text-center" [ngSwitch]="item.trangThaiDonHang">
+                                        <ng-template [ngSwitchCase]="0">Chờ xác nhận</ng-template>
+                                        <ng-template [ngSwitchCase]="1">Đã xác nhận</ng-template>
+                                        <ng-template [ngSwitchCase]="2">Đang vận chuyển</ng-template>
+                                        <ng-template [ngSwitchCase]="3">Đã giao hàng</ng-template>
+                                        <ng-template [ngSwitchCase]="4">Đã hủy</ng-template>
+                                    </td>
+
+                                    <td class="text-center" [ngSwitch]="item.trangThaiThanhToan">
+                                        <ng-template [ngSwitchCase]="true">Đã thanh toán</ng-template>
+                                        <ng-template [ngSwitchCase]="false">Chưa thanh toán</ng-template>
+                                    </td>
+                                    <td class="text-center">{{item.phuongThucGiaoDich}}</td>
                                     <td class="table-action text-center">
-                                        <a href="javascript:void(0);" class="action-icon" data-bs-toggle="modal"
-                                            data-bs-target="#full-width-modal"> <i class="mdi mdi-eye"></i></a>
-                                        <a (click)="editModal()" class="action-icon" data-bs-toggle="modal"
-                                            data-bs-target="#standard-modal">
+                                        <a href="javascript:void(0);" (click)="showDetail(item)" class="action-icon"
+                                            data-bs-toggle="modal" data-bs-target="#full-width-modal"> <i
+                                                class="mdi mdi-eye"></i></a>
+                                        <a (click)="editModal(item)" class="action-icon">
                                             <i class="mdi mdi-square-edit-outline"></i></a>
                                     </td>
                                 </tr>
@@ -98,27 +115,25 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="products-datatable_info" role="status"
-                                    aria-live="polite">Showing products 1 to 5 of 12</div>
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    hoadonxuatList?.totalItems }}</div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
                                     <ul class="pagination pagination-rounded">
-                                        <li class="paginate_button page-item previous disabled"
-                                            id="products-datatable_previous"><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="0" tabindex="0"
-                                                class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
-                                        <li class="paginate_button page-item active"><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="1" tabindex="0"
-                                                class="page-link">1</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="2" tabindex="0"
-                                                class="page-link">2</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="products-datatable" data-dt-idx="3" tabindex="0"
-                                                class="page-link">3</a></li>
-                                        <li class="paginate_button page-item next" id="products-datatable_next"><a
-                                                href="#" aria-controls="products-datatable" data-dt-idx="4" tabindex="0"
-                                                class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -136,20 +151,19 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="tenLoai" class="form-label">Trạng thái đơn hàng <a class="text-danger">(*)</a></label>
-                <select class="form-select" id="example-select">
-                    <option>Chờ xác nhận</option>
-                    <option>Đã xác nhận</option>
-                    <option>Đang vận chuyển</option>
-                    <option>Giao hàng thành công</option>
-                    <option>Hủy hàng</option>
-                    <option>Đã hoàn trả</option>
+                <select class="form-select" id="example-select" [(ngModel)]="hoadonxuat.trangThaiDonHang">
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Đã xác nhận</option>
+                    <option value="2">Đang vận chuyển</option>
+                    <option value="3">Giao thành công</option>
+                    <option value="4">Hủy hàng</option>
                 </select>
             </div>
             <div class="col-md-6"><label for="tenLoai" class="form-label">Trạng thái thanh toán <a
                         class="text-danger">(*)</a></label>
-                <select class="form-select" id="example-select">
-                    <option>Đã thanh toám</option>
-                    <option>Chưa thanh toán</option>
+                <select class="form-select" id="example-select" [(ngModel)]="hoadonxuat.trangThaiThanhToan">
+                    <option value="true">Đã thanh toám</option>
+                    <option value="false">Chưa thanh toán</option>
                 </select>
             </div>
         </div>
@@ -185,25 +199,24 @@
 
                                 <!-- Invoice Detail-->
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="float-end mt-3">
-                                            <p><b>Xin chào, Cooper Hobson</b></p>
-                                            <p class="text-muted font-16">Vui lòng tìm bên dưới bảng phân tích chi phí
-                                                cho công việc đã hoàn thành gần đây. Vui lòng thanh toán trong thời gian
-                                                sớm nhất có thể và đừng ngần ngại liên hệ với tôi nếu có bất kỳ câu hỏi
-                                                nào.</p>
-                                        </div>
-
-                                    </div><!-- end col -->
-                                    <div class="col-sm-4 offset-sm-2">
-                                        <div class="mt-3 float-sm-end">
-                                            <p class="font-16"><strong>Ngày đặt hàng: : </strong> &nbsp;&nbsp;&nbsp; Jan
-                                                17,
-                                                2018</p>
-                                            <p class="font-16"><strong>Tình trạng: </strong> <span
-                                                    class="float-end font-16">Đã thanhh toán</span></p>
-                                            <p class="font-16"><strong>Mã đơn hàng: </strong> <span
-                                                    class="float-end">#123456</span></p>
+                                    <!-- end col -->
+                                    <div class="col-sm-4 ">
+                                        <div class="mt-3">
+                                            <p class="font-16"><strong>Ngày đặt hàng:</strong>
+                                                <span class="font-16 mr-2">{{hoadonDetail?.createdAt | date:
+                                                    'dd/MM/yyyy'}}</span>
+                                            </p>
+                                            <p class="font-16"><strong>Tình trạng: </strong>
+                                                <span class="font-16 mr-2"
+                                                    [ngSwitch]="hoadonDetail?.trangThaiThanhToan">
+                                                    <ng-template [ngSwitchCase]="true">Đã thanh toán</ng-template>
+                                                    <ng-template [ngSwitchCase]="false">Chưa thanh
+                                                        toán</ng-template>
+                                                </span>
+                                            </p>
+                                            <p class="font-16"><strong>Mã đơn hàng: </strong>
+                                                <span class="mr-2">#{{hoadonDetail?.id}}</span>
+                                            </p>
                                         </div>
                                     </div><!-- end col -->
                                 </div>
@@ -211,30 +224,27 @@
 
                                 <div class="row mt-4">
                                     <div class="col-sm-4">
-                                        <h6 class="font-16">Địa chỉ</h6>
+                                        <h6 class="font-16">Người gửi</h6>
                                         <address>
-                                            TechStore<br>
-                                            795 Folsom Ave, Suite 600<br>
-                                            San Francisco, CA 94107<br>
-                                            <abbr>SĐT:</abbr> (123) 456-7890
+                                            Cửa hàng TechStore<br>
+                                            391 Hàm Hy, Cộng Lạc<br>
+                                            Tứ Kỳ, Hải Dương<br>
+                                            <abbr>SĐT:</abbr> (+84) 796498503
                                         </address>
                                     </div> <!-- end col-->
 
                                     <div class="col-sm-4">
                                         <h6 class="font-16">Địa chỉ giao hàng</h6>
                                         <address>
-                                            Cooper Hobson<br>
-                                            795 Folsom Ave, Suite 600<br>
-                                            San Francisco, CA 94107<br>
-                                            <abbr>SĐT:</abbr> (123) 456-7890
+                                            {{hoadonDetail?.hoTen}}<br>
+                                            {{hoadonDetail?.diaChi}}<br>
+                                            <abbr>Ghi chú: </abbr>{{hoadonDetail?.ghiChu}}<br>
+                                            <abbr>SĐT:</abbr> (+84) {{hoadonDetail?.soDienThoai}}
                                         </address>
                                     </div> <!-- end col-->
 
                                     <div class="col-sm-4">
-                                        <div class="text-sm-end">
-                                            <img src="assets/Admin/images/barcode.png" alt="barcode-image"
-                                                class="img-fluid me-2">
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -246,46 +256,22 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Sản phẩm</th>
-                                                        <th>Số lượng</th>
-                                                        <th>Đơn giá</th>
+                                                        <th class="text-center">Sản phẩm</th>
+                                                        <th class="text-center">Số lượng</th>
+                                                        <th class="text-center">Đơn giá</th>
                                                         <th class="text-end">Tổng</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <b>Laptop</b> <br>
-                                                            Brand Model VGN-TXN27N/B
-                                                            11.1" Notebook PC
+                                                    <tr *ngFor="let item of chiTietHoaDon; let i = index">
+                                                        <td>{{i+1}}</td>
+                                                        <td class="text-center">
+                                                            {{item.tenSP}}
                                                         </td>
-                                                        <td>1</td>
-                                                        <td>$1799.00</td>
-                                                        <td class="text-end">$1799.00</td>
+                                                        <td class="text-center">{{item.soLuong}}</td>
+                                                        <td class="text-center">{{item.giaBan | number}}</td>
+                                                        <td class="text-end">{{item.thanhTien | number}}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <b>Warranty</b> <br>
-                                                            Two Year Extended Warranty -
-                                                            Parts and Labor
-                                                        </td>
-                                                        <td>3</td>
-                                                        <td>$499.00</td>
-                                                        <td class="text-end">$1497.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>
-                                                            <b>LED</b> <br>
-                                                            80cm (32) HD Ready LED TV
-                                                        </td>
-                                                        <td>2</td>
-                                                        <td>$412.00</td>
-                                                        <td class="text-end">$824.00</td>
-                                                    </tr>
-
                                                 </tbody>
                                             </table>
                                         </div> <!-- end table-responsive-->
@@ -308,9 +294,10 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="float-end mt-3 mt-sm-0">
-                                            <p><b>Tổng phụ:</b> <span class="float-end">$4120.00</span></p>
-                                            <p><b>VAT (12.5):</b> <span class="float-end">$515.00</span></p>
-                                            <h3>$4635.00 USD</h3>
+                                            <p><b>Tổng phụ:</b> <span class="float-end">{{hoadonDetail?.tongTien |
+                                                    number}}</span></p>
+                                            <!-- <p><b>VAT (12.5):</b> <span class="float-end">$515.00</span></p> -->
+                                            <h3>{{hoadonDetail?.tongTien | number}} VNĐ</h3>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>

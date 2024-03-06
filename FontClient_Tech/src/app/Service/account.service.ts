@@ -22,6 +22,18 @@ export class AccountService {
         return this.http.post<any>(baseUrl + 'api/LoginClient/Signin', khachhang)
     }
 
+    SendEmailOTP(email: any) {
+        return this.http.post<any>(baseUrl + 'api/LoginClient/SendEmail/' + email, null)
+    }
+
+    TrangThai(email: any, otp: any) {
+        return this.http.put<any>(baseUrl + `api/LoginClient/TrangThai/${email}/${otp}`, null)
+    }
+
+    ResetPass(email: any) {
+        return this.http.post<any>(baseUrl + `api/LoginClient/ResetPass/${email}`, null)
+    }
+
     signOut() {
         localStorage.clear()
         this.router.navigate(['/'])

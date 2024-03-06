@@ -15,12 +15,11 @@
                                     Xin chào<span class="ml-2" style="color: #fff;">{{ fullName }}</span>
                                 </a>
                                 <ul class="profile-main" *ngIf="isProfileMenuOpen" (click)="stopPropagation($event)">
-                                    <li><a href="javascript:void(0)"><img src="assets/Profile/historyMember.svg"
-                                                alt="">Lịch sử mua hàng</a></li>
-                                    <li><a href="javascript:void(0)"><img src="assets/Profile/rank.svg" alt=""> Hạng
-                                            thành viên</a></li>
-                                    <li><a href="javascript:void(0)"><img src="assets/Profile/accountMember.svg"
-                                                alt="">Thông tin tài khoản</a></li>
+                                    <li><a href="javascript:void(0)" [routerLink]="['/profile/history']"><img
+                                                src="assets/Profile/historyMember.svg" alt="">Lịch sử mua hàng</a></li>
+                                    <li><a href="javascript:void(0)" [routerLink]="['/profile']"><img
+                                                src="assets/Profile/accountMember.svg" alt="">Thông tin tài khoản</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="header-right-after">

@@ -123,15 +123,14 @@
                         <li>
                             <a [routerLink]="['/contact']" [ngClass]="{'active': isSystemCollapsed}">Contact</a>
                         </li>
+                        <li>
+                            <a [routerLink]="['/feedback']" [ngClass]="{'active': isSystemCollapsed}">FeedBack</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/role']" [ngClass]="{'active': isSystemCollapsed}">Phân quyền</a>
+                        </li>
                     </ul>
                 </div>
-            </li>
-            <li class="side-nav-item">
-                <a class="side-nav-link" (click)="toggleRoleCollapse()" routerLink="/role"
-                    [ngClass]="{'active-link': isRoleCollapsed}">
-                    <i class="uil-home-alt"></i>
-                    <span>Phân quyền </span>
-                </a>
             </li>
         </ul>
         <div class="clearfix"></div>

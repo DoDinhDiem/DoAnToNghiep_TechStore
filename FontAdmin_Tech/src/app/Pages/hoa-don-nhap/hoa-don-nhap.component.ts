@@ -88,7 +88,6 @@ export class HoaDonNhapComponent {
     editModal(hoadonnhap: IHoaDonNhap) {
         this.hoaDonNhapService.getById(hoadonnhap.id).subscribe((data) => {
             this.hoadonnhap = data.hoaDon
-            console.log(this.hoadonnhap)
             this.visible_edit = true
             this.Save = 'Cập nhập'
         })
@@ -144,10 +143,6 @@ export class HoaDonNhapComponent {
             this.hoadonDetail = data.hoaDon
             this.nhaCungCap = data.nhaCC
             this.chiTietHoaDon = data.chiTiet
-
-            console.log(this.hoadonDetail)
-            console.log(this.nhaCungCap)
-            console.log(this.chiTietHoaDon)
         })
     }
     /*

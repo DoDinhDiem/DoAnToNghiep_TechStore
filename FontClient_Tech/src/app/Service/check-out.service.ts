@@ -20,7 +20,7 @@ export class CheckOutService {
     }
 
     updatetKhachHang(khachhang: any) {
-        return this.http.put<any>(baseUrl + 'api/Client/Update_KhachHang/', khachhang)
+        return this.http.put<any>(baseUrl + 'api/Client/Update_KhachHang', khachhang)
     }
 
     createHoaDonBan(HoaDonBan: any): Observable<any> {

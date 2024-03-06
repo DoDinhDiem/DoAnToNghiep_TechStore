@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CGC7pDRe+UAipSJq+D1O2yVHWQYZPuOXUmlOVxOvavc=",
+  "Hash": "rIcUCxB3ugOU3zpxg/rb2A83x/AeTFF+k/YwOtCnNOs=",
   "Source": "BackEnd_Tech",
   "BasePath": "_content/BackEnd_Tech",
   "Mode": "Default",
@@ -946,6 +946,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Staffs\\products_1708185111276.webp"
+    },
+    {
+      "Identity": "D:\\DoAnTotNghiep\\BackEnd_Tech\\BackEnd_Tech\\wwwroot\\Uploads\\Staffs\\products_1709311112190.png",
+      "SourceId": "BackEnd_Tech",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DoAnTotNghiep\\BackEnd_Tech\\BackEnd_Tech\\wwwroot\\",
+      "BasePath": "_content/BackEnd_Tech",
+      "RelativePath": "Uploads/Staffs/products_1709311112190.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Staffs\\products_1709311112190.png"
+    },
+    {
+      "Identity": "D:\\DoAnTotNghiep\\BackEnd_Tech\\BackEnd_Tech\\wwwroot\\Uploads\\Staffs\\products_1709368937067.png",
+      "SourceId": "BackEnd_Tech",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DoAnTotNghiep\\BackEnd_Tech\\BackEnd_Tech\\wwwroot\\",
+      "BasePath": "_content/BackEnd_Tech",
+      "RelativePath": "Uploads/Staffs/products_1709368937067.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Staffs\\products_1709368937067.png"
     }
   ]
 }

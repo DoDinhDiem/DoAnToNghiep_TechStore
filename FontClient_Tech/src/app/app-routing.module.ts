@@ -45,16 +45,12 @@ const routes: Routes = [
                         loadChildren: () => import('./Pages/profile/profile-history/profile-history.module').then((m) => m.ProfileHistoryModule)
                     },
                     {
-                        path: 'rank',
-                        loadChildren: () => import('./Pages/profile/profile-rank/profile-rank.module').then((m) => m.ProfileRankModule)
-                    },
-                    {
-                        path: 'money',
-                        loadChildren: () => import('./Pages/profile/topping-fundas/topping-fundas.module').then((m) => m.ToppingFundasModule)
-                    },
-                    {
                         path: 'account',
                         loadChildren: () => import('./Pages/profile/profile-account/profile-account.module').then((m) => m.ProfileAccountModule)
+                    },
+                    {
+                        path: 'change-password',
+                        loadChildren: () => import('./Pages/profile/change-password/change-password.module').then((m) => m.ChangePasswordModule)
                     }
                 ]
             },
@@ -65,6 +61,18 @@ const routes: Routes = [
             {
                 path: 'account',
                 loadChildren: () => import('./Pages/account/account.module').then((m) => m.AccountModule)
+            },
+            {
+                path: 'signup',
+                loadChildren: () => import('./Pages/sign-up/sign-up.module').then((m) => m.SignUpModule)
+            },
+            {
+                path: 'confinmail',
+                loadChildren: () => import('./Pages/confim-mail/confim-mail.module').then((m) => m.ConfimMailModule)
+            },
+            {
+                path: 'forgotpass',
+                loadChildren: () => import('./Pages/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule)
             },
             {
                 path: 'about',

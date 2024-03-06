@@ -129,6 +129,18 @@ import { NgToastModule } from 'ng-angular-popup'
 import { SafePipe } from 'src/app/Pages/contact/safe.pipe'
 import { TokenInterceptor } from 'src/app/Interceptors/Token.interceptor'
 import { SuccessModule } from 'src/app/Pages/success/success.module'
+import { SignUpModule } from 'src/app/Pages/sign-up/sign-up.module'
+import { SignUpComponent } from 'src/app/Pages/sign-up/sign-up.component'
+import { ConfimMailModule } from 'src/app/Pages/confim-mail/confim-mail.module'
+import { ConfimMailComponent } from 'src/app/Pages/confim-mail/confim-mail.component'
+import { ForgotPasswordComponent } from 'src/app/Pages/forgot-password/forgot-password.component'
+import { ForgotPasswordModule } from 'src/app/Pages/forgot-password/forgot-password.module'
+import { ProfileHomeComponent } from 'src/app/Pages/profile/profile-home/profile-home.component'
+import { ProfileHistoryComponent } from 'src/app/Pages/profile/profile-history/profile-history.component'
+import { ProfileRankComponent } from 'src/app/Pages/profile/profile-rank/profile-rank.component'
+import { ProfileAccountComponent } from 'src/app/Pages/profile/profile-account/profile-account.component'
+import { ToppingFundasComponent } from 'src/app/Pages/profile/topping-fundas/topping-fundas.component'
+import { ChangePasswordComponent } from 'src/app/Pages/profile/change-password/change-password.component'
 
 @NgModule({
     declarations: [
@@ -148,7 +160,16 @@ import { SuccessModule } from 'src/app/Pages/success/success.module'
         ContactComponent,
         SearchComponent,
         SafePipe,
-        SuccessComponent
+        SuccessComponent,
+        SignUpComponent,
+        ConfimMailComponent,
+        ForgotPasswordComponent,
+        ProfileHomeComponent,
+        ProfileHistoryComponent,
+        ProfileRankComponent,
+        ProfileAccountComponent,
+        ToppingFundasComponent,
+        ChangePasswordComponent
     ],
     imports: [
         HomeModule,
@@ -166,6 +187,9 @@ import { SuccessModule } from 'src/app/Pages/success/success.module'
         SearchModule,
         NgToastModule,
         SuccessModule,
+        SignUpModule,
+        ConfimMailModule,
+        ForgotPasswordModule,
         //PrimeNG
         AvatarModule,
         AvatarGroupModule,

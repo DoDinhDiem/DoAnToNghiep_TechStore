@@ -1,0 +1,26 @@
+.authentication-bg {
+    visibility: visible;
+    background: #fff !important;
+    background-image: url(/assets/Admin/images/bg-pattern-light.svg) !important;
+    background-size: cover;
+    background-position: center !important;
+    padding-bottom: 2.3rem;
+}
+.card {
+    background-color: #fff !important;
+}
+.form-control {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+.input-group-text {
+    background-color: #eef2f7;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+}
+.form-control:focus {
+    color: #6c757d;
+}
+.form-control {
+    color: #6c757d;
+}

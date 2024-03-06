@@ -21,7 +21,20 @@ namespace BackEnd_Tech.Controllers
         {
             try
             {
-                var query = await _context.HoaDonXuats.FindAsync(id);
+                var query = await _context.HoaDonXuats.Where(a => a.Id == id)
+                                                       .Select(hd => new
+                                                       {
+                                                           hoaDons = hd,
+                                                           chiTiet = _context.ChiTietHoaDonXuats
+                                                                .Where(ct => ct.HoaDonXuatId == hd.Id)
+                                                                .Select(a => new
+                                                                {
+                                                                    tenSP = _context.SanPhams.Where(sp => sp.Id == a.SanPhamId).Select(sp => sp.TenSanPham).FirstOrDefault(),
+                                                                    soLuong = a.SoLuong,
+                                                                    giaBan = a.GiaBan,
+                                                                    thanhTien = a.ThanhTien
+                                                                }).ToList()
+                                                       }).FirstOrDefaultAsync();
 
                 if(query == null)
                 {
@@ -63,7 +76,7 @@ namespace BackEnd_Tech.Controllers
 
         [Route("Search_HoaDonXuat")]
         [HttpGet]
-        public async Task<IActionResult> SearchHoaDonXuat([FromQuery] DateTime? createdAt, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchHoaDonXuat([FromQuery]  int page = 1, int pageSize = 10)
         {
             try
             {
@@ -79,10 +92,10 @@ namespace BackEnd_Tech.Controllers
 
                 var query = _context.HoaDonXuats.AsQueryable();
 
-                if (createdAt.HasValue)
-                {
-                    query = query.Where(hd => hd.CreatedAt <= createdAt.Value.Date);
-                }
+                //if (createdAt.HasValue)
+                //{
+                //    query = query.Where(hd => hd.CreatedAt <= createdAt.Value.Date);
+                //}
 
                 var totalItems = await query.CountAsync();
 

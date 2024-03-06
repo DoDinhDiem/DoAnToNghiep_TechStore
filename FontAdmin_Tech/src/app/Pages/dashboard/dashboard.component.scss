@@ -1,0 +1,9 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+:host ::ng-deep {
+    canvas {
+        height: 400px !important;
+    }
+}

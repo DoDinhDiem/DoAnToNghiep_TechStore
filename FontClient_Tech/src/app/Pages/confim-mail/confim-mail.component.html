@@ -1,0 +1,48 @@
+<div class="mb-1"></div>
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container breadcrumb-container">
+        <div class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Xác thực OTP</li>
+        </div>
+    </div>
+</nav>
+
+<div class="login-page mt-3">
+    <div class="container">
+        <div class="form-box" style="box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="signin-tab-2">Vui lòng xác nhận OTP</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <div class="text-center">
+                            <p>Nhập mã OTP được gửi đến email của bạn để xác nhận.</p>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="accountEmail" [(ngModel)]="otp" required
+                                autocomplete="off" placeholder="Nhập mã OTP">
+                        </div>
+
+                        <div *ngIf="secondsToDday > 0; else timeUp">
+                            Thời gian còn lại: <span style="color: #D70018;">{{secondsToDday}}</span> s
+                        </div>
+                        <ng-template #timeUp>
+                            <p style="cursor: pointer;" (click)="resetOtp()">Gửi lại mã</p>
+                        </ng-template>
+
+                        <div class="form-footer">
+                            <button (click)="onSubmit()" type="submit" class="btn btn-outline-primary-2">
+                                <span>Xác nhận OTP</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>

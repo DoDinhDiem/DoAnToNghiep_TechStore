@@ -13,4 +13,6 @@ export interface IKhachHang {
     refreshToken?: string
     refreshTokenExpiryTime?: string
     ghiChu?: string
+    veryOtp?: number
+    VeryDate?: string
 }

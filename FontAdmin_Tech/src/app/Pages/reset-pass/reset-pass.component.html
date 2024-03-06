@@ -1,0 +1,48 @@
+<div class="authentication-bg">
+    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-4 col-lg-5">
+                    <div class="card">
+                        <div class="card-header pt-4 pb-4 text-center bg-primary">
+                            <a>
+                                <span><img src="assets/logo/logo-white-lg.png" alt="" height="26"></span>
+                            </a>
+                        </div>
+
+                        <div class="card-body p-4">
+
+                            <div class="text-center w-75 m-auto">
+                                <h4 class="text-dark-50 text-center mt-0 fw-bold">Đặt lại mật khẩu</h4>
+                                <p class="text-muted mb-4">Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một
+                                    email với hướng dẫn đặt lại mật khẩu của bạn.</p>
+                            </div>
+
+                            <form action="#">
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Email</label>
+                                    <input class="form-control" type="email" id="emailaddress"
+                                        [(ngModel)]="nhanvien.email" required="" placeholder="Nhập địa chỉ email"
+                                        autocomplete="off">
+                                </div>
+
+                                <div class="mb-0 text-center">
+                                    <button class="btn btn-primary" (click)="onSubmit()" type="submit">Đặt lại mật
+                                        khẩu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Quay lại <a href="javascript:void(0)" [routerLink]="['/login']"
+                                    class="text-muted ms-1"><b>Đăng nhập</b></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>

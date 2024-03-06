@@ -14,7 +14,6 @@ import { UserStoreService } from 'src/app/Service/user-store.service'
 })
 export class AccountComponent {
     passwordType: string = 'password'
-    passwordTypes: string = 'password'
 
     constructor(
         private accountService: AccountService,
@@ -27,10 +26,6 @@ export class AccountComponent {
 
     togglePasswordVisibility() {
         this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
-        this.changeDetectorRef.detectChanges()
-    }
-    togglePasswordVisibilitys() {
-        this.passwordTypes = this.passwordType === 'password' ? 'text' : 'password'
         this.changeDetectorRef.detectChanges()
     }
 
@@ -48,20 +43,14 @@ export class AccountComponent {
                 this.router.navigate(['/'])
             },
             error: (err) => {
-                this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: err?.error.message, life: 3000 })
-            }
-        })
-    }
-
-    khachhang: IKhachHang = {}
-    signUp() {
-        this.khachhang.trangThai = true
-        this.accountService.signUp(this.khachhang).subscribe({
-            next: (res) => {
-                this.khachhang = {}
-                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-            },
-            error: (err) => {
+                if (err.error.trangThai == false) {
+                    alert(err?.error.message)
+                    if (this.account.email !== undefined) {
+                        this.userStoreService.setEmailForStore(this.account.email)
+                        this.accountService.SendEmailOTP(this.account.email).subscribe({})
+                        this.router.navigate(['/confinmail'])
+                    }
+                }
                 this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: err?.error.message, life: 3000 })
             }
         })

@@ -15,6 +15,10 @@ export class NhanVienService {
         return this.http.get<any>(baseUrl + 'api/NhanVien/GetById_NhanVien/' + id)
     }
 
+    getByEmail(email: any): Observable<any> {
+        return this.http.get<any>(baseUrl + 'api/NhanVien/GetByEmail_NhanVien/' + email)
+    }
+
     //Thêm mới nhân viên
     create(NhanVien: INhanVien) {
         return this.http.post<any>(baseUrl + 'api/NhanVien/Create_NhanVien', NhanVien)

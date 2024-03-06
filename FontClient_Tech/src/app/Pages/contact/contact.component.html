@@ -64,31 +64,26 @@
 
                     <form action="#" class="contact-form mb-2">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="cname" class="sr-only">Tên</label>
-                                <input type="text" class="form-control" id="cname" placeholder="Tên *" required>
+                                <input type="text" class="form-control" name="hoten" [(ngModel)]="feedback.hoTen"
+                                    id="cname" placeholder="Tên *" readonly>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="cemail" class="sr-only">Email</label>
-                                <input type="email" class="form-control" id="cemail" placeholder="Email *" required>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label for="cphone" class="sr-only">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="cphone" placeholder="Số điện thoại">
+                                <input type="email" class="form-control" name="email" id="cemail"
+                                    [(ngModel)]="feedback.email" placeholder="Email *" readonly>
                             </div>
                         </div>
 
-                        <label for="csubject" class="sr-only">Chủ đề</label>
-                        <input type="text" class="form-control" id="csubject" placeholder="Chủ đề">
-
                         <label for="cmessage" class="sr-only">Tin nhắn</label>
-                        <textarea class="form-control" cols="30" rows="4" id="cmessage" required
-                            placeholder="Tin nhắn *"></textarea>
+                        <textarea class="form-control" [(ngModel)]="feedback.noiDung" name="noidung" cols="30" rows="4"
+                            id="cmessage" required placeholder="Tin nhắn *"></textarea>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                            <button (click)="onSubmit()" type="submit"
+                                class="btn btn-outline-primary-2 btn-minwidth-sm">
                                 <span>GỬI</span>
                                 <i class="icon-long-arrow-right"></i>
                             </button>
@@ -99,3 +94,4 @@
         </div>
     </div>
 </div>
+<p-toast></p-toast>

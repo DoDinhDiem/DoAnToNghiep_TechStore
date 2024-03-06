@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BackEnd_Tech.Controllers
 {
@@ -821,7 +822,6 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Authorize]
         [Route("Update_KhachHang")]
         [HttpPut]
         public async Task<IActionResult> UpdateKhachHang([FromBody] KhachHang model)
@@ -835,11 +835,9 @@ namespace BackEnd_Tech.Controllers
                 }
 
                 query.HoTen = model.HoTen;
-                query.SoDienThoai = model.SoDienThoai;
                 query.DiaChi = model.DiaChi;
                 query.GioiTinh = model.GioiTinh;
                 query.NgaySinh = model.NgaySinh;
-                query.TrangThai = model.TrangThai;
 
                 await _context.SaveChangesAsync();
 
@@ -904,6 +902,106 @@ namespace BackEnd_Tech.Controllers
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = "Thành công" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("Create_FeedBack")]
+        [HttpPost]
+        public async Task<IActionResult> CreateFeedBack([FromBody] FeedBack model)
+        {
+            try
+            {
+                _context.FeedBacks.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Phản hồi đã được lưu giữ" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("LichSuMuaHang")]
+        [HttpGet]
+        public async Task<IActionResult> SearchHoaDonXuat([FromQuery] string email, int? trangThai, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                if (page < 1)
+                {
+                    page = 1;
+                }
+
+                if (pageSize < 1)
+                {
+                    pageSize = 10;
+                }
+
+                var query = _context.HoaDonXuats.Where(x => x.Email == email);
+
+                if (trangThai.HasValue)
+                {
+                    switch (trangThai)
+                    {
+                        case 0:
+                            query = query.Where(x => x.TrangThaiDonHang == 0);
+                            break;
+                        case 1:
+                            query = query.Where(x => x.TrangThaiDonHang == 1);
+                            break;
+                        case 2:
+                            query = query.Where(x => x.TrangThaiDonHang == 2);
+                            break;
+                        case 3:
+                            query = query.Where(x => x.TrangThaiDonHang == 3);
+                            break;
+                        case 4:
+                            query = query.Where(x => x.TrangThaiDonHang == 4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                var totalItems = await query.CountAsync();
+
+                var totalAmount = await query.SumAsync(x => x.TongTien);
+
+                var hoaDonList = await query
+                    .OrderByDescending(x => x.CreatedAt) // Sắp xếp theo thời gian tạo, mới nhất đầu danh sách
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(hd => new
+                    {
+                        ChiTiet = _context.ChiTietHoaDonXuats
+                            .Where(ct => ct.HoaDonXuatId == hd.Id)
+                            .Select(a => new
+                            {
+                                TenSP = _context.SanPhams.Where(sp => sp.Id == a.SanPhamId).Select(sp => sp.TenSanPham).FirstOrDefault(),
+                                AnhSP = _context.AnhSanPhams.Where(sp => sp.SanPhamId == a.SanPhamId).Select(sp => sp.Image).FirstOrDefault(),
+                                SoLuong = a.SoLuong,
+                                GiaBan = a.GiaBan,
+                                ThanhTien = a.ThanhTien
+                            }).ToList()
+                    })
+                    .ToListAsync();
+
+                var response = new
+                {
+                    TotalItems = totalItems,
+                    TotalAmount = totalAmount,
+                    TotalPages = (int)Math.Ceiling((double)totalItems / pageSize),
+                    PageSize = pageSize,
+                    PageNumber = page,
+                    Items = hoaDonList
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {

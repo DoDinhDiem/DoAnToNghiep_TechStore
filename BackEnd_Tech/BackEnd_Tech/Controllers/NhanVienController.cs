@@ -36,12 +36,33 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
+
+        [Route("GetByEmail_NhanVien/{email}")]
+        [HttpGet]
+        public async Task<IActionResult> GetByEmailNhanVien(string email)
+        {
+            try
+            {
+                var query = await _context.NhanViens.Where(x => x.Email == email).FirstOrDefaultAsync();
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Nhân viên không tồn tại!" });
+                }
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Route("Create_NhanVien")]
         [HttpPost]
         public async Task<IActionResult> CreateNhanVien([FromBody] NhanVien model)
         {
             try
             {
+                model.PassTrue = false;
                 model.PassWord = PasswordHasher.HashPassword(model.PassWord);
                 _context.NhanViens.Add(model);
                 await _context.SaveChangesAsync();

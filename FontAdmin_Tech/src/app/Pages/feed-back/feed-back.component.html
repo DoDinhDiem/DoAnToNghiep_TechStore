@@ -1,0 +1,166 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </div>
+            <h4 class="page-title">{{title}}</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+
+                <div class="table-responsive">
+                    <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="products-datatable_length">
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div id="products-datatable_filter" class="dataTables_filter">
+                                    <!-- <label>Tìm kiếm:
+                                        <input type="search" class="form-control form-control-sm" placeholder="Tìm..."
+                                            [(ngModel)]="key" (input)="onKeywordInput()"></label> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1"></div>
+                        <div *ngIf="showSkeleton">
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                        </div>
+
+                        <table *ngIf="!showSkeleton" class="table table-centered w-100 dt-responsive nowrap"
+                            id="products-datatable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Họ tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Nội dung</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center" style="width: 150px">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of feedbackList?.items">
+                                    <td class="text-center">{{item.hoTen}}</td>
+                                    <td class="text-center">{{item.email}}</td>
+                                    <td class="text-center">{{item.noiDung}}</td>
+                                    <td class="text-center">
+                                        <p-inputSwitch [(ngModel)]="item.trangThai"
+                                            (ngModelChange)="trangThai(item)"></p-inputSwitch>
+                                    </td>
+                                    <td class="table-action text-center">
+                                        <a href="javascript:void(0)" (click)="editModal(item)"
+                                            class="action-icon font-16" data-bs-toggle="modal"
+                                            data-bs-target="#compose-modal"> <i class="mdi mdi-square-edit-outline"></i>
+                                            Trả lời</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="products-datatable_info" role="status"
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    feedbackList?.totalItems }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
+                                    <ul class="pagination pagination-rounded">
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="compose-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="compose-header-modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-primary">
+                <h4 class="modal-title" id="compose-header-modalLabel">Phản hồi FeedBack</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="p-1">
+                <div class="modal-body px-3 pt-3 pb-0">
+                    <form>
+                        <div class="mb-2">
+                            <label for="msgto" class="form-label">Đến</label>
+                            <input type="text" id="msgto" [(ngModel)]="emailRequest.to" name="to" class="form-control"
+                                placeholder="Example@gmail.com" readonly>
+                        </div>
+                        <div class="mb-2">
+                            <label for="mailsubject" class="form-label">Tiêu đề</label>
+                            <input type="text" id="mailsubject" [(ngModel)]="emailRequest.subject" name="mailsubject"
+                                class="form-control" placeholder="Tiêu đề" autocomplete="off">
+                        </div>
+                        <div class="write-mdg-box mb-3">
+                            <label class="form-label">Nội dung</label>
+                            <p-editor [(ngModel)]="emailRequest.content" name="content"
+                                [style]="{ height: '200px' }"></p-editor>
+                        </div>
+                    </form>
+                </div>
+                <div class="px-3 pb-3">
+                    <button (click)="onSubmit()" type="button" class="btn btn-primary" data-bs-dismiss="modal"><i
+                            class="mdi mdi-send me-1"></i> Gửi</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<p-toast></p-toast>

@@ -339,6 +339,8 @@ namespace BackEnd_Tech.Models
                     .HasColumnType("ntext")
                     .HasColumnName("noiDung");
 
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updated_at");
@@ -507,6 +509,10 @@ namespace BackEnd_Tech.Models
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updated_at");
+
+                entity.Property(e => e.VeryDate).HasColumnName("veryDate");
+
+                entity.Property(e => e.VeryOtp).HasColumnName("veryOtp");
             });
 
             modelBuilder.Entity<LichSuGiaoDich>(entity =>
@@ -523,7 +529,7 @@ namespace BackEnd_Tech.Models
                 entity.Property(e => e.KhachHangId).HasColumnName("khachHang_Id");
 
                 entity.Property(e => e.LoaiThe)
-                    .HasMaxLength(1)
+                    .HasMaxLength(255)
                     .HasColumnName("loaiThe");
 
                 entity.Property(e => e.NganHang)
@@ -635,12 +641,14 @@ namespace BackEnd_Tech.Models
                     .HasColumnType("date")
                     .HasColumnName("ngayVaoLam");
 
+                entity.Property(e => e.PassTrue).HasColumnName("passTrue");
+
                 entity.Property(e => e.PassWord)
                     .HasMaxLength(100)
                     .HasColumnName("passWord");
 
                 entity.Property(e => e.RefreshToken)
-                    .HasMaxLength(1)
+                    .HasMaxLength(255)
                     .HasColumnName("refreshToken");
 
                 entity.Property(e => e.RefreshTokenExpiryTime).HasColumnName("refreshTokenExpiryTime");

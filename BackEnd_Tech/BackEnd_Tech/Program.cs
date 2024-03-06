@@ -22,6 +22,9 @@ builder.Services.AddDbContext<TechStoreContext>(options =>
 });
 
 // Add services to the container.
+var mailSettings = builder.Configuration.GetSection("MailSettings");
+builder.Services.Configure<MailSettings>(mailSettings);
+
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
 

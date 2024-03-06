@@ -12,6 +12,7 @@ namespace BackEnd_Tech.Models
         public string? NoiDung { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public bool? TrangThai { get; set; }
 
         public virtual KhachHang? User { get; set; }
     }

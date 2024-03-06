@@ -13,6 +13,8 @@ using BackEnd_Tech.Models;
 using BackEnd_Tech.Models.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace BackEnd_Tech.Controllers
 {
@@ -22,10 +24,17 @@ namespace BackEnd_Tech.Controllers
     {
         private readonly TechStoreContext _context;
         private AppSettings _appSettings;
-        public LoginClientController(TechStoreContext context, IOptions<AppSettings> appSetting)
+        private readonly MailSettings _mailSettings;
+        private static Random random = new Random();
+        private const string LowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+        private const string UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Digits = "0123456789";
+        private const string SpecialCharacters = "!@#$%^&*()_+-=[]{}|;:'\"<>,.?/";
+        public LoginClientController(TechStoreContext context, IOptions<AppSettings> appSetting, IOptions<MailSettings> mailSettings)
         {
             _context = context;
             _appSettings = appSetting.Value;
+            _mailSettings = mailSettings.Value;
         }
 
         [Route("Signin")]
@@ -44,6 +53,13 @@ namespace BackEnd_Tech.Controllers
             if (!PasswordHasher.VerifyPassword(model.PassWord, query.PassWord))
             {
                 return BadRequest(new { Message = "Mật khẩu không đúng! Vui lòng nhập lại." });
+            }
+            if(query.TrangThai == false)
+            {
+                return BadRequest(new { 
+                    trangThai = false,
+                    Message = "Bạn vui lòng xác thực email để đăng nhập!" 
+                });
             }
 
             query.Token = CreateJwt(query);
@@ -84,6 +100,158 @@ namespace BackEnd_Tech.Controllers
                 Status = 200,
                 message = "Đăng ký thành công!"
             });
+        }
+
+        [Route("SendEmail/{email}")]
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string email)
+        {
+            try
+            {
+                var user = await _context.KhachHangs.FirstOrDefaultAsync(x => x.Email == email);
+
+                if (user == null)
+                {
+                    return NotFound("Không tìm thấy người dùng với địa chỉ email này.");
+                }
+                user.VeryOtp = TaoSoNgauNhien();
+                user.VeryDate = DateTime.Now.AddMinutes(1);
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail));
+                message.To.Add(new MailboxAddress("", email));
+                message.Subject = "Mã xác thực";
+                message.Body = new TextPart("html")
+                {
+                    Text = $"<p style='font-size: 18px'>Mã OTP của bạn là: <strong>{user.VeryOtp}</strong></p>"
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(_mailSettings.Host, _mailSettings.Port, false);
+                    client.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                    await client.SendAsync(message);
+                    await client.DisconnectAsync(true);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Email đã được gửi thành công" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+        }
+
+        [Route("ResetPass/{email}")]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassWork(string email)
+        {
+            try
+            {
+                var user = await _context.KhachHangs.FirstOrDefaultAsync(x => x.Email == email);
+
+                if (user == null)
+                {
+                    return NotFound("Không tìm thấy người dùng với địa chỉ email này.");
+                }
+
+                // Gửi email với mã xác thực
+                var pass = GenerateRandomPassword();
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail));
+                message.To.Add(new MailboxAddress("", email));
+                message.Subject = "Quên mật khẩu";
+                message.Body = new TextPart("html")
+                {
+                    Text = $"<p style='font-size: 18px'>Mật khẩu mới của bạn là: <strong>{pass}</strong></p>"
+                };
+
+                user.PassWord = PasswordHasher.HashPassword(pass);
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(_mailSettings.Host, _mailSettings.Port, false);
+                    client.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                    await client.SendAsync(message);
+                    await client.DisconnectAsync(true);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Mật khẩu đã đã được gửi vào email" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex.Message}");
+            }
+        }
+
+        [Route("TrangThai/{email}/{otp}")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateTrangThai(string email, int otp)
+        {
+            try
+            {
+                var query = await _context.KhachHangs
+                                          .Where(x =>  x.Email == email && x.VeryOtp == otp) 
+                                          .FirstOrDefaultAsync();
+                if(query == null)
+                {
+                    return NotFound(new { message = "Tài khoản không tồn tại!" });
+                }
+                if(query.VeryDate < DateTime.Now)
+                {
+                    return NotFound(new { message = "Mã otp đã hết hạn! Vui lòng gửi lại" });
+                }
+                query.TrangThai = true; 
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Xác thực email thành công!" });
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("ChangePassWord")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var user = await _context.KhachHangs.FirstOrDefaultAsync(x => x.Email == model.Email);
+                if (user == null)
+                {
+                    return NotFound(new { Message = "Tài khoản không tồn tại! Vui lòng nhập lại." });
+                }
+
+                if (!PasswordHasher.VerifyPassword(model.CurrentPassword, user.PassWord))
+                {
+                    return BadRequest(new { Message = "Mật khẩu hiện tại không đúng! Vui lòng nhập lại." });
+                }
+
+                var passMessage = CheckPasswordStrength(model.NewPassword);
+                if (!string.IsNullOrEmpty(passMessage))
+                {
+                    return BadRequest(new { Message = passMessage });
+                }
+
+                user.PassWord = PasswordHasher.HashPassword(model.NewPassword);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { Message = "Đổi mật khẩu thành công!" });
+            }
+            catch (Exception ex)
+            {
+                // It's generally a bad idea to expose detailed exception information like this in production
+                return BadRequest(new { Message = ex.Message });
+            }
         }
 
         private Task<bool> CheckEmailExistAsync(string? email)
@@ -180,6 +348,50 @@ namespace BackEnd_Tech.Controllers
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken,
             });
+        }
+
+        private string GenerateRandomPassword()
+        {
+            string password = "";
+
+            password += UppercaseLetters[random.Next(UppercaseLetters.Length)];
+
+            for (int i = 0; i < 7; i++)
+            {
+                password += GetRandomCharacter();
+            }
+
+            password += SpecialCharacters[random.Next(SpecialCharacters.Length)];
+
+            return Shuffle(password);
+        }
+
+        private char GetRandomCharacter()
+        {
+            string allCharacters = LowercaseLetters + Digits;
+            return allCharacters[random.Next(allCharacters.Length)];
+        }
+
+        private string Shuffle(string str)
+        {
+            char[] array = str.ToCharArray();
+            int n = array.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                char value = array[k];
+                array[k] = array[n];
+                array[n] = value;
+            }
+            return new string(array);
+        }
+
+        private int TaoSoNgauNhien()
+        {
+            Random rand = new Random();
+            int soNgauNhien = rand.Next(100000, 999999);
+            return soNgauNhien;
         }
     }
 }

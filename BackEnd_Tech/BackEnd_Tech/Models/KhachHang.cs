@@ -28,6 +28,8 @@ namespace BackEnd_Tech.Models
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
+        public int? VeryOtp { get; set; }
+        public DateTime? VeryDate { get; set; }
 
         public virtual ICollection<BinhLuanTinTuc> BinhLuanTinTucs { get; set; }
         public virtual ICollection<FeedBack> FeedBacks { get; set; }
