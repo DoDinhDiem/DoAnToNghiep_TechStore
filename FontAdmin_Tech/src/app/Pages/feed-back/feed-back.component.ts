@@ -59,12 +59,18 @@ export class FeedBackComponent {
     }
 
     onSubmit() {
-        this.feedBackService.SendEmail(this.emailRequest).subscribe((data) => {
-            if (this.feedback.trangThai == false) {
-                this.trangThai(this.feedback)
+        console.log(this.emailRequest)
+        this.feedBackService.SendEmail(this.emailRequest).subscribe({
+            next: (data) => {
+                if (this.feedback.trangThai == false) {
+                    this.trangThai(this.feedback)
+                }
+                this.emailRequest = {}
+                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: data.message })
+            },
+            error: (err) => {
+                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Lỗi' })
             }
-            this.emailRequest = {}
-            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: data.message })
         })
     }
 

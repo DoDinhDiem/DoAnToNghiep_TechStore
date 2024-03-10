@@ -25,7 +25,7 @@
 
             <li class="side-nav-item">
                 <a (click)="toggleProductCollapse()" class="side-nav-link">
-                    <i class="uil-store"></i>
+                    <i class="mdi mdi-ballot-outline"></i>
                     <span> Sản phẩm </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -46,7 +46,7 @@
 
             <li class="side-nav-item">
                 <a class="side-nav-link" (click)="toggleNewsCollapse()">
-                    <i class="uil-store"></i>
+                    <i class="mdi mdi-newspaper"></i>
                     <span> Tin tức </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -64,7 +64,7 @@
 
             <li class="side-nav-item">
                 <a class="side-nav-link" (click)="toggleInvoiceCollapse()">
-                    <i class="uil-store"></i>
+                    <i class="uil-chart"></i>
                     <span> Hóa đơn </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -86,9 +86,9 @@
                 </div>
             </li>
 
-            <li class="side-nav-item">
+            <li class="side-nav-item" *ngIf="role=='Role_Admin'">
                 <a class="side-nav-link" (click)="toggleManKindCollapse()">
-                    <i class="uil-store"></i>
+                    <i class=" uil-users-alt"></i>
                     <span> Con người </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -106,14 +106,17 @@
                     </ul>
                 </div>
             </li>
-            <li class="side-nav-item">
-                <a class="side-nav-link" (click)="toggleSystemCollapse()">
-                    <i class="uil-store"></i>
+            <li class="side-nav-item" *ngIf="role=='Role_Admin'">
+                <a class=" side-nav-link" (click)="toggleSystemCollapse()">
+                    <i class="dripicons-briefcase"></i>
                     <span> Hệ thống </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" [ngClass]="{'show': isSystemCollapsed}" id="sidebarEcommerceNews">
                     <ul class="side-nav-second-level">
+                        <li>
+                            <a [routerLink]="['/magiamgia']" [ngClass]="{'active': isSystemCollapsed}">Mã giảm giá</a>
+                        </li>
                         <li>
                             <a [routerLink]="['/slide']" [ngClass]="{'active': isSystemCollapsed}">Slide</a>
                         </li>

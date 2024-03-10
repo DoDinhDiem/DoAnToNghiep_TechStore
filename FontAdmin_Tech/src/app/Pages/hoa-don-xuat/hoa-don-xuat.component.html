@@ -19,10 +19,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="row mb-2">
+                <!-- <div class="row mb-2">
                     <div class="col-sm-4">
-                        <!-- <a (click)="showDialog()" class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i>
-                            Thêm mới</a> -->
+                        <a (click)="showDialog()" class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i>
+                            Thêm mới</a>
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
@@ -30,8 +30,7 @@
                             <button type="button" class="btn btn-light mb-2">Xuất</button>
                         </div>
                     </div>
-                    <!-- end col -->
-                </div>
+                </div> -->
 
                 <div class="table-responsive">
                     <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -214,6 +213,9 @@
                                                         toán</ng-template>
                                                 </span>
                                             </p>
+                                            <p class="font-16"><strong>Phương thức thanh toán: </strong>
+                                                <span class="font-16 mr-2">{{hoadonDetail?.phuongThucGiaoDich}}</span>
+                                            </p>
                                             <p class="font-16"><strong>Mã đơn hàng: </strong>
                                                 <span class="mr-2">#{{hoadonDetail?.id}}</span>
                                             </p>
@@ -319,3 +321,4 @@
         </div>
     </div>
 </div>
+<p-toast></p-toast>

@@ -47,13 +47,18 @@ export class TinTucService {
     }
 
     //Upload ảnh
-    uploadFiles(files: File[]): Observable<any> {
+    // uploadFiles(files: File[]): Observable<any> {
+    //     const formData = new FormData()
+
+    //     for (let i = 0; i < files.length; i++) {
+    //         formData.append('files', files[i])
+    //     }
+
+    //     return this.http.post(baseUrl + 'api/TinTuc/Upload_Image', formData)
+    // }
+    uploadFiles(file: File): Observable<any> {
         const formData = new FormData()
-
-        for (let i = 0; i < files.length; i++) {
-            formData.append('files', files[i])
-        }
-
+        formData.append('file', file, file.name)
         return this.http.post(baseUrl + 'api/TinTuc/Upload_Image', formData)
     }
 }

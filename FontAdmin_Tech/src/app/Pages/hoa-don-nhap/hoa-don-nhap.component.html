@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <!-- <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button> -->
                         </div>
                     </div>
                     <!-- end col -->
@@ -252,7 +252,7 @@
                                     <div class="col-sm-4 offset-sm-2">
                                         <div class="mt-3 float-sm-end">
                                             <p class="font-16"><strong>Ngày đặt hàng: : </strong> &nbsp;&nbsp;&nbsp;
-                                                {{hoadonDetail?.createdAt | date: 'dd/MM/yyyy'}}</p>
+                                                {{hoadonDetail?.createdAt | date: 'dd/MM/yyyy HH:mm'}}</p>
                                             <p class="font-16"><strong>Tình trạng: </strong> <span
                                                     class="float-end font-16">{{hoadonDetail?.trangThaiThanhToan}}</span>
                                             </p>

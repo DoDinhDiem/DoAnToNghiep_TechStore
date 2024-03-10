@@ -13646,7 +13646,7 @@ button:focus {
 }
 .cart-discount {
     flex: 0 0 50%;
-    max-width: 326px;
+    max-width: 500px;
 }
 .cart-discount .form-control {
     margin-right: 1.1rem;

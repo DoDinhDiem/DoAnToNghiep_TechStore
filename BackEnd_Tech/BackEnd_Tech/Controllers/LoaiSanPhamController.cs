@@ -1,4 +1,5 @@
 ﻿using BackEnd_Tech.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Role_Admin, Role_User")]
     public class LoaiSanPhamController : ControllerBase
     {
         private TechStoreContext _context;
@@ -144,6 +146,7 @@ namespace BackEnd_Tech.Controllers
 
                 _context.LoaiSanPhams.Remove(query);
                 await _context.SaveChangesAsync();
+
                 return Ok(new { message = "Xóa loại sản phẩm thành công!" });
             }
             catch (Exception ex)

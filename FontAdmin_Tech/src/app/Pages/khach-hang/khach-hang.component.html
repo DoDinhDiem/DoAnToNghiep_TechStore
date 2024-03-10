@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-light mb-2">Xuất
+                                Excel</button>
                         </div>
                     </div>
                     <!-- end col -->
@@ -77,12 +77,12 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of khachhangList?.items">
-                                    <th class="text-center">{{item.hoTen}}</th>
-                                    <th class="text-center">{{item.email}}</th>
-                                    <th class="text-center">{{item.soDienThoai}}</th>
-                                    <th class="text-center">{{item.diaChi}}</th>
-                                    <th class="text-center">{{item.gioiTinh}}</th>
-                                    <th class="text-center">{{item.ngaySinh | date: 'dd/MM/yyyy'}}</th>
+                                    <td class="text-center">{{item.hoTen}}</td>
+                                    <td class="text-center">{{item.email}}</td>
+                                    <td class="text-center">{{item.soDienThoai}}</td>
+                                    <td class="text-center">{{item.diaChi}}</td>
+                                    <td class="text-center">{{item.gioiTinh}}</td>
+                                    <td class="text-center">{{item.ngaySinh | date: 'dd/MM/yyyy'}}</td>
                                     <td class="text-center">
                                         <p-inputSwitch [(ngModel)]="item.trangThai"
                                             (ngModelChange)="trangThai(item)"></p-inputSwitch>

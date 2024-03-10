@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { IChucVu } from 'src/app/Models/chuc-vu'
 import { ChucVuService } from 'src/app/Service/chuc-vu.service'
+import * as moment from 'moment'
+import { ExcelService } from 'src/app/Service/excel.service'
 
 @Component({
     selector: 'app-chuc-vu',
@@ -24,7 +26,12 @@ export class ChucVuComponent {
     chucvuList: any
 
     //Gọi constructor
-    constructor(private chucVuService: ChucVuService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+        private chucVuService: ChucVuService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        private excelService: ExcelService
+    ) {}
 
     //Gọi chạy cùng component
     ngOnInit() {
@@ -48,8 +55,9 @@ export class ChucVuComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.chucVuService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.chucVuService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.chucvuList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -115,6 +123,22 @@ export class ChucVuComponent {
                 })
             }
         })
+    }
+
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = ['Mã chức vụ', 'Tên chức vụ', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [item.id, item.tenChucVu, item.trangThai, this.formatDate(item.createdAt), this.formatDate(item.updatedAt)])
+
+        this.excelService.exportAsExcelFile(data, headers, 'ChucVu')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
     }
 
     /*

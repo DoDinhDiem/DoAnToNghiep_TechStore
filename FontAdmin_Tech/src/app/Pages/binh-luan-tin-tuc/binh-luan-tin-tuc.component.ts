@@ -7,6 +7,7 @@ import { BinhLuanTinTucService } from 'src/app/Service/binh-luan-tin-tuc.service
 import { PhanHoiBinhLuanTinTucService } from 'src/app/Service/phan-hoi-binh-luan-tin-tuc.service'
 import { IPhanHoiBinhLuanTinTuc } from 'src/app/Models/phan-hoi-binh-luan-tin-tuc'
 import * as moment from 'moment'
+import { AuthService } from 'src/app/Service/auth.service'
 
 @Component({
     selector: 'app-binh-luan-tin-tuc',
@@ -48,7 +49,8 @@ export class BinhLuanTinTucComponent implements OnInit {
         private binhLuanTinTucService: BinhLuanTinTucService,
         private route: ActivatedRoute,
         private messageService: MessageService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private auth: AuthService
     ) {}
 
     id!: any
@@ -111,7 +113,7 @@ export class BinhLuanTinTucComponent implements OnInit {
 
     onSubmit() {
         this.phanhoi.binhLuanId = Number(this.binhluanID)
-        this.phanhoi.nhanVienId = 4
+        this.phanhoi.nhanVienId = this.auth.getIdFromToken()
         this.phanhoi.trangThai = true
         this.phanHoiService.create(this.phanhoi).subscribe((res) => {
             this.LayAllPhanHoi(this.binhLuan.id)

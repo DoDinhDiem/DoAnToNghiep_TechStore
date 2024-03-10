@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { AuthService } from 'src/app/Service/auth.service'
 
 @Component({
     selector: 'app-menu',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core'
     styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
+    role: any
+    constructor(private auth: AuthService) {
+        this.role = this.auth.getRoleFromToken()
+    }
     isProductCollapsed: boolean = false
     isNewsCollapsed: boolean = false
     isInvoiceCollapsed: boolean = false

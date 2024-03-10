@@ -167,21 +167,6 @@
                             <label for="reply-message" class="sr-only">Bình luận</label>
                             <textarea name="reply-message" [(ngModel)]="comment.noiDung" id="reply-message" cols="30"
                                 rows="4" class="form-control" required placeholder="Bình luận *"></textarea>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="reply-name" class="sr-only">Họ tên</label>
-                                    <input type="text" class="form-control" [(ngModel)]="comment.hoTen" id="reply-name"
-                                        name="reply-name" required placeholder="Họ tên *">
-                                </div><!-- End .col-md-6 -->
-
-                                <div class="col-md-6">
-                                    <label for="reply-email" class="sr-only">Email</label>
-                                    <input type="email" class="form-control" [(ngModel)]="comment.email"
-                                        id="reply-email" name="reply-email" required placeholder="Email *">
-                                </div><!-- End .col-md-6 -->
-                            </div><!-- End .row -->
-
                             <button type="submit" (click)="saveComment()" class="btn btn-outline-primary-2">
                                 <span>Đăng</span>
                                 <i class="icon-long-arrow-right"></i>

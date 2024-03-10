@@ -37,7 +37,7 @@ export class HangSanPhamService {
 
     //Xóa 1 hãng sản phẩm where id
     delete(id: any): Observable<any> {
-        return this.http.delete<any>(baseUrl + 'HangSanPham/Delete_HangSanPham/' + id)
+        return this.http.delete<any>(baseUrl + 'api/HangSanPham/Delete_HangSanPham/' + id)
     }
 
     //Tìm kiếm & phân trang hãng sản phẩm

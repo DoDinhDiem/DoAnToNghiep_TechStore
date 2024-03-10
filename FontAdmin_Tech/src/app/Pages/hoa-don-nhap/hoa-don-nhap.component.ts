@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { MessageService } from 'primeng/api'
 import { IHoaDonNhap } from 'src/app/Models/hoa-don-nhap'
+import { AuthService } from 'src/app/Service/auth.service'
 import { HoaDonNhapService } from 'src/app/Service/hoa-don-nhap.service'
 import { NhaCungCapService } from 'src/app/Service/nha-cung-cap.service'
 import { SanPhamService } from 'src/app/Service/san-pham.service'
@@ -34,7 +35,8 @@ export class HoaDonNhapComponent {
         private hoaDonNhapService: HoaDonNhapService,
         private nhacungcapService: NhaCungCapService,
         private sanphamService: SanPhamService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private auth: AuthService
     ) {}
 
     //Gọi chạy cùng component
@@ -94,6 +96,7 @@ export class HoaDonNhapComponent {
     }
 
     onSubmit() {
+        this.hoadonnhap.userId = this.auth.getIdFromToken()
         this.hoadonnhap.chiTietHoaDonNhaps = []
         for (let i = 0; i < this.invoiceDetail.length; i++) {
             const order = this.invoiceDetail[i]
@@ -107,7 +110,6 @@ export class HoaDonNhapComponent {
             }
             this.hoadonnhap.chiTietHoaDonNhaps.push(chitiet)
         }
-        console.log()
         if (this.hoadonnhap.nhaCungCapId && this.hoadonnhap.id) {
             this.hoaDonNhapService.update(this.hoadonnhap).subscribe({
                 next: (res) => {

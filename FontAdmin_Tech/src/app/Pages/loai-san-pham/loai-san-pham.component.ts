@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { ILoaiSanPham } from 'src/app/Models/loai-san-pham'
+import { ExcelService } from 'src/app/Service/excel.service'
 import { LoaiSanPhamService } from 'src/app/Service/loai-san-pham.service'
-import { UserStoreService } from 'src/app/Service/user-store.service'
+import * as moment from 'moment'
 
 @Component({
     selector: 'app-loai-san-pham',
@@ -21,11 +22,16 @@ export class LoaiSanPhamComponent implements OnInit {
     Save = 'Lưu'
 
     //Khai báo biến gọi loại sản phẩm
-    loaisp!: ILoaiSanPham
+    loaisp: ILoaiSanPham
     loaispList: any
 
     //Gọi constructor
-    constructor(private loaiSanPhamService: LoaiSanPhamService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+        private loaiSanPhamService: LoaiSanPhamService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        private excelService: ExcelService
+    ) {}
 
     //Gọi chạy cùng component
     ngOnInit() {
@@ -35,6 +41,7 @@ export class LoaiSanPhamComponent implements OnInit {
     //Gọi mở dialog
     showDialog() {
         this.loaisp = {}
+        this.submitted = false
         this.visible = true
         this.Save = 'Lưu'
     }
@@ -42,17 +49,20 @@ export class LoaiSanPhamComponent implements OnInit {
     //Đóng dialog
     closeDialog() {
         this.visible = false
+        this.submitted = false
         this.loaisp = {}
     }
 
     id: any
 
+    loaiXlsx: any
     //Gọi load loại sản phẩm
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.loaiSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.loaiSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.loaispList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -74,7 +84,9 @@ export class LoaiSanPhamComponent implements OnInit {
         })
     }
 
+    submitted: boolean = false
     onSubmit() {
+        this.submitted = true
         if (this.loaisp.trangThai == undefined) {
             this.loaisp.trangThai = false
         }
@@ -103,6 +115,20 @@ export class LoaiSanPhamComponent implements OnInit {
             })
         }
     }
+    exportToExcel(): void {
+        const headers = ['Mã loại', 'Tên loại', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [item.id, item.tenLoai, item.trangThai, this.formatDate(item.createdAt), this.formatDate(item.updatedAt)])
+
+        this.excelService.exportAsExcelFile(data, headers, 'LoaiSanPham')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
 
     //Xóa 1 loại sản phẩm
     delete(loaisp: ILoaiSanPham) {
@@ -113,7 +139,6 @@ export class LoaiSanPhamComponent implements OnInit {
             accept: () => {
                 this.loaiSanPhamService.delete(loaisp.id).subscribe((res) => {
                     this.loadData()
-
                     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
                 })
             }

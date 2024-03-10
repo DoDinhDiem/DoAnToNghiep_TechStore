@@ -1,4 +1,5 @@
 ﻿using BackEnd_Tech.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,8 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Role_Admin, Role_User")]
+
     public class TinTucController : ControllerBase
     {
         private TechStoreContext _context;
@@ -30,12 +33,12 @@ namespace BackEnd_Tech.Controllers
                                               TinTuc = s,
                                               Image = _context.AnhTinTucs
                                                                     .Where(a => a.TinTucId == s.Id && a.TrangThai == true)
-                                                                    .Select(a => new { a.Image })
+                                                                    .Select(a =>  a.Image )
                                                                     .FirstOrDefault(),
-                                              AnhTinTuc = _context.AnhTinTucs
-                                                                    .Where(a => a.TinTucId == s.Id && a.TrangThai == false)
-                                                                    .Select(a => new { a.Image })
-                                                                    .ToList(),
+                                              //AnhTinTuc = _context.AnhTinTucs
+                                              //                      .Where(a => a.TinTucId == s.Id && a.TrangThai == false)
+                                              //                      .Select(a => new { a.Image })
+                                              //                      .ToList(),
                                               tenNguoiViet = _context.NhanViens.Where(us => us.Id == s.UserId).Select(a => a.HoTen).FirstOrDefault()
                                           })
                                           .FirstOrDefaultAsync();
@@ -166,6 +169,7 @@ namespace BackEnd_Tech.Controllers
 
                 _context.TinTucs.Remove(query);
                 await _context.SaveChangesAsync();
+
                 return Ok(new { message = "Xóa tin tức thành công" });
             }
             catch (Exception ex)
@@ -204,7 +208,12 @@ namespace BackEnd_Tech.Controllers
                                             .Take(pageSize)
                                             .Select(tt => new
                                             {
-                                                tinTuc = tt,
+                                                id = tt.Id,
+                                                tieuDe = tt.TieuDe,
+                                                noiDung = tt.NoiDung,
+                                                trangThai = tt.TrangThai,
+                                                createdAt = tt.CreatedAt,
+                                                updatedAt = tt.UpdatedAt,
                                                 tenNguoiViet = _context.NhanViens.Where(us => us.Id == tt.UserId).Select(a => a.HoTen).FirstOrDefault(),
                                                 tenDanhMuc = _context.DanhMucTinTucs.Where(dm => dm.Id == tt.DanhMucId).Select(a => a.TenDanhMuc).FirstOrDefault(),
                                                 anhTinTuc = _context.AnhTinTucs.Where(anh => anh.TinTucId == tt.Id && anh.TrangThai == true).Select(a => a.Image).FirstOrDefault()
@@ -228,44 +237,70 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-
         [Route("Upload_Image")]
         [HttpPost]
-        public async Task<IActionResult> Upload(List<IFormFile> files)
+        public async Task<IActionResult> Upload(IFormFile file)
         {
             try
             {
-                List<string> fileNames = new List<string>();
-
-                foreach (var file in files)
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads", "News");
+                if (!Directory.Exists(uploadsFolder))
                 {
-                    if (file == null || file.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    string uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads", "News");
-                    if (!Directory.Exists(uploadsFolder))
-                    {
-                        Directory.CreateDirectory(uploadsFolder);
-                    }
-
-                    string filePath = Path.Combine(uploadsFolder, file.FileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-
-                    fileNames.Add(file.FileName);
+                    Directory.CreateDirectory(uploadsFolder);
                 }
 
-                return Ok(fileNames);
+                string filePath = Path.Combine(uploadsFolder, file.FileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                return Ok(new { fileName = file.FileName });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        //[Route("Upload_Image")]
+        //[HttpPost]
+        //public async Task<IActionResult> Upload(List<IFormFile> files)
+        //{
+        //    try
+        //    {
+        //        List<string> fileNames = new List<string>();
+
+        //        foreach (var file in files)
+        //        {
+        //            if (file == null || file.Length == 0)
+        //            {
+        //                continue;
+        //            }
+
+        //            string uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads", "News");
+        //            if (!Directory.Exists(uploadsFolder))
+        //            {
+        //                Directory.CreateDirectory(uploadsFolder);
+        //            }
+
+        //            string filePath = Path.Combine(uploadsFolder, file.FileName);
+
+        //            using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //            {
+        //                await file.CopyToAsync(fileStream);
+        //            }
+
+        //            fileNames.Add(file.FileName);
+        //        }
+
+        //        return Ok(fileNames);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex.Message}");
+        //    }
+        //}
     }
 }

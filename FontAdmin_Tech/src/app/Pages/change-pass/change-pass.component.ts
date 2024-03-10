@@ -39,7 +39,6 @@ export class ChangePassComponent {
     confirmNewPassword: any
     onSubmit() {
         this.changePass.email = this.email
-        console.log(this.changePass.newPassword)
         if (this.changePass.newPassword == this.confirmNewPassword) {
             this.profileService.changePass(this.changePass).subscribe({
                 next: (res) => {

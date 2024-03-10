@@ -82,7 +82,10 @@ export class SlideComponent {
         if (this.fileOnly) {
             this.slide.image = this.fileOnly.name
         }
-        this.onUpload()
+        if (this.fileSelected) {
+            this.onUpload()
+            this.fileSelected = false
+        }
         if (this.slide.id) {
             this.slideService.update(this.slide).subscribe({
                 next: (res) => {
@@ -208,17 +211,24 @@ export class SlideComponent {
     //Upload file
     fileOnly: any
     sequenceNumber = 0
+    fileSelected: boolean = false
+
     onFileOnly(event: any) {
         const files: FileList = event.target.files
-        const file = files[0]
-        const newName = this.generateNewFileName(file.name)
-        this.fileOnly = new File([file], newName, { type: file.type })
+        if (files.length > 0) {
+            this.fileSelected = true
+            const file = files[0]
+            const newName = this.generateNewFileName(file.name)
+            this.fileOnly = new File([file], newName, { type: file.type })
+        } else {
+            this.fileSelected = false
+        }
     }
 
     generateNewFileName(oldFileName: string): string {
         const timestamp = new Date().getTime()
         const extension = oldFileName.split('.').pop()
-        const newFileName = `slide_${timestamp}.${extension}`
+        const newFileName = `slides_${timestamp}.${extension}`
         return newFileName
     }
 

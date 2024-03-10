@@ -19,6 +19,8 @@ export class AuthGuard {
                 return true
             } else {
                 this.toast.error({ detail: 'Lỗi', summary: 'Bạn không có quyền truy cập vào trang này!' })
+                this.router.navigate(['/'])
+
                 return false
             }
         } else {

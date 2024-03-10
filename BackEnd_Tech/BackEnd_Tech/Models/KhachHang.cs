@@ -11,6 +11,7 @@ namespace BackEnd_Tech.Models
             FeedBacks = new HashSet<FeedBack>();
             HoaDonXuats = new HashSet<HoaDonXuat>();
             LichSuGiaoDiches = new HashSet<LichSuGiaoDich>();
+            MaGiamActives = new HashSet<MaGiamActive>();
         }
 
         public int Id { get; set; }
@@ -35,5 +36,6 @@ namespace BackEnd_Tech.Models
         public virtual ICollection<FeedBack> FeedBacks { get; set; }
         public virtual ICollection<HoaDonXuat> HoaDonXuats { get; set; }
         public virtual ICollection<LichSuGiaoDich> LichSuGiaoDiches { get; set; }
+        public virtual ICollection<MaGiamActive> MaGiamActives { get; set; }
     }
 }

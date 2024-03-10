@@ -82,6 +82,7 @@ namespace BackEnd_Tech.Controllers
                                         loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
+                                        SoLuongTon = x.SoLuongTon,
                                         tenLoai = x.LoaiSanPham.TenLoai,
                                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a=> a.Image).FirstOrDefault()
                                     })
@@ -101,7 +102,7 @@ namespace BackEnd_Tech.Controllers
             try
             {
                 DateTime ngayHienTai = DateTime.Now;
-                DateTime ngayTruoc7Ngay = ngayHienTai.AddDays(-7);
+                DateTime ngayTruoc7Ngay = ngayHienTai.AddMonths(-1);
 
                 var query = await _context.SanPhams
                                     .OrderByDescending(p => p.CreatedAt)
@@ -117,6 +118,7 @@ namespace BackEnd_Tech.Controllers
                                         loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
+                                        SoLuongTon = x.SoLuongTon,
                                         tenLoai = x.LoaiSanPham.TenLoai,
                                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
                                     })
@@ -147,7 +149,8 @@ namespace BackEnd_Tech.Controllers
                                        x.TenSanPham,
                                        x.LoaiSanPhamId,
                                        x.GiaBan,
-                                       x.GiamGia
+                                       x.GiamGia,
+                                       x.SoLuongTon
                                    } into g
                                    select new
                                    {
@@ -156,6 +159,7 @@ namespace BackEnd_Tech.Controllers
                                        loaiSanPhamId = g.Key.LoaiSanPhamId,
                                        giaBan = g.Key.GiaBan,
                                        giamGia = g.Key.GiamGia,
+                                       SoLuongTon = g.Key.SoLuongTon,
                                        avatar = _context.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault(),
                                        total = g.Count()
                                    }).ToListAsync();
@@ -187,6 +191,7 @@ namespace BackEnd_Tech.Controllers
                                         loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
+                                        SoLuongTon = x.SoLuongTon,
                                         tenLoai = x.LoaiSanPham.TenLoai,
                                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
                                     })
@@ -218,6 +223,7 @@ namespace BackEnd_Tech.Controllers
                                         loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
+                                        SoLuongTon = x.SoLuongTon,
                                         tenLoai = x.LoaiSanPham.TenLoai,
                                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
                                     })
@@ -322,6 +328,7 @@ namespace BackEnd_Tech.Controllers
                                         loaiSanPhamId = x.LoaiSanPhamId,
                                         giaBan = x.GiaBan,
                                         giamGia = x.GiamGia,
+                                        soLuongTon = x.SoLuongTon,
                                         tenLoai = x.LoaiSanPham.TenLoai,
                                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
                                     })
@@ -407,6 +414,7 @@ namespace BackEnd_Tech.Controllers
                         loaiSanPhamId = x.LoaiSanPhamId,
                         giaBan = x.GiaBan,
                         giamGia = x.GiamGia,
+                        SoLuongTon = x.SoLuongTon,
                         tenLoai = x.LoaiSanPham.TenLoai,
                         avatar = x.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault()
                     })
@@ -665,42 +673,6 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Route("Create_BinhLuanTinTuc")]
-        [HttpPost]
-        public async Task<IActionResult> CreateBinhLuanTinTuc([FromBody] BinhLuanTinTuc model)
-        {
-            try
-            {
-                _context.BinhLuanTinTucs.Add(model);
-                await _context.SaveChangesAsync();
-
-                return Ok(new
-                {
-                    message = "Thêm bình luận thành cồng!"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        
-        [Route("Create_PhanHoiBinhLuan")]
-        [HttpPost]
-        public async Task<IActionResult> CreatePhanHoiBinhLuan([FromBody] PhanHoiBinhLuanTinTuc model)
-        {
-            try
-            {   model.HoTen = _context.KhachHangs.Where(a => a.Id == model.KhachHangId).Select(a => a.HoTen).FirstOrDefault();
-                _context.PhanHoiBinhLuanTinTucs.Add(model);
-                await _context.SaveChangesAsync();
-                return Ok(new {message = "Bình luận thành công"});
-            }catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         //Lấy ra giới thiệu của hàng
         [Route("GetGioiThieu")]
         [HttpGet]
@@ -802,7 +774,6 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        [Authorize]
         [Route("GetById_KhachHang/{email}")]
         [HttpGet]
         public async Task<IActionResult> GetByIdKhachHang(string email)
@@ -815,110 +786,6 @@ namespace BackEnd_Tech.Controllers
                     return BadRequest(new { message = "Khách hàng không tồn tại!" });
                 }
                 return Ok(query);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Route("Update_KhachHang")]
-        [HttpPut]
-        public async Task<IActionResult> UpdateKhachHang([FromBody] KhachHang model)
-        {
-            try
-            {
-                var query = await _context.KhachHangs.FindAsync(model.Id);
-                if (query == null)
-                {
-                    return BadRequest(new { message = "Khách hàng không tồn tại!" });
-                }
-
-                query.HoTen = model.HoTen;
-                query.DiaChi = model.DiaChi;
-                query.GioiTinh = model.GioiTinh;
-                query.NgaySinh = model.NgaySinh;
-
-                await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Cập nhập thông tin khách hàng thành công" });
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-
-        [Route("Create_HoaDonXuat")]
-        [HttpPost]
-        public async Task<IActionResult> CreateHoaDonBan([FromBody] HoaDonXuat model)
-        {
-            try
-            {
-                _context.HoaDonXuats.Add(model);
-
-                var newHoaDon = new List<ChiTietHoaDonXuat>();
-
-                foreach (var cthd in model.ChiTietHoaDonXuats)
-                {
-
-                    var ct = new ChiTietHoaDonXuat
-                    {
-                        HoaDonXuatId = model.Id,
-                        SanPhamId = cthd.SanPhamId,
-                        SoLuong = cthd.SoLuong,
-                        GiaBan = cthd.GiaBan,
-                        ThanhTien = cthd.ThanhTien
-                    };
-                    newHoaDon.Add(ct);
-
-                }
-                decimal? totalAmount = newHoaDon.Sum(ct => ct.ThanhTien);
-                decimal? giamGia = model.GiamGia ?? 0;
-                model.TongTien = totalAmount - giamGia;
-
-                await _context.SaveChangesAsync();
-                return Ok(new
-                {
-                    id = model.Id,
-                    message = "Đặt hàng thành công!"
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Route("Create_LichSuGiaoDich")]
-        [HttpPost]
-        public async Task<IActionResult> CreateLichSuGiaoDich([FromBody] LichSuGiaoDich model)
-        {
-            try
-            {
-                _context.LichSuGiaoDiches.Add(model);
-                await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Thành công" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Route("Create_FeedBack")]
-        [HttpPost]
-        public async Task<IActionResult> CreateFeedBack([FromBody] FeedBack model)
-        {
-            try
-            {
-                _context.FeedBacks.Add(model);
-                await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Phản hồi đã được lưu giữ" });
             }
             catch (Exception ex)
             {
@@ -978,6 +845,7 @@ namespace BackEnd_Tech.Controllers
                     .Take(pageSize)
                     .Select(hd => new
                     {
+                        tinhTrang = hd.TrangThaiDonHang,
                         ChiTiet = _context.ChiTietHoaDonXuats
                             .Where(ct => ct.HoaDonXuatId == hd.Id)
                             .Select(a => new
@@ -1009,5 +877,216 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
+        [Route("MaGiamGia/{email}")]
+        [HttpGet]
+        public async Task<IActionResult> GetMaGiamGia(string? email)
+        {
+            try
+            {
+                var query = await (from x in _context.MaGiamGia
+                                   where x.TrangThai == true && x.SoLuong > 0
+                                   && !_context.MaGiamActives.Any(mat => mat.MaGiamGiaId == x.Id && mat.KhachHang.Email == email)
+                                   select new
+                                   {
+                                       id = x.Id,
+                                       maCode = x.MaGiamGia,
+                                       soTienGiam = x.SoTienGiam,
+                                       moTa = x.MoTa,
+                                       trangThai = x.TrangThai,
+                                       hanSuDung = x.HanSuDung
+                                   }).ToListAsync();
+                var totalCount = query.Count();
+                var response = new
+                {
+                    totalCount = totalCount,
+                    items = query
+                };
+                return Ok(response);
+                                          
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_BinhLuanTinTuc")]
+        [HttpPost]
+        public async Task<IActionResult> CreateBinhLuanTinTuc([FromBody] BinhLuanTinTuc model)
+        {
+            try
+            {
+                _context.BinhLuanTinTucs.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "Thêm bình luận thành cồng!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_PhanHoiBinhLuan")]
+        [HttpPost]
+        public async Task<IActionResult> CreatePhanHoiBinhLuan([FromBody] PhanHoiBinhLuanTinTuc model)
+        {
+            try
+            {
+                model.HoTen = _context.KhachHangs.Where(a => a.Id == model.KhachHangId).Select(a => a.HoTen).FirstOrDefault();
+                _context.PhanHoiBinhLuanTinTucs.Add(model);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Bình luận thành công" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Update_KhachHang")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateKhachHang([FromBody] KhachHang model)
+        {
+            try
+            {
+                var query = await _context.KhachHangs.FindAsync(model.Id);
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Khách hàng không tồn tại!" });
+                }
+
+                query.HoTen = model.HoTen;
+                query.DiaChi = model.DiaChi;
+                query.GioiTinh = model.GioiTinh;
+                query.NgaySinh = model.NgaySinh;
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Cập nhập thông tin khách hàng thành công" });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_HoaDonXuat")]
+        [HttpPost]
+        public async Task<IActionResult> CreateHoaDonBan([FromBody] HoaDonXuat model)
+        {
+            try
+            {
+                _context.HoaDonXuats.Add(model);
+
+                var newHoaDon = new List<ChiTietHoaDonXuat>();
+
+                foreach (var cthd in model.ChiTietHoaDonXuats)
+                {
+                    var sanPham = await _context.SanPhams.FindAsync(cthd.SanPhamId);
+                    if (sanPham == null)
+                    {
+                        return NotFound(new {message = "Không tìm thấy sản phẩm " });
+                    }
+
+                    if (sanPham.SoLuongTon < cthd.SoLuong || sanPham.SoLuongTon < 1)
+                    {
+                        return BadRequest(new { message = "Số lượng sản phẩm không đủ " });
+                    }
+
+                    sanPham.SoLuongTon -= cthd.SoLuong;
+
+                    var ct = new ChiTietHoaDonXuat
+                    {
+                        HoaDonXuatId = model.Id,
+                        SanPhamId = cthd.SanPhamId,
+                        SoLuong = cthd.SoLuong,
+                        GiaBan = cthd.GiaBan,
+                        ThanhTien = cthd.ThanhTien
+                    };
+                    newHoaDon.Add(ct);
+
+                }
+                decimal? totalAmount = newHoaDon.Sum(ct => ct.ThanhTien);
+                decimal? giamGia = model.GiamGia ?? 0;
+                model.TongTien = totalAmount - giamGia;
+
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    id = model.Id,
+                    message = "Đặt hàng thành công!"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_LichSuGiaoDich")]
+        [HttpPost]
+        public async Task<IActionResult> CreateLichSuGiaoDich([FromBody] LichSuGiaoDich model)
+        {
+            try
+            {
+                _context.LichSuGiaoDiches.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Thành công" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_FeedBack")]
+        [HttpPost]
+        public async Task<IActionResult> CreateFeedBack([FromBody] FeedBack model)
+        {
+            try
+            {
+                _context.FeedBacks.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Phản hồi đã được lưu giữ" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [Route("Create_MaGiamActive")]
+        [HttpPost]
+        public async Task<IActionResult> CreateMaGiamActive([FromBody] MaGiamActive model)
+        {
+            try
+            {
+                await _context.MaGiamActives.AddAsync(model);
+
+                var query = await _context.MaGiamGia.Where(x => x.Id == model.MaGiamGiaId).FirstOrDefaultAsync();
+
+                query.SoLuong -= 1;
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Thành công!" });
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

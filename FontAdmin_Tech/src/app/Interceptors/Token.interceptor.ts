@@ -24,9 +24,6 @@ export class TokenInterceptor implements HttpInterceptor {
             catchError((err: any) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
-                        //this.toast.warning({detail:"Warning", summary:"Token is expired, Please Login again"});
-                        //this.router.navigate(['login'])
-                        //handle
                         return this.handleUnAuthorizedError(request, next)
                     }
                 }
@@ -38,7 +35,6 @@ export class TokenInterceptor implements HttpInterceptor {
         let tokeApiModel = new TokenApiModel()
         tokeApiModel.accessToken = this.auth.getToken()!
         tokeApiModel.refreshToken = this.auth.getRefreshToken()!
-        console.log('token', tokeApiModel.accessToken)
         return this.auth.renewToken(tokeApiModel).pipe(
             switchMap((data: TokenApiModel) => {
                 this.auth.storeRefreshToken(data.refreshToken)

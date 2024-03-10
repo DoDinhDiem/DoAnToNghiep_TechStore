@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-light mb-2">Xuất
+                                Excel</button>
                         </div>
                     </div>
                     <!-- end col -->
@@ -83,25 +83,25 @@
                                     <td class="text-center">
                                         <img style="box-shadow: 5px 5px 10px 0px #888888;
                                         border-radius: 5px; height: 60px"
-                                            src="{{baseUrl}}/Uploads/Products/{{item.anhSanPham}}" alt="">
+                                            src="{{baseUrl}}Uploads/Products/{{item.anhSanPham}}" alt="">
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.tenSanPham}}
+                                        {{item.tenSanPham}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.giaBan | number}}
+                                        {{item.giaBan | number}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.giamGia | number}}
+                                        {{item.giamGia | number}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.soLuongTon}}
+                                        {{item.soLuongTon}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.baoHang}}
+                                        {{item.baoHang}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.sanPham.moTa | slice:0:120}}
+                                        {{item.moTa | slice:0:120}}
                                     </td>
                                     <td class="text-center">
                                         {{item.tenLoai}}
@@ -110,7 +110,7 @@
                                         {{item.tenHang}}
                                     </td>
                                     <td class="text-center">
-                                        <p-inputSwitch [(ngModel)]="item.sanPham.trangThai"
+                                        <p-inputSwitch [(ngModel)]="item.trangThai"
                                             (ngModelChange)="trangThai(item)"></p-inputSwitch>
                                     </td>
                                     <td>
@@ -121,16 +121,16 @@
                                                     class="mdi mdi-dots-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end drop-action">
                                                 <button class="dropdown-item"
-                                                    [routerLink]="['/sanpham/anhsanpham', item.sanPham.id]"><i
+                                                    [routerLink]="['/sanpham/anhsanpham', item.id]"><i
                                                         class="mdi dripicons-photo-group me-2 text-muted vertical-middle"></i>Ảnh</button>
                                                 <button class="dropdown-item"
-                                                    [routerLink]="['/sanpham/thongsosanpham', item.sanPham.id]"><i
+                                                    [routerLink]="['/sanpham/thongsosanpham', item.id]"><i
                                                         class="mdi  dripicons-view-list me-2 text-muted vertical-middle"></i>Thông
                                                     số</button>
-                                                <button class="dropdown-item" (click)="showDetail(item.sanPham.id)"
+                                                <button class="dropdown-item" (click)="showDetail(item.id)"
                                                     data-bs-toggle="modal" data-bs-target="#full-width-modal"><i
                                                         class="mdi mdi-eye me-2 text-muted vertical-middle"></i>Xem</button>
-                                                <button class="dropdown-item" (click)="editModal(item.sanPham)"><i
+                                                <button class="dropdown-item" (click)="editModal(item)"><i
                                                         class="mdi mdi-square-edit-outline me-2 text-muted vertical-middle"></i>Sửa</button>
                                                 <button class="dropdown-item" (click)="delete(item)"><i
                                                         class="mdi mdi-delete me-2 text-muted vertical-middle"></i>Xóa</button>
@@ -226,7 +226,7 @@
                 <div class="row mt-2">
                     <div class="col">
                         <img style="height: 100px; border-radius: 5px;"
-                            src="{{baseUrl}}/Uploads/Products/{{fileOnly.image}}" alt="">
+                            src="{{baseUrl}}Uploads/Products/{{fileOnly.name}}" alt="">
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@
                 <div class="row">
                     <div class="col mt-2" *ngFor="let item of selectedFiles">
                         <img style="height: 100px; margin-right: 2px; border-radius: 5px;"
-                            src="{{baseUrl}}/Uploads/Products/{{item.image}}" alt="">
+                            src="{{baseUrl}}Uploads/Products/{{item.name}}" alt="">
                     </div>
                 </div>
             </div>
@@ -302,7 +302,7 @@
                                             [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"
                                             [activeIndex]="activeIndex">
                                             <ng-template pTemplate="item" let-item>
-                                                <img [src]="baseUrl + '/Uploads/Products/' + item.image" width="100%"
+                                                <img src="{{baseUrl}}/Uploads/Products/{{item.image}}" width="100%"
                                                     height="435px" />
                                             </ng-template>
                                             <ng-template pTemplate="thumbnail" let-item>

@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{title}}</li>
+                </ol>
+            </div>
+            <h4 class="page-title">{{title}}</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        <a [routerLink]="['/magiamgia']" class="btn btn-light mb-2"><i
+                                class="mdi dripicons-return me-2"></i>
+                            Quay lại</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-sm-end">
+                            <!-- <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
+                            <button type="button" class="btn btn-light mb-2">Xuất</button> -->
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+
+                <div class="table-responsive">
+                    <div id="products-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="products-datatable_length">
+                                    <label class="form-label">Hiển thị
+                                        <select class="form-select form-select-sm ms-1 me-1"
+                                            (change)="onPageSizeChange()" [(ngModel)]="selectedPageSize">
+                                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <!-- <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:
+                                        <input type="search" class="form-control form-control-sm" placeholder="Tìm..."
+                                            [(ngModel)]="key" (input)="onKeywordInput()"></label></div> -->
+                            </div>
+                        </div>
+                        <div class="mb-1"></div>
+                        <div *ngIf="showSkeleton">
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+                        </div>
+
+                        <table *ngIf="!showSkeleton" class="table table-centered w-100 dt-responsive nowrap"
+                            id="products-datatable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Mã code</th>
+                                    <th class="text-center">Tên khách hàng</th>
+                                    <th class="text-center">Ngày sử dụng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of loaispList?.items">
+                                    <td class="text-center">{{item.maGiamGia}}</td>
+                                    <td class="text-center">{{item.khachHang}}</td>
+                                    <td class="text-center">{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="products-datatable_info" role="status"
+                                    aria-live="polite">Hiển thị từ {{ getStartIndex() }} đến {{ getEndIndex() }} của {{
+                                    loaispList?.totalItems }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="products-datatable_paginate">
+                                    <ul class="pagination pagination-rounded">
+                                        <li class="paginate_button page-item previous"
+                                            [class.disabled]="currentPage === 1" (click)="onPreviousPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                                        </li>
+                                        <li *ngFor="let page of getPageNumbers()" class="paginate_button page-item"
+                                            style="cursor: pointer;" [ngClass]="{'active': currentPage === page}"
+                                            (click)="onPageChange(page)">
+                                            <a class="page-link">{{ page }}</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="products-datatable_next"
+                                            (click)="onNextPage()">
+                                            <a class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

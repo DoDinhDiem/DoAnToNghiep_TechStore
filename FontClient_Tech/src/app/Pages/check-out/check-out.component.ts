@@ -2,9 +2,11 @@ import { Component } from '@angular/core'
 import { MenuItem, MessageService } from 'primeng/api'
 import { IHoaDon } from 'src/app/Models/hoa-don'
 import { IKhachHang } from 'src/app/Models/khach-hang'
+import { IMaGiamActive } from 'src/app/Models/ma-giam-active'
 import { AccountService } from 'src/app/Service/account.service'
 import { CartService } from 'src/app/Service/cart.service'
 import { CheckOutService } from 'src/app/Service/check-out.service'
+import { MaGiamGiaService } from 'src/app/Service/ma-giam-gia.service'
 import { UserStoreService } from 'src/app/Service/user-store.service'
 
 @Component({
@@ -25,7 +27,8 @@ export class CheckOutComponent {
         private checkoutService: CheckOutService,
         private messageService: MessageService,
         private userStoreService: UserStoreService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private maGiamGiaService: MaGiamGiaService
     ) {
         this.GetEmail()
         this.getByIdKhachHang()
@@ -33,11 +36,14 @@ export class CheckOutComponent {
 
     ngOnInit() {
         this.cartService.loadCart()
+        this.getDiscount()
         this.cartService.products$.subscribe((products) => {
             this.getQuantity()
             this.calculateTotalPrice()
+            this.calculateTotalPriceFinal()
         })
         this.cartItems = this.cartService.getCartItem()
+        this.getMaGiamGia()
     }
 
     getQuantity() {
@@ -68,13 +74,18 @@ export class CheckOutComponent {
     }
 
     hoadon: IHoaDon = {}
-
+    magiamActive: IMaGiamActive = {}
     onSubmit() {
-        this.hoadon.tongTien = this.totalPrice
+        this.hoadon.tongTien = this.totalPriceFinal
         this.hoadon.userId = this.khachhang.id
         this.hoadon.hoTen = this.khachhang.hoTen
         this.hoadon.soDienThoai = this.khachhang.soDienThoai
         this.hoadon.diaChi = this.khachhang.diaChi
+        if (this.discount) {
+            this.hoadon.giamGia = this.discount.soTienGiam
+        } else {
+            this.hoadon.giamGia = 0
+        }
         this.hoadon.email = this.email
         this.hoadon.trangThaiDonHang = 0
         this.hoadon.trangThaiThanhToan = false
@@ -93,6 +104,10 @@ export class CheckOutComponent {
                     }
                 })
             } else if (this.selectedPaymentMethod == 'cash') {
+                if (this.discount) {
+                    this.magiamActive.khachHangId = this.khachhang.id
+                    this.magiamActive.maGiamGiaId = this.discount.id
+                }
                 this.hoadon.chiTietHoaDonXuats = []
                 for (let i = 0; i < this.cartItems.length; i++) {
                     const order = this.cartItems[i]
@@ -106,17 +121,60 @@ export class CheckOutComponent {
                 }
                 this.checkoutService.createHoaDonBan(this.hoadon).subscribe({
                     next: (res) => {
+                        if (this.discount) {
+                            this.maGiamGiaService.create(this.magiamActive).subscribe({})
+                            this.maGiamGiaService.clearDiscount()
+                            this.getMaGiamGia()
+                        }
                         this.cartService.clearProducts()
                         this.cartService.loadCart()
                         this.cartItems = []
                         this.totalPrice = 0
+                        this.totalPriceFinal = 0
                         this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
                     },
                     error: (err) => {
-                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi', life: 3000 })
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: err.error.message, life: 3000 })
                     }
                 })
             }
         }
+    }
+
+    dropdownVisible: boolean = false
+    toggleDropdown() {
+        this.dropdownVisible = !this.dropdownVisible
+    }
+
+    giamgia: any
+    getMaGiamGia() {
+        this.maGiamGiaService.GetMaGiamGia(this.email).subscribe((res) => {
+            this.giamgia = res
+        })
+    }
+
+    totalPriceFinal: number = 0
+    calculateTotalPriceFinal() {
+        if (this.discount) {
+            this.totalPriceFinal = this.cartService.getTotalPrice() - this.discount.soTienGiam
+        } else {
+            this.totalPriceFinal = this.cartService.getTotalPrice()
+        }
+    }
+
+    setDiscount(discount: any) {
+        this.maGiamGiaService.storeDiscount(discount)
+        this.getDiscount()
+        this.calculateTotalPriceFinal()
+    }
+
+    discount: any
+    getDiscount() {
+        this.discount = this.maGiamGiaService.getDiscount()
+    }
+    clearDiscount() {
+        this.maGiamGiaService.clearDiscount()
+        this.getDiscount()
+        this.calculateTotalPriceFinal()
     }
 }

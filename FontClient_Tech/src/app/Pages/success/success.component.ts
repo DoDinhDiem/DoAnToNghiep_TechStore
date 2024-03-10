@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { IHoaDon } from 'src/app/Models/hoa-don'
 import { IKhachHang } from 'src/app/Models/khach-hang'
 import { ILichSuGiaoDich } from 'src/app/Models/lich-su-giao-dich'
+import { IMaGiamActive } from 'src/app/Models/ma-giam-active'
 import { AccountService } from 'src/app/Service/account.service'
 import { CartService } from 'src/app/Service/cart.service'
 import { CheckOutService } from 'src/app/Service/check-out.service'
+import { MaGiamGiaService } from 'src/app/Service/ma-giam-gia.service'
 import { UserStoreService } from 'src/app/Service/user-store.service'
 
 interface IOrderInfo {
@@ -37,6 +39,7 @@ export class SuccessComponent {
 
     constructor(
         private cartService: CartService,
+        private maGiamGiaService: MaGiamGiaService,
         private checkoutService: CheckOutService,
         private userStoreService: UserStoreService,
         private accountService: AccountService,
@@ -59,6 +62,10 @@ export class SuccessComponent {
         this.GetEmail()
         this.getByIdKhachHang()
         this.orderInfor()
+    }
+
+    ngOnInit() {
+        this.getDiscount()
     }
 
     parsedOrderInfo: Partial<IOrderInfo> = {}
@@ -101,6 +108,12 @@ export class SuccessComponent {
         })
     }
 
+    discount: any
+    magiamActive: IMaGiamActive = {}
+    getDiscount() {
+        this.discount = this.maGiamGiaService.getDiscount()
+    }
+
     hoadon: IHoaDon = {}
     lichsugiaodich: ILichSuGiaoDich = {}
     saveInvoice() {
@@ -112,6 +125,7 @@ export class SuccessComponent {
             this.hoadon.diaChi = this.parsedOrderInfo.address
             this.hoadon.email = this.parsedOrderInfo.email
             this.hoadon.ghiChu = this.parsedOrderInfo.notes
+            this.hoadon.giamGia = Number(this.parsedOrderInfo.discount)
             this.hoadon.tongTien = this.vnp_Amount
             this.hoadon.trangThaiDonHang = 0
             this.hoadon.trangThaiThanhToan = true
@@ -123,6 +137,10 @@ export class SuccessComponent {
             this.lichsugiaodich.nganHang = this.vnp_BankCode
             this.lichsugiaodich.loaiThe = this.vnp_CardType
 
+            if (this.discount || this.discount != null) {
+                this.magiamActive.maGiamGiaId = this.discount.id
+                this.magiamActive.khachHangId = this.khachhang.id
+            }
             this.hoadon.chiTietHoaDonXuats = []
             for (let i = 0; i < this.cartItems.length; i++) {
                 const order = this.cartItems[i]
@@ -138,6 +156,10 @@ export class SuccessComponent {
                 next: (res) => {
                     this.lichsugiaodich.hoaDonId = res.id
                     this.checkoutService.createLichSuGiaoDich(this.lichsugiaodich).subscribe({})
+                    if (this.discount) {
+                        this.maGiamGiaService.create(this.magiamActive).subscribe({})
+                        this.maGiamGiaService.clearDiscount()
+                    }
                     this.cartService.clearProducts()
                     this.cartService.loadCart()
                     this.cartItems = []
@@ -145,6 +167,9 @@ export class SuccessComponent {
                     this.router.navigate(['/success'])
 
                     this.notification = true
+                },
+                error: (err) => {
+                    this.notification = false
                 }
             })
         } else {

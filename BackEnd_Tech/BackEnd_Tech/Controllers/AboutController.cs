@@ -1,4 +1,5 @@
 ﻿using BackEnd_Tech.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Role_Admin")]
     public class AboutController : ControllerBase
     {
         private TechStoreContext _context;

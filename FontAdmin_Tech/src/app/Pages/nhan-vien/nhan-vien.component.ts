@@ -6,6 +6,8 @@ import { NhanVienService } from 'src/app/Service/nhan-vien.service'
 import { ChucVuService } from 'src/app/Service/chuc-vu.service'
 import { RoleService } from 'src/app/Service/role.service'
 import { DatePipe } from '@angular/common'
+import * as moment from 'moment'
+import { ExcelService } from 'src/app/Service/excel.service'
 
 @Component({
     selector: 'app-nhan-vien',
@@ -35,7 +37,8 @@ export class NhanVienComponent {
         private chucVuService: ChucVuService,
         private roleService: RoleService,
         private messageService: MessageService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private excelService: ExcelService
     ) {}
 
     //Gọi chạy cùng component
@@ -80,8 +83,9 @@ export class NhanVienComponent {
             }))
         })
         setTimeout(() => {
-            this.nhanVienService.search(this.key, this.email, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.nhanVienService.search(this.key, this.email, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.nhanvienList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -117,6 +121,7 @@ export class NhanVienComponent {
 
         if (this.fileSelected) {
             this.onUpload()
+            this.fileSelected = false
         }
 
         if (this.nhanvien.hoTen && this.nhanvien.id) {
@@ -154,11 +159,59 @@ export class NhanVienComponent {
             accept: () => {
                 this.nhanVienService.delete(nhanvien.id).subscribe((res) => {
                     this.loadData()
-
                     this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
                 })
             }
         })
+    }
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = [
+            'Mã nhân viên',
+            'Họ tên',
+            'Email',
+            'Số điện thoại',
+            'Địa chỉ',
+            'Giới tính',
+            'Ngày sinh',
+            'Ngày vào làm',
+            'Chức vụ',
+            'Quyền',
+            'Trạng thái',
+            'Ngày tạo',
+            'Ngày tạo'
+        ]
+
+        const data = this.loaiXlsx.map((item: any) => [
+            item.id,
+            item.hoTen,
+            item.email,
+            item.soDienThoai,
+            item.diaChi,
+            item.gioiTinh,
+            this.formatDate(item.ngaySinh),
+            this.formatDate(item.ngayVaoLam),
+            item.tenChucVu,
+            item.tenQuyen,
+            item.trangThai,
+            this.formatDateTime(item.createdAt),
+            this.formatDateTime(item.updatedAt)
+        ])
+
+        this.excelService.exportAsExcelFile(data, headers, 'NhanVien')
+    }
+
+    private formatDateTime(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY')
     }
 
     /*
@@ -261,7 +314,7 @@ export class NhanVienComponent {
     generateNewFileName(oldFileName: string): string {
         const timestamp = new Date().getTime()
         const extension = oldFileName.split('.').pop()
-        const newFileName = `products_${timestamp}.${extension}`
+        const newFileName = `staffs_${timestamp}.${extension}`
         return newFileName
     }
 

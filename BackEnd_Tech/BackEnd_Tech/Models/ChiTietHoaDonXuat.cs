@@ -9,7 +9,7 @@ namespace BackEnd_Tech.Models
         public int? HoaDonXuatId { get; set; }
         public int? SanPhamId { get; set; }
         public decimal? GiaBan { get; set; }
-        public decimal? SoLuong { get; set; }
+        public int? SoLuong { get; set; }
         public decimal? ThanhTien { get; set; }
 
         public virtual HoaDonXuat? HoaDonXuat { get; set; }

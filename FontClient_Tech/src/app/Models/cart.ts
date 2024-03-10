@@ -4,4 +4,5 @@ export interface ICart {
     tenSanPham: string
     thanhTien: number
     soLuong: number
+    soLuongTon: number
 }

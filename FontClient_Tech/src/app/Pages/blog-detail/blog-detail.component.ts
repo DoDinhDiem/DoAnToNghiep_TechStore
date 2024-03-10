@@ -7,6 +7,7 @@ import * as moment from 'moment'
 import { IBinhLuanTinTuc } from 'src/app/Models/binh-luan-tin-tuc'
 import { MessageService } from 'primeng/api'
 import { IPhanHoiBinhLuan } from 'src/app/Models/phan-hoi-tin-tuc'
+import { AccountService } from 'src/app/Service/account.service'
 
 @Component({
     selector: 'app-blog-detail',
@@ -19,7 +20,13 @@ export class BlogDetailComponent {
 
     baseUrl = baseUrl
 
-    constructor(private chiTietTinTucService: ChiTietTinTucService, private heThongService: HeThongService, private route: ActivatedRoute, private messageService: MessageService) {
+    constructor(
+        private chiTietTinTucService: ChiTietTinTucService,
+        private heThongService: HeThongService,
+        private route: ActivatedRoute,
+        private messageService: MessageService,
+        private auth: AccountService
+    ) {
         this.replyVisibility = {}
     }
 
@@ -91,21 +98,26 @@ export class BlogDetailComponent {
 
     comment: IBinhLuanTinTuc = {}
     saveComment() {
-        this.comment.tinTucId = this.id
-        this.comment.khachHangId = 1
-        this.comment.trangThai = true
-        this.chiTietTinTucService.create(this.comment).subscribe((res) => {
-            this.GetBinhLuanTinTuc()
-            this.comment = {}
-            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-        })
+        if (this.auth.isLoggedIn()) {
+            this.comment.tinTucId = this.id
+            this.comment.hoTen = this.auth.getfullNameFromToken()
+            this.comment.email = this.auth.getEmailFromToken()
+            this.comment.khachHangId = this.auth.getIdFromToken()
+            this.comment.trangThai = true
+            this.chiTietTinTucService.create(this.comment).subscribe((res) => {
+                this.GetBinhLuanTinTuc()
+                this.comment = {}
+                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+            })
+        }
     }
 
     response: IPhanHoiBinhLuan = {}
     saveResponse() {
         this.response.tinTucId = this.id
         this.response.binhLuanId = this.binhLuanId
-        this.response.khachHangId = 1
+        this.response.hoTen = this.auth.getfullNameFromToken()
+        this.response.khachHangId = this.auth.getIdFromToken()
         this.response.trangThai = true
         this.chiTietTinTucService.createPhanHoi(this.response).subscribe((res) => {
             this.GetBinhLuanTinTuc()

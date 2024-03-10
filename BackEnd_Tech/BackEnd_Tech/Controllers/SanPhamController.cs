@@ -1,4 +1,5 @@
 ﻿using BackEnd_Tech.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Role_Admin, Role_User")]
     public class SanPhamController : ControllerBase
     {
         private TechStoreContext _context;
@@ -52,11 +54,11 @@ namespace BackEnd_Tech.Controllers
                                               SanPham = s,
                                               Image = _context.AnhSanPhams
                                                                     .Where(a => a.SanPhamId == s.Id && a.TrangThai == true)
-                                                                    .Select(a => new { a.Image })
+                                                                    .Select(a => a.Image )
                                                                     .FirstOrDefault(),
                                               AnhSanPhams = _context.AnhSanPhams
                                                                     .Where(a => a.SanPhamId == s.Id && a.TrangThai == false)
-                                                                    .Select(a => new { a.Image })
+                                                                    .Select(a => new { Image = a.Image } )
                                                                     .ToList(),
                                               ListImage = _context.AnhSanPhams
                                                                 .Where(a => a.SanPhamId == s.Id)
@@ -272,7 +274,16 @@ namespace BackEnd_Tech.Controllers
                                         .Take(pageSize)
                                         .Select(sp => new
                                         {
-                                            sanPham = sp,
+                                            id = sp.Id,
+                                            tenSanPham =  sp.TenSanPham,
+                                            giaBan = sp.GiaBan,
+                                            giamGia = sp.GiamGia,
+                                            soLuongTon = sp.SoLuongTon,
+                                            baoHang = sp.BaoHang,
+                                            moTa = sp.MoTa,
+                                            trangThai = sp.TrangThai,
+                                            createdAt = sp.CreatedAt,
+                                            updatedAt = sp.UpdatedAt,
                                             anhSanPham = _context.AnhSanPhams.Where(a => a.SanPhamId == sp.Id && a.TrangThai == true).Select(a => a.Image).FirstOrDefault(),
                                             tenLoai = _context.LoaiSanPhams.Where(l => l.Id == sp.LoaiSanPhamId).Select(x => x.TenLoai).FirstOrDefault(),
                                             tenHang = _context.HangSanPhams.Where(h => h.Id == sp.HangSanPhamId).Select(x => x.TenHang).FirstOrDefault()
@@ -336,84 +347,33 @@ namespace BackEnd_Tech.Controllers
             }
         }
 
-        //[Route("Update_SanPham")]
-        //[HttpPut]
-        //public async Task<IActionResult> UpdateSanPham([FromBody] SanPham model)
-        //{
-        //    try
-        //    {
-        //        var existingSanPham = await _context.SanPhams.Include(s => s.AnhSanPhams).Include(s => s.ThongSos).FirstOrDefaultAsync(s => s.Id == model.Id);
+        //Thêm một ảnh
+        [Route("Upload_Image_One")]
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            try
+            {
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads", "Products");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
 
-        //        if (existingSanPham == null)
-        //        {
-        //            return BadRequest(new { message = "Sản phẩm không tồn tại!" });
-        //        }
+                string filePath = Path.Combine(uploadsFolder, file.FileName);
 
-        //        existingSanPham.TenSanPham = model.TenSanPham;
-        //        existingSanPham.GiaBan = model.GiaBan;
-        //        existingSanPham.BaoHanh = model.BaoHanh;
-        //        existingSanPham.MoTa = model.MoTa;
-        //        existingSanPham.LoaiSanPham = model.LoaiSanPham;
-        //        existingSanPham.HangSanPham = model.HangSanPham;
-        //        existingSanPham.TrangThai = model.TrangThai;
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
 
-        //        // Lấy danh sách các đường dẫn tệp ảnh mới
-        //        List<string> newImagePaths = model.AnhSanPhams.Select(a => a.Image).ToList();
-
-        //        // Lấy danh sách các đường dẫn tệp ảnh cũ
-        //        List<string> oldImagePaths = existingSanPham.AnhSanPhams.Select(a => a.Image).ToList();
-
-        //        // Xóa tất cả các ảnh cũ từ ổ đĩa chỉ khi có sự thay đổi trong ảnh
-        //        foreach (var imagePath in oldImagePaths)
-        //        {
-        //            if (!newImagePaths.Contains(imagePath))
-        //            {
-        //                var fullPath = Path.Combine(_environment.WebRootPath, imagePath);
-        //                if (System.IO.File.Exists(fullPath))
-        //                {
-        //                    System.IO.File.Delete(fullPath);
-        //                }
-        //            }
-        //        }
-
-        //        // Xóa tất cả các ảnh cũ và thông số cũ
-        //        _context.AnhSanPhams.RemoveRange(existingSanPham.AnhSanPhams);
-        //        _context.ThongSos.RemoveRange(existingSanPham.ThongSos);
-
-        //        // Thêm ảnh mới
-        //        foreach (var image in model.AnhSanPhams)
-        //        {
-        //            var img = new AnhSanPham
-        //            {
-        //                SanPhamId = model.Id,
-        //                Image = image.Image,
-        //                TrangThai = image.TrangThai
-        //            };
-        //            existingSanPham.AnhSanPhams.Add(img);
-        //        }
-
-        //        // Thêm thông số mới
-        //        foreach (var parameter in model.ThongSos)
-        //        {
-        //            var parr = new ThongSo
-        //            {
-        //                SanPhamId = model.Id,
-        //                TenThongSo = parameter.TenThongSo,
-        //                MoTa = parameter.MoTa,
-        //                TrangThai = true
-        //            };
-        //            existingSanPham.ThongSos.Add(parameter);
-        //        }
-
-        //        await _context.SaveChangesAsync();
-
-        //        return Ok(new { message = "Cập nhật sản phẩm thành công!" });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+                return Ok(new { fileName = file.FileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
     }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { IHangSanPham } from 'src/app/Models/hang-san-pham'
+import { ExcelService } from 'src/app/Service/excel.service'
 import { HangSanPhamService } from 'src/app/Service/hang-san-pham.service'
+import * as moment from 'moment'
 
 @Component({
     selector: 'app-hang-san-pham',
@@ -20,11 +22,17 @@ export class HangSanPhamComponent {
     Save = 'Lưu'
 
     //Khai báo biến gọi loại sản phẩm
-    hangsp!: IHangSanPham
+    hangsp: IHangSanPham
     hangspList: any
 
+    submitted: boolean = false
     //Gọi constructor
-    constructor(private hangSanPhamService: HangSanPhamService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+        private excelService: ExcelService,
+        private hangSanPhamService: HangSanPhamService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService
+    ) {}
 
     //Gọi chạy cùng component
     ngOnInit() {
@@ -36,12 +44,14 @@ export class HangSanPhamComponent {
         this.hangsp = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.hangsp = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -49,8 +59,9 @@ export class HangSanPhamComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.hangSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.hangSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.hangspList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -72,6 +83,7 @@ export class HangSanPhamComponent {
     }
 
     onSubmit() {
+        this.submitted = true
         if (this.hangsp.trangThai == undefined) {
             this.hangsp.trangThai = false
         }
@@ -115,6 +127,23 @@ export class HangSanPhamComponent {
                 })
             }
         })
+    }
+
+    loaiXlsx: any
+
+    exportToExcel(): void {
+        const headers = ['Mã hãng', 'Tên hãng', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [item.id, item.tenHang, item.trangThai, this.formatDate(item.createdAt), this.formatDate(item.updatedAt)])
+
+        this.excelService.exportAsExcelFile(data, headers, 'HangSanPham')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
     }
 
     /*

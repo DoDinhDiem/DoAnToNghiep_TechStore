@@ -1,18 +1,27 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { MessageService } from 'primeng/api'
 import { baseUrl } from 'src/app/Api/baseHttp'
+import { CartService } from 'src/app/Service/cart.service'
 import { DanhMucSanPhamService } from 'src/app/Service/danh-muc-san-pham.service'
 import { HeThongService } from 'src/app/Service/he-thong.service'
 
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
-    styleUrls: ['./product.component.scss']
+    styleUrls: ['./product.component.scss'],
+    providers: [MessageService]
 })
 export class ProductComponent {
     baseUrl = baseUrl
 
-    constructor(private danhMucSanPhamService: DanhMucSanPhamService, private heThongService: HeThongService, private route: ActivatedRoute) {}
+    constructor(
+        private danhMucSanPhamService: DanhMucSanPhamService,
+        private heThongService: HeThongService,
+        private route: ActivatedRoute,
+        private cartService: CartService,
+        private messageService: MessageService
+    ) {}
     id!: any
     ngOnInit() {
         this.route.params.subscribe((params) => {
@@ -152,5 +161,27 @@ export class ProductComponent {
         return Array(pageCount)
             .fill(0)
             .map((x, i) => i + 1)
+    }
+
+    isProductInCart(productId: number): number {
+        const cartItem = this.cartService.getCartItem().find((item) => item.id === productId)
+        return cartItem ? cartItem.soLuong : 0
+    }
+
+    addToCart(product: any) {
+        if (product.soLuongTon <= 0) {
+            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Sản phẩm đã hết hàng!', life: 3000 })
+            return
+        }
+
+        const cartQuantity = this.isProductInCart(product.id)
+        if (cartQuantity >= product.soLuongTon) {
+            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng có sẵn!', life: 3000 })
+            return
+        }
+
+        this.cartService.addToCart(product)
+        this.cartService.loadCart()
+        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 3000 })
     }
 }

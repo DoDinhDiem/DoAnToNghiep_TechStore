@@ -2,8 +2,11 @@ import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { baseUrl } from 'src/app/Api/baseHttp'
 import { ITinTuc } from 'src/app/Models/tin-tuc'
+import { AuthService } from 'src/app/Service/auth.service'
 import { DanhMucTinTucService } from 'src/app/Service/danh-muc-tin-tuc.service'
 import { TinTucService } from 'src/app/Service/tin-tuc.service'
+import * as moment from 'moment'
+import { ExcelService } from 'src/app/Service/excel.service'
 
 @Component({
     selector: 'app-tin-tuc',
@@ -35,7 +38,9 @@ export class TinTucComponent {
         private tinTucService: TinTucService,
         private danhMucSanPhamService: DanhMucTinTucService,
         private messageService: MessageService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private auth: AuthService,
+        private excelService: ExcelService
     ) {}
 
     //Gọi chạy cùng component
@@ -71,8 +76,9 @@ export class TinTucComponent {
             }))
         })
         setTimeout(() => {
-            this.tinTucService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.tinTucService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.tintucList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -91,24 +97,26 @@ export class TinTucComponent {
     editModal(tintuc: ITinTuc) {
         this.tinTucService.getById(tintuc.id).subscribe((data) => {
             this.tintuc = data.tinTuc
-            this.fileOnlyEdit = data.image
-            this.selectedFilesEdit = data.anhTinTuc
+            this.fileOnly = { name: data.image }
+            console.log(data)
+            // this.selectedFiles = data.anhTinTuc.map((item: any) => ({ name: item.image }))
             this.visible = true
             this.Save = 'Cập nhập'
         })
     }
 
-    tintucDetail: any
-    image: any
-    nguoiViet: any
-    showSeeDialog(tintuc: ITinTuc) {
-        this.tinTucService.getById(tintuc.id).subscribe((data) => {
-            this.tintucDetail = data.tinTuc
-            this.image = data.image
-            this.nguoiViet = data.tenNguoiViet
-            this.visible_look = true
-        })
-    }
+    // tintucDetail: any
+    // image: any
+    // nguoiViet: any
+    // showSeeDialog(tintuc: ITinTuc) {
+    //     this.tinTucService.getById(tintuc.id).subscribe((data) => {
+    //         console.log(data)
+    //         this.tintucDetail = data.tinTuc
+    //         this.image = data.image
+    //         this.nguoiViet = data.tenNguoiViet
+    //         this.visible_look = true
+    //     })
+    // }
 
     onSubmit() {
         if (this.tintuc.trangThai == undefined) {
@@ -119,51 +127,30 @@ export class TinTucComponent {
         this.tintuc.anhTinTucs = []
         //Một ảnh
         if (this.fileOnly) {
-            for (let i = 0; i < this.fileOnly.length; i++) {
-                const file = this.fileOnly[i]
-                const img = {
-                    image: file.name,
-                    trangThai: true
-                }
-                this.tintuc.anhTinTucs.push(img)
-            }
-        }
-
-        if (this.selectedFiles) {
-            //Nhiều ảnh
-            for (let i = 0; i < this.selectedFiles.length; i++) {
-                const file = this.selectedFiles[i]
-                const img = {
-                    image: file.name,
-                    trangThai: false
-                }
-                this.tintuc.anhTinTucs.push(img)
-            }
-        }
-        //Sửa ảnh
-        if (this.fileOnlyEdit && this.fileOnly == undefined) {
-            const file = this.fileOnlyEdit
+            const file = this.fileOnly
             const img = {
-                image: file.image,
+                image: file.name,
                 trangThai: true
             }
             this.tintuc.anhTinTucs.push(img)
         }
 
-        if (this.selectedFilesEdit && this.selectedFiles == undefined) {
-            for (let i = 0; i < this.selectedFilesEdit.length; i++) {
-                const file = this.selectedFilesEdit[i]
-                const img = {
-                    image: file.image,
-                    trangThai: false
-                }
-                this.tintuc.anhTinTucs.push(img)
-            }
-        }
+        // if (this.selectedFiles) {
+        //     //Nhiều ảnh
+        //     for (let i = 0; i < this.selectedFiles.length; i++) {
+        //         const file = this.selectedFiles[i]
+        //         const img = {
+        //             image: file.name,
+        //             trangThai: false
+        //         }
+        //         this.tintuc.anhTinTucs.push(img)
+        //     }
+        // }
 
-        this.tintuc.userId = 3
-        if (this.fileOnly || this.selectedFiles) {
+        this.tintuc.userId = this.auth.getIdFromToken()
+        if (this.fileSelect) {
             this.onUpload()
+            this.fileSelect = false
         }
 
         if (this.tintuc.tieuDe && this.tintuc.id) {
@@ -208,44 +195,83 @@ export class TinTucComponent {
         })
     }
 
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = ['Mã tin tức', 'Loại tin tức', 'Người viết', 'Tiêu đề', 'Nội dung', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [
+            item.id,
+            item.tenDanhMuc,
+            item.tenNguoiViet,
+            item.tieuDe,
+            this.truncateString(item.noiDung, 32767),
+            item.trangThai,
+            this.formatDate(item.createdAt),
+            this.formatDate(item.updatedAt)
+        ])
+
+        this.excelService.exportAsExcelFile(data, headers, 'Tin tức')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
+
+    private truncateString(str: string, maxLength: number): string {
+        if (!str) return ''
+        return str.length > maxLength ? str.substring(0, maxLength) : str
+    }
     /*
      *Upload ảnh sản phẩm
      */
 
     fileOnly: any
-    selectedFiles!: any[]
+    // selectedFiles!: any[]
     sequenceNumber = 0
+    fileSelect: boolean = false
 
-    onFilesArray(event: any) {
-        const files: FileList = event.target.files
-        this.selectedFiles = Array.from(files).map((file) => {
-            const newName = this.generateNewFileName(file.name)
-            return new File([file], newName, { type: file.type })
-        })
-    }
+    // onFilesArray(event: any) {
+    //     const files: FileList = event.target.files
+    //     this.selectedFiles = Array.from(files).map((file) => {
+    //         const newName = this.generateNewFileName(file.name)
+    //         return new File([file], newName, { type: file.type })
+    //     })
+    // }
+
+    // generateNewFileName(oldFileName: string): string {
+    //     const timestamp = new Date().getTime()
+    //     const extension = oldFileName.split('.').pop()
+    //     const newFileName = `news${timestamp}_${this.sequenceNumber}.${extension}`
+    //     this.sequenceNumber++
+    //     return newFileName
+    // }
 
     onFileOnly(event: any) {
         const files: FileList = event.target.files
-        this.fileOnly = Array.from(files).map((file) => {
+        if (files.length > 0) {
+            this.fileSelect = true
+            const file = files[0]
             const newName = this.generateNewFileName(file.name)
-            return new File([file], newName, { type: file.type })
-        })
+            this.fileOnly = new File([file], newName, { type: file.type })
+        } else {
+            this.fileSelect = false
+        }
     }
 
     generateNewFileName(oldFileName: string): string {
         const timestamp = new Date().getTime()
         const extension = oldFileName.split('.').pop()
-        const newFileName = `news${timestamp}_${this.sequenceNumber}.${extension}`
-        this.sequenceNumber++
+        const newFileName = `news_${timestamp}.${extension}`
         return newFileName
     }
     onUpload() {
-        if (this.fileOnly && this.fileOnly.length > 0) {
-            this.tinTucService.uploadFiles(this.fileOnly).subscribe({})
-        }
-        if (this.selectedFiles && this.selectedFiles.length > 0) {
-            this.tinTucService.uploadFiles(this.selectedFiles).subscribe({})
-        }
+        this.tinTucService.uploadFiles(this.fileOnly).subscribe({})
+        // if (this.selectedFiles && this.selectedFiles.length > 0) {
+        //     this.tinTucService.uploadFiles(this.selectedFiles).subscribe({})
+        // }
     }
 
     /*

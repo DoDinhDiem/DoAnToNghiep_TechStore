@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-light mb-2">Xuất
+                                Excel</button>
                         </div>
                     </div>
                     <!-- end col -->
@@ -85,23 +85,23 @@
                                     <td class="text-center">
                                         <img style="box-shadow: 5px 5px 10px 0px #888888;
                                         border-radius: 5px;  height: 60px"
-                                            src="{{baseUrl}}/Uploads/Staffs/{{item.nhanVien.avatar}}" alt="">
+                                            src="{{baseUrl}}/Uploads/Staffs/{{item.avatar}}" alt="">
                                     </td>
-                                    <td class="text-center">{{item.nhanVien.hoTen}}</td>
-                                    <td class="text-center">{{item.nhanVien.email}}</td>
-                                    <td class="text-center">0{{item.nhanVien.soDienThoai}}</td>
-                                    <td class="text-center">{{item.nhanVien.diaChi}}</td>
-                                    <td class="text-center">{{item.nhanVien.gioiTinh}}</td>
-                                    <td class="text-center">{{item.nhanVien.ngaySinh | date: 'dd/MM/yyyy'}}</td>
-                                    <td class="text-center">{{item.nhanVien.ngayVaoLam | date: 'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{item.hoTen}}</td>
+                                    <td class="text-center">{{item.email}}</td>
+                                    <td class="text-center">0{{item.soDienThoai}}</td>
+                                    <td class="text-center">{{item.diaChi}}</td>
+                                    <td class="text-center">{{item.gioiTinh}}</td>
+                                    <td class="text-center">{{item.ngaySinh | date: 'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{item.ngayVaoLam | date: 'dd/MM/yyyy'}}</td>
                                     <td class="text-center">{{item.tenChucVu}}</td>
                                     <td class="text-center">{{item.tenQuyen}}</td>
                                     <td class="text-center">
-                                        <p-inputSwitch [(ngModel)]="item.nhanVien.trangThai"
-                                            (ngModelChange)="trangThai(item.nhanVien)"></p-inputSwitch>
+                                        <p-inputSwitch [(ngModel)]="item.trangThai"
+                                            (ngModelChange)="trangThai(item)"></p-inputSwitch>
                                     </td>
                                     <td class="table-action text-center">
-                                        <a (click)="editModal(item.nhanVien)" class="action-icon">
+                                        <a (click)="editModal(item)" class="action-icon">
                                             <i class="mdi mdi-square-edit-outline"></i>
                                         </a>
                                         <!-- <a href="javascript:void(0);" class="action-icon"> <i
@@ -249,7 +249,8 @@
             <div class="col-md-4">
                 <div class="mb-3">
                     <label for="tenLoai" class="form-label">Avatar <a class="text-danger">(*)</a></label>
-                    <input type="file" id="tenLoai" class="form-control" autocomplete="off">
+                    <input type="file" id="tenLoai" (change)="onFileOnly($event)" class="form-control"
+                        autocomplete="off">
                     <div class="row mt-2">
                         <div class="col">
                             <img style="height: 100px; border-radius: 5px;"

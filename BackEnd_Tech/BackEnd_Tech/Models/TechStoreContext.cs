@@ -32,6 +32,8 @@ namespace BackEnd_Tech.Models
         public virtual DbSet<KhachHang> KhachHangs { get; set; } = null!;
         public virtual DbSet<LichSuGiaoDich> LichSuGiaoDiches { get; set; } = null!;
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; } = null!;
+        public virtual DbSet<MaGiamActive> MaGiamActives { get; set; } = null!;
+        public virtual DbSet<MaGiamGium> MaGiamGia { get; set; } = null!;
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; } = null!;
         public virtual DbSet<NhanVien> NhanViens { get; set; } = null!;
         public virtual DbSet<PhanHoiBinhLuanTinTuc> PhanHoiBinhLuanTinTucs { get; set; } = null!;
@@ -570,6 +572,65 @@ namespace BackEnd_Tech.Models
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updated_at");
+            });
+
+            modelBuilder.Entity<MaGiamActive>(entity =>
+            {
+                entity.ToTable("MaGiamActive");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("created_At")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.KhachHangId).HasColumnName("khachHang_Id");
+
+                entity.Property(e => e.MaGiamGiaId).HasColumnName("maGiamGia_Id");
+
+                entity.HasOne(d => d.KhachHang)
+                    .WithMany(p => p.MaGiamActives)
+                    .HasForeignKey(d => d.KhachHangId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SDMa_userId_khachhangid");
+
+                entity.HasOne(d => d.MaGiamGia)
+                    .WithMany(p => p.MaGiamActives)
+                    .HasForeignKey(d => d.MaGiamGiaId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SDMa_maId_id");
+            });
+
+            modelBuilder.Entity<MaGiamGium>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("created_At")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.HanSuDung)
+                    .HasColumnType("date")
+                    .HasColumnName("hanSuDung");
+
+                entity.Property(e => e.MaGiamGia)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("maGiamGia");
+
+                entity.Property(e => e.MoTa)
+                    .HasColumnType("ntext")
+                    .HasColumnName("moTa");
+
+                entity.Property(e => e.SoLuong).HasColumnName("soLuong");
+
+                entity.Property(e => e.SoTienGiam)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("soTienGiam");
+
+                entity.Property(e => e.TrangThai).HasColumnName("trangThai");
             });
 
             modelBuilder.Entity<NhaCungCap>(entity =>

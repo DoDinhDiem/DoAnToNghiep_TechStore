@@ -78,7 +78,7 @@ export class AnhSanPhamComponent {
     editModal(anhSP: IAnhSanPham) {
         this.anhSanPhamService.getById(anhSP.id).subscribe((data) => {
             this.anhSP = data
-            this.fileOnly = data.image
+            this.fileOnly = { name: data.image }
             this.visible = true
             this.Save = 'Cập nhập'
         })
@@ -220,7 +220,6 @@ export class AnhSanPhamComponent {
 
     //Upload file
     fileOnly: any
-    fileEdit: any
     sequenceNumber = 0
     onFileOnly(event: any) {
         const files: FileList = event.target.files
@@ -237,7 +236,6 @@ export class AnhSanPhamComponent {
     }
 
     onUpload() {
-        console.log(this.fileOnly)
         this.anhSanPhamService.uploadFiles(this.fileOnly).subscribe()
     }
 }

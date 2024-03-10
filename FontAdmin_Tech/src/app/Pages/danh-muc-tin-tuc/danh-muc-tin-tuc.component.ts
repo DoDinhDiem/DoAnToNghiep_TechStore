@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { IDanhMucTinTuc } from 'src/app/Models/danh-muc-tin-tuc'
 import { DanhMucTinTucService } from 'src/app/Service/danh-muc-tin-tuc.service'
+import { ExcelService } from 'src/app/Service/excel.service'
+import * as moment from 'moment'
 
 @Component({
     selector: 'app-danh-muc-tin-tuc',
@@ -24,7 +26,12 @@ export class DanhMucTinTucComponent {
     danhmucList: any
 
     //Gọi constructor
-    constructor(private danhMucSanPhamService: DanhMucTinTucService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+        private danhMucSanPhamService: DanhMucTinTucService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        private excelService: ExcelService
+    ) {}
 
     //Gọi chạy cùng component
     ngOnInit() {
@@ -48,8 +55,9 @@ export class DanhMucTinTucComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.danhMucSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.danhMucSanPhamService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.danhmucList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -115,6 +123,21 @@ export class DanhMucTinTucComponent {
                 })
             }
         })
+    }
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = ['Mã loại tin tức', 'Tên loại tin tức', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [item.id, item.tenDanhMuc, item.trangThai, this.formatDate(item.createdAt), this.formatDate(item.updatedAt)])
+
+        this.excelService.exportAsExcelFile(data, headers, 'DanhMucTinTuc')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
     }
 
     /*

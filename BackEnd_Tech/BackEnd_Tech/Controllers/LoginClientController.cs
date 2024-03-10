@@ -20,6 +20,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class LoginClientController : ControllerBase
     {
         private readonly TechStoreContext _context;
@@ -276,7 +277,8 @@ namespace BackEnd_Tech.Controllers
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Email, model.Email),
-                new Claim(ClaimTypes.Name, model.HoTen)
+                new Claim(ClaimTypes.Name, model.HoTen),
+                new Claim("id", model.Id.ToString()),
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

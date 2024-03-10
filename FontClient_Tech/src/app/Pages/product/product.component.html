@@ -49,7 +49,8 @@
                                                 title="Yêu thích"><span>Yêu thích</span></a>
                                         </div>
                                         <div class="product-action product-action-dark">
-                                            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
+                                            <a href="javascript:void(0)" (click)="addToCart(item)"
+                                                class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
                                                     giỏ hàng</span></a>
                                         </div>
                                     </figure>
@@ -175,3 +176,4 @@
         </div>
     </div>
 </div>
+<p-toast></p-toast>

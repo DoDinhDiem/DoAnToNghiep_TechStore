@@ -50,7 +50,6 @@ export class ContactComponent {
         setTimeout(() => {
             this.contactService.search(this.currentPage, this.selectedPageSize).subscribe((data) => {
                 this.contactList = data
-                console.log(data)
                 this.showSkeleton = false
             })
         }, 2000)

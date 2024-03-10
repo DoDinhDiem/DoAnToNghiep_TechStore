@@ -56,4 +56,10 @@ export class SanPhamService {
 
         return this.http.post(baseUrl + 'api/SanPham/Upload_Image', formData)
     }
+
+    uploadFileOne(file: File): Observable<any> {
+        const formData = new FormData()
+        formData.append('file', file, file.name)
+        return this.http.post(baseUrl + 'api/SanPham/Upload_Image_One', formData)
+    }
 }

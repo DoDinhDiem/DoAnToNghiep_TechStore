@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BackEnd_Tech.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VNPAYController : ControllerBase
     {
         private readonly IConfiguration _configuration;

@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { INhaCungCap } from 'src/app/Models/nha-cung-cap'
 import { NhaCungCapService } from 'src/app/Service/nha-cung-cap.service'
+import * as moment from 'moment'
+import { ExcelService } from 'src/app/Service/excel.service'
 
 @Component({
     selector: 'app-nha-cung-cap',
@@ -24,7 +26,12 @@ export class NhaCungCapComponent {
     nhaccList: any
 
     //Gọi constructor
-    constructor(private nhaCungCapService: NhaCungCapService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+    constructor(
+        private nhaCungCapService: NhaCungCapService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        private excelService: ExcelService
+    ) {}
 
     //Gọi chạy cùng component
     ngOnInit() {
@@ -48,8 +55,9 @@ export class NhaCungCapComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.nhaCungCapService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.nhaCungCapService.search(this.key, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.nhaccList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -117,6 +125,30 @@ export class NhaCungCapComponent {
         })
     }
 
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = ['Mã nhà cung cấp', 'Tên nhà cung cấp', 'Email', 'Số điện thoại', 'Địa chỉ', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [
+            item.id,
+            item.tenNhaCC,
+            item.Email,
+            item.soDienThoai,
+            item.diaChi,
+            item.trangThai,
+            this.formatDate(item.createdAt),
+            this.formatDate(item.updatedAt)
+        ])
+
+        this.excelService.exportAsExcelFile(data, headers, 'NhaCungCap')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
     /*
      *Đoạn code thay đổi dữ liệu khi tìm kiếm next/prev trang
      *Và show hiển thị từ đến

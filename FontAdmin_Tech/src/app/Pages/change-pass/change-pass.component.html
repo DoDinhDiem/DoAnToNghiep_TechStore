@@ -20,7 +20,7 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mật khẩu hiện tại</label>
                                 <div class="input-group input-group-merge">
-                                    <input [type]="passwordType" id="password" [(ngModel)]="changePass.currentPassword"
+                                    <input [type]="passwordType" id="password1" [(ngModel)]="changePass.currentPassword"
                                         class="form-control" placeholder="Mật khẩu hiện tại">
                                     <div class="input-group-text" (click)="togglePasswordVisibility()"> <i class="mdi"
                                             [ngClass]="{' mdi-eye': passwordType === 'password',
@@ -31,7 +31,7 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mật khẩu mới</label>
                                 <div class="input-group input-group-merge">
-                                    <input [type]="passwordType" id="password" [(ngModel)]="changePass.newPassword"
+                                    <input [type]="passwordType" id="password2" [(ngModel)]="changePass.newPassword"
                                         class="form-control" placeholder="Mật khẩu mới">
                                     <div class="input-group-text" (click)="togglePasswordVisibility()"> <i class="mdi"
                                             [ngClass]="{' mdi-eye': passwordType === 'password',
@@ -43,7 +43,7 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Xác nhận lại mật khẩu</label>
                                 <div class="input-group input-group-merge">
-                                    <input [type]="passwordType" id="password" [(ngModel)]="confirmNewPassword"
+                                    <input [type]="passwordType" id="password3" [(ngModel)]="confirmNewPassword"
                                         class="form-control" placeholder="Xác nhận lại mật khẩu">
                                     <div class="input-group-text" (click)="togglePasswordVisibility()"> <i class="mdi"
                                             [ngClass]="{' mdi-eye': passwordType === 'password',

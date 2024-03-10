@@ -191,14 +191,18 @@
     padding: 2px 6px;
 }
 
-.order-status.shipped {
-    background-color: rgba(0, 171, 85, 0.078);
-    color: #007b55;
+.order-status.wait {
+    background-color: rgb(255 255 0 / 8%);
+    color: #8c8c03;
 }
 
 .order-status.shipped {
     background-color: rgba(0, 171, 85, 0.078);
     color: #007b55;
+}
+.order-status.cancel {
+    background-color: rgb(255 0 0 / 8%);
+    color: #ff0101;
 }
 
 .order-status {

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core'
 import { IKhachHang } from 'src/app/Models/khach-hang'
 import { KhachHangService } from 'src/app/Service/khach-hang.service'
+import * as moment from 'moment'
+import { ExcelService } from 'src/app/Service/excel.service'
 
 @Component({
     selector: 'app-khach-hang',
@@ -9,7 +11,7 @@ import { KhachHangService } from 'src/app/Service/khach-hang.service'
 })
 export class KhachHangComponent {
     title = 'Khách hàng'
-    constructor(private khachHangService: KhachHangService) {}
+    constructor(private khachHangService: KhachHangService, private excelService: ExcelService) {}
 
     khachhang!: IKhachHang
     khachhangList: any
@@ -20,9 +22,9 @@ export class KhachHangComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.khachHangService.search(this.key, this.email, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.khachHangService.search(this.key, this.email, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.khachhangList = data
-                console.log(data)
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -32,6 +34,40 @@ export class KhachHangComponent {
         this.khachHangService.updateTrangThai(khachhang.id).subscribe((res) => {
             this.loadData()
         })
+    }
+
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = ['Mã khách hàng', 'Họ tên', 'Email', 'Số điện thoại', 'Địa chỉ', 'Giới tính', 'Ngày sinh', 'Trạng thái', 'Ngày tạo', 'Ngày sửa']
+
+        const data = this.loaiXlsx.map((item: any) => [
+            item.id,
+            item.hoTen,
+            item.email,
+            item.soDienThoai,
+            item.diaChi,
+            item.gioiTinh,
+            this.formatDate(item.ngaySinh),
+            item.trangThai,
+            this.formatDateTime(item.createdAt),
+            this.formatDateTime(item.updatedAt)
+        ])
+
+        this.excelService.exportAsExcelFile(data, headers, 'KhachHang')
+    }
+
+    private formatDateTime(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY')
     }
 
     //Khai báo key, page, pageSize

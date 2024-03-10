@@ -26,7 +26,6 @@ export class HoaDonXuatComponent {
             this.hoaDonXuatService.search(this.currentPage, this.selectedPageSize).subscribe((data) => {
                 this.hoadonxuatList = data
                 this.showSkeleton = false
-                console.log(data)
             })
         }, 2000)
     }
@@ -37,7 +36,6 @@ export class HoaDonXuatComponent {
         this.hoaDonXuatService.getById(hoaDon.id).subscribe((data) => {
             this.hoadonxuat = data.hoaDons
             this.visible_edit = true
-            console.log(this.hoadonxuat)
         })
     }
     hoadonDetail!: any
@@ -46,12 +44,24 @@ export class HoaDonXuatComponent {
         this.hoaDonXuatService.getById(hoaDon.id).subscribe((data) => {
             this.hoadonDetail = data.hoaDons
             this.chiTietHoaDon = data.chiTiet
-            console.log(this.hoadonDetail)
-            console.log(this.chiTietHoaDon)
         })
     }
 
-    onSubmit() {}
+    onSubmit() {
+        if (this.hoadonxuat.trangThaiDonHang && this.hoadonxuat.id) {
+            this.hoaDonXuatService.update(this.hoadonxuat).subscribe({
+                next: (res) => {
+                    this.loadData()
+                    this.closeDialog()
+                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                },
+                error: (err) => {
+                    this.loadData()
+                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                }
+            })
+        }
+    }
 
     //Khai báo key, page, pageSize
     currentPage: number = 1

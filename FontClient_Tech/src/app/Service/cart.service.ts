@@ -31,7 +31,8 @@ export class CartService {
                 tenSanPham: product.tenSanPham,
                 image: product.avatar,
                 thanhTien: product.giaBan - product.giamGia,
-                soLuong: 1
+                soLuong: 1,
+                soLuongTon: product.soLuongTon
             }
             this.cartItems.push(newItem)
         }
@@ -50,7 +51,8 @@ export class CartService {
                 tenSanPham: product.tenSanPham,
                 image: product.avatar,
                 thanhTien: product.giaBan - product.giamGia,
-                soLuong: quantity
+                soLuong: quantity,
+                soLuongTon: product.soLuongTon
             }
             this.cartItems.push(newItem)
         }
@@ -62,14 +64,24 @@ export class CartService {
     }
 
     incrementQuantity(product: any) {
-        product.soLuong += 1
-        this.updateCart()
+        if (product.soLuong >= product.soLuongTon) {
+            return
+        } else {
+            product.soLuong += 1
+            this.updateCart()
+        }
     }
 
     decrementQuantity(product: any) {
         if (product.soLuong > 1) {
             product.soLuong -= 1
             this.updateCart()
+        } else {
+            const index = this.cartItems.findIndex((x: any) => x.id === product.id)
+            if (index > -1) {
+                this.cartItems.splice(index, 1)
+                this.updateCart()
+            }
         }
     }
 

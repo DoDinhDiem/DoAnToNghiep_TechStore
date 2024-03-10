@@ -1,11 +1,12 @@
 import { Component } from '@angular/core'
 import { ConfirmationService, MessageService } from 'primeng/api'
-import { UploadEvent } from 'primeng/fileupload'
 import { ISanPham } from 'src/app/Models/san-pham'
 import { SanPhamService } from 'src/app/Service/san-pham.service'
 import { baseUrl } from 'src/app/Api/baseHttp'
 import { LoaiSanPhamService } from 'src/app/Service/loai-san-pham.service'
 import { HangSanPhamService } from 'src/app/Service/hang-san-pham.service'
+import { ExcelService } from 'src/app/Service/excel.service'
+import * as moment from 'moment'
 
 @Component({
     selector: 'app-san-pham',
@@ -41,7 +42,8 @@ export class SanPhamComponent {
         private messageService: MessageService,
         private sanphamService: SanPhamService,
         private loaiService: LoaiSanPhamService,
-        private hangService: HangSanPhamService
+        private hangService: HangSanPhamService,
+        private excelService: ExcelService
     ) {}
 
     ngOnInit() {
@@ -80,8 +82,9 @@ export class SanPhamComponent {
             }))
         })
         setTimeout(() => {
-            this.sanphamService.search(this.key, this.giaBanMin, this.giaBanMax, this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.sanphamService.search(this.key, this.giaBanMin, this.giaBanMax, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
                 this.sanphamList = data
+                this.loaiXlsx = data.items
                 this.showSkeleton = false
             })
         }, 2000)
@@ -99,8 +102,8 @@ export class SanPhamComponent {
         this.sanphamService.getById(sanpham.id).subscribe((data) => {
             this.edit = true
             this.sanpham = data.sanPham
-            this.selectedFiles = data.anhSanPhams
-            this.fileOnly = data.image
+            this.selectedFiles = data.anhSanPhams.map((item: any) => ({ name: item.image }))
+            this.fileOnly = { name: data.image }
             this.productParameters = data.thongSos
             this.visible = true
             this.Save = 'Cập nhập'
@@ -116,15 +119,12 @@ export class SanPhamComponent {
         this.sanpham.anhSanPhams = []
 
         if (this.fileOnly) {
-            //Một ảnh
-            for (let i = 0; i < this.fileOnly.length; i++) {
-                const file = this.fileOnly[i]
-                const img = {
-                    image: file.name,
-                    trangThai: true
-                }
-                this.sanpham.anhSanPhams.push(img)
+            const file = this.fileOnly
+            const img = {
+                image: file.name,
+                trangThai: true
             }
+            this.sanpham.anhSanPhams.push(img)
         }
 
         if (this.selectedFiles) {
@@ -151,8 +151,13 @@ export class SanPhamComponent {
             this.sanpham.thongSos.push(thongSo)
         }
 
-        if (this.fileOnly || this.selectedFiles) {
+        if (this.fileOne) {
+            this.onUploadOne()
+            this.fileOne = false
+        }
+        if (this.fileSelect) {
             this.onUpload()
+            this.fileSelect = false
         }
 
         if (this.sanpham.tenSanPham && this.sanpham.id) {
@@ -183,8 +188,8 @@ export class SanPhamComponent {
 
     //Xóa 1 sản phẩm
     delete(sanpham: any) {
-        const tenSanPham = sanpham.sanPham.tenSanPham
-        const id = sanpham.sanPham.id
+        const tenSanPham = sanpham.tenSanPham
+        const id = sanpham.id
         this.confirmationService.confirm({
             message: 'Bạn có chắc chắn muốn xóa ' + tenSanPham + '?',
             header: 'Thông báo',
@@ -198,6 +203,53 @@ export class SanPhamComponent {
         })
     }
 
+    loaiXlsx: any
+    exportToExcel(): void {
+        const headers = [
+            'Mã sản phẩm',
+            'Tên sản phẩm',
+            'Giá bán',
+            'Giá khuyến mại',
+            'Số lượng tồn',
+            'Bảo hành',
+            'Mô ta',
+            'Loại sản phẩm',
+            'Hãng sản phẩm',
+            'Trạng thái',
+            'Ngày tạo',
+            'Ngày sửa'
+        ]
+
+        const data = this.loaiXlsx.map((item: any) => [
+            item.id,
+            item.tenSanPham,
+            item.giaBan,
+            item.giamGia,
+            item.soLuongTon,
+            item.baoHang,
+            this.truncateString(item.moTa, 32767),
+            item.tenLoai,
+            item.tenHang,
+            item.trangThai,
+            this.formatDate(item.createdAt),
+            this.formatDate(item.updatedAt)
+        ])
+
+        this.excelService.exportAsExcelFile(data, headers, 'SanPham')
+    }
+
+    private formatDate(dateString: string): string {
+        if (!dateString) {
+            return ''
+        }
+        return moment(dateString).format('DD/MM/YYYY HH:mm')
+    }
+
+    private truncateString(str: string, maxLength: number): string {
+        if (!str) return ''
+        return str.length > maxLength ? str.substring(0, maxLength) : str
+    }
+
     /*
      *Upload ảnh sản phẩm
      */
@@ -205,21 +257,39 @@ export class SanPhamComponent {
     fileOnly: any
     selectedFiles!: any[]
     sequenceNumber = 0
+    fileOne: boolean = false
+    fileSelect: boolean = false
 
     onFilesArray(event: any) {
         const files: FileList = event.target.files
-        this.selectedFiles = Array.from(files).map((file) => {
-            const newName = this.generateNewFileName(file.name)
-            return new File([file], newName, { type: file.type })
-        })
+        if (files.length > 0) {
+            this.fileSelect = true
+            this.selectedFiles = Array.from(files).map((file) => {
+                const newName = this.generateNewFileName(file.name)
+                return new File([file], newName, { type: file.type })
+            })
+        } else {
+            this.fileSelect = false
+        }
     }
 
     onFileOnly(event: any) {
         const files: FileList = event.target.files
-        this.fileOnly = Array.from(files).map((file) => {
+        if (files.length > 0) {
+            this.fileOne = true
+            const file = files[0]
             const newName = this.generateNewFileName(file.name)
-            return new File([file], newName, { type: file.type })
-        })
+            this.fileOnly = new File([file], newName, { type: file.type })
+        } else {
+            this.fileOne = false
+        }
+    }
+
+    generateNewFileNameOne(oldFileName: string): string {
+        const timestamp = new Date().getTime()
+        const extension = oldFileName.split('.').pop()
+        const newFileName = `products_${timestamp}.${extension}`
+        return newFileName
     }
 
     generateNewFileName(oldFileName: string): string {
@@ -230,12 +300,15 @@ export class SanPhamComponent {
         return newFileName
     }
     onUpload() {
-        if (this.fileOnly && this.fileOnly.length > 0) {
-            this.sanphamService.uploadFiles(this.fileOnly).subscribe({})
-        }
-        if (this.selectedFiles && this.selectedFiles.length > 0) {
-            this.sanphamService.uploadFiles(this.selectedFiles).subscribe({})
-        }
+        this.sanphamService.uploadFiles(this.selectedFiles).subscribe(() => {
+            this.fileOne = false
+        })
+    }
+
+    onUploadOne() {
+        this.sanphamService.uploadFileOne(this.fileOnly).subscribe(() => {
+            this.fileSelect = false
+        })
     }
 
     /*

@@ -1,6 +1,7 @@
 ﻿using BackEnd_Tech.Models;
 using BackEnd_Tech.Models.Dto;
 using BackEnd_Tech.Models.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -19,6 +20,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class LoginController : ControllerBase
     {
         private TechStoreContext _context;
@@ -188,6 +190,7 @@ namespace BackEnd_Tech.Controllers
             {
                 new Claim(ClaimTypes.Role, roleTenRole),
                 new Claim("chucVu", tenChucVu),
+                new Claim("id", model.Id.ToString()),
                 new Claim(ClaimTypes.Email, model.Email),
                 new Claim(ClaimTypes.Name, model.HoTen)
             });
@@ -197,7 +200,7 @@ namespace BackEnd_Tech.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = credentials
             };
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);

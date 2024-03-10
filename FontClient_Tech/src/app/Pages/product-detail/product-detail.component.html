@@ -65,8 +65,9 @@
                                                 <i class="icon-plus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" style="text-align: center" [value]="quantity" min="1"
-                                            max="10" class="form-control " required="" placeholder="" />
+                                        <input type="text" style="text-align: center" [value]="quantity" min="0"
+                                            max="{{sanPham?.soLuongTon}}" class="form-control " required=""
+                                            placeholder="" />
                                     </div>
                                 </div>
 
@@ -218,7 +219,8 @@
                                                     thích</span></a>
                                         </div>
                                         <div class="product-action product-action-dark">
-                                            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
+                                            <a href="javascript:void(0)" (click)="addToCart(item)"
+                                                class="btn-product btn-cart" title="Add to cart"><span>Thêm vào
                                                     giỏ hàng</span></a>
                                         </div>
                                     </figure>

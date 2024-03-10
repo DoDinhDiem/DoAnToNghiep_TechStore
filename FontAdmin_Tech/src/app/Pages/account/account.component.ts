@@ -30,7 +30,6 @@ export class AccountComponent {
     onSubmit() {
         this.auth.signIn(this.nhanvien).subscribe({
             next: (res) => {
-                console.log(res)
                 this.nhanvien = {}
                 this.auth.storeToken(res.accessToken)
                 this.auth.storeRefreshToken(res.refreshToken)

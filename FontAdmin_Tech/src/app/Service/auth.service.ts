@@ -63,7 +63,11 @@ export class AuthService {
         if (this.userPayload) return this.userPayload.chucVu
     }
 
+    getIdFromToken() {
+        if (this.userPayload) return this.userPayload.id
+    }
+
     renewToken(tokenApi: TokenApiModel) {
-        return this.http.post<any>(baseUrl + 'api/Login/Refresh', tokenApi)
+        return this.http.post<any>(baseUrl + 'api/Login/RefreshToken', tokenApi)
     }
 }

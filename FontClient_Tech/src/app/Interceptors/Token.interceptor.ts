@@ -48,6 +48,7 @@ export class TokenInterceptor implements HttpInterceptor {
                         detail: 'Thông báo',
                         summary: 'Phiên bản hết hạn! Vui lòng đăng nhập lại'
                     })
+                    this.auth.isLoggedIn()
                     this.router.navigate(['account'])
                 })
             })

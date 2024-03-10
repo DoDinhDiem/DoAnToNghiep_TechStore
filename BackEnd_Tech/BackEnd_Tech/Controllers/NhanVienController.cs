@@ -1,5 +1,6 @@
 ﻿using BackEnd_Tech.Models;
 using BackEnd_Tech.Models.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     public class NhanVienController : ControllerBase
     {
         private TechStoreContext _context;
@@ -17,7 +19,7 @@ namespace BackEnd_Tech.Controllers
             _context = context;
             _environment = environment;
         }
-
+        [Authorize(Roles = "Role_Admin")]
         [Route("GetById_NhanVien/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetByIdNhanVien(int id)
@@ -37,6 +39,7 @@ namespace BackEnd_Tech.Controllers
         }
 
 
+        [Authorize(Roles = "Role_Admin, Role_User")]
         [Route("GetByEmail_NhanVien/{email}")]
         [HttpGet]
         public async Task<IActionResult> GetByEmailNhanVien(string email)
@@ -55,7 +58,7 @@ namespace BackEnd_Tech.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Role_Admin")]
         [Route("Create_NhanVien")]
         [HttpPost]
         public async Task<IActionResult> CreateNhanVien([FromBody] NhanVien model)
@@ -73,7 +76,7 @@ namespace BackEnd_Tech.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Role_Admin")]
         [Route("Update_NhanVien")]
         [HttpPut]
         public async Task<IActionResult> UpdateNhanVien([FromBody] NhanVien model)
@@ -106,7 +109,7 @@ namespace BackEnd_Tech.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Role_Admin")]
         [Route("TrangThai/{id}")]
         [HttpPut]
         public async Task<IActionResult> UpdateTrangThai(int id)
@@ -129,7 +132,7 @@ namespace BackEnd_Tech.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Role_Admin")]
         [Route("Search_NhanVien")]
         [HttpGet]
         public async Task<IActionResult> SearchNhanVien([FromQuery] string? hoTen, string? email, int page = 1, int pageSize = 10)
@@ -165,7 +168,18 @@ namespace BackEnd_Tech.Controllers
                                             .Take(pageSize)
                                             .Select(nv => new
                                             {
-                                                nhanVien = nv,
+                                                id = nv.Id,
+                                                avatar = nv.Avatar,
+                                                hoTen = nv.HoTen,
+                                                email = nv.Email,
+                                                soDienThoai = nv.SoDienThoai,
+                                                diaChi= nv.DiaChi,
+                                                gioiTinh = nv.GioiTinh,
+                                                ngaySinh = nv.NgaySinh,
+                                                ngayVaoLam = nv.NgayVaoLam,
+                                                trangThai = nv.TrangThai,
+                                                createdAt = nv.CreatedAt,
+                                                updatedAt = nv.UpdatedAt,
                                                 tenQuyen = _context.Roles.Where(role => role.Id == nv.RoleId).Select(x => x.TenRole).FirstOrDefault(),
                                                 tenChucVu = _context.ChucVus.Where(cv => cv.Id == nv.ChucVuId).Select(x => x.TenChucVu).FirstOrDefault(),
                                             })

@@ -1,5 +1,6 @@
 ﻿using BackEnd_Tech.Models;
 using BackEnd_Tech.Models.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace BackEnd_Tech.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Role_Admin")]
     public class FeedBackController : ControllerBase
     {
         private TechStoreContext _context;

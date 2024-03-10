@@ -26,11 +26,10 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-light mb-2">Xuất
+                                Exel</button>
                         </div>
                     </div>
-                    <!-- end col -->
                 </div>
 
                 <div class="table-responsive">
@@ -127,8 +126,9 @@
 
     <ng-template pTemplate="content">
         <div class="mb-3">
-            <label for="tenLoai" class="form-label">Tên loại </label>
+            <label for="tenLoai" class="form-label">Tên loại <a class="text-danger">(*)</a></label>
             <input type="text" [(ngModel)]="loaisp.tenLoai" id="tenLoai" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !loaisp.tenLoai">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

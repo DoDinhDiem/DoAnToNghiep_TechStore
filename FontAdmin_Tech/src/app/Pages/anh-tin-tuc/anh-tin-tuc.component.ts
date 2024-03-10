@@ -78,7 +78,7 @@ export class AnhTinTucComponent {
     editModal(anhTT: IAnhTinTuc) {
         this.anhTinTucService.getById(anhTT.id).subscribe((data) => {
             this.anhTT = data
-            this.fileEdit = data.image
+            this.fileOnly = { name: data.avatar }
             this.visible = true
             this.Save = 'Cập nhập'
         })

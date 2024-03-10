@@ -32,10 +32,7 @@
                             Quay lại</button>
                     </div>
                     <div class="col-sm-8">
-                        <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
-                        </div>
+
                     </div>
                     <!-- end col -->
                 </div>
@@ -138,9 +135,9 @@
         <div class="mb-3">
             <label for="tenLoai" class="form-label">Ảnh sản phẩm <a class="text-danger">(*)</a></label>
             <input type="file" id="tenLoai" class="form-control" (change)="onFileOnly($event)" autocomplete="off">
-            <div class="row mt-2" *ngIf="fileEdit">
+            <div class="row mt-2">
                 <div class="col">
-                    <img style="height: 100px; border-radius: 5px;" src="{{baseUrl}}Uploads/Products/{{fileEdit}}"
+                    <img style="height: 100px; border-radius: 5px;" src="{{baseUrl}}Uploads/Products/{{fileOnly.name}}"
                         alt="">
                 </div>
             </div>

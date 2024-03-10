@@ -31,7 +31,7 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/jvectormap/jquery-jvectormap.min.js"
                         ],
-                        "allowedCommonJsDependencies": ["chart.js", "xlsx", "jspdf-autotable", "file-saver", "jspdf", "quill"]
+                        "allowedCommonJsDependencies": ["chart.js", "xlsx", "jspdf-autotable", "file-saver", "jspdf", "quill", "moment"]
                     },
                     "configurations": {
                         "production": {

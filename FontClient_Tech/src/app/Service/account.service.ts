@@ -70,6 +70,9 @@ export class AccountService {
     getEmailFromToken() {
         if (this.userPayload) return this.userPayload.email
     }
+    getIdFromToken() {
+        if (this.userPayload) return this.userPayload.id
+    }
 
     renewToken(tokenApi: TokenApiModel) {
         return this.http.post<any>(baseUrl + 'api/LoginClient/RefreshToken', tokenApi)

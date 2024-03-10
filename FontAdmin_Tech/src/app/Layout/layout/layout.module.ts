@@ -145,7 +145,6 @@ import { RoleModule } from 'src/app/Pages/role/role.module'
 import { SlideModule } from 'src/app/Pages/slide/slide.module'
 import { AboutModule } from 'src/app/Pages/about/about.module'
 import { ContactModule } from 'src/app/Pages/contact/contact.module'
-import { NgToastModule } from 'ng-angular-popup'
 import { AccountComponent } from 'src/app/Pages/account/account.component'
 import { AccountModule } from 'src/app/Pages/account/account.module'
 import { FeedBackComponent } from 'src/app/Pages/feed-back/feed-back.component'
@@ -154,6 +153,11 @@ import { ResetPassComponent } from 'src/app/Pages/reset-pass/reset-pass.componen
 import { ResetPassModule } from 'src/app/Pages/reset-pass/reset-pass.module'
 import { ChangePassComponent } from 'src/app/Pages/change-pass/change-pass.component'
 import { ChangePassModule } from 'src/app/Pages/change-pass/change-pass.module'
+import { MaGiamGiaComponent } from 'src/app/Pages/ma-giam-gia/ma-giam-gia.component'
+import { GiamGiaActiveComponent } from 'src/app/Pages/giam-gia-active/giam-gia-active.component'
+import { GiamGiaActiveModule } from 'src/app/Pages/giam-gia-active/giam-gia-active.module'
+import { MaGiamGiaModule } from 'src/app/Pages/ma-giam-gia/ma-giam-gia.module'
+import { TokenInterceptor } from 'src/app/Interceptors/Token.interceptor'
 
 @NgModule({
     declarations: [
@@ -185,7 +189,9 @@ import { ChangePassModule } from 'src/app/Pages/change-pass/change-pass.module'
         AccountComponent,
         FeedBackComponent,
         ResetPassComponent,
-        ChangePassComponent
+        ChangePassComponent,
+        MaGiamGiaComponent,
+        GiamGiaActiveComponent
     ],
     imports: [
         LoaiSanPhamModule,
@@ -212,6 +218,8 @@ import { ChangePassModule } from 'src/app/Pages/change-pass/change-pass.module'
         FeedBackModule,
         ResetPassModule,
         ChangePassModule,
+        MaGiamGiaModule,
+        GiamGiaActiveModule,
         //PrimeNG
         BrowserModule,
         AvatarModule,
@@ -308,8 +316,7 @@ import { ChangePassModule } from 'src/app/Pages/change-pass/change-pass.module'
         TreeTableModule,
         AnimateModule,
         CardModule,
-        RouterModule,
-        NgToastModule
+        RouterModule
     ]
 })
 export class LayoutModule {}

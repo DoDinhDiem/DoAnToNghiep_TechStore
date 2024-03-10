@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end">
-                            <button type="button" class="btn btn-light mb-2 me-1">Nhập</button>
-                            <button type="button" class="btn btn-light mb-2">Xuất</button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-light mb-2">Xuất
+                                Excel</button>
                         </div>
                     </div>
                     <!-- end col -->
@@ -84,17 +84,17 @@
                                         {{item.tenDanhMuc}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.tinTuc.tieuDe}}
+                                        {{item.tieuDe}}
                                     </td>
                                     <td class="text-center">
-                                        {{item.tinTuc.noiDung | slice:0:120}}
+                                        {{item.noiDung | slice:0:120}}
                                     </td>
                                     <td class="text-center">
                                         {{item.tenNguoiViet}}
                                     </td>
                                     <td class="text-center">
-                                        <p-inputSwitch [(ngModel)]="item.tinTuc.trangThai"
-                                            (ngModelChange)="trangThai(item.tinTuc)"></p-inputSwitch>
+                                        <p-inputSwitch [(ngModel)]="item.trangThai"
+                                            (ngModelChange)="trangThai(item)"></p-inputSwitch>
                                     </td>
                                     <td>
                                         <div class="btn-group dropdown">
@@ -103,18 +103,18 @@
                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                     class="mdi mdi-dots-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end drop-action">
+                                                <!-- <button class="dropdown-item"
+                                                    [routerLink]="['/tintuc/anhtintuc', item.id]"><i
+                                                        class="mdi dripicons-photo-group me-2 text-muted vertical-middle"></i>Ảnh</button> -->
                                                 <button class="dropdown-item"
-                                                    [routerLink]="['/tintuc/anhtintuc', item.tinTuc.id]"><i
-                                                        class="mdi dripicons-photo-group me-2 text-muted vertical-middle"></i>Ảnh</button>
-                                                <button class="dropdown-item"
-                                                    [routerLink]="['/tintuc/binhluantintuc', item.tinTuc.id]"><i
+                                                    [routerLink]="['/tintuc/binhluantintuc', item.id]"><i
                                                         class="uil  uil-comments-alt me-2 text-muted vertical-middle"></i>Bình
                                                     luận</button>
-                                                <button class="dropdown-item" (click)="showSeeDialog(item.tinTuc)"><i
-                                                        class="mdi mdi-eye me-2 text-muted vertical-middle"></i>Xem</button>
-                                                <button class="dropdown-item" (click)="editModal(item.tinTuc)"><i
+                                                <!-- <button class="dropdown-item" (click)="showSeeDialog(item)"><i
+                                                        class="mdi mdi-eye me-2 text-muted vertical-middle"></i>Xem</button> -->
+                                                <button class="dropdown-item" (click)="editModal(item)"><i
                                                         class="mdi mdi-square-edit-outline me-2 text-muted vertical-middle"></i>Sửa</button>
-                                                <button class="dropdown-item" (click)="delete(item.tinTuc)"><i
+                                                <button class="dropdown-item" (click)="delete(item)"><i
                                                         class="mdi mdi-delete me-2 text-muted vertical-middle"></i>Xóa</button>
                                             </div>
                                         </div>
@@ -171,36 +171,38 @@
                 </select>
             </div>
         </div>
-        <div class="row mb-2">
-            <div class="mb-2 col-md-6">
-                <label for="tenLoai" class="form-label">Ảnh đại diện <a class="text-danger">(*)</a></label>
-                <input type="file" class="form-control" (change)="onFileOnly($event)">
-                <div class="row mt-2" *ngIf="fileOnlyEdit">
-                    <div class="col">
-                        <img style="height: 100px; border-radius: 5px;"
-                            src="{{baseUrl}}Uploads/News/{{fileOnlyEdit.image}}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-md-6">
-                <label for="tenLoai" class="form-label">Ảnh chi tiết</label>
-                <input type="file" class="form-control" multiple (change)="onFilesArray($event)">
-                <div class="row" *ngIf="selectedFilesEdit">
-                    <div class="col mt-2" *ngFor="let item of selectedFilesEdit">
-                        <img style="height: 100px; margin-right: 2px; border-radius: 5px;"
-                            src="{{baseUrl}}Uploads/News/{{item.image}}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="mb-2">
             <label for="tenLoai" class="form-label">Nội dung</label>
             <p-editor [(ngModel)]="tintuc.noiDung" [style]="{ height: '180px' }"></p-editor>
         </div>
-        <div class="mb-3">
-            <label for="trangThai" class="form-label">Trạng thái <a class="text-danger">(*)</a></label>
-            <br>
-            <p-inputSwitch [(ngModel)]="tintuc.trangThai"></p-inputSwitch>
+        <div class="row mb-2">
+            <div class="mb-2 col-md-6">
+                <label for="tenLoai" class="form-label">Ảnh <a class="text-danger">(*)</a></label>
+                <input type="file" class="form-control" (change)="onFileOnly($event)">
+                <div class="row mt-2">
+                    <div class="col">
+                        <img style="height: 100px; border-radius: 5px;" src="{{baseUrl}}Uploads/News/{{fileOnly?.name}}"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2 col-md-6">
+                <label for="trangThai" class="form-label">Trạng thái <a class="text-danger">(*)</a></label>
+                <br>
+                <p-inputSwitch [(ngModel)]="tintuc.trangThai"></p-inputSwitch>
+            </div>
+            <!-- <div class="mb-2 col-md-6">
+                <label for="tenLoai" class="form-label">Ảnh chi tiết</label>
+                <input type="file" class="form-control" multiple (change)="onFilesArray($event)">
+                <div class="row">
+                    <div class="col mt-2" *ngFor="let item of selectedFiles">
+                        <img style="height: 100px; margin-right: 2px; border-radius: 5px;"
+                            src="{{baseUrl}}Uploads/News/{{item.name}}" alt="">
+                    </div>
+                </div>
+            </div> -->
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
@@ -209,14 +211,15 @@
     </ng-template>
 </p-dialog>
 
-<p-dialog [header]="title" [(visible)]="visible_look" position="top" [style]="{ 'width': '45vw', 'height': '670px' }"
+<!-- <p-dialog [header]="title" [(visible)]="visible_look" position="top" [style]="{ 'width': '45vw', 'height': '670px' }"
     [draggable]="false">
     <div class="card mt-1" style="box-shadow:  1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);">
-        <img *ngIf="image" style="width: 80%; margin: auto;" src="{{baseUrl}}Uploads/News/{{image.image}}"
-            class="card-img-top mt-2" alt="Card image cap">
+        <img style="width: 80%; margin: auto;" src="{{baseUrl}}Uploads/News/{{image}}" class="card-img-top mt-2"
+            alt="Card image cap">
         <div class="card-body text-center">
             <p class="card-text">
-                <small class="text-muted">bởi {{nguoiViet}} | {{tintucDetail?.createdAt | date: 'dd/MM/yyyy'}}</small>
+                <small class="text-muted">
+                    bởi {{nguoiViet}} | {{tintucDetail?.createdAt | date: 'dd/MM/yyyy HH:mm'}}</small>
             </p>
             <h5 class="card-title">{{tintucDetail?.tieuDe}}</h5>
             <p class="card-text">
@@ -226,7 +229,7 @@
     <ng-template pTemplate="footer">
         <button type="button" class="btn btn-light" (click)="closeSeeDialog()">Đóng</button>
     </ng-template>
-</p-dialog>
+</p-dialog> -->
 
 <p-toast></p-toast>
 <p-confirmDialog [style]="{ width: '450px', }"></p-confirmDialog>
