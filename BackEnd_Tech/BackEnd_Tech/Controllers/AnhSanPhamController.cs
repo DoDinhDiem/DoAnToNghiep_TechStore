@@ -11,9 +11,9 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class AnhSanPhamController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
         public static IWebHostEnvironment _environment;
-        public AnhSanPhamController(TechStoreContext context, IWebHostEnvironment environment)
+        public AnhSanPhamController(TechStoreMainContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;

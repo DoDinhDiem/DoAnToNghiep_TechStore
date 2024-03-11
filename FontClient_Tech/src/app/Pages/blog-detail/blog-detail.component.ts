@@ -103,6 +103,7 @@ export class BlogDetailComponent {
             this.comment.hoTen = this.auth.getfullNameFromToken()
             this.comment.email = this.auth.getEmailFromToken()
             this.comment.khachHangId = this.auth.getIdFromToken()
+            console.log(this.comment)
             this.comment.trangThai = true
             this.chiTietTinTucService.create(this.comment).subscribe((res) => {
                 this.GetBinhLuanTinTuc()

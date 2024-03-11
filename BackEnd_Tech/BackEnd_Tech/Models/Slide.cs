@@ -7,7 +7,6 @@ namespace BackEnd_Tech.Models
     {
         public int Id { get; set; }
         public string? Image { get; set; }
-        public string? Link { get; set; }
         public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

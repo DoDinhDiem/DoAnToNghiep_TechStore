@@ -11,9 +11,9 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin")]
     public class SlideController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
         public static IWebHostEnvironment _environment;
-        public SlideController(TechStoreContext context, IWebHostEnvironment environment)
+        public SlideController(TechStoreMainContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;
@@ -72,7 +72,6 @@ namespace BackEnd_Tech.Controllers
             }
 
             query.Image = model.Image;
-            query.Link = model.Link;
             query.TrangThai = model.TrangThai;
 
             await _context.SaveChangesAsync();

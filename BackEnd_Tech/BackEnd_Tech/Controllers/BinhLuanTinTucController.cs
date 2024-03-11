@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class BinhLuanTinTucController : ControllerBase
     {
-        private TechStoreContext _context;
-        public BinhLuanTinTucController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public BinhLuanTinTucController(TechStoreMainContext context)
         {
             _context = context;
         }
@@ -33,7 +33,6 @@ namespace BackEnd_Tech.Controllers
                                               email = x.Email,
                                               noiDung = x.NoiDung,
                                               userComment = x.KhachHang.HoTen,
-                                              avatar = x.KhachHang.Avatar,
                                               createdAt = x.CreatedAt,
                                               trangThai = x.TrangThai
                                           }).FirstOrDefaultAsync();

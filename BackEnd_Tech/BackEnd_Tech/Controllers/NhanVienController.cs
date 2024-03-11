@@ -12,9 +12,9 @@ namespace BackEnd_Tech.Controllers
    
     public class NhanVienController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
         public static IWebHostEnvironment _environment;
-        public NhanVienController(TechStoreContext context, IWebHostEnvironment environment)
+        public NhanVienController(TechStoreMainContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;

@@ -14,14 +14,14 @@ namespace BackEnd_Tech.Models
         }
 
         public int Id { get; set; }
+        public int? LoaiSanPhamId { get; set; }
+        public int? HangSanPhamId { get; set; }
         public string? TenSanPham { get; set; }
         public decimal? GiaBan { get; set; }
         public decimal? GiamGia { get; set; }
         public int? SoLuongTon { get; set; }
         public string? BaoHang { get; set; }
         public string? MoTa { get; set; }
-        public int? LoaiSanPhamId { get; set; }
-        public int? HangSanPhamId { get; set; }
         public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

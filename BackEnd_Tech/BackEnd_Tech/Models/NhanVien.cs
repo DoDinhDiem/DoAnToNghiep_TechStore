@@ -13,6 +13,7 @@ namespace BackEnd_Tech.Models
 
         public int Id { get; set; }
         public int? RoleId { get; set; }
+        public int? ChucVuId { get; set; }
         public string? Email { get; set; }
         public string? PassWord { get; set; }
         public string? Avatar { get; set; }
@@ -22,14 +23,13 @@ namespace BackEnd_Tech.Models
         public string? GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
         public DateTime? NgayVaoLam { get; set; }
-        public int? ChucVuId { get; set; }
-        public bool? TrangThai { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public bool? PassTrue { get; set; }
+        public bool? TrangThai { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public virtual ChucVu? ChucVu { get; set; }
         public virtual Role? Role { get; set; }

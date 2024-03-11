@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class HoaDonXuatController : ControllerBase
     {
-        private TechStoreContext _context;
-        public HoaDonXuatController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public HoaDonXuatController(TechStoreMainContext context)
         {
             _context = context;
         }

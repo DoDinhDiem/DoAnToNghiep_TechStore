@@ -12,9 +12,9 @@ namespace BackEnd_Tech.Controllers
 
     public class TinTucController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
         public static IWebHostEnvironment _environment;
-        public TinTucController(TechStoreContext context, IWebHostEnvironment environment)
+        public TinTucController(TechStoreMainContext context, IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;

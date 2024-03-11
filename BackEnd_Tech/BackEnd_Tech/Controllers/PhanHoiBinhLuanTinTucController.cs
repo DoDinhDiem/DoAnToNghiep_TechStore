@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class PhanHoiBinhLuanTinTucController : ControllerBase
     {
-        private TechStoreContext _context;
-        public PhanHoiBinhLuanTinTucController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public PhanHoiBinhLuanTinTucController(TechStoreMainContext context)
         {
             _context = context;
         }
@@ -30,7 +30,6 @@ namespace BackEnd_Tech.Controllers
                                               id = x.Id,
                                               hoTen = x.HoTen,
                                               noiDung = x.NoiDung,
-                                              avatarClient = _context.KhachHangs.Where(a => a.Id == x.KhachHangId).Select(a => a.HoTen).FirstOrDefault(),
                                               avatar = _context.NhanViens.Where(a => a.Id == x.NhanVienId).Select(a => a.Avatar).FirstOrDefault(),
                                               createdAt = x.CreatedAt,
                                               trangThai = x.TrangThai

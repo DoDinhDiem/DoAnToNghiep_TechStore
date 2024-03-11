@@ -14,9 +14,9 @@ namespace BackEnd_Tech.Models
         public string? MaGiamGia { get; set; }
         public decimal? SoTienGiam { get; set; }
         public string? MoTa { get; set; }
-        public bool? TrangThai { get; set; }
         public int? SoLuong { get; set; }
         public DateTime? HanSuDung { get; set; }
+        public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
 
         public virtual ICollection<MaGiamActive> MaGiamActives { get; set; }

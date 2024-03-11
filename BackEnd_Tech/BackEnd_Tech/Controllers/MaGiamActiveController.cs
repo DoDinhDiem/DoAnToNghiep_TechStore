@@ -12,9 +12,9 @@ namespace BackEnd_Tech.Controllers
 
     public class MaGiamActiveController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
 
-        public MaGiamActiveController(TechStoreContext context)
+        public MaGiamActiveController(TechStoreMainContext context)
         {
             _context = context;
         }

@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class NhaCungCapController : ControllerBase
     {
-        private TechStoreContext _context;
-        public NhaCungCapController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public NhaCungCapController(TechStoreMainContext context)
         {
             _context = context;
         }

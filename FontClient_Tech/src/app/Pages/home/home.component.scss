@@ -14,7 +14,7 @@
     .p-carousel .p-carousel-indicators .p-carousel-indicator button {
         width: 20px;
         border: 0.1rem solid #c96;
-        background: transparent;
+        background: #fff;
         display: block;
         -webkit-backface-visibility: visible;
         transition: all 0.3s ease;
@@ -22,5 +22,10 @@
     }
     .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
         background-color: #fcb941;
+    }
+
+    .p-galleria .p-galleria-item-nav {
+        background: #fff;
+        color: #000;
     }
 }

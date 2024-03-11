@@ -303,25 +303,23 @@
             [circular]="true" [responsiveOptions]="responsiveOptions">
             <ng-template let-item pTemplate="item">
                 <div class="border-1 surface-border border-round px-1">
-                    <article class="entry" [style.width.px]="(tinTuc.length < 4) ? 277 : null">
+                    <article [style.width.px]="(tinTuc.length < 4) ? 277 : null"
+                        class="entry entry-grid entry-item-new p-3">
                         <figure class="entry-media">
                             <a [routerLink]="['/blog-detail', item.id]">
-                                <img src="{{baseUrl}}Uploads/News/{{item.anh}}" alt="image desc">
+                                <img src="{{baseUrl}}/Uploads/News/{{item.anh}}" style="height: 150px !important"
+                                    alt="image desc">
                             </a>
                         </figure>
 
                         <div class="entry-body">
                             <div class="entry-meta">
-                                <a href="#">{{item.createdAt | date: 'dd/MM/yyyy h:mm a'}}</a>
+                                <a href="javascript:void(0)">{{item.createdAt | date: 'dd/mm/yyyy HH:mm '}}</a>
                             </div>
 
-                            <h3 class="entry-title">
+                            <h2 class="entry-title">
                                 <a [routerLink]="['/blog-detail', item.id]">{{item.tieuDe}}</a>
-                            </h3>
-                            <div class="entry-content">
-                                <p [innerHTML]="item.noiDung | slice:0:120"></p>
-                                <a [routerLink]="['/blog-detail', item.id]" class="read-more">xem thêm</a>
-                            </div>
+                            </h2>
                         </div>
                     </article>
                 </div>

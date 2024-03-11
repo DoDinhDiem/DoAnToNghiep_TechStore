@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
 
     public class ChucVuController : ControllerBase
     {
-        private TechStoreContext _context;
-        public ChucVuController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public ChucVuController(TechStoreMainContext context)
         {
             _context = context;
         }

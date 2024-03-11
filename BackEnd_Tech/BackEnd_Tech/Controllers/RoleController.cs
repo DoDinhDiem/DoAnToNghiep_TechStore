@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin")]
     public class RoleController : ControllerBase
     {
-        private TechStoreContext _context;
-        public RoleController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public RoleController(TechStoreMainContext context)
         {
             _context = context;
         }

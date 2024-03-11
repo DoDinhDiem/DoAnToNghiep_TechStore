@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
 
     public class ThongSoController : ControllerBase
     {
-        private TechStoreContext _context;
-        public ThongSoController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public ThongSoController(TechStoreMainContext context)
         {
             _context = context;
         }

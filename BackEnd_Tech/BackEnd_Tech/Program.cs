@@ -43,7 +43,7 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 //Kết nối cơ sở dữ liệu
-builder.Services.AddDbContext<TechStoreContext>(options =>
+builder.Services.AddDbContext<TechStoreMainContext>(options =>
 {
     var configuration = builder.Configuration;
     options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));

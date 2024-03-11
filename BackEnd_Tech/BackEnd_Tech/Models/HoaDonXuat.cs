@@ -22,8 +22,8 @@ namespace BackEnd_Tech.Models
         public decimal? TongTien { get; set; }
         public int? TrangThaiDonHang { get; set; }
         public bool? TrangThaiThanhToan { get; set; }
-        public DateTime? CreatedAt { get; set; }
         public string? PhuongThucGiaoDich { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         public virtual KhachHang? User { get; set; }
         public virtual ICollection<ChiTietHoaDonXuat> ChiTietHoaDonXuats { get; set; }

@@ -23,7 +23,7 @@ namespace BackEnd_Tech.Controllers
     [AllowAnonymous]
     public class LoginClientController : ControllerBase
     {
-        private readonly TechStoreContext _context;
+        private readonly TechStoreMainContext _context;
         private AppSettings _appSettings;
         private readonly MailSettings _mailSettings;
         private static Random random = new Random();
@@ -31,7 +31,7 @@ namespace BackEnd_Tech.Controllers
         private const string UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string Digits = "0123456789";
         private const string SpecialCharacters = "!@#$%^&*()_+-=[]{}|;:'\"<>,.?/";
-        public LoginClientController(TechStoreContext context, IOptions<AppSettings> appSetting, IOptions<MailSettings> mailSettings)
+        public LoginClientController(TechStoreMainContext context, IOptions<AppSettings> appSetting, IOptions<MailSettings> mailSettings)
         {
             _context = context;
             _appSettings = appSetting.Value;

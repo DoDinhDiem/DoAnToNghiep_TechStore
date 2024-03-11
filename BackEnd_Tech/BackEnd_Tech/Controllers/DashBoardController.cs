@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
 
     public class DashBoardController : ControllerBase
     {
-        private TechStoreContext _context;
-        public DashBoardController(TechStoreContext context) {
+        private TechStoreMainContext _context;
+        public DashBoardController(TechStoreMainContext context) {
             _context = context;
         }
 

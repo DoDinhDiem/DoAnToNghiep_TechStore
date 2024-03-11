@@ -67,4 +67,10 @@
         fill: #fff;
         height: 1em;
     }
+    .entry-media img {
+        display: block;
+        max-width: none;
+        width: 100%;
+        max-height: 350px;
+    }
 }

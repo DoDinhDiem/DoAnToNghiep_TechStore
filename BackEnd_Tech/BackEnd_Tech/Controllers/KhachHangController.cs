@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class KhachHangController : ControllerBase
     {
-        private TechStoreContext _context;
-        public KhachHangController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public KhachHangController(TechStoreMainContext context)
         {
             _context = context;
         }

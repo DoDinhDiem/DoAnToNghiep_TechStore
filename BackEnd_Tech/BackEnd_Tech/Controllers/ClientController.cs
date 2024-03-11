@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private TechStoreContext _context;
-        public ClientController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public ClientController(TechStoreMainContext context)
         {
             _context = context;
         }
@@ -626,7 +626,6 @@ namespace BackEnd_Tech.Controllers
                                          id = x.Id,
                                          hoTen = x.HoTen,
                                          noiDung = x.NoiDung,
-                                         avatar = x.KhachHang.Avatar,
                                          createdAt = x.CreatedAt,
                                      }).ToListAsync();
 
@@ -660,7 +659,6 @@ namespace BackEnd_Tech.Controllers
                                          binhLuanId = x.BinhLuanId,
                                          hoTen = x.HoTen,
                                          noiDung = x.NoiDung,
-                                         avatarClient = _context.KhachHangs.Where(a => a.Id == x.KhachHangId).Select(a => a.Avatar).FirstOrDefault(),
                                          avatar = _context.NhanViens.Where(a => a.Id == x.NhanVienId).Select(a => a.Avatar).FirstOrDefault(),
                                          createdAt = x.CreatedAt,
                                      }).ToListAsync();

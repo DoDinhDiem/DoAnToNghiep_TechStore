@@ -11,8 +11,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin")]
     public class MaGiamGiaController : ControllerBase
     {
-        private TechStoreContext _context;
-        public MaGiamGiaController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public MaGiamGiaController(TechStoreMainContext context)
         {
             _context = context;
         }

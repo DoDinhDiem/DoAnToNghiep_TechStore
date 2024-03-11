@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class LoaiSanPhamController : ControllerBase
     {
-        private TechStoreContext _context;
-        public LoaiSanPhamController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public LoaiSanPhamController(TechStoreMainContext context)
         {
             _context = context;
         }

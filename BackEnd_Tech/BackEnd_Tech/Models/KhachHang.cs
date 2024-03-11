@@ -22,15 +22,14 @@ namespace BackEnd_Tech.Models
         public string? DiaChi { get; set; }
         public string? GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public bool? TrangThai { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public string? Avatar { get; set; }
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public int? VeryOtp { get; set; }
         public DateTime? VeryDate { get; set; }
+        public bool? TrangThai { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public virtual ICollection<BinhLuanTinTuc> BinhLuanTinTucs { get; set; }
         public virtual ICollection<FeedBack> FeedBacks { get; set; }

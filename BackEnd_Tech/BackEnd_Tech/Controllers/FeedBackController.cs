@@ -16,10 +16,10 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin")]
     public class FeedBackController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
         private readonly MailSettings _mailSettings;
 
-        public FeedBackController(TechStoreContext context, IOptions<MailSettings> mailSettings)
+        public FeedBackController(TechStoreMainContext context, IOptions<MailSettings> mailSettings)
         {
             _context = context;
             _mailSettings = mailSettings.Value;

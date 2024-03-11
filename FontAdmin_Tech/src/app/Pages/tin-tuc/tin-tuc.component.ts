@@ -58,6 +58,7 @@ export class TinTucComponent {
     //Đóng dialog
     closeDialog() {
         this.visible = false
+        this.fileOnly = {}
         this.tintuc = {}
     }
 

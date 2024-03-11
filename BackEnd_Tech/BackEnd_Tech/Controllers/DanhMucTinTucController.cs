@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
 
     public class DanhMucTinTucController : ControllerBase
     {
-        private TechStoreContext _context;
-        public DanhMucTinTucController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public DanhMucTinTucController(TechStoreMainContext context)
         {
             _context = context;
         }

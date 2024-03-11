@@ -12,8 +12,8 @@ namespace BackEnd_Tech.Controllers
 
     public class ContactController : ControllerBase
     {
-        private TechStoreContext _context;
-        public ContactController(TechStoreContext context)
+        private TechStoreMainContext _context;
+        public ContactController(TechStoreMainContext context)
         {
             _context = context;
         }

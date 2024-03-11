@@ -11,6 +11,7 @@ namespace BackEnd_Tech.Models
         }
 
         public int Id { get; set; }
+        public int? TinTucId { get; set; }
         public int? KhachHangId { get; set; }
         public string? HoTen { get; set; }
         public string? Email { get; set; }
@@ -18,7 +19,6 @@ namespace BackEnd_Tech.Models
         public bool? TrangThai { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public int? TinTucId { get; set; }
 
         public virtual KhachHang? KhachHang { get; set; }
         public virtual TinTuc? TinTuc { get; set; }

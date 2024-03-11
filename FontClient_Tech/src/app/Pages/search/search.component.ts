@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { MessageService } from 'primeng/api'
 import { baseUrl } from 'src/app/Api/baseHttp'
+import { AccountService } from 'src/app/Service/account.service'
 import { CartService } from 'src/app/Service/cart.service'
 import { HeThongService } from 'src/app/Service/he-thong.service'
 
@@ -14,7 +15,14 @@ import { HeThongService } from 'src/app/Service/he-thong.service'
 export class SearchComponent {
     baseUrl = baseUrl
     sanphamList: any
-    constructor(private heThongService: HeThongService, public router: Router, private activatedRoute: ActivatedRoute, private cartService: CartService, private messageService: MessageService) {}
+    constructor(
+        private heThongService: HeThongService,
+        public router: Router,
+        private activatedRoute: ActivatedRoute,
+        private cartService: CartService,
+        private messageService: MessageService,
+        private auth: AccountService
+    ) {}
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.key = params.get('searchTerm')
@@ -27,9 +35,30 @@ export class SearchComponent {
         })
     }
 
+    isProductInCart(productId: number): number {
+        const cartItem = this.cartService.getCartItem().find((item) => item.id === productId)
+        return cartItem ? cartItem.soLuong : 0
+    }
+
     addToCart(product: any) {
-        this.cartService.addToCart(product)
-        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 1000 })
+        if (this.auth.isLoggedIn()) {
+            if (product.soLuongTon <= 0) {
+                this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Sản phẩm đã hết hàng!', life: 3000 })
+                return
+            }
+
+            const cartQuantity = this.isProductInCart(product.id)
+            if (cartQuantity >= product.soLuongTon) {
+                this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng có sẵn!', life: 3000 })
+                return
+            }
+
+            this.cartService.addToCart(product)
+            this.cartService.loadCart()
+            this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Thêm vào giỏ hàng thành công', life: 3000 })
+        } else {
+            this.messageService.add({ severity: 'warn', summary: 'Thông báo', detail: 'Vui lòng đăng nhập! Để thực hiện mua hàng', life: 3000 })
+        }
     }
 
     key: any = ''

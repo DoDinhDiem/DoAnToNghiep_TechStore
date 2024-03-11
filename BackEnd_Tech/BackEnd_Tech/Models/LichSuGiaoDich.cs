@@ -7,11 +7,11 @@ namespace BackEnd_Tech.Models
     {
         public int Id { get; set; }
         public int? KhachHangId { get; set; }
+        public int? HoaDonId { get; set; }
         public decimal? SoTien { get; set; }
         public string? NganHang { get; set; }
         public string? LoaiThe { get; set; }
-        public int? HoaDonId { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         public virtual HoaDonXuat? HoaDon { get; set; }
         public virtual KhachHang? KhachHang { get; set; }

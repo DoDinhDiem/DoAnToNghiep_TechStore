@@ -19,19 +19,19 @@ export class BinhLuanTinTucComponent implements OnInit {
     baseUrl = baseUrl
     isCommentBoxVisible: boolean = false
 
-    binhluanID: any
-    toggleCommentBox(id: any) {
+    binhluanID: number
+    toggleCommentBox(id: number) {
         this.binhluanID = id
         this.isCommentBoxVisible = true
     }
 
     closeCommentBox() {
-        this.binhluanID = {}
+        this.binhluanID = null
         this.phanhoi = {}
         this.isCommentBoxVisible = false
     }
 
-    title = 'Loại sản phẩm'
+    title = 'Bình luận tin tức'
 
     //Khai báo true/false cho dialog
     visible: boolean = false
@@ -112,7 +112,8 @@ export class BinhLuanTinTucComponent implements OnInit {
     }
 
     onSubmit() {
-        this.phanhoi.binhLuanId = Number(this.binhluanID)
+        this.phanhoi.tinTucId = this.id
+        this.phanhoi.binhLuanId = this.binhluanID
         this.phanhoi.nhanVienId = this.auth.getIdFromToken()
         this.phanhoi.trangThai = true
         this.phanHoiService.create(this.phanhoi).subscribe((res) => {

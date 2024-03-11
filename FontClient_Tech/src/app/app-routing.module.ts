@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { LayoutComponent } from './Client/layout/layout.component'
 import { ProfileComponent } from './Pages/profile/profile.component'
+import { AuthGuard } from './Guards/auth.guard'
 
 const routes: Routes = [
     {
@@ -30,7 +31,8 @@ const routes: Routes = [
             },
             {
                 path: 'shopping-cart',
-                loadChildren: () => import('./Pages/shopping-cart/shopping-cart.module').then((m) => m.ShoppingCartModule)
+                loadChildren: () => import('./Pages/shopping-cart/shopping-cart.module').then((m) => m.ShoppingCartModule),
+                canActivate: [AuthGuard]
             },
             {
                 path: 'profile',
@@ -52,11 +54,13 @@ const routes: Routes = [
                         path: 'change-password',
                         loadChildren: () => import('./Pages/profile/change-password/change-password.module').then((m) => m.ChangePasswordModule)
                     }
-                ]
+                ],
+                canActivate: [AuthGuard]
             },
             {
                 path: 'checkout',
-                loadChildren: () => import('./Pages/check-out/check-out.module').then((m) => m.CheckOutModule)
+                loadChildren: () => import('./Pages/check-out/check-out.module').then((m) => m.CheckOutModule),
+                canActivate: [AuthGuard]
             },
             {
                 path: 'account',

@@ -67,7 +67,7 @@
 
             <div class="header-right">
                 <div class="wishlist">
-                    <a href="wishlist.html" title="Wishlist">
+                    <a href="javascript:void(0)" title="Wishlist">
                         <div class="icon">
                             <i class="icon-heart-o"></i>
                             <span class="wishlist-count badge">0</span>
@@ -77,8 +77,8 @@
                 </div><!-- End .compare-dropdown -->
 
                 <div class="dropdown cart-dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" data-display="static">
+                    <a href="javascript:void(0)" [routerLink]="['/shopping-cart']" class="dropdown-toggle" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <div class="icon">
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{ quantity

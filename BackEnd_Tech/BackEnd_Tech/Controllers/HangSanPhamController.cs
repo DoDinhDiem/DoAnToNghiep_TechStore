@@ -11,9 +11,9 @@ namespace BackEnd_Tech.Controllers
     [Authorize(Roles = "Role_Admin, Role_User")]
     public class HangSanPhamController : ControllerBase
     {
-        private TechStoreContext _context;
+        private TechStoreMainContext _context;
 
-        public HangSanPhamController(TechStoreContext context)
+        public HangSanPhamController(TechStoreMainContext context)
         {
             _context = context;   
         }
