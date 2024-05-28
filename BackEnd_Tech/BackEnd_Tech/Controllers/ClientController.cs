@@ -160,7 +160,7 @@ namespace BackEnd_Tech.Controllers
                                        giaBan = g.Key.GiaBan,
                                        giamGia = g.Key.GiamGia,
                                        SoLuongTon = g.Key.SoLuongTon,
-                                       avatar = _context.AnhSanPhams.Where(a => a.TrangThai == true).Select(a => a.Image).FirstOrDefault(),
+                                       avatar = _context.AnhSanPhams.Where(a => a.SanPhamId == g.Key.Id && a.TrangThai == true).Select(a => a.Image).FirstOrDefault(),
                                        total = g.Count()
                                    }).ToListAsync();
                 return Ok(query);
@@ -835,7 +835,8 @@ namespace BackEnd_Tech.Controllers
 
                 var totalItems = await query.CountAsync();
 
-                var totalAmount = await query.SumAsync(x => x.TongTien);
+                var queryForTotalAmount = query.Where(x => x.TrangThaiDonHang != 4);
+                var totalAmount = await queryForTotalAmount.SumAsync(x => x.TongTien);
 
                 var hoaDonList = await query
                     .OrderByDescending(x => x.CreatedAt) // Sắp xếp theo thời gian tạo, mới nhất đầu danh sách
@@ -843,6 +844,7 @@ namespace BackEnd_Tech.Controllers
                     .Take(pageSize)
                     .Select(hd => new
                     {
+                        id = hd.Id,
                         tinhTrang = hd.TrangThaiDonHang,
                         ChiTiet = _context.ChiTietHoaDonXuats
                             .Where(ct => ct.HoaDonXuatId == hd.Id)
@@ -868,6 +870,61 @@ namespace BackEnd_Tech.Controllers
                 };
 
                 return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("Update_DonHang/{id}")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateHoaDonXuat(int id, HoaDonXuat model)
+        {
+            try
+            {
+                var query = await _context.HoaDonXuats.FindAsync(id);
+                query.TrangThaiDonHang = model.TrangThaiDonHang;
+
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "Cập nhập hóa đơn thành công"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetById_HoaDonXuat/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetByIdHoaDonXuat(int id)
+        {
+            try
+            {
+                var query = await _context.HoaDonXuats.Where(a => a.Id == id)
+                                                       .Select(hd => new
+                                                       {
+                                                           hoaDons = hd,
+                                                           chiTiet = _context.ChiTietHoaDonXuats
+                                                                .Where(ct => ct.HoaDonXuatId == hd.Id)
+                                                                .Select(a => new
+                                                                {
+                                                                    tenSP = _context.SanPhams.Where(sp => sp.Id == a.SanPhamId).Select(sp => sp.TenSanPham).FirstOrDefault(),
+                                                                    soLuong = a.SoLuong,
+                                                                    giaBan = a.GiaBan,
+                                                                    thanhTien = a.ThanhTien
+                                                                }).ToList()
+                                                       }).FirstOrDefaultAsync();
+
+                if (query == null)
+                {
+                    return BadRequest(new { message = "Hóa đơn xuất không tồn tại!" });
+                }
+
+                return Ok(query);
             }
             catch (Exception ex)
             {

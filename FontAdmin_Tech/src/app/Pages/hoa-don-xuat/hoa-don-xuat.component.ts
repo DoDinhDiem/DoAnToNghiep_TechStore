@@ -23,7 +23,7 @@ export class HoaDonXuatComponent {
     loadData() {
         this.showSkeleton = true
         setTimeout(() => {
-            this.hoaDonXuatService.search(this.currentPage, this.selectedPageSize).subscribe((data) => {
+            this.hoaDonXuatService.search(this.sapxepSelects, this.currentPage, this.selectedPageSize).subscribe((data) => {
                 this.hoadonxuatList = data
                 this.showSkeleton = false
             })
@@ -135,4 +135,36 @@ export class HoaDonXuatComponent {
 
     //Khai báo sekeleton
     showSkeleton: boolean = false
+
+    sapxep: any[] = [
+        {
+            value: '',
+            name: 'Tất cả'
+        },
+        {
+            value: 0,
+            name: 'Chờ xác nhận'
+        },
+        {
+            value: 1,
+            name: 'Đã xác nhận'
+        },
+        {
+            value: 2,
+            name: 'Đang vận chuyển'
+        },
+        {
+            value: 3,
+            name: 'Giao thành công'
+        },
+        {
+            value: 4,
+            name: 'Hủy hàng'
+        }
+    ]
+    sapxepSelects: any = ''
+
+    onSapXepChange() {
+        this.loadData()
+    }
 }

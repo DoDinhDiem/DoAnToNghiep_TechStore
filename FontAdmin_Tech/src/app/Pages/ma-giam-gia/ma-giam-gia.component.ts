@@ -23,6 +23,8 @@ export class MaGiamGiaComponent {
     magiamgia!: IMaGiamGia
     magiamgiaList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(private maGiamGiaService: MaGiamGiaService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -36,12 +38,14 @@ export class MaGiamGiaComponent {
         this.magiamgia = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.magiamgia = {}
+        this.submitted = false
     }
 
     id: any
@@ -74,32 +78,36 @@ export class MaGiamGiaComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.magiamgia.trangThai == undefined) {
             this.magiamgia.trangThai = false
         }
-        if (this.magiamgia.maGiamGia && this.magiamgia.id) {
-            this.maGiamGiaService.update(this.magiamgia).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.maGiamGiaService.create(this.magiamgia).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        if (this.magiamgia.maGiamGia && this.magiamgia.soTienGiam && this.magiamgia.soLuong && this.magiamgia.hanSuDung && this.magiamgia.moTa) {
+            if (this.magiamgia.id) {
+                this.maGiamGiaService.update(this.magiamgia).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.maGiamGiaService.create(this.magiamgia).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

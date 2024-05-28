@@ -55,7 +55,7 @@ namespace BackEnd_Tech.Controllers
 
             if (!PasswordHasher.VerifyPassword(model.PassWord, user.PassWord))
             {
-                return BadRequest(new { Message = "Mật khẩu không đúng! Vui lòng nhập lại." });
+                return BadRequest(new { message = "Mật khẩu không đúng! Vui lòng nhập lại." });
             }
 
             user.Token = CreateJwt(user);

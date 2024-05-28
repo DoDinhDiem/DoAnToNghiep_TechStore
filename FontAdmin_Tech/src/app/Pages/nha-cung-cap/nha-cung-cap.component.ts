@@ -25,6 +25,8 @@ export class NhaCungCapComponent {
     nhacc!: INhaCungCap
     nhaccList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private nhaCungCapService: NhaCungCapService,
@@ -43,12 +45,14 @@ export class NhaCungCapComponent {
         this.nhacc = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.nhacc = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -80,32 +84,37 @@ export class NhaCungCapComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.nhacc.trangThai == undefined) {
             this.nhacc.trangThai = false
         }
-        if (this.nhacc.tenNhaCC && this.nhacc.id) {
-            this.nhaCungCapService.update(this.nhacc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.nhaCungCapService.create(this.nhacc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+
+        if (this.nhacc.tenNhaCC && this.nhacc.email && this.nhacc.diaChi && this.nhacc.soDienThoai) {
+            if (this.nhacc.id) {
+                this.nhaCungCapService.update(this.nhacc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.nhaCungCapService.create(this.nhacc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

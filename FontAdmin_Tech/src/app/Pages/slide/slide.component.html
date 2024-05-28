@@ -137,6 +137,7 @@
                         alt="">
                 </div>
             </div>
+            <small class="p-error" *ngIf="submitted && !slide.image">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

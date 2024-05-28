@@ -33,6 +33,8 @@ export class TinTucComponent {
     //select và hiển ở table của
     danhmuc: any[] = []
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private tinTucService: TinTucService,
@@ -53,6 +55,7 @@ export class TinTucComponent {
         this.tintuc = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
@@ -60,6 +63,7 @@ export class TinTucComponent {
         this.visible = false
         this.fileOnly = {}
         this.tintuc = {}
+        this.submitted = false
     }
 
     closeSeeDialog() {
@@ -120,6 +124,8 @@ export class TinTucComponent {
     // }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.tintuc.trangThai == undefined) {
             this.tintuc.trangThai = false
         }
@@ -154,29 +160,31 @@ export class TinTucComponent {
             this.fileSelect = false
         }
 
-        if (this.tintuc.tieuDe && this.tintuc.id) {
-            this.tinTucService.update(this.tintuc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.tinTucService.create(this.tintuc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        if (this.tintuc.tieuDe && this.tintuc.noiDung) {
+            if (this.tintuc.id) {
+                this.tinTucService.update(this.tintuc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.tinTucService.create(this.tintuc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

@@ -46,9 +46,14 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <!-- <div id="products-datatable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
-                                            type="search" class="form-control form-control-sm" placeholder=""
-                                            aria-controls="products-datatable"></label></div> -->
+                                <div id="products-datatable_filter"
+                                    class="dataTables_filter d-flex justify-content-end">
+                                    <select class="form-select form-select-sm" style="max-width: 30%;"
+                                        (change)=" onSapXepChange()" [(ngModel)]="sapxepSelects">
+                                        <option *ngFor="let item of sapxep" [value]="item.value">{{ item.name }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-1"></div>

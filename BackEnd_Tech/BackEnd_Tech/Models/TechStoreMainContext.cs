@@ -930,7 +930,7 @@ namespace BackEnd_Tech.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.MoTa)
-                    .HasMaxLength(255)
+                    .HasColumnType("ntext")
                     .HasColumnName("moTa");
 
                 entity.Property(e => e.SanPhamId).HasColumnName("sanPham_id");

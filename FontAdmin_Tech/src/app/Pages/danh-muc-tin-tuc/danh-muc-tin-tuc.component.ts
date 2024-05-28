@@ -25,6 +25,8 @@ export class DanhMucTinTucComponent {
     danhmuc!: IDanhMucTinTuc
     danhmucList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private danhMucSanPhamService: DanhMucTinTucService,
@@ -42,13 +44,14 @@ export class DanhMucTinTucComponent {
     showDialog() {
         this.danhmuc = {}
         this.visible = true
-        this.Save = 'Lưu'
+        ;(this.Save = 'Lưu'), (this.submitted = false)
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.danhmuc = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -80,32 +83,37 @@ export class DanhMucTinTucComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.danhmuc.trangThai == undefined) {
             this.danhmuc.trangThai = false
         }
-        if (this.danhmuc.tenDanhMuc && this.danhmuc.id) {
-            this.danhMucSanPhamService.update(this.danhmuc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.danhMucSanPhamService.create(this.danhmuc).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+
+        if (this.danhmuc.tenDanhMuc) {
+            if (this.danhmuc.id) {
+                this.danhMucSanPhamService.update(this.danhmuc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.danhMucSanPhamService.create(this.danhmuc).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

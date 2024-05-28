@@ -148,8 +148,8 @@ namespace BackEnd_Tech.Controllers
                 query.GiaBan = model.GiaBan;
                 query.BaoHang = model.BaoHang;
                 query.MoTa = model.MoTa;
-                query.LoaiSanPham = model.LoaiSanPham;
-                query.HangSanPham = model.HangSanPham;
+                query.LoaiSanPhamId = model.LoaiSanPhamId;
+                query.HangSanPhamId = model.HangSanPhamId;
                 query.TrangThai = model.TrangThai;
 
            

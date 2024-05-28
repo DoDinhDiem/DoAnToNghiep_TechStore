@@ -33,7 +33,6 @@ export class ShoppingCartComponent {
         })
         this.cartItems = this.cartService.getCartItem()
         this.getMaGiamGia()
-        console.log(this.cartItems)
     }
     getQuantity() {
         this.quantity = this.cartService.getQuantity()

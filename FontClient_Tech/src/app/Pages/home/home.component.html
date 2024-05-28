@@ -37,7 +37,8 @@
         <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel"
             aria-labelledby="products-featured-link">
             <p-carousel [value]="sanPhamMoi" [numVisible]="(sanPhamMoi.length < 2) ? sanPhamMoi.length : 5"
-                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions"
+                [showIndicators]="false">
                 <ng-template let-item pTemplate="item">
                     <div class="border-1 surface-border border-round px-1">
                         <div class="product" [style.width.px]="(sanPhamMoi.length < 5) ? 217 : null"
@@ -79,7 +80,8 @@
         </div>
         <div class="tab-pane p-0 fade" id="products-sale-tab" role="tabpanel" aria-labelledby="products-sale-link">
             <p-carousel [value]="sanPhamBanChay" [numVisible]="(sanPhamBanChay.length < 2) ? sanPhamBanChay.length : 5"
-                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions"
+                [showIndicators]="false">
                 <ng-template let-item pTemplate="item">
                     <div class="border-1 surface-border border-round text-center px-1">
                         <div class="product" [style.width.px]="(sanPhamBanChay.length < 5) ? 217 : null"
@@ -121,7 +123,8 @@
         </div><!-- .End .tab-pane -->
         <div class="tab-pane p-0 fade" id="products-top-tab" role="tabpanel" aria-labelledby="products-top-link">
             <p-carousel [value]="sanPhamGiamGia" [numVisible]="(sanPhamGiamGia.length < 2) ? sanPhamGiamGia.length : 5"
-                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions">
+                [numScroll]="1" [circular]="true" [autoplayInterval]="7000" [responsiveOptions]="responsiveOptions"
+                [showIndicators]="false">
                 <ng-template let-item pTemplate="item">
                     <div class="border-1 surface-border border-round px-1">
                         <div class="product" [style.width.px]="(sanPhamGiamGia.length < 5) ? 217 : null"
@@ -199,7 +202,7 @@
     <div class="tab-content tab-content-carousel">
         <div class="tab-pane p-0 fade show active" id="top-all-tab">
             <p-carousel [value]="dienThoai" [numVisible]="(dienThoai.length < 2) ? dienThoai.length : 5" [numScroll]="1"
-                [circular]="true" [responsiveOptions]="responsiveOptions">
+                [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="false">
                 <ng-template let-item pTemplate="item">
                     <div class="border-1 surface-border border-round px-1">
                         <div class="product" [style.width.px]="(dienThoai.length < 5) ? 217 : null"
@@ -254,7 +257,7 @@
     <div class="tab-content tab-content-carousel">
         <div class="tab-pane p-0 fade show active" id="top-all-tab">
             <p-carousel [value]="lapTop" [numVisible]="(lapTop.length < 2) ? lapTop.length : 5" [numScroll]="1"
-                [circular]="true" [responsiveOptions]="responsiveOptions">
+                [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="false">
                 <ng-template let-item pTemplate="item">
                     <div class="border-1 surface-border border-round px-1">
                         <div class="product" [style.width.px]="(lapTop.length < 5) ? 217 : null"
@@ -300,7 +303,7 @@
     <div class="container">
         <h2 class="title">Tin tức mới</h2>
         <p-carousel [value]="tinTuc" [numVisible]="(tinTuc.length < 2) ? tinTuc.length : 4" [numScroll]="1"
-            [circular]="true" [responsiveOptions]="responsiveOptions">
+            [circular]="true" [responsiveOptions]="responsiveOptions" [showIndicators]="false">
             <ng-template let-item pTemplate="item">
                 <div class="border-1 surface-border border-round px-1">
                     <article [style.width.px]="(tinTuc.length < 4) ? 277 : null"

@@ -78,7 +78,7 @@ namespace BackEnd_Tech.Controllers
 
         [Route("Search_HoaDonXuat")]
         [HttpGet]
-        public async Task<IActionResult> SearchHoaDonXuat([FromQuery]  int page = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchHoaDonXuat([FromQuery] int? trangThai, int page = 1, int pageSize = 10)
         {
             try
             {
@@ -94,14 +94,34 @@ namespace BackEnd_Tech.Controllers
 
                 var query = _context.HoaDonXuats.AsQueryable();
 
-                //if (createdAt.HasValue)
-                //{
-                //    query = query.Where(hd => hd.CreatedAt <= createdAt.Value.Date);
-                //}
+
+                if (trangThai.HasValue)
+                {
+                    switch (trangThai)
+                    {
+                        case 0:
+                            query = query.Where(x => x.TrangThaiDonHang == 0);
+                            break;
+                        case 1:
+                            query = query.Where(x => x.TrangThaiDonHang == 1);
+                            break;
+                        case 2:
+                            query = query.Where(x => x.TrangThaiDonHang == 2);
+                            break;
+                        case 3:
+                            query = query.Where(x => x.TrangThaiDonHang == 3);
+                            break;
+                        case 4:
+                            query = query.Where(x => x.TrangThaiDonHang == 4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
                 var totalItems = await query.CountAsync();
 
-                var hoaDonList = await query
+                var hoaDonList = await query.OrderByDescending(p => p.CreatedAt)
                                             .Skip((page - 1) * pageSize)
                                             .Take(pageSize)
                                             .ToListAsync();

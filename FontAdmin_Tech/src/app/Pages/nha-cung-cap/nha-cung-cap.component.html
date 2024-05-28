@@ -134,12 +134,15 @@
                     <label for="tenNhaCc" class="form-label">Tên nhà cung cấp <a class="text-danger">(*)</a></label>
                     <input type="text" id="tenNhaCc" class="form-control" [(ngModel)]="nhacc.tenNhaCC"
                         autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhacc.tenNhaCC">Không được để trống</small>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email <a class="text-danger">(*)</a></label>
                     <input type="text" id="email" class="form-control" [(ngModel)]="nhacc.email" autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhacc.email">Không được để trống</small>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -147,15 +150,18 @@
                     <label for="soDienThoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
                     <input type="number" id="soDienThoai" min="0" class="form-control" [(ngModel)]="nhacc.soDienThoai"
                         autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhacc.soDienThoai">Không được để trống</small>
+
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="diaChi" class="form-label">Địa chỉ <a class="text-danger">(*)</a></label>
                     <input type="text" id="diaChi" class="form-control" [(ngModel)]="nhacc.diaChi" autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhacc.diaChi">Không được để trống</small>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class=" col-md-6">
                 <div class="mb-3">
                     <label for="trangThai" class="form-label">Trạng thái </label>
                     <br>

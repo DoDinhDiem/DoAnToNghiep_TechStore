@@ -23,6 +23,8 @@ export class ContactComponent {
     contact!: IContact
     contactList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(private contactService: ContactService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -36,12 +38,14 @@ export class ContactComponent {
         this.contact = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.contact = {}
+        this.submitted = false
     }
 
     //Gọi load Contact
@@ -65,29 +69,43 @@ export class ContactComponent {
     }
 
     onSubmit() {
-        if (this.contact.map && this.contact.id) {
-            this.contactService.update(this.contact).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.contactService.create(this.contact).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        this.submitted = true
+
+        if (
+            this.contact.map &&
+            this.contact.duong &&
+            this.contact.thonXom &&
+            this.contact.xaPhuong &&
+            this.contact.xaPhuong &&
+            this.contact.quanHuyen &&
+            this.contact.tinhThanhPho &&
+            this.contact.email &&
+            this.contact.soDienThoai
+        ) {
+            if (this.contact.id) {
+                this.contactService.update(this.contact).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.contactService.create(this.contact).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

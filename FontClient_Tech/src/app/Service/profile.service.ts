@@ -18,4 +18,12 @@ export class ProfileService {
     changePass(changePass: IChangePass) {
         return this.http.put<any>(baseUrl + 'api/LoginClient/ChangePassword', changePass)
     }
+
+    getById(id: any): Observable<any> {
+        return this.http.get<any>(baseUrl + 'api/Client/GetById_HoaDonXuat/' + id)
+    }
+
+    getUpdateDonHang(id: any, hoadon: any): Observable<any> {
+        return this.http.put<any>(baseUrl + `api/Client/Update_DonHang/${id}`, hoadon)
+    }
 }

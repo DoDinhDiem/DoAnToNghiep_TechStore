@@ -8,7 +8,6 @@ export interface IKhachHang {
     gioiTinh?: string
     ngaySinh?: string
     trangThai?: boolean
-    avatar?: string
     token?: string
     refreshToken?: string
     refreshTokenExpiryTime?: string

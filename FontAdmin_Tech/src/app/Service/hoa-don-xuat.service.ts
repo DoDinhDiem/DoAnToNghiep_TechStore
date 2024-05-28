@@ -20,8 +20,8 @@ export class HoaDonXuatService {
     }
 
     //Tìm kiếm & phân trang hóa đơn nhập
-    search(page: number, pageSize: number): Observable<any[]> {
-        const params = `?page=${page}&pageSize=${pageSize}`
+    search(trangThai: number, page: number, pageSize: number): Observable<any[]> {
+        const params = `?trangThai=${trangThai}&page=${page}&pageSize=${pageSize}`
         return this.http.get<any[]>(baseUrl + `api/HoaDonXuat/Search_HoaDonXuat${params}`)
     }
 }

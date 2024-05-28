@@ -158,12 +158,14 @@
                 <div class="mb-3">
                     <label for="hoTen" class="form-label">Họ tên <a class="text-danger">(*)</a></label>
                     <input type="text" id="hoTen" [(ngModel)]="nhanvien.hoTen" class="form-control" autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhanvien.hoTen">Không được để trống</small>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email <a class="text-danger">(*)</a></label>
                     <input type="text" id="email" [(ngModel)]="nhanvien.email" class="form-control" autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhanvien.email">Không được để trống</small>
                 </div>
             </div>
             <div class="col-md-4">
@@ -178,6 +180,8 @@
                     <label for="soDienThoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
                     <input type="number" id="soDienThoai" [(ngModel)]="nhanvien.soDienThoai" class="form-control"
                         autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhanvien.soDienThoai">Không được để trống</small>
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -185,6 +189,8 @@
                     <label for="tenLoai" class="form-label">Địa chỉ <a class="text-danger">(*)</a></label>
                     <input type="text" id="tenLoai" [(ngModel)]="nhanvien.diaChi" class="form-control"
                         autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhanvien.diaChi">Không được để trống</small>
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -194,6 +200,7 @@
                         <option value="Nam">Nam</option>
                         <option value="Nữ">Nữ</option>
                     </select>
+                    <small class="p-error" *ngIf="submitted && !nhanvien.gioiTinh">Không được để trống</small>
                 </div>
             </div>
             <div class="col-md-4">
@@ -201,6 +208,7 @@
                     <label for="ngaySinh" class="form-label">Ngày sinh <a class="text-danger">(*)</a></label>
                     <input type="date" id="ngaySinh" [(ngModel)]="nhanvien.ngaySinh" class="form-control"
                         autocomplete="off">
+                    <small class="p-error" *ngIf="submitted && !nhanvien.ngaySinh">Không được để trống</small>
                 </div>
             </div>
             <div class="col-md-4">

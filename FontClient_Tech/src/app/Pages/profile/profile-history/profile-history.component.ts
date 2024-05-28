@@ -3,16 +3,19 @@ import { ProfileRankModule } from '../profile-rank/profile-rank.module'
 import { ProfileService } from 'src/app/Service/profile.service'
 import { AccountService } from 'src/app/Service/account.service'
 import { baseUrl } from 'src/app/Api/baseHttp'
+import { IHoaDon } from 'src/app/Models/hoa-don'
+import { ConfirmationService, MessageService } from 'primeng/api'
 
 @Component({
     selector: 'app-profile-history',
     templateUrl: './profile-history.component.html',
-    styleUrls: ['./profile-history.component.scss']
+    styleUrls: ['./profile-history.component.scss'],
+    providers: [ConfirmationService, MessageService]
 })
 export class ProfileHistoryComponent {
     baseUrl = baseUrl
     selectedStatus: number | null = null
-    constructor(private profileService: ProfileService, private accountService: AccountService) {}
+    constructor(private profileService: ProfileService, private accountService: AccountService, private confirmationService: ConfirmationService, private messageService: MessageService) {}
 
     chitiet: any
     chitietList: any
@@ -28,7 +31,7 @@ export class ProfileHistoryComponent {
         this.profileService.getLichSuMuaHang(this.email, this.trangThai, this.currentPage, this.selectedPageSize).subscribe((data: any) => {
             this.chitietList = data
             this.totalAmount = data.totalAmount
-            console.log(this.chitietList)
+            console.log(data)
         })
     }
 
@@ -108,5 +111,36 @@ export class ProfileHistoryComponent {
             const endIndex = this.currentPage * this.selectedPageSize
             return endIndex > this.selectedPageSize ? this.selectedPageSize : endIndex
         }
+    }
+
+    hoadonDetail!: any
+    chiTietHoaDon!: any
+    showDetail(hoaDon: IHoaDon) {
+        this.profileService.getById(hoaDon.id).subscribe((data) => {
+            this.hoadonDetail = data.hoaDons
+            this.chiTietHoaDon = data.chiTiet
+        })
+    }
+
+    hoaDon: IHoaDon = {}
+    huyHang(id: any) {
+        this.confirmationService.confirm({
+            message: 'Bạn có chắc chắn muốn hủy đơn hàng này?',
+            header: 'Thông báo',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.hoaDon.trangThaiDonHang = 4
+                console.log(this.hoaDon)
+                this.profileService.getUpdateDonHang(id, this.hoaDon).subscribe((res) => {
+                    this.loadData()
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Thông báo',
+                        detail: res.message,
+                        life: 3000
+                    })
+                })
+            }
+        })
     }
 }

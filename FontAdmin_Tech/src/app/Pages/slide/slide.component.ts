@@ -25,6 +25,8 @@ export class SlideComponent {
     slide!: ISlide
     slideList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(private slideService: SlideService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -38,12 +40,14 @@ export class SlideComponent {
         this.slide = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.slide = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -75,6 +79,8 @@ export class SlideComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.slide.trangThai == undefined) {
             this.slide.trangThai = false
         }
@@ -86,29 +92,32 @@ export class SlideComponent {
             this.onUpload()
             this.fileSelected = false
         }
-        if (this.slide.id) {
-            this.slideService.update(this.slide).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.slideService.create(this.slide).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+
+        if (this.slide.image) {
+            if (this.slide.id) {
+                this.slideService.update(this.slide).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.slideService.create(this.slide).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

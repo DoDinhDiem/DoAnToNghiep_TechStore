@@ -31,6 +31,8 @@ export class NhanVienComponent {
     nhanvien!: INhanVien
     nhanvienList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private nhanVienService: NhanVienService,
@@ -51,12 +53,14 @@ export class NhanVienComponent {
         this.nhanvien = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.nhanvien = {}
+        this.submitted = false
     }
 
     closeEditDialog() {
@@ -111,6 +115,8 @@ export class NhanVienComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.nhanvien.trangThai == undefined) {
             this.nhanvien.trangThai = false
         }
@@ -124,29 +130,31 @@ export class NhanVienComponent {
             this.fileSelected = false
         }
 
-        if (this.nhanvien.hoTen && this.nhanvien.id) {
-            this.nhanVienService.update(this.nhanvien).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeEditDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.nhanVienService.create(this.nhanvien).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        if (this.nhanvien.hoTen && this.nhanvien.email && this.nhanvien.soDienThoai && this.nhanvien.diaChi && this.nhanvien.ngaySinh && this.nhanvien.gioiTinh) {
+            if (this.nhanvien.id) {
+                this.nhanVienService.update(this.nhanvien).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeEditDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.nhanVienService.create(this.nhanvien).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

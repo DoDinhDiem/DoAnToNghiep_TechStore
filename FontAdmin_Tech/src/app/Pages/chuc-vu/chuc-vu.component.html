@@ -125,8 +125,9 @@
 
     <ng-template pTemplate="content">
         <div class="mb-3">
-            <label for="tenLoai" class="form-label">Tên chức vụ </label>
+            <label for="tenLoai" class="form-label">Tên chức vụ <a class="text-danger">(*)</a></label>
             <input type="text" id="tenLoai" [(ngModel)]="chucvu.tenChucVu" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !chucvu.tenChucVu">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

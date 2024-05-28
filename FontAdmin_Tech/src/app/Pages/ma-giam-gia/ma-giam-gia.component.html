@@ -139,15 +139,19 @@
                 <label for="tenLoai" class="form-label">Mã Code <a class="text-danger">(*)</a></label>
                 <input type="text" [(ngModel)]="magiamgia.maGiamGia" id="tenLoai" class="form-control" required=""
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !magiamgia.maGiamGia">Không được để trống</small>
+
             </div>
             <div class="mb-3 col-md-4">
                 <label for="tenLoai" class="form-label">Số tiền giảm <a class="text-danger">(*)</a></label>
                 <input type="text" [(ngModel)]="magiamgia.soTienGiam" id="tenLoai" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !magiamgia.soTienGiam">Không được để trống</small>
             </div>
             <div class="mb-3 col-md-4">
                 <label for="tenLoai" class="form-label">Số lượng <a class="text-danger">(*)</a></label>
                 <input type="text" [(ngModel)]="magiamgia.soLuong" id="tenLoai" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !magiamgia.soLuong">Không được để trống</small>
             </div>
         </div>
 
@@ -156,10 +160,12 @@
                 <label for="tenLoai" class="form-label">Hạn sử dụng <a class="text-danger">(*)</a></label>
                 <input type="date" [(ngModel)]="magiamgia.hanSuDung" id="tenLoai" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !magiamgia.hanSuDung">Không được để trống</small>
             </div>
             <div class="mb-3 col-md-4">
                 <label for="tenLoai" class="form-label">Mô tả <a class="text-danger">(*)</a></label>
                 <input type="text" [(ngModel)]="magiamgia.moTa" id="tenLoai" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !magiamgia.moTa">Không được để trống</small>
             </div>
             <div class="mb-3 col-md-4">
                 <label for="trangThai" class="form-label">Trạng thái </label>

@@ -10,7 +10,6 @@ import { NgToastService } from 'ng-angular-popup'
 export class AuthGuard {
     constructor(private auth: AccountService, private router: Router, private toast: NgToastService) {}
     canActivate(): boolean {
-        console.log(this.auth.isLoggedIn())
         if (this.auth.isLoggedIn()) {
             return true
         } else {

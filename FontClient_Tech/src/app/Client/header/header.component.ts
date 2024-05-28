@@ -104,12 +104,11 @@ export class HeaderComponent {
         this.isProfileMenuOpen = !this.isProfileMenuOpen
     }
     stopPropagation(event: Event) {
-        event.stopPropagation() // Ngăn chặn sự kiện click từ việc lan truyền ra các phần tử cha
+        event.stopPropagation()
     }
 
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
-        // Kiểm tra nếu click không nằm trong phần tử .profile-main hoặc phần tử li chứa menu
         if (!(event.target.closest('.profile-main') || event.target.closest('li'))) {
             this.isProfileMenuOpen = false
         }

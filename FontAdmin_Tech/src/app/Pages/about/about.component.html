@@ -124,6 +124,7 @@
         <div class="mb-3">
             <label for="tenLoai" class="form-label">Mô tả </label>
             <p-editor [(ngModel)]="about.gioiThieu" [style]="{ height: '180px' }"></p-editor>
+            <small class="p-error" *ngIf="submitted && !about.gioiThieu">Không được để trống</small>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">

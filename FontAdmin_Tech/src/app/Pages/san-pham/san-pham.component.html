@@ -184,11 +184,13 @@
                 <label for="tenSanPham" class="form-label">Tên sản phẩm <a class="text-danger">(*)</a></label>
                 <input type="text" id="tenSanPham" [(ngModel)]="sanpham.tenSanPham" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !sanpham.tenSanPham">Không được để trống</small>
             </div>
             <div class="mb-2 col-md-4">
                 <label for="giaBan" class="form-label">Giá bán <a class="text-danger">(*)</a></label>
                 <input type="number" min="0" id="giaBan" [(ngModel)]="sanpham.giaBan" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !sanpham.giaBan">Không được để trống</small>
             </div>
             <div class="mb-2 col-md-4">
                 <label for="giamGia" class="form-label">Giảm giá</label>
@@ -201,6 +203,7 @@
                 <label for="baoHanh" class="form-label">Bảo hành</label>
                 <input type="text" min="0" id="baoHanh" [(ngModel)]="sanpham.baoHang" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !sanpham.baoHang">Không được để trống</small>
             </div>
             <div class="mb-2 col-md-4">
                 <label for="tenLoai" class="form-label">Loại sản phẩm <a class="text-danger">(*)</a></label>
@@ -218,6 +221,7 @@
         <div class="mb-2">
             <label for="tenLoai" class="form-label">Mô tả sản phẩm </label>
             <p-editor [(ngModel)]="sanpham.moTa" [style]="{ height: '180px' }"></p-editor>
+            <small class="p-error" *ngIf="submitted && !sanpham.moTa">Không được để trống</small>
         </div>
         <div class="row mb-2">
             <div class="mb-2 col-md-6">

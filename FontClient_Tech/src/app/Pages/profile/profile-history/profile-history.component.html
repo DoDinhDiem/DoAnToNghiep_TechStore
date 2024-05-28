@@ -64,7 +64,18 @@
                                             class="info__group is-flex is-justify-content-space-between is-flex-direction-column">
                                             <div class="price">{{sp.giaBan | number}}đ x {{sp.soLuong}}</div>
 
+
                                         </div>
+
+                                    </div>
+                                </div>
+                                <div class="info__group d-flex justify-content-end">
+                                    <div class="group-btn-info is-flex">
+                                        <div class="btn-info" *ngIf="item.tinhTrang == 0 || item.tinhTrang == 1"
+                                            (click)="huyHang(item.id)">Hủy hàng</div>
+                                        <div class="btn-info" (click)="showDetail(item)" data-bs-toggle="modal"
+                                            data-bs-target="#full-width-modal">
+                                            Xem chi tiết</div>
                                     </div>
                                 </div>
                             </div>
@@ -104,3 +115,147 @@
         </div>
     </div>
 </div>
+
+<div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-full-width" style="min-width: 1200px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="fullWidthModalLabel">Chi tiết đơn hàng</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card"
+                            style="box-shadow:  1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);">
+                            <div class="card-body">
+                                <div class="clearfix d-flex justify-content-center">
+                                    <div class="justify-content-start">
+                                        <img src="assets/logo/logo-dark-lg.png" alt="" style="height: 50px;">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 ">
+                                        <div class="mt-3">
+                                            <p class="font-16"><strong>Ngày đặt hàng:</strong>
+                                                <span class="font-16 mr-2">{{hoadonDetail?.createdAt | date:
+                                                    'dd/MM/yyyy'}}</span>
+                                            </p>
+                                            <p class="font-16"><strong>Tình trạng: </strong>
+                                                <span class="font-16 mr-2"
+                                                    [ngSwitch]="hoadonDetail?.trangThaiThanhToan">
+                                                    <ng-template [ngSwitchCase]="true">Đã thanh toán</ng-template>
+                                                    <ng-template [ngSwitchCase]="false">Chưa thanh
+                                                        toán</ng-template>
+                                                </span>
+                                            </p>
+                                            <p class="font-16"><strong>Phương thức thanh toán: </strong>
+                                                <span class="font-16 mr-2">{{hoadonDetail?.phuongThucGiaoDich}}</span>
+                                            </p>
+                                            <p class="font-16"><strong>Mã đơn hàng: </strong>
+                                                <span class="mr-2">#{{hoadonDetail?.id}}</span>
+                                            </p>
+                                        </div>
+                                    </div><!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mt-4">
+                                    <div class="col-sm-4">
+                                        <h6 class="font-16">Người gửi</h6>
+                                        <address>
+                                            Cửa hàng TechStore<br>
+                                            391 Hàm Hy, Cộng Lạc<br>
+                                            Tứ Kỳ, Hải Dương<br>
+                                            <abbr>SĐT:</abbr> (+84) 796498503
+                                        </address>
+                                    </div> <!-- end col-->
+
+                                    <div class="col-sm-4">
+                                        <h6 class="font-16">Địa chỉ giao hàng</h6>
+                                        <address>
+                                            {{hoadonDetail?.hoTen}}<br>
+                                            {{hoadonDetail?.diaChi}}<br>
+                                            <abbr>Ghi chú: </abbr>{{hoadonDetail?.ghiChu}}<br>
+                                            <abbr>SĐT:</abbr> (+84) {{hoadonDetail?.soDienThoai}}
+                                        </address>
+                                    </div> <!-- end col-->
+
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table mt-4">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th class="text-center">Sản phẩm</th>
+                                                        <th class="text-center">Số lượng</th>
+                                                        <th class="text-center">Đơn giá</th>
+                                                        <th class="text-end">Tổng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of chiTietHoaDon; let i = index">
+                                                        <td>{{i+1}}</td>
+                                                        <td class="text-center">
+                                                            {{item.tenSP}}
+                                                        </td>
+                                                        <td class="text-center">{{item.soLuong}}</td>
+                                                        <td class="text-center">{{item.giaBan | number}}</td>
+                                                        <td class="text-end">{{item.thanhTien | number}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end table-responsive-->
+                                    </div> <!-- end col -->
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="clearfix pt-3">
+                                            <h6 class="text-muted">Ghi chú:</h6>
+                                            <small>
+                                                Tất cả các tài khoản phải được thanh toán trong vòng 7 ngày kể từ ngày
+                                                nhận được hóa đơn. Được thanh toán bằng séc hoặc thẻ tín dụng hoặc thanh
+                                                toán trực tiếp trực tuyến. Nếu tài khoản không được thanh toán trong
+                                                vòng 7 ngày, các chi tiết tín dụng được cung cấp để xác nhận công việc
+                                                đã thực hiện sẽ bị tính phí trích dẫn đã thỏa thuận nêu trên.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 d-flex justify-content-end">
+                                        <div class=" mt-3 mt-sm-0">
+                                            <p><b>Tổng phụ:</b> <span
+                                                    class="d-flex justify-content-end">{{hoadonDetail?.tongTien |
+                                                    number}}</span></p>
+                                            <br>
+                                            <h3>{{hoadonDetail?.tongTien | number}} VNĐ</h3>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+
+                                <div class="d-print-none mt-4">
+                                    <div class="text-end">
+                                        <a href="javascript: void(0);" class="btn btn-light me-2"
+                                            data-bs-dismiss="modal">Hủy</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '450px', }"></p-confirmDialog>

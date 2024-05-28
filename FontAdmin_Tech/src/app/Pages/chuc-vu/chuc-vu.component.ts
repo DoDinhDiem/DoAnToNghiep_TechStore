@@ -25,6 +25,8 @@ export class ChucVuComponent {
     chucvu!: IChucVu
     chucvuList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private chucVuService: ChucVuService,
@@ -43,12 +45,14 @@ export class ChucVuComponent {
         this.chucvu = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.chucvu = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -80,32 +84,37 @@ export class ChucVuComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.chucvu.trangThai == undefined) {
             this.chucvu.trangThai = false
         }
-        if (this.chucvu.tenChucVu && this.chucvu.id) {
-            this.chucVuService.update(this.chucvu).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.chucVuService.create(this.chucvu).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+
+        if (this.chucvu.tenChucVu) {
+            if (this.chucvu.id) {
+                this.chucVuService.update(this.chucvu).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.chucVuService.create(this.chucvu).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

@@ -38,7 +38,7 @@ namespace BackEnd_Tech.Controllers
         {
             try
             {
-                var query = _context.HoaDonXuats.Where(x => x.TrangThaiThanhToan == true).Sum(x => x.TongTien);
+                var query = _context.HoaDonXuats.Where(x => x.TrangThaiThanhToan == true && x.TrangThaiDonHang != 4).Sum(x => x.TongTien);
                 return Ok(query);
             }
             catch (Exception ex)
@@ -127,7 +127,7 @@ namespace BackEnd_Tech.Controllers
                     .ToList();
                 var tongTienNam = _context.HoaDonXuats.Where(hd => hd.CreatedAt.HasValue &&
                         hd.CreatedAt.Value.Year == year &&
-                        hd.TrangThaiThanhToan == true).Sum(hd => hd.TongTien) ;
+                        hd.TrangThaiThanhToan == true && hd.TrangThaiDonHang != 4).Sum(hd => hd.TongTien) ;
                 var result = new
                 {
                     ThongKeThang = query,

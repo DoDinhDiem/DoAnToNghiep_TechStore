@@ -141,10 +141,13 @@
         <div class="mb-3">
             <label for="tenThongSo" class="form-label">Tên thông số <a class="text-danger">(*)</a></label>
             <input type="text" id="tenThongSo" [(ngModel)]="thongso.tenThongSo" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !thongso.tenThongSo">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="moTa" class="form-label">Mô tả <a class="text-danger">(*)</a></label>
             <input type="text" id="moTa" [(ngModel)]="thongso.moTa" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !thongso.moTa">Không được để trống</small>
+
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

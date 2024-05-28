@@ -23,6 +23,8 @@ export class FeedBackComponent {
     feedback!: IFeedBack
     feedbackList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(private feedBackService: FeedBackService, private messageService: MessageService) {}
 
@@ -55,23 +57,26 @@ export class FeedBackComponent {
         this.feedBackService.getById(feedback.id).subscribe((data) => {
             this.feedback = data
             this.emailRequest.to = data.email
+            this.submitted = false
         })
     }
 
     onSubmit() {
-        console.log(this.emailRequest)
-        this.feedBackService.SendEmail(this.emailRequest).subscribe({
-            next: (data) => {
-                if (this.feedback.trangThai == false) {
-                    this.trangThai(this.feedback)
+        this.submitted = true
+        if (this.emailRequest.subject && this.emailRequest.content) {
+            this.feedBackService.SendEmail(this.emailRequest).subscribe({
+                next: (data) => {
+                    if (this.feedback.trangThai == false) {
+                        this.trangThai(this.feedback)
+                    }
+                    this.emailRequest = {}
+                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: data.message })
+                },
+                error: (err) => {
+                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Lỗi' })
                 }
-                this.emailRequest = {}
-                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: data.message })
-            },
-            error: (err) => {
-                this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Lỗi' })
-            }
-        })
+            })
+        }
     }
 
     /*

@@ -163,6 +163,7 @@
             <div class="mb-xl-2 col-md-6">
                 <label for="tieuDe" class="form-label">Tiêu đề <a class="text-danger">(*)</a></label>
                 <input type="text" id="tieuDe" [(ngModel)]="tintuc.tieuDe" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !tintuc.tieuDe">Không được để trống</small>
             </div>
             <div class="mb-2 col-md-6">
                 <label for="tenLoai" class="form-label">Danh mục tin tức <a class="text-danger">(*)</a></label>
@@ -175,6 +176,7 @@
         <div class="mb-2">
             <label for="tenLoai" class="form-label">Nội dung</label>
             <p-editor [(ngModel)]="tintuc.noiDung" [style]="{ height: '180px' }"></p-editor>
+            <small class="p-error" *ngIf="submitted && !tintuc.noiDung">Không được để trống</small>
         </div>
         <div class="row mb-2">
             <div class="mb-2 col-md-6">

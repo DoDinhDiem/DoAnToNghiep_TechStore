@@ -233,7 +233,7 @@
     margin-left: auto;
 }
 
-.block-order-item .order-item .order-item__info .info__group .group-btn-info .btn-info {
+.btn-info {
     background: transparent;
     border-radius: 3px;
     box-shadow: 0 0 0 0.5px #e0052b;
@@ -243,18 +243,7 @@
     padding: 3px 10px;
     position: relative;
     white-space: nowrap;
-}
-
-.block-order-item .order-item .order-item__info .info__group .group-btn-info .btn-info {
-    background: transparent;
-    border-radius: 3px;
-    box-shadow: 0 0 0 0.5px #e0052b;
-    color: #e0052b;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 3px 10px;
-    position: relative;
-    white-space: nowrap;
+    margin: 5px;
 }
 
 @media screen and (min-width: 540px) {

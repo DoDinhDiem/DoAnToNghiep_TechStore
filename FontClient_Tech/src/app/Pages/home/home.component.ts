@@ -76,7 +76,6 @@ export class HomeComponent implements OnInit {
     GetDienThoai() {
         this.trangChuService.GetDienThoai().subscribe((data) => {
             this.dienThoai = data
-            console.log(this.dienThoai)
         })
     }
 

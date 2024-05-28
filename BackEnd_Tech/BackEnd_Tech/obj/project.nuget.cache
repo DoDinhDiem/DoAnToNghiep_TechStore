@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rV+JMlTfyCLp01RNs6ri+yr2Fvr8pObYivdgzkxSYeAT2xD3yXf2pKqPc0jXPoKC21SyBIGSjecb2MqWbwXYZw==",
+  "dgSpecHash": "X6obB0MMChbZ66/wX9glh0E9h9LUzT3rxFan8kCJQOsQmAP9FFnY7l8HVanBnZPAvAXLEPFkaDw9sc6AacfeVQ==",
   "success": true,
   "projectFilePath": "D:\\DoAnTotNghiep\\BackEnd_Tech\\BackEnd_Tech\\BackEnd_Tech.csproj",
   "expectedPackageFiles": [
@@ -64,11 +64,7 @@
     "C:\\Users\\dodin\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
     "C:\\Users\\dodin\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
     "C:\\Users\\dodin\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
-    "C:\\Users\\dodin\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\dodin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.26\\microsoft.windowsdesktop.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\dodin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.26\\microsoft.netcore.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\dodin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.26\\microsoft.aspnetcore.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\dodin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.26\\microsoft.netcore.app.host.win-x64.6.0.26.nupkg.sha512"
+    "C:\\Users\\dodin\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

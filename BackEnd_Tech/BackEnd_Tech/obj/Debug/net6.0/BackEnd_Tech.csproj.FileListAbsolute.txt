@@ -63,7 +63,6 @@ D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\staticwebassets\msbu
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BackEnd_Tech.props
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\staticwebassets.pack.json
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\scopedcss\bundle\BackEnd_Tech.styles.css
-D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.csproj.CopyComplete
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.dll
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\refint\BackEnd_Tech.dll
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_Tech.pdb
@@ -78,3 +77,4 @@ D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\bin\Debug\net6.0\System.Security.Cryp
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+D:\DoAnTotNghiep\BackEnd_Tech\BackEnd_Tech\obj\Debug\net6.0\BackEnd_.61FDEBAD.Up2Date

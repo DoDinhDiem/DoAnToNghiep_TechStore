@@ -45,7 +45,7 @@ export class AccountComponent {
                 }
             },
             error: (err) => {
-                this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi đăng nhập! Vui lòng xem lại' })
+                this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: err.error.message, life: 3000 })
             }
         })
     }

@@ -118,17 +118,8 @@
                                     </h5>
                                 </td>
                                 <td class="text-center">
-                                    <h5 class="font-14 my-1 fw-normal">{{item.giaBan - item.giamGia | number}}</h5>
-                                    <span class="text-muted font-13">Giá</span>
-                                </td>
-                                <td class="text-center">
-                                    <h5 class="font-14 my-1 fw-normal">{{item.soLuong}}</h5>
-                                    <span class="text-muted font-13">Số lượng tồn</span>
-                                </td>
-                                <td class="text-center">
-                                    <h5 class="font-14 my-1 fw-normal">{{(item.giaBan - item.giamGia) * item.soLuong |
-                                        number}}</h5>
-                                    <span class="text-muted font-13">Tổng</span>
+                                    <h5 class="font-14 my-1 fw-normal">{{item.total }}</h5>
+                                    <span class="text-muted font-13">Số lượng</span>
                                 </td>
                             </tr>
                         </tbody>

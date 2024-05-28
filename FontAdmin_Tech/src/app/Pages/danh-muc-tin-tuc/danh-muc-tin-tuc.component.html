@@ -129,6 +129,7 @@
         <div class="mb-3">
             <label for="tenDanhMuc" class="form-label">Tên danh mục <a class="text-danger">(*)</a></label>
             <input type="text" id="tenDanhMuc" [(ngModel)]="danhmuc.tenDanhMuc" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !danhmuc.tenDanhMuc">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

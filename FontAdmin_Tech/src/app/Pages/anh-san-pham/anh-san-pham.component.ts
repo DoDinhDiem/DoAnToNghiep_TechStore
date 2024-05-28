@@ -26,6 +26,8 @@ export class AnhSanPhamComponent {
     anhSP!: IAnhSanPham
     anhSPList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(
         private anhSanPhamService: AnhSanPhamService,
@@ -48,12 +50,14 @@ export class AnhSanPhamComponent {
         this.fileOnly = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.anhSP = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -85,6 +89,8 @@ export class AnhSanPhamComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         this.anhSP.sanPhamId = this.id
         if (this.anhSP.trangThai == undefined) {
             this.anhSP.trangThai = false
@@ -95,30 +101,31 @@ export class AnhSanPhamComponent {
         }
 
         this.onUpload()
-
-        if (this.anhSP.id) {
-            this.anhSanPhamService.update(this.anhSP).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.anhSanPhamService.create(this.anhSP).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        if (this.anhSP.image) {
+            if (this.anhSP.id) {
+                this.anhSanPhamService.update(this.anhSP).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.anhSanPhamService.create(this.anhSP).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

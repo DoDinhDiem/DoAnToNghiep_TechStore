@@ -16,6 +16,7 @@ import * as moment from 'moment'
 })
 export class SanPhamComponent {
     baseUrl = baseUrl
+    submitted: boolean = false
 
     //Title
     title = 'Sản phẩm'
@@ -57,13 +58,14 @@ export class SanPhamComponent {
         this.fileOnly = {}
         this.productParameters = []
         this.visible = true
-        this.Save = 'Lưu'
+        ;(this.Save = 'Lưu'), (this.submitted = false)
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.sanpham = {}
+        this.submitted = false
     }
 
     //Gọi load sản phẩm
@@ -92,7 +94,7 @@ export class SanPhamComponent {
 
     //Cập nhập trạng thái
     trangThai(sanpham: any) {
-        this.sanphamService.updateTrangThai(sanpham.sanPham.id).subscribe((res) => {
+        this.sanphamService.updateTrangThai(sanpham.id).subscribe((res) => {
             this.loadData()
         })
     }
@@ -111,6 +113,8 @@ export class SanPhamComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.sanpham.trangThai == undefined) {
             this.sanpham.trangThai = false
         }
@@ -160,29 +164,32 @@ export class SanPhamComponent {
             this.fileSelect = false
         }
 
-        if (this.sanpham.tenSanPham && this.sanpham.id) {
-            this.sanphamService.update(this.sanpham).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.sanphamService.create(this.sanpham).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+        console.log(this.sanpham)
+        if (this.sanpham.tenSanPham && this.sanpham.giaBan && this.sanpham.moTa) {
+            if (this.sanpham.id) {
+                this.sanphamService.update(this.sanpham).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.sanphamService.create(this.sanpham).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

@@ -129,6 +129,7 @@
         <div class="mb-3">
             <label for="tenRole" class="form-label">Tên quyền </label>
             <input type="text" [(ngModel)]="role.tenRole" id="tenRole" class="form-control" autocomplete="off">
+            <small class="p-error" *ngIf="submitted && !role.tenRole">Không được để trống</small>
         </div>
         <div class="mb-3">
             <label for="trangThai" class="form-label">Trạng thái </label>

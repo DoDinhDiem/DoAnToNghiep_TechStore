@@ -26,20 +26,20 @@
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": ["src/styles.scss", "node_modules/owl.carousel/dist/assets/owl.carousel.css", "node_modules/owl.carousel/dist/assets/owl.theme.default.css"],
                         "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/owl.carousel/dist/owl.carousel.min.js", "node_modules/bootstrap/dist/js/bootstrap.min.js"],
-                        "allowedCommonJsDependencies": ["chart.js", "xlsx", "jspdf-autotable", "file-saver", "jspdf", "quill"]
+                        "allowedCommonJsDependencies": ["chart.js", "xlsx", "jspdf-autotable", "file-saver", "jspdf", "quill", "moment"]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "3mb",
+                                    "maximumError": "5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "3mb",
+                                    "maximumError": "5mb"
                                 }
                             ],
                             "outputHashing": "all"

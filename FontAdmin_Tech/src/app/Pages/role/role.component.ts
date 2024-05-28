@@ -23,6 +23,8 @@ export class RoleComponent {
     role!: IRole
     roleList: any
 
+    submitted: boolean = false
+
     //Gọi constructor
     constructor(private roleService: RoleService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
@@ -36,12 +38,14 @@ export class RoleComponent {
         this.role = {}
         this.visible = true
         this.Save = 'Lưu'
+        this.submitted = false
     }
 
     //Đóng dialog
     closeDialog() {
         this.visible = false
         this.role = {}
+        this.submitted = false
     }
 
     //Gọi load loại sản phẩm
@@ -72,32 +76,37 @@ export class RoleComponent {
     }
 
     onSubmit() {
+        this.submitted = true
+
         if (this.role.trangThai == undefined) {
             this.role.trangThai = false
         }
-        if (this.role.tenRole && this.role.id) {
-            this.roleService.update(this.role).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.loadData()
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
-        } else {
-            this.roleService.create(this.role).subscribe({
-                next: (res) => {
-                    this.loadData()
-                    this.closeDialog()
-                    this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
-                },
-                error: (err) => {
-                    this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
-                }
-            })
+
+        if (this.role.tenRole) {
+            if (this.role.id) {
+                this.roleService.update(this.role).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.loadData()
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            } else {
+                this.roleService.create(this.role).subscribe({
+                    next: (res) => {
+                        this.loadData()
+                        this.closeDialog()
+                        this.messageService.add({ severity: 'success', summary: 'Thông báo', detail: res.message, life: 3000 })
+                    },
+                    error: (err) => {
+                        this.messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Lỗi! Vui lòng xem lại', life: 3000 })
+                    }
+                })
+            }
         }
     }
 

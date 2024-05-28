@@ -141,41 +141,56 @@
             <div class="mb-xl-2 col-md-4">
                 <label for="map" class="form-label">Link Map <a class="text-danger">(*)</a></label>
                 <input type="text" id="map" [(ngModel)]="contact.map" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.map">Không được để trống</small>
             </div>
             <div class="mb-xl-2 col-md-4">
                 <label for="duong" class="form-label">Đường <a class="text-danger">(*)</a></label>
                 <input type="text" id="duong" [(ngModel)]="contact.duong" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.duong">Không được để trống</small>
+
             </div>
             <div class="mb-xl-2 col-md-4">
                 <label for="thonXom" class="form-label">Thôn/Xóm <a class="text-danger">(*)</a></label>
                 <input type="text" id="thonXom" [(ngModel)]="contact.thonXom" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.thonXom">Không được để trống</small>
+
             </div>
         </div>
         <div class="row">
             <div class="mb-xl-2 col-md-4">
                 <label for="xaPhuong" class="form-label">Xã/phường <a class="text-danger">(*)</a></label>
                 <input type="text" id="xaPhuong" [(ngModel)]="contact.xaPhuong" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.xaPhuong">Không được để trống</small>
+
             </div>
             <div class="mb-xl-2 col-md-4">
                 <label for="quanHuyen" class="form-label">Quận/Huyện <a class="text-danger">(*)</a></label>
                 <input type="text" id="quanHuyen" [(ngModel)]="contact.quanHuyen" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.quanHuyen">Không được để trống</small>
+
             </div>
             <div class="mb-xl-2 col-md-4">
                 <label for="tinhThanhPho" class="form-label">Tỉnh/Thành phố <a class="text-danger">(*)</a></label>
                 <input type="text" id="tinhThanhPho" [(ngModel)]="contact.tinhThanhPho" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.tinhThanhPho">Không được để trống</small>
+
             </div>
         </div>
         <div class="row">
             <div class="mb-xl-2 col-md-4">
                 <label for="email" class="form-label">Email <a class="text-danger">(*)</a></label>
                 <input type="email" id="email" [(ngModel)]="contact.email" class="form-control" autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.email">Không được để trống</small>
+
             </div>
             <div class="mb-xl-2 col-md-4">
                 <label for="soDienThoai" class="form-label">Số điện thoại <a class="text-danger">(*)</a></label>
                 <input type="number" id="soDienThoai" [(ngModel)]="contact.soDienThoai" class="form-control"
                     autocomplete="off">
+                <small class="p-error" *ngIf="submitted && !contact.soDienThoai">Không được để trống</small>
+
             </div>
             <div class="mb-xl-2 col-md-4"></div>
         </div>
