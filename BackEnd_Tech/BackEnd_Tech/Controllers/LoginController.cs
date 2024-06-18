@@ -103,7 +103,7 @@ namespace BackEnd_Tech.Controllers
         {
             try
             {
-                var user = await _context.KhachHangs.FirstOrDefaultAsync(x => x.Email == email);
+                var user = await _context.NhanViens.FirstOrDefaultAsync(x => x.Email == email);
 
                 if (user == null)
                 {

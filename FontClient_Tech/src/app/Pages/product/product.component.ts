@@ -127,14 +127,14 @@ export class ProductComponent {
     //Khi thay đổi page
     onPageChange(page: number) {
         this.currentPage = page
-        // this.loadData()
+        this.GetGiaLonNhatTheoLoai(this.id)
     }
 
     //Back khi phân trang
     onPreviousPage() {
         if (this.currentPage > 1) {
             this.currentPage--
-            // this.loadData()
+            this.GetGiaLonNhatTheoLoai(this.id)
         }
     }
 
@@ -142,7 +142,7 @@ export class ProductComponent {
     onNextPage() {
         if (this.currentPage < this.getPageCount()) {
             this.currentPage++
-            // this.loadData()
+            this.GetGiaLonNhatTheoLoai(this.id)
         }
     }
 

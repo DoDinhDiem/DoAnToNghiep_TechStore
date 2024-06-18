@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800');
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800');
 html {
     font-size: 62.5%;
     -webkit-text-size-adjust: 100%;
@@ -10,7 +10,7 @@ body {
     height: 100%;
 }
 body {
-    font: normal 300 1.4rem/1.86 'Poppins', sans-serif;
+    font: normal 300 1.4rem/1.86 'Roboto', sans-serif;
     color: #666;
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
@@ -218,7 +218,7 @@ blockquote cite {
 blockquote cite span {
     display: block;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 blockquote.text-white cite {
     color: #cccccc;
@@ -976,7 +976,7 @@ blockquote.text-white cite span {
     padding: 1rem 0 0.5rem;
     display: flex;
     align-items: flex-end;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 400;
     text-transform: uppercase;
     color: #666;
@@ -1108,7 +1108,7 @@ blockquote.text-white cite span {
 .header-search select {
     line-height: 1;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0;
     background-color: #fff;
     margin: 0;
@@ -1296,7 +1296,7 @@ blockquote.text-white cite span {
     margin-left: auto;
 }
 .header-intro-clearance .header-bottom .menu > li > a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     text-transform: none;
 }
@@ -1314,7 +1314,7 @@ blockquote.text-white cite span {
 }
 .header-intro-clearance .header-bottom .header-right p {
     padding-right: 0.5rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: -0.01em;
 }
@@ -1724,7 +1724,7 @@ blockquote.text-white cite span {
 .menu li > a {
     color: #999999;
     font-weight: 300;
-    font-size: 1.3rem;
+    font-size: 1.6rem !important;
     letter-spacing: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -1737,7 +1737,7 @@ blockquote.text-white cite span {
 .menu > li > a {
     color: #333;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     padding: 3.95rem 3rem;
     text-transform: uppercase;
@@ -1806,7 +1806,7 @@ blockquote.text-white cite span {
 .menu .menu-title {
     color: #333;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     text-transform: uppercase;
     margin-bottom: 0.6rem;
 }
@@ -1986,7 +1986,7 @@ blockquote.text-white cite span {
     align-self: stretch;
     color: #333333;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -2048,7 +2048,7 @@ blockquote.text-white cite span {
 .category-dropdown .dropdown-item {
     color: #666;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     border: 0.1rem solid #ebebeb;
@@ -2210,7 +2210,7 @@ blockquote.text-white cite span {
     display: block;
     color: #666;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     border: 0.1rem solid #ebebeb;
@@ -2229,7 +2229,7 @@ blockquote.text-white cite span {
 .menu-vertical .menu-title {
     color: #333;
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     text-transform: capitalize;
     padding-bottom: 1rem;
@@ -2640,13 +2640,13 @@ blockquote.text-white cite span {
     color: #333;
 }
 a {
-    font-family: 'Poppins';
+    font-family: 'Roboto';
 }
 p {
     margin-bottom: 0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0;
     color: #777;
 }
@@ -2667,7 +2667,7 @@ p {
 }
 .header-2 .header-search-extended .form-control {
     padding: 1.2rem 2.4rem 1rem 2rem;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: -0.01em;
 }
 .header-2 .header-search-extended .btn {
@@ -2693,7 +2693,7 @@ p {
 }
 .header-2 .header-top {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     background-color: #f8f8f8;
 }
 .header-2 .header-top .header-left {
@@ -2906,7 +2906,7 @@ p {
 }
 .header-4 .header-top {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     background-color: #f5f6f9;
     margin-bottom: 0;
     letter-spacing: -0.01em;
@@ -3260,7 +3260,7 @@ p {
     color: #c96;
 }
 .header-6 .header-bottom .header-right p {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     color: #fff;
@@ -3274,7 +3274,7 @@ p {
     margin-right: 3rem;
 }
 .header-6 .header-top .social-icons a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     color: #777;
 }
@@ -3406,7 +3406,7 @@ p {
     border-bottom: none;
 }
 .header-7 .header-middle .menu > li > a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 400;
     letter-spacing: 0;
 }
@@ -3490,7 +3490,7 @@ p {
 }
 .header-8 .header-top {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #f4e8dd;
     background-color: #c96;
     margin-bottom: 0;
@@ -3656,7 +3656,7 @@ p {
     background-color: #fff;
 }
 .header-10 .header-top {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     background-color: #fafafa;
     margin-bottom: 0;
 }
@@ -4051,7 +4051,7 @@ p {
     padding-bottom: 0.7rem;
 }
 .header-12 .header-top {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .header-12 .header-top .header-left {
     letter-spacing: -0.01em;
@@ -4119,7 +4119,7 @@ p {
     color: #fff;
 }
 .header-12 .header-bottom .header-right p {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: -0.01em;
     color: #fff;
@@ -4359,7 +4359,7 @@ p {
 }
 .header-14 .header-top {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0;
 }
 .header-14 .header-top .header-left {
@@ -4551,7 +4551,7 @@ p {
     min-height: 0;
 }
 .header-14 .menu-vertical i {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     display: inline-flex;
     justify-content: center;
     margin-right: 1rem;
@@ -4728,7 +4728,7 @@ p {
 .footer {
     width: 100%;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #777;
     background-color: #fff;
 }
@@ -4984,7 +4984,7 @@ p {
 .footer-newsletter .form-control {
     height: 46px;
     padding: 1.25rem 2rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     font-weight: 300;
     color: #999999;
@@ -5057,7 +5057,7 @@ p {
 }
 .page-header h1 {
     color: #333;
-    font: normal 400 3.2rem/1.1 'Poppins', sans-serif;
+    font: normal 400 3.2rem/1.1 'Roboto', sans-serif;
     letter-spacing: -0.025em;
     margin-bottom: 0;
 }
@@ -5133,7 +5133,7 @@ p {
 }
 .breadcrumb-item {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: 0;
     text-transform: capitalize;
@@ -5212,7 +5212,7 @@ p {
 .title-desc {
     color: #777;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     margin-bottom: 0;
@@ -5262,7 +5262,7 @@ p {
     margin-bottom: 2rem;
 }
 .icon-box.icon-box-sm {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.86;
 }
 .icon-box-title {
@@ -5525,7 +5525,7 @@ p {
 .nav.nav-tabs .nav-link {
     color: #777;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.025em;
     padding: 0.85rem 2.2rem;
@@ -5574,7 +5574,7 @@ p {
 .nav.nav-pills .nav-link {
     color: #777;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     padding: 0.45rem 1rem;
@@ -5711,7 +5711,7 @@ p {
     text-align: center;
     padding: 0.85rem 1.5rem;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     min-width: 170px;
@@ -5782,9 +5782,9 @@ p {
     border: none;
     border-bottom: 0.1rem solid transparent;
     letter-spacing: 0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     min-width: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .btn-link.btn-link-dark {
     color: #333;
@@ -6475,7 +6475,7 @@ p {
 }
 .product-countdown-container .product-countdown .countdown-amount {
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     margin-bottom: 0;
     text-transform: uppercase;
@@ -6632,7 +6632,7 @@ p {
 .ratings,
 .ratings-val {
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0.1em;
     line-height: 1;
     font-family: 'molla';
@@ -6771,7 +6771,7 @@ p {
     width: 3rem;
     height: 3rem;
     padding: 0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     transition: all 0.35s ease;
     padding: 0;
@@ -7285,7 +7285,7 @@ p {
     margin-right: 0.6rem;
 }
 .product.product-8 .btn-product span {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: inherit;
     transition-duration: 0s;
 }
@@ -7331,7 +7331,7 @@ p {
     opacity: 1;
 }
 .product.product-9 .product-price {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     color: #333;
@@ -7473,7 +7473,7 @@ p {
 .product.product-10 .product-title a {
     font-size: 1.3rem;
     font-weight: 400;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0;
     color: #333;
 }
@@ -7485,20 +7485,20 @@ p {
     margin-top: 0.8rem;
     font-size: 1.3rem;
     font-weight: 700;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0;
     color: #333333;
 }
 .product.product-10 .new-price {
     font-size: 1.3rem;
     font-weight: 700;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0;
 }
 .product.product-10 .old-price {
     font-size: 1.3rem;
     font-weight: 400;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0;
     text-decoration: none;
 }
@@ -7507,7 +7507,7 @@ p {
     text-transform: uppercase;
     font-size: 1.3rem;
     font-weight: 700;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: -0.01em;
 }
 .product.product-10 .product-label.label-deal {
@@ -7553,7 +7553,7 @@ p {
     padding-bottom: 0.8rem;
 }
 .product.product-11 .btn-product span {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .product.product-11 .btn-product:hover,
 .product.product-11 .btn-product:focus {
@@ -7599,7 +7599,7 @@ p {
 .product.product-list .product-content {
     color: #777;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.43;
     padding-top: 1rem;
     margin-bottom: 3.4rem;
@@ -7705,7 +7705,7 @@ p {
     margin-bottom: 0.2rem;
 }
 .product.product-sm .product-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .product.product-sm .product-price {
     font-size: 1.6rem;
@@ -7922,7 +7922,7 @@ p {
     padding-bottom: 4.5rem;
 }
 .btn.banner-link {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     padding: 0.8rem 1.4rem;
     min-width: 0;
@@ -8463,7 +8463,7 @@ p {
 .form-control {
     height: 40px;
     padding: 0.85rem 2rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     font-weight: 300;
     color: #777;
@@ -8509,7 +8509,7 @@ textarea.form-control {
 label {
     color: #666;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin: 0 0 1.1rem;
 }
 .form-text {
@@ -8591,7 +8591,7 @@ small.form-text {
     position: static;
     margin-bottom: 0;
     margin-top: 0.1rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     padding-left: 2.6rem;
     margin-left: -2.6rem;
 }
@@ -8923,7 +8923,7 @@ small.form-text {
 }
 .table th {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     color: #999;
 }
@@ -8970,7 +8970,7 @@ small.form-text {
     min-width: 3rem;
     height: 4rem;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     padding: 0 0.3rem;
     line-height: 1;
     color: #706f6c;
@@ -9012,7 +9012,7 @@ small.form-text {
 }
 .page-item-total {
     color: #cccccc;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 400;
     margin-left: 1.2rem;
 }
@@ -9072,7 +9072,7 @@ small.form-text {
 }
 .alert {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.43;
     letter-spacing: -0.01em;
     border-radius: 0;
@@ -9331,7 +9331,7 @@ small.form-text {
 .element-type {
     font-size: 1.3rem;
     font-weight: 400;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     letter-spacing: 0.01em;
     color: #666;
     text-transform: uppercase;
@@ -9441,7 +9441,7 @@ button:focus {
 .intro-subtitle {
     color: #fff;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     margin-bottom: 0.5rem;
 }
@@ -9665,7 +9665,7 @@ button:focus {
     height: 5.4rem;
 }
 .quickView-content .details-filter-row label {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0;
     text-transform: uppercase;
     color: #333;
@@ -9701,7 +9701,7 @@ button:focus {
     box-shadow: none;
 }
 .quickView-content .btn-product.btn-cart span {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0.1em;
 }
 .quickView-content .product-details-footer {
@@ -9713,7 +9713,7 @@ button:focus {
     margin-left: 0;
 }
 .quickView-content .product-cat {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 400;
     letter-spacing: 0.01em;
     color: #777;
@@ -10020,7 +10020,7 @@ button:focus {
         left: 100px;
     }
     .intro-content .btn {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         min-width: 150px;
         padding-top: 1.15rem;
         padding-bottom: 1.15rem;
@@ -10091,7 +10091,7 @@ button:focus {
     flex-direction: column;
     flex-wrap: wrap;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -10257,7 +10257,7 @@ button:focus {
 .widget-clean label {
     color: inherit;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     margin: 0;
 }
@@ -10279,7 +10279,7 @@ button:focus {
     content: '\f110';
     display: block;
     font-family: 'molla';
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     position: absolute;
     top: 50%;
@@ -10325,7 +10325,7 @@ button:focus {
     align-items: center;
     color: #333;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -10557,7 +10557,7 @@ button:focus {
     display: flex;
     align-items: center;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.3;
     letter-spacing: 0;
 }
@@ -10638,7 +10638,7 @@ button:focus {
 }
 .product-details .product-cat {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .product-details .product-cat span {
     margin-right: 0.7rem;
@@ -10663,7 +10663,7 @@ button:focus {
     width: 4rem;
     height: 4rem;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: -0.01em;
     border: 0.1rem solid #d7d7d7;
     background-color: transparent;
@@ -10711,7 +10711,7 @@ button:focus {
 .details-filter-row label {
     display: inline-block;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-bottom: 0;
 }
 .details-filter-row .product-nav {
@@ -10755,7 +10755,7 @@ button:focus {
     border: 0.1rem solid #c96;
 }
 .product-details-action .btn-cart span {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: inherit;
     text-transform: uppercase;
     box-shadow: none;
@@ -10789,7 +10789,7 @@ button:focus {
     margin-top: -0.2rem;
 }
 .details-action-wrapper .btn-product span {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .details-action-wrapper .btn-product + .btn-product {
     padding-left: 1.3rem;
@@ -10907,7 +10907,7 @@ button:focus {
 }
 .product-desc-content blockquote cite {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0;
 }
 .reviews h3 {
@@ -10968,7 +10968,7 @@ button:focus {
     margin-left: 1.6rem;
 }
 .review-action i {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-right: 0.6rem;
 }
 .product-details-centered {
@@ -11022,7 +11022,7 @@ button:focus {
     display: inline-block;
     width: 67px;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-bottom: 0;
 }
 .product-details-extended .nav.nav-pills {
@@ -11351,7 +11351,7 @@ button:focus {
 .entry {
     position: relative;
     margin-bottom: 3rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.85;
 }
 .entry-media {
@@ -11403,7 +11403,7 @@ button:focus {
     align-items: center;
     flex-flow: wrap;
     color: #777;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     margin-bottom: 0.5rem;
 }
@@ -11440,7 +11440,7 @@ button:focus {
 }
 .entry-cats {
     color: #777;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     margin-bottom: 1.5rem;
 }
@@ -11512,7 +11512,7 @@ button:focus {
     display: inline-block;
     color: #333333;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
@@ -11694,7 +11694,7 @@ button:focus {
     color: #333;
     display: block;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
 }
 .widget-cats a span {
@@ -11749,14 +11749,14 @@ button:focus {
     display: block;
     color: #cccccc;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.25;
     letter-spacing: -0.01em;
     margin-bottom: 0.5rem;
 }
 .posts-list h4 {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.4;
     letter-spacing: 0;
     margin-bottom: 0;
@@ -11788,7 +11788,7 @@ button:focus {
     display: block;
     color: #777;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.4;
     border-radius: 0.3rem;
     padding: 0.65rem 0.9rem;
@@ -11984,7 +11984,7 @@ button:focus {
     display: block;
     color: #777;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.4;
     border-radius: 0.3rem;
     padding: 0.45rem 0.9rem;
@@ -12073,7 +12073,7 @@ button:focus {
     font-weight: 400;
     padding-top: 0.95rem;
     padding-bottom: 0.95rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     transition: all 0.35s ease;
 }
@@ -12214,7 +12214,7 @@ button:focus {
     right: 0;
     top: 0;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     letter-spacing: -0.01em;
     padding-bottom: 0.4rem;
@@ -12383,7 +12383,7 @@ button:focus {
     color: #777;
     padding: 0.4rem 1rem;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -12625,7 +12625,7 @@ button:focus {
     display: block;
     color: #999;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-top: 0.3rem;
 }
 .member-overlay {
@@ -12747,7 +12747,7 @@ button:focus {
     font-style: normal;
     font-weight: 400;
     margin: 0 0 1rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     padding: 0.5rem 0.75rem 0.2rem 0.75rem;
     line-height: 1.5;
     margin: 0;
@@ -12827,7 +12827,7 @@ button:focus {
 }
 .store-subtitle {
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0;
     margin-bottom: 0.4rem;
     margin-top: 3.2rem;
@@ -12959,7 +12959,7 @@ button:focus {
 .btn.btn-login {
     color: #333;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     display: flex;
     align-items: center;
@@ -13046,7 +13046,7 @@ button:focus {
     margin-bottom: 0.5rem;
 }
 .categories-page .banner-badge .banner-subtitle {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .categories-page .banner:hover > a:not(.banner-link):after {
     visibility: visible;
@@ -13099,7 +13099,7 @@ button:focus {
     color: #333;
     text-transform: uppercase;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     border-bottom: 0.1rem solid #ebebeb;
@@ -13112,7 +13112,7 @@ button:focus {
     margin-right: 1rem;
 }
 .sidebar-filter .widget-clean a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .sidebar-filter-banner.sidebar-shop .widget:not(.widget-clean) {
     border-bottom: none;
@@ -13295,7 +13295,7 @@ button:focus {
 }
 .accordion-summary .card-title {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #333;
     letter-spacing: 0;
 }
@@ -13703,7 +13703,7 @@ button:focus {
     display: inline-block;
     font-weight: 300;
     color: #999;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     border-bottom: 0.1rem solid #999;
 }
 .table.table-summary .summary-shipping-estimate a:hover,
@@ -13758,7 +13758,7 @@ button:focus {
     overflow: hidden;
     position: relative;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     padding: 1.4rem 0;
     color: #333;
@@ -13906,7 +13906,7 @@ button:focus {
 }
 .coming-countdown .countdown-section {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1;
     letter-spacing: 0;
 }

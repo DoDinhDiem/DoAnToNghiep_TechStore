@@ -74,7 +74,7 @@
                             <a [routerLink]="['/nhacungcap']" [ngClass]="{'active': isInvoiceCollapsed}">Nhà cung
                                 cấp</a>
                         </li>
-                        <li>
+                        <li *ngIf="role=='Role_Admin'">
                             <a [routerLink]="['/hoadonnhap']" [ngClass]="{'active': isInvoiceCollapsed}">Hóa đơn
                                 nhập</a>
                         </li>

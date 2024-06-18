@@ -260,6 +260,7 @@ namespace BackEnd_Tech.Controllers
                                        giamGia = g.Key.GiamGia ?? 0,
                                        total = g.Count()
                                    })
+                                   .OrderByDescending(x => x.total)
                                    .Take(6)
                                    .ToListAsync();
                 return Ok(query);
